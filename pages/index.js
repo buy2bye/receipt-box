@@ -52,7 +52,7 @@ const Container = styled.div`
 
   .main__tutorial {
     width: 100%;
-    height: 60%;
+    height: 80%;
   }
 
   .main__login-button {
