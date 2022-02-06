@@ -1,9 +1,15 @@
 import styled from '@emotion/styled';
 import Head from 'next/head';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 import Tutorial from '../components/main/Tutorial';
 
 export default function Home() {
+  const router = useRouter();
+  const handleSocialLogin = () => {
+    router.push('/main');
+  };
+
   return (
     <Container>
       <Head>
@@ -14,8 +20,18 @@ export default function Home() {
 
       <main className='main'>
         <Tutorial className='main__tutorial' />
-        <button className='main__login-button kakao'>카카오로 로그인</button>
-        <button className='main__login-button naver'>네이버로 로그인</button>
+        <button
+          className='main__login-button kakao'
+          onClick={handleSocialLogin}
+        >
+          카카오로 로그인
+        </button>
+        <button
+          className='main__login-button naver'
+          onClick={handleSocialLogin}
+        >
+          네이버로 로그인
+        </button>
       </main>
     </Container>
   );
