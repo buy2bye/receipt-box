@@ -1,6 +1,5 @@
 import styled from '@emotion/styled';
 import Head from 'next/head';
-import Image from 'next/image';
 import { useRouter } from 'next/router';
 import Tutorial from '../components/main/Tutorial';
 
@@ -53,6 +52,7 @@ const Container = styled.div`
   .main__tutorial {
     width: 100%;
     height: 80%;
+    background: rgba(0, 0, 0, 0.5);
   }
 
   .main__login-button {
