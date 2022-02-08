@@ -23,13 +23,14 @@ export default function Home() {
           className='main__login-button kakao'
           onClick={handleSocialLogin}
         >
-          카카오로 로그인
+          <img className='kakao-icon' src='icons/kakao.svg' alt='kakao-icon' />
+          <span>카카오로 시작하기</span>
         </button>
         <button
-          className='main__login-button naver'
+          className='main__login-button normal'
           onClick={handleSocialLogin}
         >
-          네이버로 로그인
+          <span>이메일로 시작하기</span>
         </button>
       </main>
     </Container>
@@ -58,11 +59,17 @@ const Container = styled.div`
   .main__login-button {
     width: 400px;
     max-width: 100%;
-    height: 50px;
+    height: 60px;
     margin-bottom: 12px;
     border: 1px solid black;
-    border-radius: 12px;
+    border-radius: 16px;
+    font-size: 16px;
+    font-weight: 300;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
 
     :active {
       background: white;
@@ -72,11 +79,22 @@ const Container = styled.div`
   .kakao {
     background: var(--kakao);
     border-color: var(--kakao);
+    color: black;
   }
 
-  .naver {
-    background: var(--naver);
-    border-color: var(--naver);
-    color: white;
+  .normal {
+    background: var(--grey100);
+    border-color: var(--grey100);
+    color: var(--grey900);
+    color: black;
+  }
+
+  .kakao-icon {
+    position: absolute;
+    top: 50%;
+    left: 20px;
+    transform: translateY(-50%);
+    width: 32px;
+    height: 32px;
   }
 `;
