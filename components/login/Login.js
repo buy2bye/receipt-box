@@ -1,22 +1,25 @@
 import styled from '@emotion/styled';
-import Tutorial from '/components/main/Tutorial';
+import useMe from 'hooks/useMe';
+import Tutorial from '/components/login/Tutorial';
 
 const Login = () => {
+  const { mutate } = useMe();
+
   const handleKakaoLogin = () => {
-    alert('kakao Login');
+    mutate(true, false);
   };
   const handleEmailLogin = () => {
-    alert('email Login');
+    mutate(true, false);
   };
 
   return (
     <Container>
-      <Tutorial className='main__tutorial' />
-      <button className='main__login-button kakao' onClick={handleKakaoLogin}>
+      <Tutorial className='login__tutorial' />
+      <button className='login__login-button kakao' onClick={handleKakaoLogin}>
         <img className='kakao-icon' src='icons/kakao.svg' alt='kakao-icon' />
         <span>카카오로 시작하기</span>
       </button>
-      <button className='main__login-button normal' onClick={handleEmailLogin}>
+      <button className='login__login-button normal' onClick={handleEmailLogin}>
         <span>이메일로 시작하기</span>
       </button>
     </Container>
@@ -31,7 +34,7 @@ const Container = styled.div`
   padding: 20px;
   overflow-y: hidden;
 
-  .main {
+  .login {
     width: 100%;
     height: 100%;
     display: flex;
@@ -40,20 +43,20 @@ const Container = styled.div`
     padding: 20px;
   }
 
-  .main__tutorial {
+  .login__tutorial {
     width: 100%;
     height: 80%;
     background: rgba(0, 0, 0, 0.5);
   }
 
-  .main__login-button {
+  .login__login-button {
     width: 400px;
     max-width: 100%;
     height: 60px;
     margin-bottom: 12px;
     border-radius: 16px;
     font-size: 16px;
-    font-weight: 300;
+    font-weight: 400;
     display: flex;
     align-items: center;
     justify-content: center;

@@ -1,7 +1,7 @@
 @font-face {
   font-family: 'Spoqa Han Sans Neo';
   src: url('/public/fonts/SpoqaHanSansNeo-Bold.woff');
-  font-weight: 900;
+  font-weight: 700;
   font-style: normal;
 }
 
@@ -14,7 +14,7 @@
 
 @font-face {
   font-family: 'Spoqa Han Sans Neo';
-  src: url('/public/fonts/SpoqaHanSansNeo-Medium.woff');
+  src: url('/public/fonts/SpoqaHanSansNeo-Regular.woff');
   font-weight: 400;
   font-style: normal;
 }
