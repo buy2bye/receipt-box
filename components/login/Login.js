@@ -125,6 +125,7 @@ const EmailLoginForm = styled.div`
 
   .inputLabel {
     position: relative;
+    width: 100%;
     font-size: 14px;
 
     label {
