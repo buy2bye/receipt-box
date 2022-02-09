@@ -19,7 +19,7 @@ const Login = () => {
       <Tutorial className='login__tutorial' />
 
       {!isEmailLoginFormShown ? (
-        <div>
+        <div className='login-buttons'>
           <button
             className='login__login-button kakao'
             onClick={handleKakaoLogin}
@@ -71,6 +71,10 @@ const Container = styled.div`
     width: 100%;
     height: 100%;
     background: rgba(0, 0, 0, 0.5);
+  }
+
+  .login-buttons {
+    width: 100%;
   }
 
   .login__login-button {
