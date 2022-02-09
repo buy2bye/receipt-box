@@ -33,6 +33,9 @@ const Container = styled.div`
   width: 100vw;
   padding: 20px;
   overflow-y: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
   .login {
     width: 100%;
