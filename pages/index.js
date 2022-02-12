@@ -17,7 +17,7 @@ export default function Home() {
       <main className='main'>
         <div className='main__header'>
           <h1 className='main__header__title'>나의 영수증 보관함</h1>
-          <button className='main__header__setting-button'>설정</button>
+          <button className='main__header__setting'>설정</button>
         </div>
         <div className='main__receipt-list'>
           <div className='main__receipt'>
@@ -42,6 +42,17 @@ const Container = styled.div`
 
   .main__header {
     width: 100%;
+    position: relative;
+  }
+
+  .main__header__setting {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+
+  .main__header__title {
+    text-align: center;
   }
 
   .main__receipt-list {
