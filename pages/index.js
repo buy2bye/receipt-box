@@ -2,8 +2,9 @@ import styled from '@emotion/styled';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import Tutorial from '../components/login/Tutorial';
+import WrapAuthPage from 'helpers/AuthWrapper';
 
-export default function Home() {
+const Home = () => {
   // 영수증 정보 유무에 따라 렌더링 분기 필요
 
   return (
@@ -29,3 +30,5 @@ const Container = styled.div`
     padding: 20px;
   }
 `;
+
+export default WrapAuthPage(Home)

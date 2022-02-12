@@ -1,7 +1,7 @@
 import '../styles/globals.css';
 import Layout from '/components/layout/Layout';
 
-function MyApp({ Component, pageProps }) {
+const ReceiptApp = ({ Component, pageProps }) => {
   return (
     <Layout>
       <Component {...pageProps} />
@@ -9,4 +9,13 @@ function MyApp({ Component, pageProps }) {
   );
 }
 
-export default MyApp;
+ReceiptApp.getInitialProps = async ({ Component, ctx }) => {
+  let pageProps = {}
+  if (Component.getInitialProps) {
+    pageProps = await Component.getInitialProps(ctx)
+    return { pageProps }
+  }
+  return { pageProps }
+}
+
+export default ReceiptApp;
