@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 import styled from '@emotion/styled';
 
 import apiController from 'helpers/apiController';
+import Title from 'components/page/Title';
 
 const SNSSingup = () => {
   const router = useRouter();
@@ -72,14 +73,6 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-`;
-
-const Title = styled.h2`
-  width: 100%;
-  text-align: left;
-  font-size: 20px;
-  font-weight: 500;
-  margin: 20px 0;
 `;
 
 const NicknameForm = styled.div`

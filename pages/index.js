@@ -1,34 +1,75 @@
 import styled from '@emotion/styled';
-import Head from 'next/head';
-import { useRouter } from 'next/router';
-import Tutorial from '../components/login/Tutorial';
 import WrapAuthPage from 'helpers/AuthWrapper';
+import Title from 'components/page/Title';
+import Subtitle from 'components/page/Subtitle';
+
+const receiptList = [
+  {
+    id: 1,
+  },
+  {
+    id: 2,
+  },
+  {
+    id: 3,
+  },
+];
 
 const Home = () => {
-  // 영수증 정보 유무에 따라 렌더링 분기 필요
+  if (receiptList.length < 4)
+    return (
+      <Container>
+        <Title>등록된 영수증이 없어요</Title>
+        <Subtitle>스마트폰 캡쳐화면도 등록할 수 있어요 g🙂</Subtitle>
+        <RegisterButton>영수증 등록하기</RegisterButton>
+      </Container>
+    );
 
   return (
     <Container>
-      <Head>
-        <title>Receipt Box</title>
-        <meta name='description' content='Receipt Box' />
-        <link rel='icon' href='/favicon.ico' />
-      </Head>
-
-      <main className='main'>나의 영수증 보관함</main>
+      <Title>나의 영수증 보관함</Title>
+      <ReceiptList>
+        {receiptList.map((item, index) => (
+          <Receipt item={item} key={index} />
+        ))}
+      </ReceiptList>
     </Container>
   );
 };
 
 const Container = styled.div`
-  .main {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px;
-  }
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  overflow-y: scroll;
+`;
+
+const ReceiptList = styled.div`
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+`;
+
+const Receipt = styled.div`
+  background: var(--blue200);
+  width: 100%;
+  height: 100px;
+  border-radius: 16px;
+`;
+
+const RegisterButton = styled.button`
+  background: var(--blue500);
+  color: white;
+  width: 200px;
+  height: 60px;
+  font-size: 14px;
+  border-radius: 16px;
+  margin-top: 20px;
 `;
 
 export default WrapAuthPage(Home);
