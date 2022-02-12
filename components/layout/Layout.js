@@ -5,12 +5,12 @@ import styled from '@emotion/styled';
 const Layout = ({ children }) => {
   const { data: isLogged } = useMe();
 
-  if (!isLogged)
-    return (
-      <Container>
-        <Login />
-      </Container>
-    );
+  // if (!isLogged)
+  //   return (
+  //     <Container>
+  //       <Login />
+  //     </Container>
+  //   );
 
   return <Container>{children}</Container>;
 };
