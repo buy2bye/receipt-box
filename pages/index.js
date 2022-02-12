@@ -18,7 +18,7 @@ const Home = () => {
       <main className='main'>나의 영수증 보관함</main>
     </Container>
   );
-}
+};
 
 const Container = styled.div`
   .main {
@@ -31,4 +31,4 @@ const Container = styled.div`
   }
 `;
 
-export default WrapAuthPage(Home)
+export default WrapAuthPage(Home);
