@@ -23,8 +23,8 @@ const ReceiptListPage = () => {
         <Container>
           <Title>등록된 영수증이 없어요</Title>
           <Subtitle>스마트폰 캡쳐화면도 등록할 수 있어요 🙂</Subtitle>
-          <RegisterButton>영수증 등록하기</RegisterButton>
-          <input type='file' name='file' accept='image/*, .pdf' />
+          <RegisterButton for='upload-photo'>영수증 등록하기</RegisterButton>
+          <input type='file' id='upload-photo' accept='image/*, .pdf' />
         </Container>
       </Layout>
     );
@@ -54,6 +54,10 @@ const Container = styled.div`
   align-items: center;
   padding: 20px;
   overflow-y: scroll;
+
+  input {
+    display: none;
+  }
 `;
 
 const ReceiptList = styled.div`
@@ -71,7 +75,7 @@ const Receipt = styled.div`
   border-radius: 16px;
 `;
 
-const RegisterButton = styled.button`
+const RegisterButton = styled.label`
   background: var(--blue500);
   color: white;
   width: 200px;
@@ -79,4 +83,7 @@ const RegisterButton = styled.button`
   font-size: 14px;
   border-radius: 16px;
   margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
