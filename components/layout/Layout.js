@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 
-const Layout = ({ children, className }) => {
+const Layout = ({ children, className, hideNav }) => {
   return (
     <Container>
       <Body className={className}>{children}</Body>
@@ -34,14 +34,13 @@ const Body = styled.div`
 `;
 
 const BottomNav = styled.div`
-  height: 100px;
   display: flex;
+  padding: 20px;
   justify-content: center;
   align-items: center;
 
   .wrapper {
-    width: 80%;
-    height: 80%;
+    width: 100%;
     display: flex;
     justify-content: space-evenly;
     background: white;
