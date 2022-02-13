@@ -24,7 +24,7 @@ const ReceiptListPage = () => {
           <Title>등록된 영수증이 없어요</Title>
           <Subtitle>스마트폰 캡쳐화면도 등록할 수 있어요 🙂</Subtitle>
           <RegisterButton>영수증 등록하기</RegisterButton>
-          <input type='file' name='file' />
+          <input type='file' name='file' accept='image/*, .pdf' />
         </Container>
       </Layout>
     );
@@ -43,7 +43,8 @@ const ReceiptListPage = () => {
   );
 };
 
-export default WrapAuthPage(ReceiptListPage);
+// export default WrapAuthPage(ReceiptListPage);
+export default ReceiptListPage;
 
 const Container = styled.div`
   width: 100%;
