@@ -68,7 +68,7 @@ export default SNSSingup;
 const Container = styled.div`
   height: 100vh;
   width: 100vw;
-  padding: 20px 20px 80px 20px;
+  padding: 24px 24px 80px 24px;
   overflow-y: hidden;
   display: flex;
   flex-direction: column;

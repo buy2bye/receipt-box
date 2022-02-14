@@ -5,7 +5,7 @@ const Subtitle = ({ children }) => {
 };
 
 const Container = styled.h3`
-  margin: -8px 0 20px 0;
+  margin: -8px 0 24px 0;
   width: 100%;
   text-align: left;
   font-size: 16px;

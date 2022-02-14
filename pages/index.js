@@ -1,2 +1,9 @@
-// 메인 진입시 영수증 목록 보여주기 default
-export { default } from './receipts';
+import ReceiptListView from 'components/ReceiptList';
+import WrapAuthPage from 'helpers/AuthWrapper';
+
+const ReceiptListPage = () => {
+  return <ReceiptListView />;
+};
+
+// export default WrapAuthPage(ReceiptListPage);
+export default ReceiptListPage;

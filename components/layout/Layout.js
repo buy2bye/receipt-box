@@ -35,7 +35,7 @@ const Body = styled.div`
 
 const BottomNav = styled.div`
   display: flex;
-  padding: 20px;
+  padding: 24px;
   justify-content: center;
   align-items: center;
 

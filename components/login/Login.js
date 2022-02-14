@@ -7,7 +7,7 @@ const Login = () => {
   const [isEmailLoginFormShown, setIsEmailLoginFormShown] = useState(false);
 
   const handleKakaoLogin = () => {
-    window.location.href = KAKAO_AUTH_URL
+    window.location.href = KAKAO_AUTH_URL;
   };
   const handleEmailLogin = () => {
     setIsEmailLoginFormShown(true);
@@ -60,7 +60,7 @@ export default Login;
 const Container = styled.div`
   height: 100vh;
   width: 100vw;
-  padding: 20px 20px 80px 20px;
+  padding: 24px 24px 80px 24px;
   overflow-y: hidden;
   display: flex;
   flex-direction: column;
@@ -109,7 +109,7 @@ const Container = styled.div`
   .kakao-icon {
     position: absolute;
     top: 50%;
-    left: 20px;
+    left: 24px;
     transform: translateY(-50%);
     width: 32px;
     height: 32px;
