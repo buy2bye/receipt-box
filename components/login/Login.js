@@ -1,14 +1,13 @@
 import styled from '@emotion/styled';
-import useMe from 'hooks/useMe';
 import { useState } from 'react';
 import Tutorial from '/components/login/Tutorial';
+import { KAKAO_AUTH_URL } from 'helpers/oauth/kakao';
 
 const Login = () => {
-  const { mutate } = useMe();
   const [isEmailLoginFormShown, setIsEmailLoginFormShown] = useState(false);
 
   const handleKakaoLogin = () => {
-    mutate(true, false);
+    window.location.href = KAKAO_AUTH_URL
   };
   const handleEmailLogin = () => {
     setIsEmailLoginFormShown(true);

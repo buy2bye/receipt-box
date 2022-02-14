@@ -1,12 +1,16 @@
 import '../styles/globals.css';
-import Layout from '/components/layout/Layout';
 
-function MyApp({ Component, pageProps }) {
-  return (
-    <Layout>
-      <Component {...pageProps} />
-    </Layout>
-  );
-}
+const ReceiptApp = ({ Component, pageProps }) => {
+  return <Component {...pageProps} />;
+};
 
-export default MyApp;
+ReceiptApp.getInitialProps = async ({ Component, ctx }) => {
+  let pageProps = {};
+  if (Component.getInitialProps) {
+    pageProps = await Component.getInitialProps(ctx);
+    return { pageProps };
+  }
+  return { pageProps };
+};
+
+export default ReceiptApp;
