@@ -25,7 +25,8 @@ const KakaoLogin = ({ code }) => {
   }
 
   useEffect(() => {
-    fetchLogin()
+    // fetchLogin()
+    setFetchDone(true)
   }, [])
 
   const renderSignup = () => {

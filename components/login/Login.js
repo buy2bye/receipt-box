@@ -2,9 +2,16 @@ import styled from '@emotion/styled';
 import { useState } from 'react';
 import Tutorial from '/components/login/Tutorial';
 import { KAKAO_AUTH_URL } from 'helpers/oauth/kakao';
+import apiController from 'helpers/apiController';
+import { setCookie } from 'helpers/cookie';
+import { useRouter } from 'next/router';
 
 const Login = () => {
   const [isEmailLoginFormShown, setIsEmailLoginFormShown] = useState(false);
+  const [username, setUsername] = useState()
+  const [password, setPassword] = useState()
+
+  const router = useRouter()
 
   const handleKakaoLogin = () => {
     window.location.href = KAKAO_AUTH_URL
@@ -12,6 +19,21 @@ const Login = () => {
   const handleEmailLogin = () => {
     setIsEmailLoginFormShown(true);
   };
+
+  const handleLogin = () => {
+    apiController().post(
+      '/api/auth/login',
+      { username, password }
+    ).then(res => {
+      const { data } = res
+      setCookie('accessToken', data.accessToken)
+      setCookie('refreshToken', data.refreshToken)
+      alert('로그인 성공')
+      router.push('/')
+    }).catch(() => {
+      alert('아이디나 비밀번호나 없거나 올바르지 않습니다.')
+    })
+  }
 
   return (
     <Container>
@@ -40,15 +62,17 @@ const Login = () => {
       ) : (
         <EmailLoginForm>
           <div className='inputLabel'>
-            <input type='text' placeholder='slowbird@gmail.com' id='email' />
+            <input type='text' placeholder='slowbird@gmail.com' id='email' onChange={(e) => setUsername(e.target.value)} />
             <label htmlFor='email'>이메일</label>
           </div>
           <div className='inputLabel'>
-            <input type='password' placeholder='6자리 이상' id='password' />
+            <input type='password' placeholder='6자리 이상' id='password' onChange={(e) => setPassword(e.target.value)} />
             <label htmlFor='password'>비밀번호</label>
           </div>
-          <button className='submit-button'>로그인</button>
-          <div className='sign-up'>회원 가입하기</div>
+          <button className='submit-button' onClick={handleLogin}>로그인</button>
+          <a href='/signup'>
+            <div className='sign-up'>회원 가입하기</div>
+          </a>
         </EmailLoginForm>
       )}
     </Container>
