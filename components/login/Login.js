@@ -38,46 +38,50 @@ const Login = () => {
     })
   }
 
+  const renderLoginMain = () => (
+    <div className='login-buttons'>
+      <button
+        className='login__login-button kakao'
+        onClick={handleKakaoLogin}
+      >
+        <img
+          className='kakao-icon'
+          src='icons/kakao.svg'
+          alt='kakao-icon'
+        />
+        <span>카카오로 시작하기</span>
+      </button>
+      <button
+        className='login__login-button normal'
+        onClick={handleEmailLogin}
+      >
+        <span>이메일로 시작하기</span>
+      </button>
+    </div>
+  )
+
+  const renderEmailLogin = () => (
+    <EmailLoginForm>
+      <div className='inputLabel'>
+        <input type='text' placeholder='slowbird@gmail.com' id='email' onChange={(e) => setUsername(e.target.value)} />
+        <label htmlFor='email'>이메일</label>
+      </div>
+      <div className='inputLabel'>
+        <input type='password' placeholder='6자리 이상' id='password' onChange={(e) => setPassword(e.target.value)} />
+        <label htmlFor='password'>비밀번호</label>
+      </div>
+      <button className='submit-button' onClick={handleLogin}>로그인</button>
+      <a href='/signup'>
+        <div className='sign-up'>회원 가입하기</div>
+      </a>
+    </EmailLoginForm>
+  )
+
   return (
     <Container>
       <Tutorial className='login__tutorial' />
 
-      {!isEmailLogin ? (
-        <div className='login-buttons'>
-          <button
-            className='login__login-button kakao'
-            onClick={handleKakaoLogin}
-          >
-            <img
-              className='kakao-icon'
-              src='icons/kakao.svg'
-              alt='kakao-icon'
-            />
-            <span>카카오로 시작하기</span>
-          </button>
-          <button
-            className='login__login-button normal'
-            onClick={handleEmailLogin}
-          >
-            <span>이메일로 시작하기</span>
-          </button>
-        </div>
-      ) : (
-        <EmailLoginForm>
-          <div className='inputLabel'>
-            <input type='text' placeholder='slowbird@gmail.com' id='email' onChange={(e) => setUsername(e.target.value)} />
-            <label htmlFor='email'>이메일</label>
-          </div>
-          <div className='inputLabel'>
-            <input type='password' placeholder='6자리 이상' id='password' onChange={(e) => setPassword(e.target.value)} />
-            <label htmlFor='password'>비밀번호</label>
-          </div>
-          <button className='submit-button' onClick={handleLogin}>로그인</button>
-          <a href='/signup'>
-            <div className='sign-up'>회원 가입하기</div>
-          </a>
-        </EmailLoginForm>
-      )}
+      {isEmailLogin  ? renderEmailLogin() : renderLoginMain()}
     </Container>
   );
 };
