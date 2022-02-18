@@ -1,24 +1,27 @@
+import { useState } from 'react'
+import { useRouter } from 'next/router';
 import styled from '@emotion/styled';
-import { useState } from 'react';
 import Tutorial from '/components/login/Tutorial';
 import { KAKAO_AUTH_URL } from 'helpers/oauth/kakao';
 import apiController from 'helpers/apiController';
 import { setCookie } from 'helpers/cookie';
-import { useRouter } from 'next/router';
 
 const Login = () => {
-  const [isEmailLoginFormShown, setIsEmailLoginFormShown] = useState(false);
+  const router = useRouter()
+  const isEmailLogin = router.query.type === 'email'
+
   const [username, setUsername] = useState()
   const [password, setPassword] = useState()
-
-  const router = useRouter()
 
   const handleKakaoLogin = () => {
     window.location.href = KAKAO_AUTH_URL
   };
+
   const handleEmailLogin = () => {
-    setIsEmailLoginFormShown(true);
-  };
+    router.push({
+      query: { type: 'email' }
+    })
+  }
 
   const handleLogin = () => {
     apiController().post(
@@ -39,7 +42,7 @@ const Login = () => {
     <Container>
       <Tutorial className='login__tutorial' />
 
-      {!isEmailLoginFormShown ? (
+      {!isEmailLogin ? (
         <div className='login-buttons'>
           <button
             className='login__login-button kakao'
