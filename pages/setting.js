@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import styled from "@emotion/styled"
 import ConfirmModal from 'components/modal/ConfirmModal'
+import WithdrawalModal from 'components/setting/WithdrawalModal'
 import apiController from 'helpers/apiController'
 import WrapAuthPage from 'helpers/AuthWrapper'
 import { kickout } from 'helpers/auth'
@@ -8,6 +9,7 @@ import { kickout } from 'helpers/auth'
 const SettingPage = ({ userInfo }) => {
 
   const [isLogoutModalOpen, setLogoutModalOpen] = useState(false)
+  const [isWithdrawalModalOpen, setWithdrawalModalOpen] = useState(false)
 
   const renderRow = (title, content) => {
     return (
@@ -31,13 +33,6 @@ const SettingPage = ({ userInfo }) => {
     )
   }
 
-  const handleLogoutClick = () => {
-    setLogoutModalOpen(true)
-  }
-
-  const handleWithdrawalClick = () => {
-  }
-
   const logout = () => {
     apiController().post('/api/auth/logout')
       .then(() => {
@@ -46,14 +41,23 @@ const SettingPage = ({ userInfo }) => {
     )
   }
 
+  const withdrawal = (reason) => {
+    apiController().post(
+      '/api/auth/withdrawal',
+      { reason: reason }
+    ).then(() => {
+      kickout()
+    })
+  }
+
   return (
     <>
       <Container>
         <Title>설정</Title>
         {renderRow('계 정', userInfo.username || userInfo.snsIdentifier)}
         {renderRow('닉 네 임', userInfo.nickname || userInfo.nickname)}
-        <Row><Button onClick={handleLogoutClick}>로그아웃</Button></Row>
-        <Row><Button onClick={handleWithdrawalClick}>회원탈퇴</Button></Row>
+        <Row><Button onClick={() => setLogoutModalOpen(true)}>로그아웃</Button></Row>
+        <Row><Button onClick={() => setWithdrawalModalOpen(true)}>회원탈퇴</Button></Row>
         {renderRow('카카오문의', '준비중')}
         {renderLink('이용약관', '')}
         {renderLink('개인정보처리방침', '')}
@@ -65,6 +69,11 @@ const SettingPage = ({ userInfo }) => {
         yesText="로그아웃"
         onYesClick={logout}
         onNoClick={() => setLogoutModalOpen(false)}
+      />
+      <WithdrawalModal
+        isOpen={isWithdrawalModalOpen}
+        onCancelClick={() => setWithdrawalModalOpen(false)}
+        onWithdrawalClick={withdrawal}
       />
     </>
   )

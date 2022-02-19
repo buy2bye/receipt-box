@@ -3,37 +3,6 @@ import styled from '@emotion/styled'
 
 import Modal from './Modal'
 
-const TitleText = styled.div`
-  font-size: 16px;
-  padding: 4px;
-  margin-bottom: 8px;
-`
-
-const DescriptionText = styled.div`
-  flex: 1;
-
-  font-size: 16px;
-  padding: 4px;
-  margin-bottom: 28px;
-`
-
-const WrapButtons = styled.div`
-  display: flex;
-  justify-content: center;
-
-  > button:last-child {
-    margin-left: 8px;
-  }
-`
-
-const Button = styled.button`
-  background: white;
-  width: 100%;
-  height: 40px;
-  border: 1px solid black;
-  border-radius: 4px;
-`
-
 const ConfirmModal = ({
   isOpen,
   titleText,
@@ -49,12 +18,11 @@ const ConfirmModal = ({
     <Modal
       isOpen={isOpen}
       modalBoxStyle={{
-          maxWidth: '400px',
-          minWidth: '256px',
-          minHeight: '140px',
-          padding: '16px'
-      }
-      }
+        maxWidth: '400px',
+        minWidth: '256px',
+        minHeight: '140px',
+        padding: '16px'
+      }}
       isPortal={isPortal}
     >
       {titleText && <TitleText>{titleText}</TitleText>}
@@ -88,3 +56,34 @@ ConfirmModal.defaultProps = {
 }
 
 export default ConfirmModal
+
+const TitleText = styled.div`
+  font-size: 16px;
+  padding: 4px;
+  margin-bottom: 8px;
+`
+
+const DescriptionText = styled.div`
+  flex: 1;
+
+  font-size: 16px;
+  padding: 4px;
+  margin-bottom: 28px;
+`
+
+const WrapButtons = styled.div`
+  display: flex;
+  justify-content: center;
+
+  > button:last-child {
+    margin-left: 8px;
+  }
+`
+
+const Button = styled.button`
+  background: white;
+  width: 100%;
+  height: 40px;
+  border: 1px solid black;
+  border-radius: 4px;
+`
