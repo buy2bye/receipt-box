@@ -5,6 +5,7 @@ import Title from 'components/page/Title';
 import BottomPopup from 'components/popup/BottomPopup';
 import receiptApi from 'api/receipt';
 import Layout from 'components/layout/Layout';
+import Button from 'components/button/Button';
 
 const UploadPage = () => {
   const [imageSrc, setImageSrc] = useState('');
@@ -13,7 +14,6 @@ const UploadPage = () => {
   const [showPopup, setShowPopup] = useState(false);
 
   const handleImageOnChange = (event) => {
-    event.preventDefault();
     const reader = new FileReader();
     const files = event.target.files;
     setImageFile(files[0]);
@@ -55,19 +55,26 @@ const UploadPage = () => {
           </span>
         )}
       </Thumbnail>
+      <Input
+        type='file'
+        id='upload-photo'
+        accept='image/*'
+        onChange={handleImageOnChange}
+      />
       {imageSrc ? (
         <ButtonsWrapper>
-          <SubmitButton onClick={handleSubmitPhotoClick}>다음</SubmitButton>
+          <Button>
+            <label htmlFor='upload-photo'>다시 올리기</label>
+          </Button>
+          <Button primary onClick={handleSubmitPhotoClick}>
+            다음
+          </Button>
         </ButtonsWrapper>
       ) : (
         <ButtonsWrapper>
-          <UploadButton htmlFor='upload-photo'>사진 업로드</UploadButton>
-          <input
-            type='file'
-            id='upload-photo'
-            accept='image/*'
-            onChange={handleImageOnChange}
-          />
+          <Button primary>
+            <label htmlFor='upload-photo'>사진 올리기</label>
+          </Button>
         </ButtonsWrapper>
       )}
 
@@ -75,17 +82,23 @@ const UploadPage = () => {
         <span className='title'>영수증의 닉네임을 설정해주세요</span>
         <input
           type='text'
-          placeholder='맥북 2022'
+          placeholder='예) 맥북 2022'
           className='text-input'
           onChange={handleNicknameChange}
         />
-        <SubmitButton onClick={handleUpload}>다음</SubmitButton>
+        <Button primary onClick={handleUpload}>
+          다음
+        </Button>
       </NicknamePopup>
     </Layout>
   );
 };
 
 export default WrapAuthPage(UploadPage);
+
+const Input = styled.input`
+  display: none;
+`;
 
 const Thumbnail = styled.div`
   width: 100%;
@@ -120,25 +133,9 @@ const ButtonsWrapper = styled.div`
   bottom: 24px;
   left: 24px;
   width: calc(100% - 48px);
-
-  input {
-    display: none;
-  }
 `;
 
 const UploadButton = styled.label`
-  background: var(--blue500);
-  color: white;
-  width: 100%;
-  height: 60px;
-  font-size: 16px;
-  border-radius: 16px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
-const SubmitButton = styled.button`
   background: var(--blue500);
   color: white;
   width: 100%;

@@ -5,12 +5,8 @@ const Title = ({ align, children }) => {
 };
 
 const Container = styled.h2`
-<<<<<<< HEAD
   margin: 24px 0;
   width: 100%;
-=======
-  margin: 20px 0;
->>>>>>> 37e184c460d51467e43b50933ba866fcfbad3b30
   text-align: left;
   font-size: 20px;
   font-weight: 400;
