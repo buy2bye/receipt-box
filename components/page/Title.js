@@ -6,7 +6,6 @@ const Title = ({ children }) => {
 
 const Container = styled.h2`
   margin: 20px 0;
-  width: 100%;
   text-align: left;
   font-size: 20px;
   font-weight: 400;
