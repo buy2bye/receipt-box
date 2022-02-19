@@ -6,7 +6,7 @@ import Link from 'next/link';
 
 const receiptList = [];
 
-const ReceiptListView = () => {
+const ReceiptListPage = () => {
   if (receiptList.length < 1)
     return (
       <Layout hideTop>
@@ -30,7 +30,7 @@ const ReceiptListView = () => {
   );
 };
 
-export default ReceiptListView;
+export default ReceiptListPage;
 
 const ReceiptList = styled.div`
   width: 100%;

@@ -1,8 +1,8 @@
-import ReceiptListView from 'components/ReceiptList';
+import ReceiptListPage from 'components/ReceiptList';
 import WrapAuthPage from 'helpers/AuthWrapper';
 
-const ReceiptListPage = () => {
-  return <ReceiptListView />;
+const Home = () => {
+  return <ReceiptListPage />;
 };
 
 export default WrapAuthPage(ReceiptListPage);
