@@ -1,11 +1,12 @@
+import { Router } from 'next/router';
 
 export const redirect = (url, ctx) => {
   if (typeof window === 'undefined') {
     // is server side rnedered
-    ctx.res.writeHead(302, { Location: url })
-    ctx.res.end()
+    ctx.res.writeHead(302, { Location: url });
+    ctx.res.end();
   } else {
-    Router.push(url)
+    Router.push(url);
   }
-  return {}
-}
+  return {};
+};

@@ -3,16 +3,20 @@ import { useState } from 'react';
 import styled from '@emotion/styled';
 import Title from 'components/page/Title';
 import BottomPopup from 'components/popup/BottomPopup';
+import apiController from 'helpers/apiController';
+import receiptApi from 'api/receipt';
 
 const UploadPage = () => {
   const [imageSrc, setImageSrc] = useState('');
+  const [imageFile, setImageFile] = useState();
+  const [nickname, setNickname] = useState('');
   const [showPopup, setShowPopup] = useState(false);
 
   const handleImageOnChange = (event) => {
-    console.log('image onchange');
     event.preventDefault();
     const reader = new FileReader();
     const files = event.target.files;
+    setImageFile(files[0]);
 
     reader.onload = function (event) {
       // 썸네일 이미지 경로 설정
@@ -23,7 +27,18 @@ const UploadPage = () => {
   };
 
   const handleSubmitPhotoClick = () => {
+    //이미지 등록 후 닉네임 설정 팝업 보여주기
     setShowPopup(true);
+  };
+
+  const handleNicknameChange = (e) => {
+    setNickname(e.target.value);
+  };
+
+  const handleUpload = () => {
+    //닉네임까지 입력 후 최종 영수증 업로드
+    const { create } = receiptApi();
+    create(nickname, imageFile);
   };
 
   return (
@@ -58,15 +73,20 @@ const UploadPage = () => {
 
       <NicknamePopup visible={showPopup} setVisible={setShowPopup}>
         <span className='title'>영수증의 닉네임을 설정해주세요</span>
-        <input type='text' placeholder='맥북 2022' className='text-input' />
-        <SubmitButton>다음</SubmitButton>
+        <input
+          type='text'
+          placeholder='맥북 2022'
+          className='text-input'
+          onChange={handleNicknameChange}
+        />
+        <SubmitButton onClick={handleUpload}>다음</SubmitButton>
       </NicknamePopup>
     </Container>
   );
 };
 
-// export default WrapAuthPage(UploadPage);
-export default UploadPage;
+export default WrapAuthPage(UploadPage);
+// export default UploadPage;
 
 const Container = styled.div`
   display: flex;
