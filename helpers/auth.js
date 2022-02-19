@@ -4,7 +4,7 @@ import axios from 'axios'
 import { getCookie, setCookie, removeCookie } from 'helpers/cookie'
 import { redirect } from 'helpers/utils'
 
-const kickout = (ctx) => {
+export const kickout = (ctx) => {
   removeCookie('accessToken', ctx)
   removeCookie('refreshToken', ctx)
   redirect("/login", ctx)

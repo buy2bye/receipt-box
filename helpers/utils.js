@@ -1,4 +1,4 @@
-import { Router } from "next/router"
+import Router from 'next/router'
 
 export const redirect = (url, ctx) => {
   if (typeof window === 'undefined') {

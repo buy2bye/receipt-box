@@ -1,8 +1,13 @@
+import { useState } from 'react'
 import styled from "@emotion/styled"
-import apiController from "helpers/apiController"
-import WrapAuthPage from "helpers/AuthWrapper"
+import ConfirmModal from 'components/modal/ConfirmModal'
+import apiController from 'helpers/apiController'
+import WrapAuthPage from 'helpers/AuthWrapper'
+import { kickout } from 'helpers/auth'
 
 const SettingPage = ({ userInfo }) => {
+
+  const [isLogoutModalOpen, setLogoutModalOpen] = useState(false)
 
   const renderRow = (title, content) => {
     return (
@@ -27,23 +32,41 @@ const SettingPage = ({ userInfo }) => {
   }
 
   const handleLogoutClick = () => {
+    setLogoutModalOpen(true)
   }
 
   const handleWithdrawalClick = () => {
   }
 
+  const logout = () => {
+    apiController().post('/api/auth/logout')
+      .then(() => {
+        kickout()
+      }
+    )
+  }
+
   return (
-    <Container>
-      <Title>설정</Title>
-      {renderRow('계 정', userInfo.username || userInfo.snsIdentifier)}
-      {renderRow('닉 네 임', userInfo.nickname || userInfo.nickname)}
-      <Row><Button>로그아웃</Button></Row>
-      <Row><Button>회원탈퇴</Button></Row>
-      {renderRow('카카오문의', '준비중')}
-      {renderLink('이용약관', '')}
-      {renderLink('개인정보처리방침', '')}
-      {renderLink('마케팅정보 수신동의', '')}
-    </Container>
+    <>
+      <Container>
+        <Title>설정</Title>
+        {renderRow('계 정', userInfo.username || userInfo.snsIdentifier)}
+        {renderRow('닉 네 임', userInfo.nickname || userInfo.nickname)}
+        <Row><Button onClick={handleLogoutClick}>로그아웃</Button></Row>
+        <Row><Button onClick={handleWithdrawalClick}>회원탈퇴</Button></Row>
+        {renderRow('카카오문의', '준비중')}
+        {renderLink('이용약관', '')}
+        {renderLink('개인정보처리방침', '')}
+        {renderLink('마케팅정보 수신동의', '')}
+      </Container>
+      <ConfirmModal
+        isOpen={isLogoutModalOpen}
+        descriptionText="로그아웃 하시겠습니까?"
+        yesText="로그아웃"
+        onYesClick={logout}
+        onNoClick={() => setLogoutModalOpen(false)}
+      />
+    </>
   )
 }
 
