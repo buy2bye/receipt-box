@@ -1,12 +1,12 @@
 import _ from 'lodash'
 import axios from 'axios'
 
-import { getCookie, setCookie } from 'helpers/cookie'
+import { getCookie, setCookie, removeCookie } from 'helpers/cookie'
 import { redirect } from 'helpers/utils'
 
 const kickout = (ctx) => {
   removeCookie('accessToken', ctx)
-  removeCookie('refreshtoken', ctx)
+  removeCookie('refreshToken', ctx)
   redirect("/login", ctx)
 }
 
