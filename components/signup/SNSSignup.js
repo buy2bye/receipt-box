@@ -19,7 +19,6 @@ const SNSSingup = () => {
       .post('/api/user/set-nickname', { nickname: nickname })
       .catch((error) => {
         const { status } = error.response;
-        console.log('status code', status);
         alert('닉네임이 중복됩니다!');
       })
       .then((res) => {
