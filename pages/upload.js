@@ -3,8 +3,8 @@ import { useState } from 'react';
 import styled from '@emotion/styled';
 import Title from 'components/page/Title';
 import BottomPopup from 'components/popup/BottomPopup';
-import apiController from 'helpers/apiController';
 import receiptApi from 'api/receipt';
+import Layout from 'components/layout/Layout';
 
 const UploadPage = () => {
   const [imageSrc, setImageSrc] = useState('');
@@ -42,7 +42,7 @@ const UploadPage = () => {
   };
 
   return (
-    <Container>
+    <Layout hideBottom>
       <Title>영수증을 등록해 주세요</Title>
       <Thumbnail>
         {imageSrc ? (
@@ -81,22 +81,11 @@ const UploadPage = () => {
         />
         <SubmitButton onClick={handleUpload}>다음</SubmitButton>
       </NicknamePopup>
-    </Container>
+    </Layout>
   );
 };
 
 export default WrapAuthPage(UploadPage);
-// export default UploadPage;
-
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 24px;
-  width: 100vw;
-  height: 100vh;
-  position: relative;
-`;
 
 const Thumbnail = styled.div`
   width: 100%;

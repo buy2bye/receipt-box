@@ -4,58 +4,33 @@ import Subtitle from 'components/page/Subtitle';
 import Layout from 'components/layout/Layout';
 import Link from 'next/link';
 
-const receiptList = [
-  //   {
-  //     id: 1,
-  //   },
-  //   {
-  //     id: 2,
-  //   },
-  //   {
-  //     id: 3,
-  //   },
-];
+const receiptList = [];
 
 const ReceiptListView = () => {
   if (receiptList.length < 1)
     return (
-      <Layout>
-        <Container>
-          <Title>등록된 영수증이 없어요</Title>
-          <Subtitle>스마트폰 캡쳐화면도 등록할 수 있어요 🙂</Subtitle>
-          <Link href='/upload'>
-            <RegisterButton>영수증 등록하기</RegisterButton>
-          </Link>
-        </Container>
+      <Layout hideTop>
+        <Title>등록된 영수증이 없어요</Title>
+        <Subtitle>스마트폰 캡쳐화면도 등록할 수 있어요 🙂</Subtitle>
+        <Link href='/upload'>
+          <RegisterButton>영수증 등록하기</RegisterButton>
+        </Link>
       </Layout>
     );
 
   return (
     <Layout>
-      <Container>
-        <Title>나의 영수증 보관함</Title>
-        <ReceiptList>
-          {receiptList.map((item, index) => (
-            <Receipt item={item} key={index} />
-          ))}
-        </ReceiptList>
-      </Container>
+      <Title>나의 영수증 보관함</Title>
+      <ReceiptList>
+        {receiptList.map((item, index) => (
+          <Receipt item={item} key={index} />
+        ))}
+      </ReceiptList>
     </Layout>
   );
 };
 
 export default ReceiptListView;
-
-const Container = styled.div`
-  position: relative;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 24px;
-  overflow-y: scroll;
-`;
 
 const ReceiptList = styled.div`
   width: 100%;

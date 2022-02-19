@@ -1,25 +1,14 @@
 import _ from 'lodash';
 import axios from 'axios';
 
-<<<<<<< HEAD
-import { getCookie, removeCookie, setCookie } from 'helpers/cookie';
+import { getCookie, setCookie, removeCookie } from 'helpers/cookie';
 import { redirect } from 'helpers/utils';
 
-const kickout = (ctx) => {
+export const kickout = (ctx) => {
   removeCookie('accessToken', ctx);
-  removeCookie('refreshtoken', ctx);
+  removeCookie('refreshToken', ctx);
   redirect('/login', ctx);
 };
-=======
-import { getCookie, setCookie, removeCookie } from 'helpers/cookie'
-import { redirect } from 'helpers/utils'
-
-export const kickout = (ctx) => {
-  removeCookie('accessToken', ctx)
-  removeCookie('refreshToken', ctx)
-  redirect("/login", ctx)
-}
->>>>>>> 37e184c460d51467e43b50933ba866fcfbad3b30
 
 export function setAuthInterceptors(instance, ctx) {
   instance.interceptors.request.use(
