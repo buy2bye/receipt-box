@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState } from 'react';
 import { useRouter } from 'next/router';
 import styled from '@emotion/styled';
 import Tutorial from '/components/login/Tutorial';
@@ -7,11 +7,11 @@ import apiController from 'helpers/apiController';
 import { setCookie } from 'helpers/cookie';
 
 const Login = () => {
-  const router = useRouter()
-  const isEmailLogin = router.query.type === 'email'
+  const router = useRouter();
+  const isEmailLogin = router.query.type === 'email';
 
-  const [username, setUsername] = useState()
-  const [password, setPassword] = useState()
+  const [username, setUsername] = useState();
+  const [password, setPassword] = useState();
 
   const handleKakaoLogin = () => {
     window.location.href = KAKAO_AUTH_URL;
@@ -19,69 +19,70 @@ const Login = () => {
 
   const handleEmailLogin = () => {
     router.push({
-      query: { type: 'email' }
-    })
-  }
+      query: { type: 'email' },
+    });
+  };
 
   const handleLogin = () => {
-    apiController().post(
-      '/api/auth/login',
-      { username, password }
-    ).then(res => {
-      const { data } = res
-      setCookie('accessToken', data.accessToken)
-      setCookie('refreshToken', data.refreshToken)
-      alert('로그인 성공')
-      router.push('/')
-    }).catch(() => {
-      alert('아이디나 비밀번호나 없거나 올바르지 않습니다.')
-    })
-  }
+    apiController()
+      .post('/api/auth/login', { username, password })
+      .then((res) => {
+        const { data } = res;
+        setCookie('accessToken', data.accessToken);
+        setCookie('refreshToken', data.refreshToken);
+        alert('로그인 성공');
+        router.push('/');
+      })
+      .catch(() => {
+        alert('아이디나 비밀번호나 없거나 올바르지 않습니다.');
+      });
+  };
 
   const renderLoginMain = () => (
     <div className='login-buttons'>
-      <button
-        className='login__login-button kakao'
-        onClick={handleKakaoLogin}
-      >
-        <img
-          className='kakao-icon'
-          src='icons/kakao.svg'
-          alt='kakao-icon'
-        />
+      <button className='login__login-button kakao' onClick={handleKakaoLogin}>
+        <img className='kakao-icon' src='icons/kakao.svg' alt='kakao-icon' />
         <span>카카오로 시작하기</span>
       </button>
-      <button
-        className='login__login-button normal'
-        onClick={handleEmailLogin}
-      >
+      <button className='login__login-button normal' onClick={handleEmailLogin}>
         <span>이메일로 시작하기</span>
       </button>
     </div>
-  )
+  );
 
   const renderEmailLogin = () => (
     <EmailLoginForm>
       <div className='inputLabel'>
-        <input type='text' placeholder='slowbird@gmail.com' id='email' onChange={(e) => setUsername(e.target.value)} />
+        <input
+          type='text'
+          placeholder='slowbird@gmail.com'
+          id='email'
+          onChange={(e) => setUsername(e.target.value)}
+        />
         <label htmlFor='email'>이메일</label>
       </div>
       <div className='inputLabel'>
-        <input type='password' placeholder='6자리 이상' id='password' onChange={(e) => setPassword(e.target.value)} />
+        <input
+          type='password'
+          placeholder='6자리 이상'
+          id='password'
+          onChange={(e) => setPassword(e.target.value)}
+        />
         <label htmlFor='password'>비밀번호</label>
       </div>
-      <button className='submit-button' onClick={handleLogin}>로그인</button>
+      <button className='submit-button' onClick={handleLogin}>
+        로그인
+      </button>
       <a href='/signup'>
         <div className='sign-up'>회원 가입하기</div>
       </a>
     </EmailLoginForm>
-  )
+  );
 
   return (
     <Container>
       <Tutorial className='login__tutorial' />
-
-      {isEmailLogin  ? renderEmailLogin() : renderLoginMain()}
+      {isEmailLogin ? renderEmailLogin() : renderLoginMain()}
     </Container>
   );
 };
@@ -105,6 +106,10 @@ const Container = styled.div`
 
   .login-buttons {
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
   }
 
   .login__login-button {

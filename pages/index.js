@@ -5,5 +5,4 @@ const ReceiptListPage = () => {
   return <ReceiptListView />;
 };
 
-// export default WrapAuthPage(ReceiptListPage);
-export default ReceiptListPage;
+export default WrapAuthPage(ReceiptListPage);
