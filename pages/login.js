@@ -1,6 +1,6 @@
 import Login from 'components/login/Login';
 
-const LoginPage = () => {
+const LoginPage = ({ ctx }) => {
   return (
     <Login />
   )

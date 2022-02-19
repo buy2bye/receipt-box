@@ -14,7 +14,7 @@ const apiController = (props = {}) => {
   axios.defaults.timeout = 10000;
   axios.defaults.baseURL = process.env.NEXT_PUBLIC_SERVER_HOST;
 
-  const api = isAuth ? setAuthInterceptors(axios, ctx) : axios;
+  const api = isAuth ? setAuthInterceptors(axios.create(), ctx) : axios;
 
   const get = async (url, payload) => {
     try {
