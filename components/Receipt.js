@@ -1,5 +1,6 @@
 import styled from '@emotion/styled';
 import { calculateDateDiff, calculatePeriod } from 'helpers/utils';
+import Link from 'next/link';
 
 const Receipt = ({ item }) => {
   const dateDiff = calculateDateDiff(item.productDate);
@@ -18,18 +19,20 @@ const Receipt = ({ item }) => {
   );
 
   return (
-    <Container>
-      {item.productImage ? imageWrapper : imageSkeleton}
-      <div className='contents'>
-        <h3 className='name'>{item?.nickname}</h3>
+    <Link href={`/receipt/${item.id}`}>
+      <Container>
+        {item.productImage ? imageWrapper : imageSkeleton}
+        <div className='contents'>
+          <h3 className='name'>{item?.nickname}</h3>
 
-        {dateDiff.okay && (
-          <span className='date'>
-            함께한 지 <b>{dateDiff.data.dateDiff}</b>일 째
-          </span>
-        )}
-      </div>
-    </Container>
+          {dateDiff.okay && (
+            <span className='date'>
+              함께한 지 <b>{dateDiff.data.dateDiff}</b>일 째
+            </span>
+          )}
+        </div>
+      </Container>
+    </Link>
   );
 };
 
