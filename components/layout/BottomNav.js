@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import Link from 'next/link';
 
 const BottomNav = () => {
   return (
@@ -8,10 +9,12 @@ const BottomNav = () => {
           <img src='icons/box.png' alt='receipt-box' />
           나의 보관함
         </button>
-        <button>
-          <img src='icons/upload.png' alt='receipt-upload' />
-          영수증 등록
-        </button>
+        <Link href='/upload'>
+          <button>
+            <img src='icons/upload.png' alt='receipt-upload' />
+            영수증 등록
+          </button>
+        </Link>
       </div>
     </Container>
   );

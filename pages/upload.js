@@ -37,8 +37,8 @@ const UploadPage = () => {
 
   const handleUpload = () => {
     //닉네임까지 입력 후 최종 영수증 업로드
-    const { create } = receiptApi();
-    create(nickname, imageFile);
+    const { createReceipt } = receiptApi();
+    createReceipt(nickname, imageFile);
   };
 
   return (

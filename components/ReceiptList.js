@@ -3,10 +3,17 @@ import Title from 'components/page/Title';
 import Subtitle from 'components/page/Subtitle';
 import Layout from 'components/layout/Layout';
 import Link from 'next/link';
-
-const receiptList = [];
+import { useEffect, useState } from 'react';
+import receiptApi from 'api/receipt';
+import Receipt from './Receipt';
 
 const ReceiptListPage = () => {
+  const [receiptList, setReceiptList] = useState([]);
+  useEffect(() => {
+    const { getReceipts } = receiptApi();
+    getReceipts().then((data) => setReceiptList(data.data.receiptList));
+  }, []);
+
   if (receiptList.length < 1)
     return (
       <Layout hideTop>
@@ -19,7 +26,7 @@ const ReceiptListPage = () => {
     );
 
   return (
-    <Layout>
+    <Layout hideTop>
       <Title>나의 영수증 보관함</Title>
       <ReceiptList>
         {receiptList.map((item, index) => (
@@ -37,14 +44,7 @@ const ReceiptList = styled.div`
   height: auto;
   display: flex;
   flex-direction: column;
-  gap: 24px;
-`;
-
-const Receipt = styled.div`
-  background: var(--blue200);
-  width: 100%;
-  height: 100px;
-  border-radius: 16px;
+  gap: 16px;
 `;
 
 const RegisterButton = styled.a`
