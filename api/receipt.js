@@ -22,7 +22,14 @@ const receiptApi = () => {
     return { data };
   };
 
-  return { createReceipt, getReceipts };
+  //영수증 상세 정보 가져오기
+  const getReceiptDetail = async (id) => {
+    const { data } = await get(`/api/receipt/${id}/info`);
+
+    return { data };
+  };
+
+  return { createReceipt, getReceipts, getReceiptDetail };
 };
 
 export default receiptApi;
