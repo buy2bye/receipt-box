@@ -5,8 +5,6 @@ import Link from 'next/link';
 const Receipt = ({ item }) => {
   const dateDiff = calculateDateDiff(item.productDate);
 
-  console.log(dateDiff);
-
   const imageSkeleton = (
     <div className='thumb'>
       <span>이미지를 준비해 드릴게요</span>
