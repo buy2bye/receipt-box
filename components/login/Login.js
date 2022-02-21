@@ -5,6 +5,7 @@ import Tutorial from '/components/login/Tutorial';
 import { KAKAO_AUTH_URL } from 'helpers/oauth/kakao';
 import apiController from 'helpers/apiController';
 import { setCookie } from 'helpers/cookie';
+import Link from 'next/link';
 
 const Login = () => {
   const router = useRouter();
@@ -73,9 +74,9 @@ const Login = () => {
       <button className='submit-button' onClick={handleLogin}>
         로그인
       </button>
-      <a href='/signup'>
+      <Link href='/signup'>
         <div className='sign-up'>회원 가입하기</div>
-      </a>
+      </Link>
     </EmailLoginForm>
   );
 

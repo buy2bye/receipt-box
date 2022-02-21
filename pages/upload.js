@@ -13,7 +13,7 @@ const UploadPage = () => {
   const [nickname, setNickname] = useState('');
   const [showPopup, setShowPopup] = useState(false);
 
-  const handleImageOnChange = (event) => {
+  const handleOnImageChange = (event) => {
     const reader = new FileReader();
     const files = event.target.files;
     setImageFile(files[0]);
@@ -59,7 +59,7 @@ const UploadPage = () => {
         type='file'
         id='upload-photo'
         accept='image/*'
-        onChange={handleImageOnChange}
+        onChange={handleOnImageChange}
       />
       {imageSrc ? (
         <ButtonsWrapper>
