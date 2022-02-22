@@ -29,7 +29,19 @@ const receiptApi = () => {
     return { data };
   };
 
-  return { createReceipt, getReceipts, getReceiptDetail };
+  const changeReceiptNickname = async (id, nickname) => {
+    const { data } = await post(`/api/receipt/${id}/set-nickname`, {
+      nickname: nickname,
+    });
+    return { data };
+  };
+
+  return {
+    createReceipt,
+    getReceipts,
+    getReceiptDetail,
+    changeReceiptNickname,
+  };
 };
 
 export default receiptApi;

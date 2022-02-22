@@ -11,9 +11,9 @@ const ReceiptDetail = () => {
   const [receipt, setReceipt] = useState();
   const [productImage, setProductImage] = useState('');
   const [imageFile, setImageFile] = useState();
+  const { getReceiptDetail, changeReceiptNickname } = receiptApi();
 
   useEffect(() => {
-    const { getReceiptDetail } = receiptApi();
     getReceiptDetail(id).then((data) => setReceipt(data.data));
   }, []);
 
@@ -28,6 +28,10 @@ const ReceiptDetail = () => {
     };
 
     if (files[0]) reader.readAsDataURL(files[0]);
+  };
+
+  const handleNicknameChange = () => {
+    changeReceiptNickname(id, 'nickname-change');
   };
 
   const imageSkeleton = (
@@ -60,7 +64,7 @@ const ReceiptDetail = () => {
     <Container>
       <div className='nickname'>
         <span>{receipt.nickname}</span>
-        <button onClick={() => alert('닉네임 변경할 것')}>
+        <button onClick={handleNicknameChange}>
           <img src='/icons/edit (2).png' alt='edit' />
         </button>
       </div>
