@@ -6,6 +6,7 @@ import BottomPopup from 'components/popup/BottomPopup';
 import receiptApi from 'api/receipt';
 import Layout from 'components/layout/Layout';
 import Button from 'components/button/Button';
+import BottomTextInputPopup from 'components/popup/BottomTextInputPopup';
 
 const UploadPage = () => {
   const [imageSrc, setImageSrc] = useState('');
@@ -78,20 +79,14 @@ const UploadPage = () => {
         </ButtonsWrapper>
       )}
 
-      <NicknamePopup
+      <BottomTextInputPopup
         visible={showPopup}
         setVisible={setShowPopup}
         title='영수증의 닉네임을 설정해주세요'
-      >
-        <TextInput
-          type='text'
-          placeholder='예) 맥북 2022'
-          onChange={handleNicknameChange}
-        />
-        <Button primary onClick={handleUpload}>
-          다음
-        </Button>
-      </NicknamePopup>
+        placeholder='예) 맥북 2022'
+        onInputChange={handleNicknameChange}
+        onSubmit={handleUpload}
+      />
     </Layout>
   );
 };
@@ -147,19 +142,4 @@ const UploadButton = styled.label`
   display: flex;
   justify-content: center;
   align-items: center;
-`;
-
-const NicknamePopup = styled(BottomPopup)``;
-
-const TextInput = styled.input`
-  margin-top: 24px;
-  width: 100%;
-  height: 60px;
-  border: 1px solid var(--grey300);
-  background: var(--grey100);
-  border-radius: 8px;
-  font-size: 18px;
-  padding: 0 16px;
-  font-weight: 300;
-  color: var(--grey800);
 `;

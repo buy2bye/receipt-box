@@ -4,6 +4,7 @@ import Button from 'components/button/Button';
 import Layout from 'components/layout/Layout';
 import TextModal from 'components/modal/TextModal';
 import BottomPopup from 'components/popup/BottomPopup';
+import BottomTextInputPopup from 'components/popup/BottomTextInputPopup';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
@@ -110,20 +111,14 @@ const ReceiptDetail = () => {
         </li>
       </Details>
 
-      <BottomPopup
+      <BottomTextInputPopup
         visible={showNicknameChangePopup}
         setVisible={setShowNicknameChangePopup}
         title='변경할 닉네임을 입력해주세요'
-      >
-        <TextInput
-          type='text'
-          placeholder='예) 맥북 2022'
-          onChange={handleNicknameChange}
-        />
-        <Button primary onClick={handleNicknameSubmit}>
-          다음
-        </Button>
-      </BottomPopup>
+        placeholder='예) 맥북 2022'
+        onInputChange={handleNicknameChange}
+        onSubmit={handleNicknameSubmit}
+      />
     </Container>
   );
 };
