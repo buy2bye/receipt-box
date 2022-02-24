@@ -4,7 +4,7 @@ import { useState } from 'react';
 const Popup = ({ children, visible, setVisible, className }) => {
   return (
     <Container visible={visible}>
-      <DimmedBackground onClick={() => setVisible(!visible)} />
+      <Overlay onClick={() => setVisible(!visible)} />
       <PopupWrapper visible={visible} className={className}>
         {children}
       </PopupWrapper>
@@ -23,7 +23,7 @@ const Container = styled.div`
   left: 0;
 `;
 
-const DimmedBackground = styled.div`
+const Overlay = styled.div`
   z-index: 12;
   width: 100%;
   height: 100%;

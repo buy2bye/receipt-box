@@ -78,12 +78,14 @@ const UploadPage = () => {
         </ButtonsWrapper>
       )}
 
-      <NicknamePopup visible={showPopup} setVisible={setShowPopup}>
-        <span className='title'>영수증의 닉네임을 설정해주세요</span>
-        <input
+      <NicknamePopup
+        visible={showPopup}
+        setVisible={setShowPopup}
+        title='영수증의 닉네임을 설정해주세요'
+      >
+        <TextInput
           type='text'
           placeholder='예) 맥북 2022'
-          className='text-input'
           onChange={handleNicknameChange}
         />
         <Button primary onClick={handleUpload}>
@@ -147,29 +149,17 @@ const UploadButton = styled.label`
   align-items: center;
 `;
 
-const NicknamePopup = styled(BottomPopup)`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  background: var(--grey200);
+const NicknamePopup = styled(BottomPopup)``;
 
-  .title {
-    display: inline-block;
-    width: 100%;
-    font-size: 18px;
-    text-align: center;
-  }
-
-  .text-input {
-    margin-top: 24px;
-    width: 100%;
-    height: 60px;
-    border: 1px solid var(--grey300);
-    background: var(--grey100);
-    border-radius: 8px;
-    font-size: 18px;
-    padding: 0 16px;
-    font-weight: 300;
-    color: var(--grey800);
-  }
+const TextInput = styled.input`
+  margin-top: 24px;
+  width: 100%;
+  height: 60px;
+  border: 1px solid var(--grey300);
+  background: var(--grey100);
+  border-radius: 8px;
+  font-size: 18px;
+  padding: 0 16px;
+  font-weight: 300;
+  color: var(--grey800);
 `;

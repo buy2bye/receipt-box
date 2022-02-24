@@ -1,32 +1,22 @@
-import ReactDOM from 'react-dom'
-import styled from '@emotion/styled'
+import ReactDOM from 'react-dom';
+import styled from '@emotion/styled';
 
-const Modal = ({
-  isOpen,
-  isPortal,
-  modalBoxStyle,
-  children
-}) => {
+const Modal = ({ isOpen, isPortal, modalBoxStyle, children }) => {
   const render = () => (
     <>
       <Overlay />
       <Container>
-        <ModalBox style={modalBoxStyle}>
-          {children}
-        </ModalBox>
+        <ModalBox style={modalBoxStyle}>{children}</ModalBox>
       </Container>
     </>
-  )
+  );
   return (
-    isOpen && (
-      isPortal ?
-      ReactDOM.createPortal(render(), document.body) :
-      render()
-    )
-  )
-}
+    isOpen &&
+    (isPortal ? ReactDOM.createPortal(render(), document.body) : render())
+  );
+};
 
-export default Modal
+export default Modal;
 
 const Overlay = styled.div`
   position: fixed;
@@ -34,10 +24,10 @@ const Overlay = styled.div`
   left: 0;
   bottom: 0;
   right: 0;
-  opacity: 0.6;
+  opacity: 0.5;
   background-color: black;
   z-index: 1000;
-`
+`;
 
 const Container = styled.div`
   position: fixed;
@@ -50,10 +40,11 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   z-index: 1001;
-`
+`;
 
 const ModalBox = styled.div`
-  border-radius: 4px;
-  box-shadow: 0 2px 18px 0 rgba(109, 120, 132, 0.28);
-  background-color: white;
-`
+  border: none;
+  border-radius: 12px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  background-color: var(--grey200);
+`;

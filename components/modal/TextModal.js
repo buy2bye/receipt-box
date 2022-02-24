@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 
 import Modal from './Modal';
 
-const ConfirmModal = ({
+const TextModal = ({
   isOpen,
   titleText,
   descriptionText,
@@ -13,6 +13,7 @@ const ConfirmModal = ({
   isPortal,
   onNoClick,
   onYesClick,
+  onInputChange,
 }) => {
   return (
     <Modal
@@ -27,6 +28,11 @@ const ConfirmModal = ({
     >
       {titleText && <TitleText>{titleText}</TitleText>}
       <DescriptionText>{descriptionText}</DescriptionText>
+      <TextInput
+        type='text'
+        placeholder='새로운 닉네임을 입력하세요'
+        onChange={onInputChange}
+      />
       <WrapButtons>
         {!hideNoButton && (
           <Button id='noBtn' variant='basic' onClick={onNoClick}>
@@ -41,34 +47,37 @@ const ConfirmModal = ({
   );
 };
 
-ConfirmModal.defaultProps = {
+TextModal.defaultProps = {
   noText: '취소',
   yesText: '확인',
   hideNoButton: false,
 };
 
-export default ConfirmModal;
+export default TextModal;
 
 const TitleText = styled.div`
   font-size: 16px;
-  padding: 4px;
   margin-bottom: 8px;
 `;
 
 const DescriptionText = styled.div`
   flex: 1;
-  font-size: 16px;
-  padding: 4px;
-  margin-bottom: 28px;
+  font-size: 14px;
+  margin-bottom: 8px;
+`;
+
+const TextInput = styled.input`
+  width: 100%;
+  height: 40px;
+  margin-bottom: 8px;
+  border-radius: 4px;
+  border: 1px solid black;
 `;
 
 const WrapButtons = styled.div`
   display: flex;
   justify-content: center;
-
-  > button:last-child {
-    margin-left: 8px;
-  }
+  gap: 4px;
 `;
 
 const Button = styled.button`
