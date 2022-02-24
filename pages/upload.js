@@ -14,14 +14,14 @@ const UploadPage = () => {
   const [nickname, setNickname] = useState('');
   const [showPopup, setShowPopup] = useState(false);
 
-  const handleOnImageChange = (event) => {
+  const handleOnImageChange = (e) => {
     const reader = new FileReader();
-    const files = event.target.files;
+    const files = e.target.files;
     setImageFile(files[0]);
 
-    reader.onload = function (event) {
+    reader.onload = function (e) {
       // 썸네일 이미지 경로 설정
-      setImageSrc(event.target.result);
+      setImageSrc(e.target.result);
     };
 
     if (files[0]) reader.readAsDataURL(files[0]);
@@ -56,7 +56,7 @@ const UploadPage = () => {
           </span>
         )}
       </Thumbnail>
-      <Input
+      <input
         type='file'
         id='upload-photo'
         accept='image/*'
@@ -92,10 +92,6 @@ const UploadPage = () => {
 };
 
 export default WrapAuthPage(UploadPage);
-
-const Input = styled.input`
-  display: none;
-`;
 
 const Thumbnail = styled.div`
   width: 100%;

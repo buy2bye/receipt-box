@@ -6,34 +6,39 @@ import TextModal from 'components/modal/TextModal';
 import BottomPopup from 'components/popup/BottomPopup';
 import BottomTextInputPopup from 'components/popup/BottomTextInputPopup';
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 const ReceiptDetail = () => {
+  const [, updateState] = useState();
+  const forceUpdate = useCallback(() => updateState({}), []);
   const router = useRouter();
   const { id } = router.query;
   const [receipt, setReceipt] = useState();
-  const [productImage, setProductImage] = useState('');
-  const [imageFile, setImageFile] = useState();
   const [nickname, setNickname] = useState('');
   const [showNicknameChangePopup, setShowNicknameChangePopup] = useState(false);
-  const { getReceiptDetail, changeReceiptNickname } = receiptApi();
+  const { getReceiptDetail, changeReceiptNickname, updateProductImage } =
+    receiptApi();
 
   useEffect(() => {
     getReceiptDetail(id).then((data) => setReceipt(data.data));
   }, []);
 
-  const handleOnImageChange = (event) => {
+  const handleProductImageChange = (e) => {
     const reader = new FileReader();
-    const files = event.target.files;
-    setImageFile(files[0]);
+    const files = e.target.files;
 
-    reader.onload = function (event) {
-      // 썸네일 이미지 경로 설정
-      setProductImage(event.target.result);
+    reader.onload = function (e) {
+      updateProductImage(id, files[0]).then(() => {
+        // 새로운 이미지 보이도록 처리해야함
+        // forceUpdate();
+        // router.replace(`/receipt/${id}`);
+      });
     };
 
     if (files[0]) reader.readAsDataURL(files[0]);
   };
+
+  console.log('rendered');
 
   const handleNicknameChange = (e) => {
     setNickname(e.target.value);
@@ -55,55 +60,58 @@ const ReceiptDetail = () => {
       <NicknameWrapper>
         <span>{receipt.nickname}</span>
         <button onClick={() => setShowNicknameChangePopup(true)}>
-          <img src='/icons/edit (2).png' alt='edit' />
+          <img src='/icons/edit.png' alt='edit' />
         </button>
       </NicknameWrapper>
-
-      <FileInput
-        type='file'
-        id='upload-photo'
-        accept='image/*'
-        onChange={handleOnImageChange}
-      />
 
       {receipt.productImage ? (
         <ThumbnailWrapper>
           <img src={receipt.productImage} alt={receipt.nickname} />
-          <button onClick={() => alert('닉네임 변경할 것')}>
-            <img src='/icons/edit (2).png' alt='edit' />
-          </button>
-        </ThumbnailWrapper>
-      ) : productImage ? (
-        <ThumbnailWrapper>
-          <img src={productImage} alt={receipt.productName} />
+          <input
+            type='file'
+            id='upload-photo'
+            accept='image/*'
+            onChange={handleProductImageChange}
+          />
+          <label className='change-image' htmlFor='upload-photo'>
+            <img src='/icons/edit.png' alt='edit' />
+          </label>
         </ThumbnailWrapper>
       ) : (
         <ThumbnailWrapper>
           <span>이미지를 준비해 드릴게요</span>
-          <label htmlFor='upload-photo'>직접 등록하기</label>
+          <input
+            type='file'
+            id='upload-photo'
+            accept='image/*'
+            onChange={handleProductImageChange}
+          />
+          <label className='new-image' htmlFor='upload-photo'>
+            직접 등록하기
+          </label>
         </ThumbnailWrapper>
       )}
 
       <Details>
         <li>
           <span>상품명</span>
-          <span>{receipt.productName || '업데이트 중...'}</span>
+          <span>{receipt.productName || '곧 업데이트 해드릴게요'}</span>
         </li>
         <li>
           <span>구매처</span>
-          <span>{receipt.productPlace || '업데이트 중...'}</span>
+          <span>{receipt.productPlace || '곧 업데이트 해드릴게요'}</span>
         </li>
         <li>
           <span>구매가</span>
           <span>
             {receipt.productPrice
               ? `${parseInt(receipt.productPrice).toLocaleString()} 원`
-              : '업데이트 중...'}
+              : '곧 업데이트 해드릴게요'}
           </span>
         </li>
         <li>
           <span>구매일자</span>
-          <span>{receipt.productDate || '업데이트 중...'}</span>
+          <span>{receipt.productDate || '곧 업데이트 해드릴게요'}</span>
         </li>
         <li>
           <span>영수증</span>
@@ -175,7 +183,7 @@ const ThumbnailWrapper = styled.div`
     align-items: center;
   }
 
-  label {
+  .new-image {
     font-weight: 500;
     font-size: 12px;
     text-decoration: underline;
@@ -184,7 +192,7 @@ const ThumbnailWrapper = styled.div`
     padding-bottom: 16px;
   }
 
-  button {
+  .change-image {
     position: absolute;
     bottom: 4px;
     right: 4px;
@@ -200,10 +208,6 @@ const ThumbnailWrapper = styled.div`
   }
 `;
 
-const FileInput = styled.input`
-  display: none;
-`;
-
 const Details = styled.ul`
   display: flex;
   flex-direction: column;
@@ -213,7 +217,7 @@ const Details = styled.ul`
   font-size: 14px;
   font-weight: 300;
 
-  li > span:first-child {
+  li > span:first-of-type {
     display: inline-block;
     width: 80px;
   }

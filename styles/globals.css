@@ -32,6 +32,10 @@ ul {
   padding: 0;
 }
 
+input[type='file'] {
+  display: none;
+}
+
 .swiper-wrapper {
   display: -webkit-inline-box;
   width: 100%;

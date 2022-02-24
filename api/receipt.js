@@ -13,7 +13,7 @@ const receiptApi = () => {
   };
 
   //영수증 리스트 가져오기
-  const getReceipts = async (page = 1, length = 10) => {
+  const getReceipts = async (page = 1, length = 100) => {
     const { data } = await get('/api/receipt/list', {
       page: page,
       length: length,
@@ -36,11 +36,20 @@ const receiptApi = () => {
     return { data };
   };
 
+  //영수증 등록
+  const updateProductImage = async (id, image) => {
+    const formData = new FormData();
+    formData.append('image', image);
+
+    post(`/api/receipt/${id}/upload-product-image`, formData);
+  };
+
   return {
     createReceipt,
     getReceipts,
     getReceiptDetail,
     changeReceiptNickname,
+    updateProductImage,
   };
 };
 
