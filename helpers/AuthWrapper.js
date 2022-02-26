@@ -10,7 +10,7 @@ const WrapAuthPage = (WrapperComponent, isLoginPage) => {
     // token 검증
     const accessToken = getCookie('accessToken', ctx);
     const refreshToken = getCookie('refreshToken', ctx);
-    if (!accessToken || !refreshToken) {
+    if (!isLoginPage && (!accessToken || !refreshToken)) {
       redirect('/login', ctx);
     }
 
