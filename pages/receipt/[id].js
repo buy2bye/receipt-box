@@ -147,7 +147,7 @@ const ReceiptDetail = () => {
           <a
             href={link.url}
             target='_blank'
-            type='noreferrer'
+            rel='noreferrer'
             className='external-link'
             key={index}
           >
