@@ -1,10 +1,8 @@
 import styled from '@emotion/styled';
 import receiptApi from 'api/receipt';
-import Button from 'components/button/Button';
 import Layout from 'components/layout/Layout';
-import TextModal from 'components/modal/TextModal';
-import BottomPopup from 'components/popup/BottomPopup';
 import BottomTextInputPopup from 'components/popup/BottomTextInputPopup';
+import DeleteReasons from 'components/receipt/DeleteReasons';
 import { useRouter } from 'next/router';
 import { useCallback, useEffect, useState } from 'react';
 
@@ -16,12 +14,17 @@ const ReceiptDetail = () => {
   const [receipt, setReceipt] = useState();
   const [nickname, setNickname] = useState('');
   const [showNicknameChangePopup, setShowNicknameChangePopup] = useState(false);
+  const [deleteReasonsShown, setDeleteReasonsShown] = useState(false);
   const { getReceiptDetail, changeReceiptNickname, updateProductImage } =
     receiptApi();
 
   useEffect(() => {
     getReceiptDetail(id).then((data) => setReceipt(data.data));
   }, []);
+
+  const handleDeleteClick = () => {
+    setDeleteReasonsShown(true);
+  };
 
   const handleProductImageChange = (e) => {
     const reader = new FileReader();
@@ -37,8 +40,6 @@ const ReceiptDetail = () => {
 
     if (files[0]) reader.readAsDataURL(files[0]);
   };
-
-  console.log('rendered');
 
   const handleNicknameChange = (e) => {
     setNickname(e.target.value);
@@ -57,6 +58,11 @@ const ReceiptDetail = () => {
 
   return (
     <Container>
+      <DeleteReceipt onClick={handleDeleteClick} />
+      <DeleteReasons
+        visible={deleteReasonsShown}
+        setVisible={setDeleteReasonsShown}
+      />
       <NicknameWrapper>
         <span>{receipt.nickname}</span>
         <button onClick={() => setShowNicknameChangePopup(true)}>
@@ -134,6 +140,15 @@ const ReceiptDetail = () => {
 export default ReceiptDetail;
 
 const Container = styled(Layout)``;
+
+const DeleteReceipt = styled.button`
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  width: 32px;
+  min-height: 32px;
+  background: blue;
+`;
 
 const NicknameWrapper = styled.div`
   margin-bottom: 16px;
@@ -221,17 +236,4 @@ const Details = styled.ul`
     display: inline-block;
     width: 80px;
   }
-`;
-
-const TextInput = styled.input`
-  margin-top: 24px;
-  width: 100%;
-  height: 60px;
-  border: 1px solid var(--grey300);
-  background: var(--grey100);
-  border-radius: 8px;
-  font-size: 18px;
-  padding: 0 16px;
-  font-weight: 300;
-  color: var(--grey800);
 `;

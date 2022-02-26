@@ -1,11 +1,17 @@
 import styled from '@emotion/styled';
 import { useState } from 'react';
 
-const Popup = ({ children, visible, setVisible, className }) => {
+const Popup = ({
+  children,
+  visible,
+  setVisible,
+  className,
+  height = '36vh',
+}) => {
   return (
     <Container visible={visible}>
       <Overlay onClick={() => setVisible(!visible)} />
-      <PopupWrapper visible={visible} className={className}>
+      <PopupWrapper visible={visible} className={className} height={height}>
         {children}
       </PopupWrapper>
     </Container>
@@ -33,7 +39,7 @@ const Overlay = styled.div`
 const PopupWrapper = styled.div`
   z-index: 13;
   width: 100vw;
-  height: 36vh;
+  height: ${(props) => props.height};
   background: white;
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
   opacity: ${(props) => (props.visible ? 1 : 0)};

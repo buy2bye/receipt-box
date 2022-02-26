@@ -1,9 +1,21 @@
 import styled from '@emotion/styled';
 import Popup from './Popup';
 
-const BottomPopup = ({ visible, setVisible, children, className, title }) => {
+const BottomPopup = ({
+  visible,
+  setVisible,
+  children,
+  className,
+  title,
+  height = '36vh',
+}) => {
   return (
-    <Container visible={visible} className={className} setVisible={setVisible}>
+    <Container
+      visible={visible}
+      className={className}
+      setVisible={setVisible}
+      height={height}
+    >
       <Title>{title}</Title>
       {children}
     </Container>
@@ -16,7 +28,7 @@ const Container = styled(Popup)`
   position: fixed;
   left: 0;
   border-radius: 24px 24px 0 0;
-  bottom: ${(props) => (props.visible ? 0 : '-36vh')};
+  bottom: ${(props) => (props.visible ? 0 : `-${props.height}`)};
   transition: 0.3s ease-out;
   display: flex;
   flex-direction: column;

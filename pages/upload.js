@@ -2,7 +2,6 @@ import WrapAuthPage from 'helpers/AuthWrapper';
 import { useState } from 'react';
 import styled from '@emotion/styled';
 import Title from 'components/page/Title';
-import BottomPopup from 'components/popup/BottomPopup';
 import receiptApi from 'api/receipt';
 import Layout from 'components/layout/Layout';
 import Button from 'components/button/Button';
