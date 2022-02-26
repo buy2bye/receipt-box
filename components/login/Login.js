@@ -38,6 +38,10 @@ const Login = () => {
       });
   };
 
+  const handlePasswordKeyDown = (e) => {
+    if (e.keyCode === 13) handleLogin();
+  };
+
   const renderLoginMain = () => (
     <div className='login-buttons'>
       <button className='login__login-button kakao' onClick={handleKakaoLogin}>
@@ -67,6 +71,7 @@ const Login = () => {
           placeholder='6자리 이상'
           id='password'
           onChange={(e) => setPassword(e.target.value)}
+          onKeyDown={handlePasswordKeyDown}
         />
         <label htmlFor='password'>비밀번호</label>
       </div>

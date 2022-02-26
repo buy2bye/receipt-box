@@ -1,18 +1,13 @@
 import Head from 'next/head';
+import Script from 'next/script';
 import '../styles/globals.css';
 
 const ReceiptApp = ({ Component, pageProps }) => {
   return (
     <>
       <Head>
-        <script
-          type='text/javascript'
-          src='https://code.jquery.com/jquery-1.12.4.min.js'
-        ></script>
-        <script
-          type='text/javascript'
-          src='https://cdn.iamport.kr/js/iamport.payment-1.1.8.js'
-        ></script>
+        <Script src='https://code.jquery.com/jquery-1.12.4.min.js'></Script>
+        <Script src='https://cdn.iamport.kr/js/iamport.payment-1.1.8.js'></Script>
       </Head>
       <Component {...pageProps} />
     </>
