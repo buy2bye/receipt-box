@@ -5,10 +5,8 @@ import '../styles/globals.css';
 const ReceiptApp = ({ Component, pageProps }) => {
   return (
     <>
-      <Head>
-        <Script src='https://code.jquery.com/jquery-1.12.4.min.js'></Script>
-        <Script src='https://cdn.iamport.kr/js/iamport.payment-1.1.8.js'></Script>
-      </Head>
+      <Script src='https://code.jquery.com/jquery-1.12.4.min.js'></Script>
+      <Script src='https://cdn.iamport.kr/js/iamport.payment-1.1.8.js'></Script>
       <Component {...pageProps} />
     </>
   );

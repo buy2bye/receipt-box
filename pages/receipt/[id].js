@@ -143,8 +143,14 @@ const ReceiptDetail = () => {
             onClick={() => setReceiptZoomedIn(true)}
           />
         </li>
-        {receipt.linkList.map((link) => (
-          <a href={link.url} target='_blank' className='external-link'>
+        {receipt.linkList.map((link, index) => (
+          <a
+            href={link.url}
+            target='_blank'
+            type='noreferrer'
+            className='external-link'
+            key={index}
+          >
             {link.title}
           </a>
         ))}
