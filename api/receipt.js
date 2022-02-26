@@ -44,12 +44,18 @@ const receiptApi = () => {
     post(`/api/receipt/${id}/upload-product-image`, formData);
   };
 
+  //영수증 삭제
+  const deleteReceipt = async (id, reason) => {
+    post(`/api/receipt/${id}/delete`, { reason: reason });
+  };
+
   return {
     createReceipt,
     getReceipts,
     getReceiptDetail,
     changeReceiptNickname,
     updateProductImage,
+    deleteReceipt,
   };
 };
 

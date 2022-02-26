@@ -15,7 +15,18 @@ const reasons = [
   '직접 입력',
 ];
 
-const DeleteReasons = ({ visible, setVisible }) => {
+const DeleteReasons = ({ visible, setVisible, onDelete }) => {
+  const [reason, setReason] = useState('영수증이 필요한 시간이 지나서');
+
+  const handleCancel = () => {
+    setVisible(false);
+  };
+
+  const handleDelete = () => {
+    onDelete(reason);
+    setVisible(false);
+  };
+
   return (
     <Container
       visible={visible}
@@ -26,21 +37,11 @@ const DeleteReasons = ({ visible, setVisible }) => {
       <SelectBox
         options={reasons}
         defaultValue='영수증이 필요한 시간이 지나서'
+        setResult={setReason}
       />
       <ButtonsWrapper>
-        <Button
-          onClick={() => {
-            setVisible(false);
-          }}
-        >
-          취소
-        </Button>
-        <Button
-          primary
-          onClick={() => {
-            setVisible(false);
-          }}
-        >
+        <Button onClick={handleCancel}>취소</Button>
+        <Button primary onClick={handleDelete}>
           삭제하기
         </Button>
       </ButtonsWrapper>

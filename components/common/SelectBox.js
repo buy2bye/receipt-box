@@ -1,17 +1,22 @@
 import styled from '@emotion/styled';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
+import { useEffect } from 'react/cjs/react.development';
 
-const SelectBox = ({ options, defaultValue, className }) => {
+const SelectBox = ({ options, defaultValue, className, setResult }) => {
   const [selected, setSelected] = useState('');
-  const [reason, setReason] = useState(defaultValue);
+  const textInputRef = useRef();
+
+  useEffect(() => {
+    selected === '직접 입력' && textInputRef.current.focus();
+  }, [selected]);
 
   const handleOptionChange = (e) => {
-    setReason(e.target.value);
+    setResult(e.target.value);
     setSelected(e.target.value);
   };
 
   const handleTextChange = (e) => {
-    setReason(e.target.value);
+    setResult(e.target.value);
   };
 
   return (
@@ -35,6 +40,7 @@ const SelectBox = ({ options, defaultValue, className }) => {
             : { opacity: 0, height: 0 }
         }
         onChange={handleTextChange}
+        ref={textInputRef}
       />
     </Container>
   );

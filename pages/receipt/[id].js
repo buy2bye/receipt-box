@@ -1,6 +1,8 @@
 import styled from '@emotion/styled';
 import receiptApi from 'api/receipt';
+import Button from 'components/button/Button';
 import Layout from 'components/layout/Layout';
+import BottomPopup from 'components/popup/BottomPopup';
 import BottomTextInputPopup from 'components/popup/BottomTextInputPopup';
 import DeleteReasons from 'components/receipt/DeleteReasons';
 import { useRouter } from 'next/router';
@@ -15,15 +17,27 @@ const ReceiptDetail = () => {
   const [nickname, setNickname] = useState('');
   const [showNicknameChangePopup, setShowNicknameChangePopup] = useState(false);
   const [deleteReasonsShown, setDeleteReasonsShown] = useState(false);
-  const { getReceiptDetail, changeReceiptNickname, updateProductImage } =
-    receiptApi();
+  const [receiptZoomedIn, setReceiptZoomedIn] = useState(false);
+  const {
+    getReceiptDetail,
+    changeReceiptNickname,
+    updateProductImage,
+    deleteReceipt,
+  } = receiptApi();
+
+  console.log(receipt);
 
   useEffect(() => {
     getReceiptDetail(id).then((data) => setReceipt(data.data));
   }, []);
 
-  const handleDeleteClick = () => {
+  const handleDeleteButtonClick = () => {
     setDeleteReasonsShown(true);
+  };
+
+  const handleDeleteSubmit = async (reason) => {
+    await deleteReceipt(id, reason);
+    router.replace('/');
   };
 
   const handleProductImageChange = (e) => {
@@ -58,10 +72,11 @@ const ReceiptDetail = () => {
 
   return (
     <Container>
-      <DeleteReceipt onClick={handleDeleteClick} />
+      <DeleteReceipt onClick={handleDeleteButtonClick}>삭제하기</DeleteReceipt>
       <DeleteReasons
         visible={deleteReasonsShown}
         setVisible={setDeleteReasonsShown}
+        onDelete={handleDeleteSubmit}
       />
       <NicknameWrapper>
         <span>{receipt.nickname}</span>
@@ -121,9 +136,29 @@ const ReceiptDetail = () => {
         </li>
         <li>
           <span>영수증</span>
-          <img src={receipt?.imageList[0]} alt={receipt?.productName} />
+          <img
+            src={receipt?.imageList[0]}
+            alt={receipt?.productName}
+            onClick={() => setReceiptZoomedIn(true)}
+          />
         </li>
+        {receipt.linkList.map((link) => (
+          <a href={link.url} target='_blank' className='external-link'>
+            {link.title}
+          </a>
+        ))}
       </Details>
+
+      <ZoomReceipt
+        visible={receiptZoomedIn}
+        setVisible={setReceiptZoomedIn}
+        height='calc(100vw + 100px)'
+      >
+        <img src={receipt.imageList[0]} alt={receipt.productName} />
+        <a href={receipt.imageList[0]} download>
+          <Button primary>다운로드</Button>
+        </a>
+      </ZoomReceipt>
 
       <BottomTextInputPopup
         visible={showNicknameChangePopup}
@@ -145,9 +180,10 @@ const DeleteReceipt = styled.button`
   position: fixed;
   top: 10px;
   right: 10px;
-  width: 32px;
-  min-height: 32px;
-  background: blue;
+  height: 32px;
+  background: transparent;
+  padding: 8px;
+  color: var(--grey400);
 `;
 
 const NicknameWrapper = styled.div`
@@ -232,8 +268,32 @@ const Details = styled.ul`
   font-size: 14px;
   font-weight: 300;
 
-  li > span:first-of-type {
-    display: inline-block;
-    width: 80px;
+  li {
+    display: flex;
+    width: 100%;
+
+    > span:first-of-type {
+      display: block;
+      min-width: 80px;
+    }
+
+    img {
+      width: 120px;
+      border: 1px solid var(--grey300);
+    }
+  }
+
+  .external-link {
+    font-weight: 400;
+    text-decoration: underline;
+    text-underline-position: under;
+    color: var(--blue500);
+  }
+`;
+
+const ZoomReceipt = styled(BottomPopup)`
+  img {
+    width: 100%;
+    object-fit: contain;
   }
 `;
