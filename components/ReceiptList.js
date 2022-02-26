@@ -8,11 +8,13 @@ import receiptApi from 'api/receipt';
 import Receipt from './Receipt';
 
 const ReceiptListPage = () => {
-  const [receiptList, setReceiptList] = useState([]);
+  const [receiptList, setReceiptList] = useState();
   useEffect(() => {
     const { getReceipts } = receiptApi();
     getReceipts().then((data) => setReceiptList(data.data.receiptList));
   }, []);
+
+  if (!receiptList) return <Layout hideTop>loading...</Layout>;
 
   if (receiptList.length < 1)
     return (

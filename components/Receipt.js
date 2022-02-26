@@ -37,12 +37,11 @@ const Receipt = ({ item }) => {
 export default Receipt;
 
 const Container = styled.div`
-  border: 1px solid var(--blue100);
+  border-bottom: 1px solid var(--grey200);
   width: 100%;
   height: 120px;
-  border-radius: 16px;
   display: flex;
-  padding: 8px;
+  padding-bottom: 16px;
   gap: 16px;
 
   .thumb {
@@ -59,6 +58,7 @@ const Container = styled.div`
       width: 100%;
       height: 100%;
       object-fit: cover;
+      border-radius: 8px;
     }
 
     span {

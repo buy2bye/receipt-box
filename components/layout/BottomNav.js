@@ -5,10 +5,12 @@ const BottomNav = () => {
   return (
     <Container>
       <div className='wrapper'>
-        <button>
-          <img src='/icons/box.png' alt='receipt-box' />
-          나의 보관함
-        </button>
+        <Link href='/'>
+          <button>
+            <img src='/icons/box.png' alt='receipt-box' />
+            나의 보관함
+          </button>
+        </Link>
         <Link href='/upload'>
           <button>
             <img src='/icons/upload.png' alt='receipt-upload' />
