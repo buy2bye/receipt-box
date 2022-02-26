@@ -1,29 +1,26 @@
-
-import { getCookie } from 'helpers/cookie'
-import { redirect } from 'helpers/utils'
+import { getCookie } from 'helpers/cookie';
+import { redirect } from 'helpers/utils';
 
 const WrapAuthPage = (WrapperComponent) => {
   const Wrapper = (props) => {
-    return (
-      <WrapperComponent {...props} />
-    )
-  }
+    return <WrapperComponent {...props} />;
+  };
 
   Wrapper.getInitialProps = async (ctx) => {
     // token 검증
-    const accessToken = getCookie('accessToken', ctx)
-    const refreshToken = getCookie('refreshToken', ctx)
+    const accessToken = getCookie('accessToken', ctx);
+    const refreshToken = getCookie('refreshToken', ctx);
     if (!accessToken || !refreshToken) {
-      redirect('login', ctx)
+      redirect('/login', ctx);
     }
 
     const componentProps =
       WrapperComponent.getInitialProps &&
-      (await WrapperComponent.getInitialProps(ctx))
-    return componentProps
-  }
+      (await WrapperComponent.getInitialProps(ctx));
+    return componentProps;
+  };
 
-  return Wrapper
-}
+  return Wrapper;
+};
 
-export default WrapAuthPage
+export default WrapAuthPage;

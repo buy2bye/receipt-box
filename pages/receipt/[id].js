@@ -5,6 +5,7 @@ import Layout from 'components/layout/Layout';
 import BottomPopup from 'components/popup/BottomPopup';
 import BottomTextInputPopup from 'components/popup/BottomTextInputPopup';
 import DeleteReasons from 'components/receipt/DeleteReasons';
+import WrapAuthPage from 'helpers/AuthWrapper';
 import { useRouter } from 'next/router';
 import { useCallback, useEffect, useState } from 'react';
 
@@ -172,7 +173,7 @@ const ReceiptDetail = () => {
   );
 };
 
-export default ReceiptDetail;
+export default WrapAuthPage(ReceiptDetail);
 
 const Container = styled(Layout)``;
 

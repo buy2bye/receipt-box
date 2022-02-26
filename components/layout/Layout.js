@@ -27,6 +27,7 @@ const Body = styled.div`
   flex-direction: column;
   align-items: center;
   padding: 24px;
+  padding-bottom: 80px;
   width: 100vw;
   height: 100vh;
   position: relative;
