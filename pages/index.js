@@ -5,4 +5,4 @@ const Home = () => {
   return <ReceiptListPage />;
 };
 
-export default WrapAuthPage(ReceiptListPage);
+export default WrapAuthPage(Home);

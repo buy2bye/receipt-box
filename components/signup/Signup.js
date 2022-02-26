@@ -4,40 +4,42 @@ import styled from '@emotion/styled';
 
 import apiController from 'helpers/apiController';
 import Title from 'components/page/Title';
-import { isEmail } from 'helpers/validate';
+import { isBirth, isEmail, isPhone } from 'helpers/validate';
 import Button from 'components/button/Button';
 import Layout from 'components/layout/Layout';
+import Iamport from 'components/Iamport';
 
 const Signup = () => {
   const router = useRouter();
 
-  const [username, setUsername] = useState({
-    value: '',
-    valid: false,
-  });
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState();
   const [passwordCheck, setPasswordCheck] = useState();
   const [nickname, setNickname] = useState();
   const [gender, setGender] = useState();
+  const [phone, setPhone] = useState();
   const [birthDate, setBirthDate] = useState();
 
   const handleUserNameInput = (e) => {
-    if (isEmail.test(e.target.value)) setUsername(e.target.value);
+    setUsername(e.target.value);
   };
 
   const handleCheckUsername = () => {
-    if (username) {
-      apiController()
-        .get('/api/auth/check-username', { username: username })
-        .then((res) => {
-          alert('사용 가능한 아이디입니다.');
-        })
-        .catch(({ response: res }) => {
-          if (res.status === 409) {
-            alert('중복된 아이디입니다.');
-          }
-        });
+    if (!isEmail.test(username)) {
+      alert('올바른 이메일을 입력해주세요.');
+      return;
     }
+
+    apiController()
+      .get('/api/auth/check-username', { username: username })
+      .then((res) => {
+        alert('사용 가능한 아이디입니다.');
+      })
+      .catch(({ response: res }) => {
+        if (res.status === 409) {
+          alert('중복된 아이디입니다.');
+        }
+      });
   };
 
   const handleCheckNickname = () => {
@@ -65,23 +67,27 @@ const Signup = () => {
 
   const handleRegister = () => {
     if (password !== passwordCheck) {
-      alert('비밀번호가 다릅니다. 확인해주세요!');
+      alert('비밀번호가 일치하지 않습니다.');
       return;
     }
-    if (!username.value) {
-      alert('아이디를 입력해주세요!');
+    if (!isEmail.test(username)) {
+      alert('올바른 이메일을 입력해주세요.');
       return;
     }
     if (!nickname) {
-      alert('닉네임을 입력해주세요!');
+      alert('닉네임을 입력해주세요.');
+      return;
+    }
+    if (!isBirth.test(birthDate)) {
+      alert('생년월일 8자리를 입력해주세요. 예) 19990130');
       return;
     }
     if (!gender) {
-      alert('성별을 입력해주세요!');
+      alert('성별을 확인해주세요.');
       return;
     }
-    if (!birthDate) {
-      alert('생년월일을 입력해주세요!');
+    if (!isPhone.test(phone)) {
+      alert('올바른 전화번호를 입력해주세요.');
       return;
     }
     const birthYear = parseInt(birthDate.slice(0, 4));
@@ -93,6 +99,7 @@ const Signup = () => {
         gender: gender,
         birth_year: birthYear,
         email: username,
+        phone: phone,
       })
       .then((res) => {
         alert('가입이 완료되었습니다.');
@@ -127,7 +134,7 @@ const Signup = () => {
         <TextInput>
           <input
             type='password'
-            placeholder=''
+            placeholder='6자리 이상'
             id='password'
             onChange={(e) => setPassword(e.target.value)}
           />
@@ -136,7 +143,7 @@ const Signup = () => {
         <TextInput>
           <input
             type='password'
-            placeholder=''
+            placeholder='6자리 이상'
             id='password_check'
             onChange={(e) => setPasswordCheck(e.target.value)}
           />
@@ -159,7 +166,19 @@ const Signup = () => {
             id='birth_date'
             onChange={(e) => setBirthDate(e.target.value)}
           />
-          <label htmlFor='birth_date'>생년월일 6자리</label>
+          <label htmlFor='birth_date'>생년월일 8자리</label>
+        </TextInput>
+        <TextInput>
+          <input
+            type='number'
+            placeholder='숫자만 입력'
+            id='phone'
+            onChange={(e) => setPhone(e.target.value)}
+          />
+          <label htmlFor='phone'>휴대폰 번호</label>
+          <PhoneAuthButton onClick={handleCheckNickname}>
+            본인인증
+          </PhoneAuthButton>
         </TextInput>
         <RadioGroup>
           <div className='title'>성별</div>
@@ -193,6 +212,9 @@ const Signup = () => {
           가입하기
         </Button>
       </Buttons>
+
+      {/* 아임포트 본인인증 api */}
+      <Iamport />
     </Container>
   );
 };
@@ -222,12 +244,11 @@ const TextInput = styled.div`
   }
 
   input {
-    width: 400px;
-    max-width: 100%;
+    width: 100%;
     height: 60px;
     border-radius: 8px;
     padding: 24px 12px 0 12px;
-    font-size: 16px;
+    font-size: 15px;
     font-weight: 400;
     border: none;
     border: 1px solid var(--grey400);
@@ -294,5 +315,10 @@ const CheckButton = styled.button`
   font-size: 12px;
   background: var(--grey100);
   border-color: var(--grey100);
-  color: var(--grey800);
+  color: var(--grey700);
+`;
+
+const PhoneAuthButton = styled(CheckButton)`
+  /* background: var(--blue50);
+  color: var(--blue600); */
 `;

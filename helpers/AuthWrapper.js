@@ -1,7 +1,7 @@
 import { getCookie } from 'helpers/cookie';
 import { redirect } from 'helpers/utils';
 
-const WrapAuthPage = (WrapperComponent) => {
+const WrapAuthPage = (WrapperComponent, isLoginPage) => {
   const Wrapper = (props) => {
     return <WrapperComponent {...props} />;
   };
@@ -12,6 +12,10 @@ const WrapAuthPage = (WrapperComponent) => {
     const refreshToken = getCookie('refreshToken', ctx);
     if (!accessToken || !refreshToken) {
       redirect('/login', ctx);
+    }
+
+    if (isLoginPage && accessToken && refreshToken) {
+      redirect('/', ctx);
     }
 
     const componentProps =

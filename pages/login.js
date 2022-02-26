@@ -1,9 +1,8 @@
 import Login from 'components/login/Login';
+import WrapAuthPage from 'helpers/AuthWrapper';
 
 const LoginPage = ({ ctx }) => {
-  return (
-    <Login />
-  )
-}
+  return <Login />;
+};
 
-export default LoginPage
+export default WrapAuthPage(LoginPage, true);

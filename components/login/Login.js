@@ -31,7 +31,6 @@ const Login = () => {
         const { data } = res;
         setCookie('accessToken', data.accessToken);
         setCookie('refreshToken', data.refreshToken);
-        alert('로그인 성공');
         router.push('/');
       })
       .catch(() => {
@@ -158,7 +157,6 @@ const EmailLoginForm = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 100%;
 
   .inputLabel {
     position: relative;
@@ -173,13 +171,12 @@ const EmailLoginForm = styled.div`
     }
 
     input {
-      width: 400px;
-      max-width: 100%;
+      width: 100%;
       height: 60px;
       margin-bottom: 12px;
       border-radius: 16px;
       padding: 24px 12px 0 12px;
-      font-size: 16px;
+      font-size: 15px;
       font-weight: 400;
       border: none;
       border: 1px solid var(--grey400);
@@ -206,6 +203,7 @@ const EmailLoginForm = styled.div`
   }
 
   .sign-up {
+    cursor: pointer;
     margin-top: 8px;
     font-size: 14px;
     color: black;
