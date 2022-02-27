@@ -107,7 +107,6 @@ const Container = styled.div`
   .login__tutorial {
     width: 100%;
     flex: 1;
-    background: rgba(0, 0, 0, 0.5);
   }
 
   .login-buttons {
