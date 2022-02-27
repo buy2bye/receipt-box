@@ -1,11 +1,13 @@
 import styled from '@emotion/styled';
 import BottomNav from './BottomNav';
+import TopLogo from './TopLogo';
 import TopNav from './TopNav';
 
-const Layout = ({ children, className, hideTop, hideBottom }) => {
+const Layout = ({ children, className, hideTop, hideBottom, showLogo }) => {
   return (
     <Container>
       {!hideTop && <TopNav />}
+      {showLogo && <TopLogo />}
       <Body className={className}>{children}</Body>
       {!hideBottom && <BottomNav />}
     </Container>

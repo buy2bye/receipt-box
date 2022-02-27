@@ -18,7 +18,7 @@ const ReceiptListPage = () => {
 
   if (receiptList.length < 1)
     return (
-      <Layout hideTop>
+      <Layout hideTop showLogo>
         <Title>등록된 영수증이 없어요</Title>
         <Subtitle>스마트폰 캡쳐화면도 등록할 수 있어요 🙂</Subtitle>
         <Link href='/upload'>
@@ -28,7 +28,7 @@ const ReceiptListPage = () => {
     );
 
   return (
-    <Layout hideTop>
+    <Layout hideTop showLogo>
       <Title>나의 영수증 보관함</Title>
       <ReceiptList>
         {receiptList.map((item, index) => (
