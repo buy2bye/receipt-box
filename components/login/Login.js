@@ -159,6 +159,8 @@ const Container = styled.div`
 `;
 
 const EmailLoginForm = styled.div`
+  width: 400px;
+  max-width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
