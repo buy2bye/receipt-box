@@ -1,3 +1,4 @@
+import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import BottomNav from './BottomNav';
 import TopLogo from './TopLogo';
@@ -8,7 +9,9 @@ const Layout = ({ children, className, hideTop, hideBottom, showLogo }) => {
     <Container>
       {!hideTop && <TopNav />}
       {showLogo && <TopLogo />}
-      <Body className={className}>{children}</Body>
+      <Body hideBottom={hideBottom} className={className}>
+        {children}
+      </Body>
       {!hideBottom && <BottomNav />}
     </Container>
   );
@@ -18,6 +21,7 @@ export default Layout;
 
 const Container = styled.div`
   width: 100vw;
+  /* height: 100vh; */
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -29,7 +33,7 @@ const Body = styled.div`
   flex-direction: column;
   align-items: center;
   padding: 24px;
-  padding-bottom: 80px;
+  padding-bottom: ${(props) => (props.hideBottom ? '80px' : '160px')};
   width: 100vw;
   height: 100vh;
   position: relative;

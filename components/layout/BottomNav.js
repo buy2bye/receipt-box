@@ -25,6 +25,10 @@ const BottomNav = () => {
 export default BottomNav;
 
 const Container = styled.div`
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100vw;
   display: flex;
   padding: 24px;
   justify-content: center;

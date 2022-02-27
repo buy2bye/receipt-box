@@ -4,7 +4,7 @@ const { get, post } = apiController();
 
 const receiptApi = () => {
   //영수증 등록
-  const createReceipt = (nickname, image) => {
+  const createReceipt = async (nickname, image) => {
     const formData = new FormData();
     formData.append('nickname', nickname);
     formData.append('image_list', image);
