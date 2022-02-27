@@ -7,11 +7,9 @@ import BottomTextInputPopup from 'components/popup/BottomTextInputPopup';
 import DeleteReasons from 'components/receipt/DeleteReasons';
 import WrapAuthPage from 'helpers/AuthWrapper';
 import { useRouter } from 'next/router';
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const ReceiptDetail = () => {
-  const [, updateState] = useState();
-  const forceUpdate = useCallback(() => updateState({}), []);
   const router = useRouter();
   const { id } = router.query;
   const [receipt, setReceipt] = useState();
@@ -29,7 +27,11 @@ const ReceiptDetail = () => {
   console.log(receipt);
 
   useEffect(() => {
-    getReceiptDetail(id).then((data) => setReceipt(data.data));
+    const fetchReceipt = async () => {
+      getReceiptDetail(id).then((data) => setReceipt(data.data));
+    };
+
+    fetchReceipt();
   }, []);
 
   const handleDeleteButtonClick = () => {

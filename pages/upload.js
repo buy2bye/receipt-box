@@ -6,8 +6,10 @@ import receiptApi from 'api/receipt';
 import Layout from 'components/layout/Layout';
 import Button from 'components/button/Button';
 import BottomTextInputPopup from 'components/popup/BottomTextInputPopup';
+import { useRouter } from 'next/router';
 
 const UploadPage = () => {
+  const router = useRouter();
   const [imageSrc, setImageSrc] = useState('');
   const [imageFile, setImageFile] = useState();
   const [nickname, setNickname] = useState('');
@@ -38,7 +40,14 @@ const UploadPage = () => {
   const handleUpload = () => {
     //닉네임까지 입력 후 최종 영수증 업로드
     const { createReceipt } = receiptApi();
-    createReceipt(nickname, imageFile);
+    createReceipt(nickname, imageFile)
+      .then((res) => {
+        alert('영수증이 등록되었습니다.');
+        router.push('/');
+      })
+      .catch(({ response: res }) => {
+        alert('영수증 등록에 실패했습니다.');
+      });
   };
 
   return (

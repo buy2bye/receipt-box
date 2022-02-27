@@ -201,10 +201,6 @@ const Signup = () => {
             <label htmlFor='gender_f'>여자</label>
           </div>
         </RadioGroup>
-        {/*
-        TODO 핸드폰 본인인증 관련 내용
-        약관 동의
-        */}
       </SignupForm>
       <Buttons>
         <Button primary onClick={handleRegister}>
