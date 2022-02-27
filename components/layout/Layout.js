@@ -6,7 +6,7 @@ import TopNav from './TopNav';
 
 const Layout = ({ children, className, hideTop, hideBottom, showLogo }) => {
   return (
-    <Container>
+    <Container hideTop={hideTop}>
       {!hideTop && <TopNav />}
       {showLogo && <TopLogo />}
       <Body hideBottom={hideBottom} className={className}>
@@ -21,8 +21,14 @@ export default Layout;
 
 const Container = styled.div`
   width: 100vw;
-  /* height: 100vh; */
-  min-height: 100vh;
+  ${(props) =>
+    props.hideTop
+      ? css`
+          height: 100vh;
+        `
+      : css`
+          min-height: 100vh;
+        `}
   display: flex;
   flex-direction: column;
 `;

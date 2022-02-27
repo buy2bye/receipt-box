@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const Popup = ({
   children,
@@ -8,6 +8,13 @@ const Popup = ({
   className,
   height = '36vh',
 }) => {
+  useEffect(() => {
+    if (visible && typeof window != 'undefined' && window.document) {
+      document.body.style.overflow = 'hidden';
+    }
+    if (!visible) document.body.style.overflow = 'scroll';
+  }, [visible]);
+
   return (
     <Container visible={visible}>
       <Overlay onClick={() => setVisible(!visible)} />

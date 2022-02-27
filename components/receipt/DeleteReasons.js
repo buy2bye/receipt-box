@@ -17,13 +17,16 @@ const reasons = [
 
 const DeleteReasons = ({ visible, setVisible, onDelete }) => {
   const [reason, setReason] = useState('영수증이 필요한 시간이 지나서');
+  const [isFetching, setIsFetching] = useState(false);
 
   const handleCancel = () => {
     setVisible(false);
   };
 
-  const handleDelete = () => {
-    onDelete(reason);
+  const handleDelete = async () => {
+    setIsFetching(true);
+    await onDelete(reason);
+    setIsFetching(false);
     setVisible(false);
   };
 
@@ -41,7 +44,7 @@ const DeleteReasons = ({ visible, setVisible, onDelete }) => {
       />
       <ButtonsWrapper>
         <Button onClick={handleCancel}>취소</Button>
-        <Button primary onClick={handleDelete}>
+        <Button primary onClick={handleDelete} isLoading={isFetching}>
           삭제하기
         </Button>
       </ButtonsWrapper>

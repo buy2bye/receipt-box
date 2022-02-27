@@ -1,9 +1,10 @@
 import styled from '@emotion/styled';
+import { CircularProgress } from '@mui/material';
 
-const Button = ({ primary, onClick, children }) => {
+const Button = ({ primary, onClick, children, isLoading }) => {
   return (
     <Container primary={primary} onClick={onClick}>
-      {children}
+      {isLoading ? <CircularProgress color='primary' size={26} /> : children}
     </Container>
   );
 };

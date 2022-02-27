@@ -1,5 +1,6 @@
 import styled from '@emotion/styled';
 import Button from 'components/button/Button';
+import { useState } from 'react';
 import BottomPopup from './BottomPopup';
 
 const BottomTextInputPopup = ({
@@ -10,9 +11,18 @@ const BottomTextInputPopup = ({
   onInputChange,
   onSubmit,
   placeholder,
+  confirmText = '다음',
 }) => {
+  const [isFetching, setIsFetching] = useState(false);
+
+  const handleClick = async () => {
+    setIsFetching(true);
+    await onSubmit();
+    setIsFetching(false);
+  };
+
   const handleKeyDown = (e) => {
-    if (e.keyCode === 13) onSubmit();
+    if (e.keyCode === 13) handleClick();
   };
 
   return (
@@ -28,8 +38,8 @@ const BottomTextInputPopup = ({
         onChange={onInputChange}
         onKeyDown={handleKeyDown}
       />
-      <Button primary onClick={onSubmit}>
-        다음
+      <Button primary onClick={handleClick} isLoading={isFetching}>
+        {confirmText}
       </Button>
     </Container>
   );

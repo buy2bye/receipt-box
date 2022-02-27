@@ -175,6 +175,7 @@ const ReceiptDetail = () => {
         placeholder='예) 맥북 2022'
         onInputChange={handleNicknameChange}
         onSubmit={handleNicknameSubmit}
+        confirmText='변경하기'
       />
     </Container>
   );
@@ -303,7 +304,8 @@ const Details = styled.ul`
 
 const ZoomReceipt = styled(BottomPopup)`
   img {
-    width: 100%;
+    width: calc(100vw - 48px);
+    height: calc(100vw - 48px);
     object-fit: contain;
   }
 `;

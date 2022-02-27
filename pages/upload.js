@@ -37,7 +37,7 @@ const UploadPage = () => {
     setNickname(e.target.value);
   };
 
-  const handleUpload = () => {
+  const handleUpload = async () => {
     //닉네임까지 입력 후 최종 영수증 업로드
     const { createReceipt } = receiptApi();
     createReceipt(nickname, imageFile)
@@ -94,6 +94,7 @@ const UploadPage = () => {
         placeholder='예) 맥북 2022'
         onInputChange={handleNicknameChange}
         onSubmit={handleUpload}
+        confirmText='등록하기'
       />
     </Layout>
   );

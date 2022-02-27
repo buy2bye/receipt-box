@@ -6,6 +6,7 @@ import { KAKAO_AUTH_URL } from 'helpers/oauth/kakao';
 import apiController from 'helpers/apiController';
 import { setCookie } from 'helpers/cookie';
 import Link from 'next/link';
+import Button from 'components/button/Button';
 
 const Login = () => {
   const router = useRouter();
@@ -13,6 +14,7 @@ const Login = () => {
 
   const [username, setUsername] = useState();
   const [password, setPassword] = useState();
+  const [isLoginFetching, setIsLoginFetching] = useState(false);
 
   const handleKakaoLogin = () => {
     window.location.href = KAKAO_AUTH_URL;
@@ -25,6 +27,7 @@ const Login = () => {
   };
 
   const handleLogin = () => {
+    setIsLoginFetching(true);
     apiController()
       .post('/api/auth/login', { username, password })
       .then((res) => {
@@ -36,6 +39,7 @@ const Login = () => {
       .catch(() => {
         alert('아이디나 비밀번호나 없거나 올바르지 않습니다.');
       });
+    setIsLoginFetching(false);
   };
 
   const handlePasswordKeyDown = (e) => {
@@ -75,9 +79,9 @@ const Login = () => {
         />
         <label htmlFor='password'>비밀번호</label>
       </div>
-      <button className='submit-button' onClick={handleLogin}>
+      <Button primary onClick={handleLogin} isLoading={isLoginFetching}>
         로그인
-      </button>
+      </Button>
       <Link href='/signup'>
         <div className='sign-up'>회원 가입하기</div>
       </Link>
