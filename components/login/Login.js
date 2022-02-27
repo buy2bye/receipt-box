@@ -118,8 +118,8 @@ const Container = styled.div`
   }
 
   .login__login-button {
-    width: 400px;
-    max-width: 100%;
+    width: 100%;
+    max-width: 720px;
     height: 60px;
     margin-bottom: 12px;
     border-radius: 16px;
@@ -158,8 +158,8 @@ const Container = styled.div`
 `;
 
 const EmailLoginForm = styled.div`
-  width: 400px;
-  max-width: 100%;
+  width: 100%;
+  max-width: 720px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -197,8 +197,8 @@ const EmailLoginForm = styled.div`
   }
 
   .submit-button {
-    width: 400px;
-    max-width: 100%;
+    width: 100%;
+    max-width: 720px;
     height: 60px;
     margin-bottom: 12px;
     border-radius: 16px;
