@@ -24,11 +24,10 @@ const ReceiptDetail = () => {
     deleteReceipt,
   } = receiptApi();
 
-  console.log(receipt);
-
   useEffect(() => {
     const fetchReceipt = async () => {
-      getReceiptDetail(id).then((data) => setReceipt(data.data));
+      const { data } = await getReceiptDetail(id);
+      setReceipt(data.data);
     };
 
     fetchReceipt();
