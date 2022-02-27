@@ -7,7 +7,6 @@ import Title from 'components/page/Title';
 import { isBirth, isEmail, isPhone } from 'helpers/validate';
 import Button from 'components/button/Button';
 import Layout from 'components/layout/Layout';
-import Iamport from 'components/Iamport';
 
 const Signup = () => {
   const router = useRouter();
@@ -212,9 +211,6 @@ const Signup = () => {
           가입하기
         </Button>
       </Buttons>
-
-      {/* 아임포트 본인인증 api */}
-      <Iamport />
     </Container>
   );
 };
