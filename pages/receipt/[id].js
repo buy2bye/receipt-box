@@ -27,7 +27,7 @@ const ReceiptDetail = () => {
   useEffect(() => {
     const fetchReceipt = async () => {
       const { data } = await getReceiptDetail(id);
-      setReceipt(data.data);
+      setReceipt(data);
     };
 
     fetchReceipt();
@@ -69,7 +69,7 @@ const ReceiptDetail = () => {
   };
 
   if (!receipt) {
-    return <Container>loading</Container>;
+    return <Container>loading...</Container>;
   }
 
   return (
@@ -270,7 +270,7 @@ const ThumbnailWrapper = styled.div`
 const Details = styled.ul`
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 20px;
   padding: 16px 0;
   margin-top: 24px;
   font-size: 14px;
@@ -283,10 +283,12 @@ const Details = styled.ul`
     > span:first-of-type {
       display: block;
       min-width: 80px;
+      font-weight: 500;
     }
 
     img {
       width: 120px;
+      height: 120px;
       border: 1px solid var(--grey300);
     }
   }

@@ -6,6 +6,8 @@ import apiController from 'helpers/apiController';
 import WrapAuthPage from 'helpers/AuthWrapper';
 import { kickout } from 'helpers/auth';
 import Link from 'next/link';
+import Layout from 'components/layout/Layout';
+import Button from 'components/button/Button';
 
 const SettingPage = ({ userInfo }) => {
   const [isLogoutModalOpen, setLogoutModalOpen] = useState(false);
@@ -27,8 +29,16 @@ const SettingPage = ({ userInfo }) => {
           style={{ color: 'black', textDecoration: 'underline' }}
           href={link}
         >
-          {text}
+          <RowTitle>{text}</RowTitle>
         </Link>
+      </Row>
+    );
+  };
+
+  const renderButton = (title, onClick) => {
+    return (
+      <Row onClick={onClick}>
+        <RowTitle>{title}</RowTitle>
       </Row>
     );
   };
@@ -51,20 +61,17 @@ const SettingPage = ({ userInfo }) => {
 
   return (
     <>
-      <Container>
-        <Title>설정</Title>
-        {renderRow('계 정', userInfo.username || userInfo.snsIdentifier)}
-        {renderRow('닉 네 임', userInfo.nickname || userInfo.nickname)}
-        <Row>
-          <Button onClick={() => setLogoutModalOpen(true)}>로그아웃</Button>
-        </Row>
-        <Row>
-          <Button onClick={() => setWithdrawalModalOpen(true)}>회원탈퇴</Button>
-        </Row>
+      <Container hideBottom>
+        <SettingTitle>설정</SettingTitle>
+        {renderRow('계정', userInfo.username || userInfo.snsIdentifier)}
+        {renderRow('닉네임', userInfo.nickname || userInfo.nickname)}
         {renderRow('카카오문의', '준비중')}
         {renderLink('이용약관', '')}
         {renderLink('개인정보처리방침', '')}
-        {renderLink('마케팅정보 수신동의', '')}
+        {renderLink('마케팅 수신동의', '')}
+        <Divider />
+        {renderButton('로그아웃', () => setLogoutModalOpen(true))}
+        {renderButton('탈퇴하기', () => setWithdrawalModalOpen(true))}
       </Container>
       <ConfirmModal
         isOpen={isLogoutModalOpen}
@@ -93,43 +100,40 @@ SettingPage.getInitialProps = async (ctx) => {
 
 export default WrapAuthPage(SettingPage);
 
-const Container = styled.div`
-  height: 100vh;
-  width: 100vw;
-  padding: 20px 20px 80px 20px;
-  overflow-y: hidden;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;
+const Container = styled(Layout)``;
 
-const Title = styled.div`
-  font-size: 24px;
-  font-weight: bold;
-  margin: 16px;
+const SettingTitle = styled.div`
+  position: fixed;
+  top: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 16px;
 `;
 
 const Row = styled.div`
-  min-width: 400px;
+  width: 100%;
+  max-width: 720px;
   display: flex;
-  flex-direction: row;
+  justify-content: space-between;
   font-size: 16px;
-  margin: 16px;
+  font-weight: 400;
+  box-sizing: border-box;
+  padding: 18px 0;
 `;
 
 const RowTitle = styled.div`
-  flex: 4;
-  font-weight: bold;
+  flex: 1;
+  min-width: 120px;
+  color: var(--grey700);
 `;
 
 const RowContent = styled.div`
-  flex: 6;
+  color: var(--grey600);
+  font-weight: 300;
 `;
 
-const Button = styled.button`
-  background: white;
-  width: 100%;
-  height: 40px;
-  border: 1px solid black;
-  border-radius: 4px;
+const Divider = styled.div`
+  width: 100vw;
+  height: 12px;
+  background: var(--grey100);
 `;

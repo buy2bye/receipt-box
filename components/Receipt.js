@@ -37,6 +37,7 @@ const Receipt = ({ item }) => {
 export default Receipt;
 
 const Container = styled.div`
+  cursor: pointer;
   border-bottom: 1px solid var(--grey200);
   width: 100%;
   height: 120px;
