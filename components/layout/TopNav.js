@@ -17,15 +17,15 @@ export default TopNav;
 
 const Container = styled.div`
   width: 100vw;
-  height: 44px;
+  height: 50px;
   padding: 0 18px;
   display: flex;
   align-items: center;
 
   button {
     position: relative;
-    width: 44px;
-    height: 44px;
+    width: 50px;
+    height: 50px;
     display: flex;
     align-items: center;
     background: transparent;

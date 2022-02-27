@@ -104,7 +104,7 @@ const Container = styled(Layout)``;
 
 const SettingTitle = styled.div`
   position: fixed;
-  top: 14px;
+  top: 16px;
   left: 50%;
   transform: translateX(-50%);
   font-size: 16px;
