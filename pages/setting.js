@@ -111,8 +111,8 @@ const SettingTitle = styled.div`
 `;
 
 const Row = styled.div`
+  cursor: pointer;
   width: 100%;
-  max-width: 720px;
   display: flex;
   justify-content: space-between;
   font-size: 16px;

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import styled from '@emotion/styled';
-
+import { setCookie } from 'helpers/cookie';
 import apiController from 'helpers/apiController';
 import Title from 'components/page/Title';
 import { isBirth, isEmail, isPhone } from 'helpers/validate';
@@ -36,7 +36,7 @@ const Signup = () => {
       })
       .catch(({ response: res }) => {
         if (res.status === 409) {
-          alert('중복된 아이디입니다.');
+          alert('이미 등록된 아이디입니다.');
         }
       });
   };
@@ -50,10 +50,28 @@ const Signup = () => {
         })
         .catch(({ response: res }) => {
           if (res.status === 409) {
-            alert('중복된 닉네임입니다.');
+            alert('이미 등록된 닉네임입니다.');
           }
         });
     }
+  };
+
+  const handleCheckPhone = () => {
+    if (!isPhone.test(phone)) {
+      alert('올바른 전화번호를 입력해주세요.');
+      return;
+    }
+
+    apiController()
+      .get('/api/auth/check-phone', { phone: phone })
+      .then((res) => {
+        alert('사용 가능한 휴대폰 번호입니다.');
+      })
+      .catch(({ response: res }) => {
+        if (res.status === 409) {
+          alert('이미 등록된 휴대폰 번호입니다.');
+        }
+      });
   };
 
   const handleGenderChange = (e) => {
@@ -65,6 +83,10 @@ const Signup = () => {
   };
 
   const handleRegister = () => {
+    if (password.length < 6) {
+      alert('비밀번호를 6자리 이상 입력해주세요.');
+      return;
+    }
     if (password !== passwordCheck) {
       alert('비밀번호가 일치하지 않습니다.');
       return;
@@ -102,15 +124,24 @@ const Signup = () => {
       })
       .then((res) => {
         alert('가입이 완료되었습니다.');
-        router.push('/login');
+        apiController()
+          .post('/api/auth/login', { username, password })
+          .then((res) => {
+            const { data } = res;
+            setCookie('accessToken', data.accessToken);
+            setCookie('refreshToken', data.refreshToken);
+            router.push('/');
+          });
       })
       .catch(({ response: res }) => {
         if (res.status === 409) {
           const { msgId } = res.data;
           if (msgId === 'u0102') {
-            alert('중복된 아이디입니다.');
+            alert('이미 등록된 아이디입니다.');
           } else if (msgId === 'u0111') {
-            alert('중복된 닉네임입니다.');
+            alert('이미 등록된 닉네임입니다.');
+          } else if (msgId === 'u0113') {
+            alert('이미 등록된 휴대폰 번호입니다.');
           }
         }
       });
@@ -175,9 +206,7 @@ const Signup = () => {
             onChange={(e) => setPhone(e.target.value)}
           />
           <label htmlFor='phone'>휴대폰 번호</label>
-          <PhoneAuthButton onClick={handleCheckNickname}>
-            본인인증
-          </PhoneAuthButton>
+          <PhoneAuthButton onClick={handleCheckPhone}>중복확인</PhoneAuthButton>
         </TextInput>
         <RadioGroup>
           <div className='title'>성별</div>

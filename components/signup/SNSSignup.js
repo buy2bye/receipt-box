@@ -85,7 +85,6 @@ const NicknameForm = styled.div`
 
     input {
       width: 100%;
-      max-width: 720px;
       height: 60px;
       margin: 8px 0 40px 0;
       border-radius: 16px;
@@ -110,7 +109,6 @@ const Buttons = styled.div`
 
   .login__login-button {
     width: 100%;
-    max-width: 720px;
     height: 60px;
     margin-bottom: 12px;
     border-radius: 16px;
