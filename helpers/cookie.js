@@ -19,4 +19,6 @@ export const getCookie = (key, ctx) => {
   return cookies[key]
 }
 
-export const removeCookie = (key, ctx) => destroyCookie(ctx, key)
+export const removeCookie = (key, ctx) => {
+  destroyCookie(ctx, key, { path: '/' })
+}
