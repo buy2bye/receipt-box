@@ -51,7 +51,9 @@ export function setAuthInterceptors(instance, ctx) {
                 Authorization: `Bearer ${getCookie('refreshToken', ctx)}`,
               },
             }
-          );
+          ).catch((err) => {
+            kickout(ctx);
+          });
 
           const accessToken = refreshData.accessToken;
           setCookie('accessToken', accessToken, ctx);
