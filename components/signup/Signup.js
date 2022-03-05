@@ -7,6 +7,8 @@ import Title from 'components/page/Title';
 import { isBirthYear, isEmail, isPhone } from 'helpers/validate';
 import Button from 'components/button/Button';
 import Layout from 'components/layout/Layout';
+import Agreements from './Agreements';
+import { fabClasses } from '@mui/material';
 
 const Signup = () => {
   const router = useRouter();
@@ -18,6 +20,13 @@ const Signup = () => {
   const [gender, setGender] = useState();
   const [phone, setPhone] = useState();
   const [birthYear, setBirthYear] = useState();
+
+  const [agreements, setAgreements] = useState({
+    ageLimit: false,
+    termsAndConditions: false,
+    privacy: false,
+    marketing: false,
+  });
 
   const handleUserNameInput = (e) => {
     setUsername(e.target.value);
@@ -229,6 +238,7 @@ const Signup = () => {
             <label htmlFor='gender_f'>여자</label>
           </div>
         </RadioGroup>
+        <Agreements agreements={agreements} setAgreements={setAgreements} />
       </SignupForm>
       <Buttons>
         <Button primary onClick={handleRegister}>
@@ -249,7 +259,7 @@ const SignupForm = styled.div`
   display: flex;
   flex-direction: column;
   gap: 12px;
-  margin-bottom: 32px;
+  margin-bottom: 16px;
 `;
 
 const TextInput = styled.div`
@@ -306,7 +316,7 @@ const RadioGroup = styled.div`
     padding: 10px 20px;
     background: var(--grey100);
     border-radius: 4px;
-    color: var(--grey500);
+    color: var(--grey700);
     transition: 0.4s;
   }
 
