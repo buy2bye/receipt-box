@@ -27,7 +27,11 @@ const SNSSingup = () => {
   };
 
   const handleLater = () => {
-    // TODO 이거 필요할까?
+    apiController()
+      .post('/api/user/set-nickname', { nickname: null })
+      .then((res) => {
+        router.push('/');
+      });
   };
 
   const handleChangeNickname = (e) => {
