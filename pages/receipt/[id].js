@@ -124,9 +124,7 @@ const ReceiptDetail = () => {
         </li>
         <li>
           <span>구매가</span>
-          <span>
-            {receipt.productPrice || '곧 업데이트 해드릴게요'}
-          </span>
+          <span>{receipt.productPrice || '곧 업데이트 해드릴게요'}</span>
         </li>
         <li>
           <span>구매일자</span>
@@ -189,6 +187,7 @@ const DeleteReceipt = styled.button`
   background: transparent;
   padding: 8px;
   color: var(--grey400);
+  font-size: 13px;
 `;
 
 const NicknameWrapper = styled.div`
