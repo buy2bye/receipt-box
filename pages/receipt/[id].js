@@ -24,12 +24,12 @@ const ReceiptDetail = () => {
     deleteReceipt,
   } = receiptApi();
 
-  useEffect(() => {
-    const fetchReceipt = async () => {
-      const { data } = await getReceiptDetail(id);
-      setReceipt(data);
-    };
+  const fetchReceipt = async () => {
+    const { data } = await getReceiptDetail(id);
+    setReceipt(data);
+  };
 
+  useEffect(() => {
     fetchReceipt();
   }, []);
 
@@ -48,9 +48,7 @@ const ReceiptDetail = () => {
 
     reader.onload = function (e) {
       updateProductImage(id, files[0]).then(() => {
-        // 새로운 이미지 보이도록 처리해야함
-        // forceUpdate();
-        // router.replace(`/receipt/${id}`);
+        fetchReceipt();
       });
     };
 
