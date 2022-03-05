@@ -4,7 +4,7 @@ import styled from '@emotion/styled';
 import { setCookie } from 'helpers/cookie';
 import apiController from 'helpers/apiController';
 import Title from 'components/page/Title';
-import { isBirth, isEmail, isPhone } from 'helpers/validate';
+import { isBirthYear, isEmail, isPhone } from 'helpers/validate';
 import Button from 'components/button/Button';
 import Layout from 'components/layout/Layout';
 
@@ -17,7 +17,7 @@ const Signup = () => {
   const [nickname, setNickname] = useState();
   const [gender, setGender] = useState();
   const [phone, setPhone] = useState();
-  const [birthDate, setBirthDate] = useState();
+  const [birthYear, setBirthYear] = useState();
 
   const handleUserNameInput = (e) => {
     setUsername(e.target.value);
@@ -99,8 +99,8 @@ const Signup = () => {
       alert('닉네임을 입력해주세요.');
       return;
     }
-    if (!isBirth.test(birthDate)) {
-      alert('생년월일 8자리를 입력해주세요. 예) 19990130');
+    if (!isBirthYear.test(birthYear)) {
+      alert('출생연도 4자리를 입력해주세요.');
       return;
     }
     if (!gender) {
@@ -111,7 +111,6 @@ const Signup = () => {
       alert('올바른 전화번호를 입력해주세요.');
       return;
     }
-    const birthYear = parseInt(birthDate.slice(0, 4));
     apiController()
       .post('/api/auth/signup', {
         username: username,
@@ -193,10 +192,10 @@ const Signup = () => {
           <input
             type='number'
             placeholder=''
-            id='birth_date'
-            onChange={(e) => setBirthDate(e.target.value)}
+            id='birth_year'
+            onChange={(e) => setBirthYear(e.target.value)}
           />
-          <label htmlFor='birth_date'>생년월일 8자리</label>
+          <label htmlFor='birth_year'>출생연도 4자리</label>
         </TextInput>
         <TextInput>
           <input
