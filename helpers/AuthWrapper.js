@@ -2,21 +2,20 @@ import { getCookie } from 'helpers/cookie';
 import { redirect } from 'helpers/utils';
 import apiController from './apiController';
 
-const WrapAuthPage = (
-  WrapperComponent,
-  isLoginPage,
-  isSNSSignupPage
-) => {
+const WrapAuthPage = (WrapperComponent, isLoginPage, isSNSSignupPage) => {
   const Wrapper = (props) => {
     return <WrapperComponent {...props} />;
   };
 
   Wrapper.getInitialProps = async (ctx) => {
+    const { bz_tracking_id } = ctx.query;
     // token 검증
     const accessToken = getCookie('accessToken', ctx);
     const refreshToken = getCookie('refreshToken', ctx);
     if (!isLoginPage && (!accessToken || !refreshToken)) {
-      redirect('/login', ctx);
+      if (bz_tracking_id)
+        redirect(`/login?bz_tracking_id=${bz_tracking_id}`, ctx);
+      else redirect('/login', ctx);
     }
 
     if (isLoginPage && accessToken && refreshToken) {
