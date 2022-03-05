@@ -1,9 +1,9 @@
 import styled from '@emotion/styled';
 
-const Toggle = () => {
+const Toggle = ({ onToggle, toggleState }) => {
   return (
     <Container>
-      <input type='checkbox' />
+      <input type='checkbox' onChange={onToggle} checked={toggleState} />
       <span />
     </Container>
   );

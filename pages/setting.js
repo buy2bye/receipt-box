@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
 import ConfirmModal from 'components/modal/ConfirmModal';
 import WithdrawalModal from 'components/setting/WithdrawalModal';
@@ -16,8 +16,13 @@ const SettingPage = ({ userInfo }) => {
   const [showChangePasswordPopup, setShowChangePasswordPopup] = useState(false);
   const [isLogoutModalOpen, setLogoutModalOpen] = useState(false);
   const [isWithdrawalModalOpen, setWithdrawalModalOpen] = useState(false);
-
+  const [marketingAgree, setMarketingAgree] = useState(
+    userInfo.marketing_agreement
+  );
   const [nickname, setNickname] = useState(userInfo.nickname);
+
+  console.log(userInfo);
+
   const handleNicknameChange = (e) => {
     setNickname(e.target.value);
   };
@@ -55,6 +60,13 @@ const SettingPage = ({ userInfo }) => {
           alert('비밀번호가 일치하지 않습니다.');
         }
       });
+  };
+
+  const handleMarketingAgreeChange = (e) => {
+    setMarketingAgree(e.target.checked);
+    apiController().post('/api/user/change-marketing-agreement', {
+      marketing_agreement: e.target.checked,
+    });
   };
 
   const renderRow = (title, content) => {
@@ -125,7 +137,13 @@ const SettingPage = ({ userInfo }) => {
         {renderRow('카카오 문의하기', '준비중')}
         {renderLink('이용약관', '/agreements/terms-and-conditions')}
         {renderLink('개인정보처리방침', '/agreements/privacy-policy')}
-        {renderRow('마케팅 수신동의', <Toggle />)}
+        {renderRow(
+          '마케팅 수신동의',
+          <Toggle
+            onToggle={handleMarketingAgreeChange}
+            toggleState={marketingAgree}
+          />
+        )}
         <Divider />
         {renderButton('로그아웃', () => setLogoutModalOpen(true))}
         {renderButton('탈퇴하기', () => setWithdrawalModalOpen(true))}
