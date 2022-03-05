@@ -126,7 +126,7 @@ const ReceiptDetail = () => {
           <span>구매가</span>
           <span>
             {/* 한화라고 가정할 수 없어서 string 형태로 변경 */}
-            {receipt.productPrice}
+            {receipt.productPrice || '곧 업데이트 해드릴게요'}
           </span>
         </li>
         <li>
