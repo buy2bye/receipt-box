@@ -1,3 +1,4 @@
+import FullScreenSpinner from 'components/common/FullScreenSpinner';
 import Login from 'components/login/Login';
 import WrapAuthPage from 'helpers/AuthWrapper';
 
