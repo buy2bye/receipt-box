@@ -14,7 +14,7 @@ const Signup = () => {
   const router = useRouter();
 
   const [username, setUsername] = useState('');
-  const [password, setPassword] = useState();
+  const [password, setPassword] = useState('');
   const [passwordCheck, setPasswordCheck] = useState();
   const [nickname, setNickname] = useState();
   const [gender, setGender] = useState();
@@ -92,16 +92,16 @@ const Signup = () => {
   };
 
   const handleRegister = () => {
+    if (!isEmail.test(username)) {
+      alert('올바른 이메일을 입력해주세요.');
+      return;
+    }
     if (password.length < 6) {
       alert('비밀번호를 6자리 이상 입력해주세요.');
       return;
     }
     if (password !== passwordCheck) {
       alert('비밀번호가 일치하지 않습니다.');
-      return;
-    }
-    if (!isEmail.test(username)) {
-      alert('올바른 이메일을 입력해주세요.');
       return;
     }
     if (!nickname) {
