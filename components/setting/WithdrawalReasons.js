@@ -17,7 +17,6 @@ const WithdrawalReasons = ({ visible, setVisible, onWithdrawal }) => {
   const [isFetching, setIsFetching] = useState(false);
 
   const handleCancel = () => {
-    console.log("!!!!!handleCancel")
     setVisible(false);
   };
 
