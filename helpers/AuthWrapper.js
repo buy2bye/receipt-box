@@ -16,13 +16,9 @@ const WrapAuthPage = (WrapperComponent, isLoginPage, isSNSSignupPage) => {
       if (bz_tracking_id)
         redirect(`/login?bz_tracking_id=${bz_tracking_id}`, ctx);
       else redirect('/login', ctx);
-    }
-
-    if (isLoginPage && accessToken && refreshToken) {
+    } else if (isLoginPage && accessToken && refreshToken) {
       redirect('/', ctx);
-    }
-
-    if (!isLoginPage) {
+    } else if (!isLoginPage) {
       const { data: userInfo } = await apiController({ ctx: ctx }).get(
         '/api/user/info'
       );
