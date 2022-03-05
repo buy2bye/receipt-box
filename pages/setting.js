@@ -9,6 +9,7 @@ import Layout from 'components/layout/Layout';
 import BottomTextInputPopup from 'components/popup/BottomTextInputPopup';
 import ChangePasswordPopup from 'components/setting/ChangePasswordPopup';
 import WithdrawalReasons from 'components/setting/WithdrawalReasons';
+import Toggle from 'components/common/Toggle';
 
 const SettingPage = ({ userInfo }) => {
   const [showNicknameChangePopup, setShowNicknameChangePopup] = useState(false);
@@ -33,7 +34,7 @@ const SettingPage = ({ userInfo }) => {
           if (response.status === 409) {
             alert('사용할 수 없는 닉네임입니다.');
           }
-        })
+        });
     } else {
       setShowNicknameChangePopup(false);
     }
@@ -41,7 +42,10 @@ const SettingPage = ({ userInfo }) => {
 
   const handleChangePasswordSubmit = (password, newPassword) => {
     apiController()
-      .post('/api/user/change-password', { password, new_password: newPassword })
+      .post('/api/user/change-password', {
+        password,
+        new_password: newPassword,
+      })
       .then(() => {
         alert('비밀번호가 변경되었습니다!');
         setShowChangePasswordPopup(false);
@@ -50,8 +54,8 @@ const SettingPage = ({ userInfo }) => {
         if (response.status === 403) {
           alert('비밀번호가 일치하지 않습니다.');
         }
-      })
-  }
+      });
+  };
 
   const renderRow = (title, content) => {
     return (
@@ -104,19 +108,24 @@ const SettingPage = ({ userInfo }) => {
       <Container hideBottom>
         <SettingTitle>설정</SettingTitle>
         {renderRow('계정', userInfo.username || userInfo.snsIdentifier)}
-        {renderRow('닉네임', (
+        {renderRow(
+          '닉네임',
           <>
-            <button onClick={() => setShowNicknameChangePopup(true)} style={{ background: 'white' }}>
-              <img src='/icons/edit.png' alt='edit' width={14} height={14}/>
-            </button>
             {userInfo.nickname}
+            <button onClick={() => setShowNicknameChangePopup(true)}>
+              <img src='/icons/edit.png' alt='edit' width={14} height={14} />
+            </button>
           </>
-        ))}
-        {userInfo.username && renderButton('비밀번호 변경', () => setShowChangePasswordPopup(true))}
-        {renderRow('카카오문의', '준비중')}
-        {renderLink('이용약관', '')}
-        {renderLink('개인정보처리방침', '')}
-        {renderLink('마케팅 수신동의', '')}
+        )}
+        {userInfo.username &&
+          renderButton('비밀번호 변경하기', () =>
+            setShowChangePasswordPopup(true)
+          )}
+        <Divider />
+        {renderRow('카카오 문의하기', '준비중')}
+        {renderLink('이용약관', '/agreements/terms-and-conditions')}
+        {renderLink('개인정보처리방침', '/agreements/privacy-policy')}
+        {renderRow('마케팅 수신동의', <Toggle />)}
         <Divider />
         {renderButton('로그아웃', () => setLogoutModalOpen(true))}
         {renderButton('탈퇴하기', () => setShowWithdrawalReasonsPopup(true))}
@@ -145,7 +154,7 @@ const SettingPage = ({ userInfo }) => {
       <ChangePasswordPopup
         visible={showChangePasswordPopup}
         setVisible={setShowChangePasswordPopup}
-        title="비밀번호를 변경합니다."
+        title='변경할 비밀번호를 입력해 주세요.'
         onSubmit={handleChangePasswordSubmit}
         confirmText='변경하기'
       />
@@ -179,6 +188,7 @@ const Row = styled.div`
   width: 100%;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   font-size: 16px;
   font-weight: 400;
   box-sizing: border-box;
@@ -198,6 +208,6 @@ const RowContent = styled.div`
 
 const Divider = styled.div`
   width: 100vw;
-  height: 12px;
+  min-height: 12px;
   background: var(--grey100);
 `;
