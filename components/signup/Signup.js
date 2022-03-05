@@ -201,11 +201,11 @@ const Signup = () => {
         <TextInput>
           <input
             type='number'
-            placeholder='숫자만 입력'
+            placeholder='등록완료 알림을 보내드려요'
             id='phone'
             onChange={(e) => setPhone(e.target.value)}
           />
-          <label htmlFor='phone'>휴대폰 번호</label>
+          <label htmlFor='phone'>휴대폰 번호 (숫자만 입력)</label>
           <PhoneAuthButton onClick={handleCheckPhone}>중복확인</PhoneAuthButton>
         </TextInput>
         <RadioGroup>
