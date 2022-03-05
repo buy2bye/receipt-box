@@ -4,8 +4,6 @@ import Link from 'next/link';
 const Agreements = ({
   privacyAgree,
   marketingAgree,
-  setPrivacyAgree,
-  setMarketingAgree,
   agreements,
   setAgreements,
 }) => {
