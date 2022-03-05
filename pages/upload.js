@@ -18,14 +18,16 @@ const UploadPage = () => {
   const handleOnImageChange = (e) => {
     const reader = new FileReader();
     const files = e.target.files;
-    setImageFile(files[0]);
 
     reader.onload = function (e) {
       // 썸네일 이미지 경로 설정
       setImageSrc(e.target.result);
     };
 
-    if (files[0]) reader.readAsDataURL(files[0]);
+    if (files[0]) {
+      reader.readAsDataURL(files[0]);
+      setImageFile(files[0]);
+    }
   };
 
   const handleSubmitPhotoClick = () => {
@@ -73,7 +75,7 @@ const UploadPage = () => {
       {imageSrc ? (
         <ButtonsWrapper>
           <Button>
-            <label htmlFor='upload-photo'>다시 올리기</label>
+            <UploadButton htmlFor='upload-photo'>다시 올리기</UploadButton>
           </Button>
           <Button primary onClick={handleSubmitPhotoClick}>
             다음
@@ -82,7 +84,7 @@ const UploadPage = () => {
       ) : (
         <ButtonsWrapper>
           <Button primary>
-            <label htmlFor='upload-photo'>사진 올리기</label>
+            <UploadButton htmlFor='upload-photo'>사진 올리기</UploadButton>
           </Button>
         </ButtonsWrapper>
       )}

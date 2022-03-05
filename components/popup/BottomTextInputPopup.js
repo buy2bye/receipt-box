@@ -11,6 +11,7 @@ const BottomTextInputPopup = ({
   onInputChange,
   onSubmit,
   placeholder,
+  value,
   confirmText = '다음',
 }) => {
   const [isFetching, setIsFetching] = useState(false);
@@ -37,6 +38,7 @@ const BottomTextInputPopup = ({
         placeholder={placeholder}
         onChange={onInputChange}
         onKeyDown={handleKeyDown}
+        value={value}
       />
       <Button primary onClick={handleClick} isLoading={isFetching}>
         {confirmText}

@@ -24,12 +24,12 @@ const ReceiptDetail = () => {
     deleteReceipt,
   } = receiptApi();
 
-  useEffect(() => {
-    const fetchReceipt = async () => {
-      const { data } = await getReceiptDetail(id);
-      setReceipt(data);
-    };
+  const fetchReceipt = async () => {
+    const { data } = await getReceiptDetail(id);
+    setReceipt(data);
+  };
 
+  useEffect(() => {
     fetchReceipt();
   }, []);
 
@@ -48,9 +48,7 @@ const ReceiptDetail = () => {
 
     reader.onload = function (e) {
       updateProductImage(id, files[0]).then(() => {
-        // 새로운 이미지 보이도록 처리해야함
-        // forceUpdate();
-        // router.replace(`/receipt/${id}`);
+        fetchReceipt();
       });
     };
 
@@ -127,9 +125,8 @@ const ReceiptDetail = () => {
         <li>
           <span>구매가</span>
           <span>
-            {receipt.productPrice
-              ? `${parseInt(receipt.productPrice).toLocaleString()} 원`
-              : '곧 업데이트 해드릴게요'}
+            {/* 한화라고 가정할 수 없어서 string 형태로 변경 */}
+            {receipt.productPrice || '곧 업데이트 해드릴게요'}
           </span>
         </li>
         <li>
