@@ -6,6 +6,7 @@ import SNSSingup from 'components/signup/SNSSignup'
 
 import apiController from 'helpers/apiController'
 import { setCookie } from 'helpers/cookie'
+import { redirect } from 'helpers/utils';
 
 const KakaoLogin = ({ code }) => {
   const router = useRouter()
