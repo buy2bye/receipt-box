@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import Link from 'next/link';
 
 const Agreements = ({
   privacyAgree,
@@ -49,6 +50,9 @@ const Agreements = ({
           id='privacy'
         />
         <label htmlFor='privacy'>(필수) 이용약관 동의</label>
+        <Link href='/agreements/terms-and-conditions'>
+          <a>보기 ></a>
+        </Link>
       </li>
       <li>
         <input
@@ -65,6 +69,9 @@ const Agreements = ({
         <label htmlFor='termsAndConditions'>
           (필수) 개인정보 수집 및 이용 동의
         </label>
+        <Link href='/agreements/privacy-agreement'>
+          <a>보기 ></a>
+        </Link>
       </li>
       <li>
         <input
@@ -75,7 +82,7 @@ const Agreements = ({
           }
           id='marketing'
         />
-        <label htmlFor='marketing'>(선택) SMS/E-Mail 마케팅 수신 동의</label>
+        <label htmlFor='marketing'>(선택) 프로모션 정보 수신 동의</label>
       </li>
     </Container>
   );
@@ -88,7 +95,7 @@ const Container = styled.ul`
   li {
     display: flex;
     align-items: center;
-    height: 24px;
+    height: 20px;
 
     input {
       width: 16px;
@@ -97,6 +104,14 @@ const Container = styled.ul`
     label {
       flex: 1;
       font-size: 14px;
+      color: var(--grey800);
+    }
+
+    a {
+      border-bottom: 1px solid var(--grey800);
+      margin: 4px 8px;
+      font-size: 13px;
+      font-weight: 500;
       color: var(--grey800);
     }
   }
