@@ -125,9 +125,8 @@ const ReceiptDetail = () => {
         <li>
           <span>구매가</span>
           <span>
-            {receipt.productPrice
-              ? `${parseInt(receipt.productPrice).toLocaleString()} 원`
-              : '곧 업데이트 해드릴게요'}
+            {/* 한화라고 가정할 수 없어서 string 형태로 변경 */}
+            {receipt.productPrice}
           </span>
         </li>
         <li>
