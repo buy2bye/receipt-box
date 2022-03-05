@@ -49,7 +49,7 @@ const Agreements = ({
         />
         <label htmlFor='privacy'>(필수) 이용약관 동의</label>
         <Link href='/agreements/terms-and-conditions'>
-          <a>보기 ></a>
+          <a>{`보기 >`}</a>
         </Link>
       </li>
       <li>
@@ -68,7 +68,7 @@ const Agreements = ({
           (필수) 개인정보 수집 및 이용 동의
         </label>
         <Link href='/agreements/privacy-agreement'>
-          <a>보기 ></a>
+          <a>{`보기 >`}</a>
         </Link>
       </li>
       <li>

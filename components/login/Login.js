@@ -7,6 +7,7 @@ import apiController from 'helpers/apiController';
 import { setCookie } from 'helpers/cookie';
 import Link from 'next/link';
 import Button from 'components/button/Button';
+import Layout from 'components/layout/Layout';
 
 const Login = () => {
   const router = useRouter();
@@ -89,7 +90,7 @@ const Login = () => {
   );
 
   return (
-    <Container>
+    <Container hideTop hideBottom>
       <Tutorial className='login__tutorial' />
       {isEmailLogin ? renderEmailLogin() : renderLoginMain()}
     </Container>
@@ -98,15 +99,8 @@ const Login = () => {
 
 export default Login;
 
-const Container = styled.div`
-  height: 100vh;
-  width: 100vw;
-  padding: 24px 24px 80px 24px;
-  overflow-y: hidden;
+const Container = styled(Layout)`
   overflow-x: hidden;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 
   .login__tutorial {
     width: 100%;
