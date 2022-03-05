@@ -45,6 +45,7 @@ const ChangePasswordPopup = ({
       className={className}
       setVisible={setVisible}
       title={title}
+      height='376px'
     >
       <InputWrapper>
         <TextInput>
@@ -90,9 +91,7 @@ const ChangePasswordPopup = ({
 
 export default ChangePasswordPopup;
 
-const Container = styled(BottomPopup)`
-  height: 376px;
-`;
+const Container = styled(BottomPopup)``;
 
 const InputWrapper = styled.div`
   display: flex;

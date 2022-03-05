@@ -140,8 +140,9 @@ const ButtonsWrapper = styled.div`
 `;
 
 const UploadButton = styled.label`
-  background: var(--blue500);
-  color: white;
+  background: ${(props) =>
+    props.primary ? 'var(--blue500)' : 'var(--grey100)'};
+  color: ${(props) => (props.primary ? 'white' : 'var(--grey700)')};
   width: 100%;
   height: 60px;
   font-size: 16px;

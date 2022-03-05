@@ -10,6 +10,8 @@ import BottomTextInputPopup from 'components/popup/BottomTextInputPopup';
 import ChangePasswordPopup from 'components/setting/ChangePasswordPopup';
 import WithdrawalReasons from 'components/setting/WithdrawalReasons';
 import Toggle from 'components/common/Toggle';
+import BottomPopup from 'components/popup/BottomPopup';
+import Button from 'components/button/Button';
 
 const SettingPage = ({ userInfo }) => {
   const [showNicknameChangePopup, setShowNicknameChangePopup] = useState(false);
@@ -147,13 +149,16 @@ const SettingPage = ({ userInfo }) => {
         {renderButton('로그아웃', () => setLogoutModalOpen(true))}
         {renderButton('탈퇴하기', () => setShowWithdrawalReasonsPopup(true))}
       </Container>
-      <ConfirmModal
-        isOpen={isLogoutModalOpen}
-        descriptionText='로그아웃 하시겠습니까?'
-        yesText='로그아웃'
-        onYesClick={logout}
-        onNoClick={() => setLogoutModalOpen(false)}
-      />
+      <BottomPopup
+        height='180px'
+        title='정말 로그아웃 하시겠어요?'
+        visible={isLogoutModalOpen}
+        setVisible={setLogoutModalOpen}
+      >
+        <Button primary onClick={logout}>
+          로그아웃
+        </Button>
+      </BottomPopup>
       <WithdrawalReasons
         visible={showWithdrawalReasonsPopup}
         setVisible={setShowWithdrawalReasonsPopup}
