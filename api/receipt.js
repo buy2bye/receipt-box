@@ -9,7 +9,7 @@ const receiptApi = () => {
     formData.append('nickname', nickname);
     formData.append('image_list', image);
 
-    post('/api/receipt/create', formData);
+    await post('/api/receipt/create', formData);
   };
 
   //영수증 리스트 가져오기
@@ -41,12 +41,12 @@ const receiptApi = () => {
     const formData = new FormData();
     formData.append('image', image);
 
-    post(`/api/receipt/${id}/upload-product-image`, formData);
+    await post(`/api/receipt/${id}/upload-product-image`, formData);
   };
 
   //영수증 삭제
   const deleteReceipt = async (id, reason) => {
-    post(`/api/receipt/${id}/delete`, { reason: reason });
+    await post(`/api/receipt/${id}/delete`, { reason: reason });
   };
 
   return {
