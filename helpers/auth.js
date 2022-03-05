@@ -43,7 +43,7 @@ export function setAuthInterceptors(instance, ctx) {
       // refreshToken 으로 accessToken을 재발급 받는다.
       if (401 === status) {
         if (!_.includes(error.config.url, '/api/auth/refresh')) {
-          const { data: refreshData } = await axios.post(
+          const refreshResult = await axios.post(
             '/api/auth/refresh',
             null,
             {
@@ -52,8 +52,13 @@ export function setAuthInterceptors(instance, ctx) {
               },
             }
           ).catch((err) => {
-            kickout(ctx);
           });
+
+          if (!refreshResult) {
+            return kickout(ctx);
+          }
+
+          const { data: refreshData } = refreshResult;
 
           const accessToken = refreshData.accessToken;
           setCookie('accessToken', accessToken, ctx);
