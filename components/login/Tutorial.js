@@ -8,6 +8,7 @@ const Tutorial = ({ className }) => {
         <SwiperSlide>Tutorial Slide 1</SwiperSlide>
         <SwiperSlide>Tutorial Slide 2</SwiperSlide>
         <SwiperSlide>Tutorial Slide 3</SwiperSlide>
+        <SwiperSlide>Tutorial Slide 4</SwiperSlide>
       </Swiper>
     </Container>
   );
