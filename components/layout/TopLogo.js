@@ -4,7 +4,9 @@ import Link from 'next/link';
 const TopLogo = () => {
   return (
     <Container>
-      <Logo>BUY2BYE</Logo>
+      <Logo>
+        <img src='/icons/logo_300.png' alt='buy2bye logo' />
+      </Logo>
       <Link href='/setting'>
         <Setting>
           <img src='/icons/setting.png' alt='setting' />
@@ -26,7 +28,11 @@ const Container = styled.div`
 `;
 
 const Logo = styled.div`
-  font-size: 16px;
+  width: 100px;
+  img {
+    width: 100%;
+    height: auto;
+  }
 `;
 
 const Setting = styled.button`
