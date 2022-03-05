@@ -84,7 +84,7 @@ const UploadPage = () => {
       ) : (
         <ButtonsWrapper>
           <Button primary>
-            <UploadButton htmlFor='upload-photo'>사진 올리기</UploadButton>
+            <UploadButton primary htmlFor='upload-photo'>사진 올리기</UploadButton>
           </Button>
         </ButtonsWrapper>
       )}
