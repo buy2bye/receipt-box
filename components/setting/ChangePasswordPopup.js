@@ -13,22 +13,25 @@ const ChangePasswordPopup = ({
 }) => {
   const [isFetching, setIsFetching] = useState(false);
 
-  const [password, setPassword] = useState('')
-  const [newPassword, setNewPassword] = useState('')
-  const [newPasswordCheck, setNewPasswordCheck] = useState('')
+  const [password, setPassword] = useState('');
+  const [newPassword, setNewPassword] = useState('');
+  const [newPasswordCheck, setNewPasswordCheck] = useState('');
 
   useEffect(() => {
-    setPassword('')
-    setNewPassword('')
-    setNewPasswordCheck('')
-  }, [visible])
+    setPassword('');
+    setNewPassword('');
+    setNewPasswordCheck('');
+  }, [visible]);
 
   const handleClick = async () => {
+    if (newPassword.length < 6) {
+      return alert('비밀번호를 6자리 이상 입력해주세요.');
+    }
     if (newPassword !== newPasswordCheck) {
       return alert('새 비밀번호가 일치하지 않습니다.');
     }
     setIsFetching(true);
-    await onSubmit(password, newPassword)
+    await onSubmit(password, newPassword);
     setIsFetching(false);
   };
 
@@ -43,39 +46,41 @@ const ChangePasswordPopup = ({
       setVisible={setVisible}
       title={title}
     >
-      <TextInput>
-        <input
-          type='password'
-          placeholder='6자리 이상'
-          id='password'
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          onKeyDown={handleKeyDown}
-        />
-        <label htmlFor='password'>현재 비밀번호</label>
-      </TextInput>
-      <TextInput>
-        <input
-          type='password'
-          placeholder='6자리 이상'
-          id='new_password'
-          value={newPassword}
-          onChange={(e) => setNewPassword(e.target.value)}
-          onKeyDown={handleKeyDown}
-        />
-        <label htmlFor='new_password'>새 비밀번호</label>
-      </TextInput>
-      <TextInput>
-        <input
-          type='password'
-          placeholder='6자리 이상'
-          id='new_password_check'
-          value={newPasswordCheck}
-          onChange={(e) => setNewPasswordCheck(e.target.value)}
-          onKeyDown={handleKeyDown}
-        />
-        <label htmlFor='new_password_check'>새 비밀번호 확인</label>
-      </TextInput>
+      <InputWrapper>
+        <TextInput>
+          <input
+            type='password'
+            placeholder='6자리 이상'
+            id='password'
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            onKeyDown={handleKeyDown}
+          />
+          <label htmlFor='password'>현재 비밀번호</label>
+        </TextInput>
+        <TextInput>
+          <input
+            type='password'
+            placeholder='6자리 이상'
+            id='new_password'
+            value={newPassword}
+            onChange={(e) => setNewPassword(e.target.value)}
+            onKeyDown={handleKeyDown}
+          />
+          <label htmlFor='new_password'>새 비밀번호</label>
+        </TextInput>
+        <TextInput>
+          <input
+            type='password'
+            placeholder='6자리 이상'
+            id='new_password_check'
+            value={newPasswordCheck}
+            onChange={(e) => setNewPasswordCheck(e.target.value)}
+            onKeyDown={handleKeyDown}
+          />
+          <label htmlFor='new_password_check'>새 비밀번호 확인</label>
+        </TextInput>
+      </InputWrapper>
       <Button primary onClick={handleClick} isLoading={isFetching}>
         {confirmText}
       </Button>
@@ -86,7 +91,13 @@ const ChangePasswordPopup = ({
 export default ChangePasswordPopup;
 
 const Container = styled(BottomPopup)`
-  height: 44vh;
+  height: 376px;
+`;
+
+const InputWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 `;
 
 const TextInput = styled.div`
@@ -103,12 +114,12 @@ const TextInput = styled.div`
   input {
     width: 100%;
     height: 60px;
-    border-radius: 8px;
     padding: 24px 12px 0 12px;
     font-size: 15px;
+    border-radius: 8px;
     font-weight: 400;
     border: none;
-    border: 1px solid var(--grey400);
+    border: 1px solid var(--grey300);
     color: var(--grey900);
     font-weight: 300;
 
