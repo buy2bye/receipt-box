@@ -17,12 +17,12 @@ const SNSSingup = () => {
 
     apiController()
       .post('/api/user/set-nickname', { nickname: nickname })
+      .then((res) => {
+        router.push('/');
+      })
       .catch((error) => {
         const { status } = error.response;
         alert('닉네임이 중복됩니다!');
-      })
-      .then((res) => {
-        router.push('/');
       });
   };
 
