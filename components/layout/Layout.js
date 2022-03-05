@@ -21,14 +21,7 @@ export default Layout;
 
 const Container = styled.div`
   width: 100vw;
-  ${(props) =>
-    props.hideTop
-      ? css`
-          height: 100vh;
-        `
-      : css`
-          min-height: 100vh;
-        `}
+  height: 100vh;
   display: flex;
   flex-direction: column;
 `;
@@ -39,9 +32,8 @@ const Body = styled.div`
   flex-direction: column;
   align-items: center;
   padding: 24px;
-  padding-bottom: ${(props) => (props.hideBottom ? '80px' : '160px')};
+  /* padding-bottom: ${(props) => (props.hideBottom ? '80px' : '160px')}; */
   width: 100vw;
-  height: 100vh;
   position: relative;
   overflow-y: scroll;
 `;
