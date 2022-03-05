@@ -73,7 +73,7 @@ const UploadPage = () => {
       {imageSrc ? (
         <ButtonsWrapper>
           <Button>
-            <label htmlFor='upload-photo'>다시 올리기</label>
+            <UploadButton htmlFor='upload-photo'>다시 올리기</UploadButton>
           </Button>
           <Button primary onClick={handleSubmitPhotoClick}>
             다음
@@ -82,7 +82,7 @@ const UploadPage = () => {
       ) : (
         <ButtonsWrapper>
           <Button primary>
-            <label htmlFor='upload-photo'>사진 올리기</label>
+            <UploadButton htmlFor='upload-photo'>사진 올리기</UploadButton>
           </Button>
         </ButtonsWrapper>
       )}
