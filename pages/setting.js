@@ -8,9 +8,11 @@ import { kickout } from 'helpers/auth';
 import Link from 'next/link';
 import Layout from 'components/layout/Layout';
 import BottomTextInputPopup from 'components/popup/BottomTextInputPopup';
+import ChangePasswordPopup from 'components/setting/ChangePasswordPopup';
 
 const SettingPage = ({ userInfo }) => {
   const [showNicknameChangePopup, setShowNicknameChangePopup] = useState(false);
+  const [showChangePasswordPopup, setShowChangePasswordPopup] = useState(false);
   const [isLogoutModalOpen, setLogoutModalOpen] = useState(false);
   const [isWithdrawalModalOpen, setWithdrawalModalOpen] = useState(false);
 
@@ -22,7 +24,7 @@ const SettingPage = ({ userInfo }) => {
   const handleNicknameSubmit = () => {
     if (nickname !== userInfo.nickname) {
       apiController()
-        .post('/api/user/set-nickname', { nickname: nickname})
+        .post('/api/user/set-nickname', { nickname: nickname })
         .then(() => {
           alert('닉네임이 변경되었습니다!');
           window.location.reload();
@@ -36,6 +38,20 @@ const SettingPage = ({ userInfo }) => {
       setShowNicknameChangePopup(false);
     }
   };
+
+  const handleChangePasswordSubmit = (password, newPassword) => {
+    apiController()
+      .post('/api/user/change-password', { password, new_password: newPassword })
+      .then(() => {
+        alert('비밀번호가 변경되었습니다!');
+        setShowChangePasswordPopup(false);
+      })
+      .catch(({ response }) => {
+        if (response.status === 403) {
+          alert('비밀번호가 일치하지 않습니다.');
+        }
+      })
+  }
 
   const renderRow = (title, content) => {
     return (
@@ -96,6 +112,7 @@ const SettingPage = ({ userInfo }) => {
             {userInfo.nickname}
           </>
         ))}
+        {userInfo.username && renderButton('비밀번호 변경', () => setShowChangePasswordPopup(true))}
         {renderRow('카카오문의', '준비중')}
         {renderLink('이용약관', '')}
         {renderLink('개인정보처리방침', '')}
@@ -120,11 +137,17 @@ const SettingPage = ({ userInfo }) => {
         visible={showNicknameChangePopup}
         setVisible={setShowNicknameChangePopup}
         title='변경할 닉네임을 입력해주세요'
-        // placeholder='예) 맥북 2022'
         onInputChange={handleNicknameChange}
         onSubmit={handleNicknameSubmit}
         confirmText='변경하기'
         value={nickname}
+      />
+      <ChangePasswordPopup
+        visible={showChangePasswordPopup}
+        setVisible={setShowChangePasswordPopup}
+        title="비밀번호를 변경합니다."
+        onSubmit={handleChangePasswordSubmit}
+        confirmText='변경하기'
       />
     </>
   );
