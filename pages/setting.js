@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import styled from '@emotion/styled';
 import ConfirmModal from 'components/modal/ConfirmModal';
-import WithdrawalModal from 'components/setting/WithdrawalModal';
 import apiController from 'helpers/apiController';
 import WrapAuthPage from 'helpers/AuthWrapper';
 import { kickout } from 'helpers/auth';
@@ -9,12 +8,13 @@ import Link from 'next/link';
 import Layout from 'components/layout/Layout';
 import BottomTextInputPopup from 'components/popup/BottomTextInputPopup';
 import ChangePasswordPopup from 'components/setting/ChangePasswordPopup';
+import WithdrawalReasons from 'components/setting/WithdrawalReasons';
 
 const SettingPage = ({ userInfo }) => {
   const [showNicknameChangePopup, setShowNicknameChangePopup] = useState(false);
   const [showChangePasswordPopup, setShowChangePasswordPopup] = useState(false);
   const [isLogoutModalOpen, setLogoutModalOpen] = useState(false);
-  const [isWithdrawalModalOpen, setWithdrawalModalOpen] = useState(false);
+  const [showWithdrawalReasonsPopup, setShowWithdrawalReasonsPopup] = useState(false);
 
   const [nickname, setNickname] = useState(userInfo.nickname);
   const handleNicknameChange = (e) => {
@@ -119,7 +119,7 @@ const SettingPage = ({ userInfo }) => {
         {renderLink('마케팅 수신동의', '')}
         <Divider />
         {renderButton('로그아웃', () => setLogoutModalOpen(true))}
-        {renderButton('탈퇴하기', () => setWithdrawalModalOpen(true))}
+        {renderButton('탈퇴하기', () => setShowWithdrawalReasonsPopup(true))}
       </Container>
       <ConfirmModal
         isOpen={isLogoutModalOpen}
@@ -128,10 +128,10 @@ const SettingPage = ({ userInfo }) => {
         onYesClick={logout}
         onNoClick={() => setLogoutModalOpen(false)}
       />
-      <WithdrawalModal
-        isOpen={isWithdrawalModalOpen}
-        onCancelClick={() => setWithdrawalModalOpen(false)}
-        onWithdrawalClick={withdrawal}
+      <WithdrawalReasons
+        visible={showWithdrawalReasonsPopup}
+        setVisible={setShowWithdrawalReasonsPopup}
+        onWithdrawal={withdrawal}
       />
       <BottomTextInputPopup
         visible={showNicknameChangePopup}
