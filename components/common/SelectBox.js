@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 import { useRef, useState } from 'react';
-import { useEffect } from 'react/cjs/react.development';
+import { useEffect } from 'react';
 
 const SelectBox = ({ options, defaultValue, className, setResult }) => {
   const [selected, setSelected] = useState('');
