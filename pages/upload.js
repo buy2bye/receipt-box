@@ -18,14 +18,16 @@ const UploadPage = () => {
   const handleOnImageChange = (e) => {
     const reader = new FileReader();
     const files = e.target.files;
-    setImageFile(files[0]);
 
     reader.onload = function (e) {
       // 썸네일 이미지 경로 설정
       setImageSrc(e.target.result);
     };
 
-    if (files[0]) reader.readAsDataURL(files[0]);
+    if (files[0]) {
+      reader.readAsDataURL(files[0]);
+      setImageFile(files[0]);
+    }
   };
 
   const handleSubmitPhotoClick = () => {
