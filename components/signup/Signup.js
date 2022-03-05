@@ -15,11 +15,7 @@ const Signup = () => {
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-<<<<<<< HEAD
   const [passwordCheck, setPasswordCheck] = useState('');
-=======
-  const [passwordCheck, setPasswordCheck] = useState();
->>>>>>> 6707076b46f68fc34fddae32fcf8d6acca831fe7
   const [nickname, setNickname] = useState();
   const [gender, setGender] = useState();
   const [phone, setPhone] = useState();
