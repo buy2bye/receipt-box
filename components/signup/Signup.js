@@ -15,7 +15,7 @@ const Signup = () => {
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [passwordCheck, setPasswordCheck] = useState();
+  const [passwordCheck, setPasswordCheck] = useState('');
   const [nickname, setNickname] = useState();
   const [gender, setGender] = useState();
   const [phone, setPhone] = useState();
@@ -120,6 +120,10 @@ const Signup = () => {
       alert('올바른 전화번호를 입력해주세요.');
       return;
     }
+    if (!agreements.ageLimit || !agreements.termsAndConditions || !agreements.privacy) {
+      alert('이용 약관 동의에 체크해주세요.');
+      return;
+    }
     apiController()
       .post('/api/auth/signup', {
         username: username,
@@ -129,6 +133,7 @@ const Signup = () => {
         birth_year: birthYear,
         email: username,
         phone: phone,
+        marketing_agreement: agreements.marketing
       })
       .then((res) => {
         alert('가입이 완료되었습니다.');

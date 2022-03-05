@@ -1,7 +1,12 @@
 import { getCookie } from 'helpers/cookie';
 import { redirect } from 'helpers/utils';
+import apiController from './apiController';
 
-const WrapAuthPage = (WrapperComponent, isLoginPage) => {
+const WrapAuthPage = (
+  WrapperComponent,
+  isLoginPage,
+  isSNSSignupPage
+) => {
   const Wrapper = (props) => {
     return <WrapperComponent {...props} />;
   };
@@ -16,6 +21,16 @@ const WrapAuthPage = (WrapperComponent, isLoginPage) => {
 
     if (isLoginPage && accessToken && refreshToken) {
       redirect('/', ctx);
+    }
+
+    if (!isLoginPage) {
+      const { data: userInfo } = await apiController({ ctx: ctx }).get(
+        '/api/user/info'
+      );
+      if (!isSNSSignupPage && !userInfo.username && !userInfo.nickname) {
+        // SNS 유저인데 닉네임 설정을 안했다
+        redirect('/snssignup', ctx);
+      }
     }
 
     const componentProps =
