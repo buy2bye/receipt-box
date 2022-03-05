@@ -1,8 +1,8 @@
-import styled from '@emotion/styled';
+import AgreementWrapper from './AgreementWrapper';
 
 const 개인정보수집동의 = () => {
   return (
-    <Container>
+    <AgreementWrapper>
       <h1>개인정보 수집 및 이용에 대한 안내</h1>
       <p>
         바이투바이 운영자 (이하 “운영자”라 함)는 개인정보 보호법에 따라
@@ -125,42 +125,8 @@ const 개인정보수집동의 = () => {
         경우 동의를 거부할 수 있습니다. 다만, 동의하지 않는 경우에는 서비스
         이용에 제한이 있을 수 있습니다.
       </p>
-    </Container>
+    </AgreementWrapper>
   );
 };
 
 export default 개인정보수집동의;
-
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-
-  h1 {
-    width: 100%;
-    text-align: center;
-    font-size: 24px;
-  }
-
-  h3 {
-    font-size: 14px;
-    font-weight: 700;
-  }
-
-  p {
-    font-size: 13px;
-    line-height: 1.6;
-  }
-
-  table {
-    width: 100%;
-    border: 1px solid var(--grey600);
-    border-collapse: collapse;
-  }
-
-  th,
-  td {
-    border: 1px solid var(--grey600);
-    padding: 8px;
-    font-size: 12px;
-  }
-`;

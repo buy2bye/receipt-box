@@ -1,8 +1,8 @@
-import styled from '@emotion/styled';
+import AgreementWrapper from './AgreementWrapper';
 
 const 개인정보처리방침 = () => {
   return (
-    <Container>
+    <AgreementWrapper>
       <h1>개인정보처리방침</h1>
       <p>
         ‘바이투바이’ 운영자[이하 “운영자”라 한다]는 정보통신망 이용촉진 및
@@ -270,42 +270,8 @@ const 개인정보처리방침 = () => {
         <br />
         시행일자 : 2022. 03. 11.
       </p>
-    </Container>
+    </AgreementWrapper>
   );
 };
 
 export default 개인정보처리방침;
-
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-
-  h1 {
-    width: 100%;
-    text-align: center;
-    font-size: 24px;
-  }
-
-  h3 {
-    font-size: 14px;
-    font-weight: 700;
-  }
-
-  p {
-    font-size: 13px;
-    line-height: 1.6;
-  }
-
-  table {
-    width: 100%;
-    border: 1px solid var(--grey600);
-    border-collapse: collapse;
-  }
-
-  th,
-  td {
-    border: 1px solid var(--grey600);
-    padding: 8px;
-    font-size: 12px;
-  }
-`;

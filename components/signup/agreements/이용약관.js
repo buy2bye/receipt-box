@@ -1,8 +1,8 @@
-import styled from '@emotion/styled';
+import AgreementWrapper from './AgreementWrapper';
 
 const 이용약관 = () => {
   return (
-    <Container>
+    <AgreementWrapper>
       <h1>이용약관</h1>
       <h3>제1조 목적</h3>
       <p>
@@ -344,42 +344,8 @@ const 이용약관 = () => {
         사유와 처리일정을 서비스 내 공지하거나 제20조 제1항에 따라 통지합니다.
       </p>
       <p>이 약관은 2022. 03. 11.부터 시행합니다.</p>
-    </Container>
+    </AgreementWrapper>
   );
 };
 
 export default 이용약관;
-
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-
-  h1 {
-    width: 100%;
-    text-align: center;
-    font-size: 24px;
-  }
-
-  h3 {
-    font-size: 14px;
-    font-weight: 700;
-  }
-
-  p {
-    font-size: 13px;
-    line-height: 1.8;
-  }
-
-  table {
-    width: 100%;
-    border: 1px solid var(--grey600);
-    border-collapse: collapse;
-  }
-
-  th,
-  td {
-    border: 1px solid var(--grey600);
-    padding: 8px;
-    font-size: 12px;
-  }
-`;
