@@ -24,7 +24,7 @@ const Container = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  position: relative;
+  position: sticky;
 `;
 
 const Logo = styled.div`
