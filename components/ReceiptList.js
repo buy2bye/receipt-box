@@ -20,7 +20,7 @@ const ReceiptListPage = () => {
     return (
       <Layout hideTop showLogo>
         <Title>등록된 영수증이 없어요</Title>
-        <Subtitle>스마트폰 캡쳐화면도 등록할 수 있어요 🙂</Subtitle>
+        <Subtitle>온라인 주문내역 캡쳐화면도 등록할 수 있어요 🙂</Subtitle>
         <Link href='/upload'>
           <RegisterButton>영수증 등록하기</RegisterButton>
         </Link>
