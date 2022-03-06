@@ -80,7 +80,7 @@ const Agreements = ({
           }
           id='marketing'
         />
-        <label htmlFor='marketing'>(선택) 프로모션 정보 수신 동의</label>
+        <label htmlFor='marketing'>(선택) 마케팅 정보 수신 동의</label>
       </li>
     </Container>
   );
