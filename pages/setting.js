@@ -139,7 +139,7 @@ const SettingPage = ({ userInfo }) => {
         {renderLink('이용약관', '/agreements/terms-and-conditions')}
         {renderLink('개인정보처리방침', '/agreements/privacy-policy')}
         {renderRow(
-          '마케팅 수신동의',
+          '마케팅 정보 수신동의',
           <Toggle
             onToggle={handleMarketingAgreeChange}
             toggleState={marketingAgree}
