@@ -13,8 +13,8 @@ export default Button;
 
 const Container = styled.button`
   background: ${(props) =>
-    props.primary ? 'var(--blue500)' : 'var(--grey100)'};
-  color: ${(props) => (props.primary ? 'white' : 'var(--grey700)')};
+    props.primary ? 'var(--primary)' : 'var(--grey100)'};
+  color: ${(props) => (props.primary ? 'var(--grey900)' : 'var(--grey700)')};
   width: 100%;
   height: 60px;
   font-size: 15px;
