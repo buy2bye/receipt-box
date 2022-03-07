@@ -135,7 +135,7 @@ const SettingPage = ({ userInfo }) => {
             setShowChangePasswordPopup(true)
           )}
         <Divider />
-        {renderRow('카카오 문의하기', '준비중')}
+        {renderLink('카카오 문의하기', 'https://pf.kakao.com/_IxmxdJb/chat')}
         {renderLink('이용약관', '/agreements/terms-and-conditions')}
         {renderLink('개인정보처리방침', '/agreements/privacy-policy')}
         {renderRow(
