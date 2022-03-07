@@ -45,7 +45,7 @@ const SNSSingup = () => {
         <div className='inputLabel'>
           <input
             type='text'
-            placeholder='슬로우버드'
+            placeholder='바이투바이'
             id='nickname'
             onChange={handleChangeNickname}
           />
