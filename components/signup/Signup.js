@@ -54,18 +54,21 @@ const Signup = () => {
   };
 
   const handleCheckNickname = () => {
-    if (nickname) {
-      apiController()
-        .get('/api/auth/check-nickname', { nickname: nickname })
-        .then((res) => {
-          alert('사용 가능한 닉네임입니다.');
-        })
-        .catch(({ response: res }) => {
-          if (res.status === 409) {
-            alert('이미 등록된 닉네임입니다.');
-          }
-        });
+    if (!nickname) {
+      alert('닉네임을 입력해주세요.');
+      return;
     }
+
+    apiController()
+      .get('/api/auth/check-nickname', { nickname: nickname })
+      .then((res) => {
+        alert('사용 가능한 닉네임입니다.');
+      })
+      .catch(({ response: res }) => {
+        if (res.status === 409) {
+          alert('이미 등록된 닉네임입니다.');
+        }
+      });
   };
 
   const handleCheckPhone = () => {
