@@ -8,7 +8,6 @@ import { isBirthYear, isEmail, isPhone } from 'helpers/validate';
 import Button from 'components/button/Button';
 import Layout from 'components/layout/Layout';
 import Agreements from './Agreements';
-import { fabClasses } from '@mui/material';
 
 import 이용약관 from 'components/signup/agreements/이용약관';
 import 개인정보수집동의 from 'components/signup/agreements/개인정보수집동의';
