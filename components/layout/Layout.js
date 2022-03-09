@@ -13,6 +13,7 @@ const Layout = ({
   showLogo,
   hideSetting,
   topNavColor,
+  onBackClick
 }) => {
   useEffect(() => {
     const handleResize = () => {
@@ -28,7 +29,7 @@ const Layout = ({
 
   return (
     <Container hideTop={hideTop}>
-      {!hideTop && <TopNav topNavColor={topNavColor} />}
+      {!hideTop && <TopNav topNavColor={topNavColor} onBackClick={onBackClick}/>}
       {showLogo && <TopLogo hideSetting={hideSetting} />}
       <Body hideBottom={hideBottom} className={className}>
         {children}

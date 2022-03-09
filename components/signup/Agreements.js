@@ -6,7 +6,9 @@ const Agreements = ({
   marketingAgree,
   agreements,
   setAgreements,
+  onViewAgreement
 }) => {
+
   const onTotalAgreeChange = (e) => {
     setAgreements({
       ageLimit: e.target.checked,
@@ -41,35 +43,31 @@ const Agreements = ({
       <li>
         <input
           type='checkbox'
-          checked={agreements.privacy}
+          checked={agreements.termsAndConditions}
           onChange={(e) =>
-            setAgreements({ ...agreements, privacy: e.target.checked })
+            setAgreements({ ...agreements, termsAndConditions: e.target.checked })
           }
-          id='privacy'
+          id='termsAndConditions'
         />
-        <label htmlFor='privacy'>(필수) 이용약관 동의</label>
-        <Link href='/agreements/terms-and-conditions'>
-          <a>{`보기 >`}</a>
-        </Link>
+        <label htmlFor='termsAndConditions'>(필수) 이용약관 동의</label>
+        <a onClick={() => onViewAgreement('이용약관')}>{`보기 >`}</a>
       </li>
       <li>
         <input
           type='checkbox'
-          checked={agreements.termsAndConditions}
+          checked={agreements.privacy}
           onChange={(e) =>
             setAgreements({
               ...agreements,
-              termsAndConditions: e.target.checked,
+              privacy: e.target.checked,
             })
           }
-          id='termsAndConditions'
+          id='privacy'
         />
-        <label htmlFor='termsAndConditions'>
+        <label htmlFor='privacy'>
           (필수) 개인정보 수집 및 이용 동의
         </label>
-        <Link href='/agreements/privacy-agreement'>
-          <a>{`보기 >`}</a>
-        </Link>
+        <a onClick={() => onViewAgreement('개인정보수집동의')}>{`보기 >`}</a>
       </li>
       <li>
         <input

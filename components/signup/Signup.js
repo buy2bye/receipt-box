@@ -10,6 +10,9 @@ import Layout from 'components/layout/Layout';
 import Agreements from './Agreements';
 import { fabClasses } from '@mui/material';
 
+import 이용약관 from 'components/signup/agreements/이용약관'
+import 개인정보수집동의 from 'components/signup/agreements/개인정보수집동의'
+
 const Signup = () => {
   const router = useRouter();
 
@@ -27,6 +30,7 @@ const Signup = () => {
     privacy: false,
     marketing: false,
   });
+  const [agreementView, setAgreementView] = useState()
 
   const handleUserNameInput = (e) => {
     setUsername(e.target.value);
@@ -90,6 +94,15 @@ const Signup = () => {
       setGender(2);
     }
   };
+
+  const handleViewAgreement = (type) => {
+    console.log("handleView Agreement")
+    if (type === '이용약관') {
+      setAgreementView(이용약관)
+    } else {
+      setAgreementView(개인정보수집동의)
+    }
+  }
 
   const handleRegister = () => {
     if (!isEmail.test(username)) {
@@ -161,96 +174,110 @@ const Signup = () => {
   };
 
   return (
-    <Container hideBottom>
-      <Title>회원 가입</Title>
-      <SignupForm>
-        <TextInput>
-          <input
-            type='text'
-            placeholder=''
-            id='username'
-            onChange={handleUserNameInput}
-          />
-          <label htmlFor='username'>이메일</label>
-          <CheckButton onClick={handleCheckUsername}>중복확인</CheckButton>
-        </TextInput>
-        <TextInput>
-          <input
-            type='password'
-            placeholder='6자리 이상'
-            id='password'
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <label htmlFor='password'>비밀번호</label>
-        </TextInput>
-        <TextInput>
-          <input
-            type='password'
-            placeholder='6자리 이상'
-            id='password_check'
-            onChange={(e) => setPasswordCheck(e.target.value)}
-          />
-          <label htmlFor='password_check'>비밀번호 확인</label>
-        </TextInput>
-        <TextInput>
-          <input
-            type='text'
-            placeholder=''
-            id='nickname'
-            onChange={(e) => setNickname(e.target.value)}
-          />
-          <label htmlFor='nickname'>닉네임</label>
-          <CheckButton onClick={handleCheckNickname}>중복확인</CheckButton>
-        </TextInput>
-        <TextInput>
-          <input
-            type='number'
-            placeholder=''
-            id='birth_year'
-            onChange={(e) => setBirthYear(e.target.value)}
-          />
-          <label htmlFor='birth_year'>출생연도 4자리</label>
-        </TextInput>
-        <TextInput>
-          <input
-            type='number'
-            placeholder='등록완료 알림을 보내드려요'
-            id='phone'
-            onChange={(e) => setPhone(e.target.value)}
-          />
-          <label htmlFor='phone'>휴대폰 번호 (숫자만 입력)</label>
-          <PhoneAuthButton onClick={handleCheckPhone}>중복확인</PhoneAuthButton>
-        </TextInput>
-        <RadioGroup>
-          <div className='title'>성별</div>
-          <div className='genders'>
+    <>
+      <Container
+        hideBottom
+        onBackClick={agreementView ? () => setAgreementView() : null}
+      >
+        <Title>회원 가입</Title>
+        <SignupForm>
+          <TextInput>
             <input
-              type='radio'
-              id='gender_m'
-              name='gender'
-              value='m'
-              onChange={handleGenderChange}
+              type='text'
+              placeholder=''
+              id='username'
+              onChange={handleUserNameInput}
             />
-            <label htmlFor='gender_m'>남자</label>
+            <label htmlFor='username'>이메일</label>
+            <CheckButton onClick={handleCheckUsername}>중복확인</CheckButton>
+          </TextInput>
+          <TextInput>
             <input
-              type='radio'
-              id='gender_f'
-              name='gender'
-              value='f'
-              onChange={handleGenderChange}
+              type='password'
+              placeholder='6자리 이상'
+              id='password'
+              onChange={(e) => setPassword(e.target.value)}
             />
+            <label htmlFor='password'>비밀번호</label>
+          </TextInput>
+          <TextInput>
+            <input
+              type='password'
+              placeholder='6자리 이상'
+              id='password_check'
+              onChange={(e) => setPasswordCheck(e.target.value)}
+            />
+            <label htmlFor='password_check'>비밀번호 확인</label>
+          </TextInput>
+          <TextInput>
+            <input
+              type='text'
+              placeholder=''
+              id='nickname'
+              onChange={(e) => setNickname(e.target.value)}
+            />
+            <label htmlFor='nickname'>닉네임</label>
+            <CheckButton onClick={handleCheckNickname}>중복확인</CheckButton>
+          </TextInput>
+          <TextInput>
+            <input
+              type='number'
+              placeholder=''
+              id='birth_year'
+              onChange={(e) => setBirthYear(e.target.value)}
+            />
+            <label htmlFor='birth_year'>출생연도 4자리</label>
+          </TextInput>
+          <TextInput>
+            <input
+              type='number'
+              placeholder='등록완료 알림을 보내드려요'
+              id='phone'
+              onChange={(e) => setPhone(e.target.value)}
+            />
+            <label htmlFor='phone'>휴대폰 번호 (숫자만 입력)</label>
+            <PhoneAuthButton onClick={handleCheckPhone}>중복확인</PhoneAuthButton>
+          </TextInput>
+          <RadioGroup>
+            <div className='title'>성별</div>
+            <div className='genders'>
+              <input
+                type='radio'
+                id='gender_m'
+                name='gender'
+                value='m'
+                onChange={handleGenderChange}
+              />
+              <label htmlFor='gender_m'>남자</label>
+              <input
+                type='radio'
+                id='gender_f'
+                name='gender'
+                value='f'
+                onChange={handleGenderChange}
+              />
 
-            <label htmlFor='gender_f'>여자</label>
-          </div>
-        </RadioGroup>
-        <Agreements agreements={agreements} setAgreements={setAgreements} />
-      </SignupForm>
-      <Buttons>
-        <Button primary onClick={handleRegister}>
-          가입하기
-        </Button>
-      </Buttons>
-    </Container>
+              <label htmlFor='gender_f'>여자</label>
+            </div>
+          </RadioGroup>
+          <Agreements
+            agreements={agreements}
+            setAgreements={setAgreements}
+            onViewAgreement={handleViewAgreement}
+          />
+        </SignupForm>
+        <Buttons>
+          <Button primary onClick={handleRegister}>
+            가입하기
+          </Button>
+        </Buttons>
+        {agreementView && (
+          <AgreementWrapper>
+            {agreementView}
+          </AgreementWrapper>
+        )}
+      </Container>
+    </>
   );
 };
 
@@ -357,3 +384,9 @@ const PhoneAuthButton = styled(CheckButton)`
   /* background: var(--blue50);
   color: var(--blue600); */
 `;
+
+const AgreementWrapper = styled.div`
+  background: white;
+  width: 100%;
+  position: absolute;
+`
