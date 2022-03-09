@@ -23,7 +23,7 @@ const Container = styled.label`
     height: 0;
 
     :checked + span {
-      background-color: var(--blue500);
+      background-color: var(--primary);
 
       :before {
         -webkit-transform: translateX(24px);
