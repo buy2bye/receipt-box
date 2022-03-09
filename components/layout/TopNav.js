@@ -1,12 +1,19 @@
 import styled from '@emotion/styled';
 import { useRouter } from 'next/router';
 
-const TopNav = ({ topNavColor = 'transparent' }) => {
+const TopNav = ({
+  topNavColor = 'transparent',
+  onBackClick
+}) => {
   const router = useRouter();
 
   return (
     <Container background={topNavColor}>
-      <button onClick={() => router.back()}>
+      <button
+        onClick={() => {
+          onBackClick ? onBackClick() : router.back();
+        }}
+      >
         <img src='/icons/left-arrow.png' />
       </button>
     </Container>
