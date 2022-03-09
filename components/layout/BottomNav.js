@@ -4,20 +4,11 @@ import Link from 'next/link';
 const BottomNav = () => {
   return (
     <Container>
-      <div className='wrapper'>
-        <Link href='/'>
-          <button>
-            <img src='/icons/box.png' alt='receipt-box' />
-            나의 보관함
-          </button>
-        </Link>
-        <Link href='/upload'>
-          <button>
-            <img src='/icons/upload.png' alt='receipt-upload' />
-            영수증 등록
-          </button>
-        </Link>
-      </div>
+      <Link href='/upload'>
+        <UploadButton>
+          <img src='/icons/camera.png' alt='receipt-upload' />
+        </UploadButton>
+      </Link>
     </Container>
   );
 };
@@ -25,46 +16,27 @@ const BottomNav = () => {
 export default BottomNav;
 
 const Container = styled.div`
-  /* position: fixed;
-  bottom: 0;
-  left: 0; */
-  width: 100vw;
+  position: fixed;
+  bottom: 40px;
+  right: 40px;
+`;
+
+const UploadButton = styled.button`
+  background-color: var(--primary);
+  width: 68px;
+  height: 68px;
+  border-radius: 50%;
   display: flex;
-  padding: 24px;
   justify-content: center;
   align-items: center;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
 
-  .wrapper {
-    width: 100%;
-    display: flex;
-    justify-content: space-evenly;
-    background: white;
-    border: 1px solid var(--grey100);
-    border-radius: 8px;
-    padding: 4px 8px;
-    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  :active {
+    opacity: 0.5;
+    transition: 0.4s;
+  }
 
-    button {
-      width: 80px;
-      border-radius: 8px;
-      padding: 8px;
-      background: transparent;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 8px;
-      font-size: 12px;
-      font-weight: 300;
-      cursor: pointer;
-
-      :active {
-        opacity: 0.5;
-        transition: 0.4s;
-      }
-
-      img {
-        width: 60%;
-      }
-    }
+  img {
+    width: 70%;
   }
 `;

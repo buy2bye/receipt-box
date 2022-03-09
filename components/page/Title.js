@@ -10,7 +10,7 @@ const Container = styled.h2`
   width: 100%;
   text-align: left;
   font-size: 20px;
-  font-weight: 400;
+  font-weight: 500;
   color: black;
   text-align: ${(props) => props.align || 'left'};
 `;

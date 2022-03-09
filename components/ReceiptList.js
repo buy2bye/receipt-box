@@ -16,21 +16,23 @@ const ReceiptListPage = () => {
 
   if (!receiptList) return <Layout hideTop>loading...</Layout>;
 
-  if (receiptList.length < 1)
-    return (
-      <Layout hideTop showLogo>
-        <Title>등록된 영수증이 없어요</Title>
-        <Subtitle>온라인 주문내역 캡쳐화면도 등록할 수 있어요 🙂</Subtitle>
-        <Link href='/upload'>
-          <RegisterButton>영수증 등록하기</RegisterButton>
-        </Link>
-      </Layout>
-    );
-
   return (
     <Layout hideTop showLogo>
-      <Title>나의 영수증 보관함</Title>
+      {receiptList.length < 1 && (
+        <UploadGuideHeader>
+          <Title>내 물건 영수증을 등록해보세요 🙂</Title>
+          <Subtitle>온라인 주문내역 캡쳐화면도 등록할 수 있어요 </Subtitle>
+        </UploadGuideHeader>
+      )}
+      <Title>내 물건 List</Title>
       <ReceiptList>
+        {receiptList.length < 1 && (
+          <UploadGuide>
+            <h3>등록된 영수증이 없어요.</h3>
+            <span>아래 카메라 버튼을 눌러</span>
+            <span>영수증을 촬영하세요!</span>
+          </UploadGuide>
+        )}
         {receiptList.map((item, index) => (
           <Receipt item={item} key={index} />
         ))}
@@ -44,23 +46,40 @@ export default ReceiptListPage;
 const ReceiptList = styled.div`
   width: 100%;
   height: auto;
+  flex: 1;
   display: flex;
   flex-direction: column;
   gap: 16px;
+  position: relative;
 `;
 
-const RegisterButton = styled.a`
-  background: var(--blue500);
-  color: white;
-  width: 200px;
-  height: 60px;
-  font-size: 16px;
-  border-radius: 16px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+const UploadGuideHeader = styled.div`
+  width: 100%;
+  border-bottom: 1px solid var(--grey200);
+  margin-bottom: 20px;
+`;
+
+const UploadGuide = styled.div`
   position: absolute;
-  top: 50%;
+  top: 30%;
   left: 50%;
   transform: translate(-50%, -50%);
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  h3 {
+    margin: 0;
+    margin-bottom: 20px;
+    font-weight: 500;
+    font-size: 16px;
+    color: var(--grey600);
+  }
+
+  span {
+    font-size: 14px;
+    line-height: 20px;
+    color: var(--grey500);
+  }
 `;
