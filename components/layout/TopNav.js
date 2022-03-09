@@ -1,11 +1,11 @@
 import styled from '@emotion/styled';
 import { useRouter } from 'next/router';
 
-const TopNav = () => {
+const TopNav = ({ topNavColor = 'transparent' }) => {
   const router = useRouter();
 
   return (
-    <Container>
+    <Container background={topNavColor}>
       <button onClick={() => router.back()}>
         <img src='/icons/left-arrow.png' />
       </button>
@@ -22,7 +22,8 @@ const Container = styled.div`
   display: flex;
   align-items: center;
   position: sticky;
-  z-index: 10;
+  z-index: 1;
+  background: ${(props) => props.background};
 
   button {
     position: relative;

@@ -12,6 +12,7 @@ const Layout = ({
   hideBottom,
   showLogo,
   hideSetting,
+  topNavColor,
 }) => {
   useEffect(() => {
     const handleResize = () => {
@@ -27,7 +28,7 @@ const Layout = ({
 
   return (
     <Container hideTop={hideTop}>
-      {!hideTop && <TopNav />}
+      {!hideTop && <TopNav topNavColor={topNavColor} />}
       {showLogo && <TopLogo hideSetting={hideSetting} />}
       <Body hideBottom={hideBottom} className={className}>
         {children}

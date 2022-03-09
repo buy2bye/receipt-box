@@ -69,14 +69,14 @@ const ReceiptDetail = () => {
 
   if (!receipt) {
     return (
-      <Container hideBottom>
+      <Container hideBottom topNavColor='var(--grey100)'>
         <FullScreenSpinner />
       </Container>
     );
   }
 
   return (
-    <Container hideBottom>
+    <Container hideBottom topNavColor='var(--grey100)'>
       <TopBackground />
       <DeleteReceipt onClick={handleDeleteButtonClick}>삭제하기</DeleteReceipt>
       <DeleteReasons
@@ -144,17 +144,22 @@ const ReceiptDetail = () => {
             onClick={() => setReceiptZoomedIn(true)}
           />
         </li>
-        {receipt.linkList.map((link, index) => (
-          <a
-            href={link.url}
-            target='_blank'
-            rel='noreferrer'
-            className='external-link'
-            key={index}
-          >
-            {link.title}
-          </a>
-        ))}
+        {receipt.linkList.length > 0 && (
+          <ExternalLinkList>
+            <span>내 물건 관리 tip</span>
+            {receipt.linkList.map((link, index) => (
+              <a
+                href={link.url}
+                target='_blank'
+                rel='noreferrer'
+                className='external-link'
+                key={index}
+              >
+                {link.title}
+              </a>
+            ))}
+          </ExternalLinkList>
+        )}
       </Details>
 
       <ZoomReceipt
@@ -186,11 +191,11 @@ export default WrapAuthPage(ReceiptDetail);
 const Container = styled(Layout)``;
 
 const TopBackground = styled.div`
-  position: fixed;
-  top: 0;
+  position: absolute;
+  top: 0px;
   left: 0;
   width: 100vw;
-  height: 191px;
+  height: 146px;
   background: var(--grey100);
   z-index: 0;
   border-bottom: 1px solid var(--grey300);
@@ -205,6 +210,7 @@ const DeleteReceipt = styled.button`
   padding: 8px;
   color: var(--grey500);
   font-size: 13px;
+  z-index: 2;
 `;
 
 const NicknameWrapper = styled.div`
@@ -227,8 +233,9 @@ const NicknameWrapper = styled.div`
 `;
 
 const ThumbnailWrapper = styled.div`
-  width: 130px;
-  height: 130px;
+  width: 140px;
+  min-height: 140px;
+  height: 140px;
   background: white;
   text-align: center;
   display: flex;
@@ -307,13 +314,6 @@ const Details = styled.ul`
       border: 1px solid var(--grey300);
     }
   }
-
-  .external-link {
-    font-weight: 400;
-    text-decoration: underline;
-    text-underline-position: under;
-    color: var(--blue500);
-  }
 `;
 
 const ZoomReceipt = styled(BottomPopup)`
@@ -321,5 +321,28 @@ const ZoomReceipt = styled(BottomPopup)`
     width: calc(100vw - 48px);
     height: calc(100vw - 48px);
     object-fit: contain;
+  }
+`;
+
+const ExternalLinkList = styled.li`
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  span {
+    padding-bottom: 8px;
+  }
+
+  a {
+    background: var(--grey100);
+    color: var(--grey900);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 16px 8px;
+    font-weight: 400;
+    font-size: 15px;
+    border-radius: 16px;
   }
 `;
