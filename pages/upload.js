@@ -54,7 +54,7 @@ const UploadPage = () => {
 
   return (
     <Layout hideBottom>
-      <Title>영수증을 등록해 주세요</Title>
+      <Title>글자가 잘 보이도록 촬영해주세요</Title>
       <Thumbnail>
         {imageSrc ? (
           <img src={imageSrc} alt='receipt-thumbnail' />
@@ -78,13 +78,15 @@ const UploadPage = () => {
             <UploadButton htmlFor='upload-photo'>다시 올리기</UploadButton>
           </Button>
           <Button primary onClick={handleSubmitPhotoClick}>
-            다음
+            등록하기
           </Button>
         </ButtonsWrapper>
       ) : (
         <ButtonsWrapper>
           <Button primary>
-            <UploadButton primary htmlFor='upload-photo'>사진 올리기</UploadButton>
+            <UploadButton primary htmlFor='upload-photo'>
+              사진 올리기
+            </UploadButton>
           </Button>
         </ButtonsWrapper>
       )}
@@ -141,11 +143,11 @@ const ButtonsWrapper = styled.div`
 
 const UploadButton = styled.label`
   background: ${(props) =>
-    props.primary ? 'var(--blue500)' : 'var(--grey100)'};
-  color: ${(props) => (props.primary ? 'white' : 'var(--grey700)')};
+    props.primary ? 'var(--primary)' : 'var(--grey100)'};
+  color: ${(props) => (props.primary ? 'var(--grey900)' : 'var(--grey700)')};
   width: 100%;
   height: 60px;
-  font-size: 16px;
+  font-size: 15px;
   border-radius: 16px;
   display: flex;
   justify-content: center;
