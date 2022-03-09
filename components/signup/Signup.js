@@ -389,4 +389,5 @@ const AgreementWrapper = styled.div`
   background: white;
   width: 100%;
   position: absolute;
+  padding: 0 24px;
 `;
