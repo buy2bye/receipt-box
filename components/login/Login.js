@@ -83,8 +83,12 @@ const Login = () => {
       <Button primary onClick={handleLogin} isLoading={isLoginFetching}>
         로그인
       </Button>
+
       <Link href='/signup'>
         <div className='sign-up'>회원 가입하기</div>
+      </Link>
+      <Link href='https://pf.kakao.com/_IxmxdJb/chat'>
+        <div className='kakao-link'>고객센터 연락하기 ></div>
       </Link>
     </EmailLoginForm>
   );
@@ -207,9 +211,17 @@ const EmailLoginForm = styled.div`
     cursor: pointer;
     margin-top: 8px;
     font-size: 14px;
-    color: black;
-    font-weight: 300;
+    color: var(--grey900);
+    font-weight: 400;
     text-decoration: underline;
     text-underline-position: under;
+  }
+
+  .kakao-link {
+    cursor: pointer;
+    margin-top: 12px;
+    font-size: 12px;
+    color: var(--grey900);
+    font-weight: 300;
   }
 `;
