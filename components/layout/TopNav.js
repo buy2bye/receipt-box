@@ -22,6 +22,7 @@ const Container = styled.div`
   display: flex;
   align-items: center;
   position: sticky;
+  z-index: 10;
 
   button {
     position: relative;

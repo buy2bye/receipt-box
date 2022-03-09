@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 import receiptApi from 'api/receipt';
 import Button from 'components/button/Button';
+import FullScreenSpinner from 'components/common/FullScreenSpinner';
 import Layout from 'components/layout/Layout';
 import BottomPopup from 'components/popup/BottomPopup';
 import BottomTextInputPopup from 'components/popup/BottomTextInputPopup';
@@ -67,11 +68,16 @@ const ReceiptDetail = () => {
   };
 
   if (!receipt) {
-    return <Container>loading...</Container>;
+    return (
+      <Container hideBottom>
+        <FullScreenSpinner />
+      </Container>
+    );
   }
 
   return (
-    <Container>
+    <Container hideBottom>
+      <TopBackground />
       <DeleteReceipt onClick={handleDeleteButtonClick}>삭제하기</DeleteReceipt>
       <DeleteReasons
         visible={deleteReasonsShown}
@@ -100,7 +106,7 @@ const ReceiptDetail = () => {
         </ThumbnailWrapper>
       ) : (
         <ThumbnailWrapper>
-          <span>이미지를 준비해 드릴게요</span>
+          <span>상품 이미지를 준비해 드릴게요</span>
           <input
             type='file'
             id='upload-photo'
@@ -116,19 +122,19 @@ const ReceiptDetail = () => {
       <Details>
         <li>
           <span>상품명</span>
-          <span>{receipt.productName || '곧 업데이트 해드릴게요'}</span>
+          <span>{receipt.productName || '업데이트 후 알림을 드릴게요'}</span>
         </li>
         <li>
           <span>구매처</span>
-          <span>{receipt.productPlace || '곧 업데이트 해드릴게요'}</span>
+          <span>{receipt.productPlace || '업데이트 후 알림을 드릴게요'}</span>
         </li>
         <li>
           <span>구매가</span>
-          <span>{receipt.productPrice || '곧 업데이트 해드릴게요'}</span>
+          <span>{receipt.productPrice || '업데이트 후 알림을 드릴게요'}</span>
         </li>
         <li>
           <span>구매일자</span>
-          <span>{receipt.productDate || '곧 업데이트 해드릴게요'}</span>
+          <span>{receipt.productDate || '업데이트 후 알림을 드릴게요'}</span>
         </li>
         <li>
           <span>영수증</span>
@@ -179,6 +185,17 @@ export default WrapAuthPage(ReceiptDetail);
 
 const Container = styled(Layout)``;
 
+const TopBackground = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 191px;
+  background: var(--grey100);
+  z-index: 0;
+  border-bottom: 1px solid var(--grey300);
+`;
+
 const DeleteReceipt = styled.button`
   position: fixed;
   top: 10px;
@@ -186,15 +203,16 @@ const DeleteReceipt = styled.button`
   height: 32px;
   background: transparent;
   padding: 8px;
-  color: var(--grey400);
+  color: var(--grey500);
   font-size: 13px;
 `;
 
 const NicknameWrapper = styled.div`
-  margin-bottom: 16px;
+  margin-bottom: 32px;
   display: flex;
   align-items: center;
   gap: 8px;
+  z-index: 1;
 
   img {
     width: 14px;
@@ -209,9 +227,9 @@ const NicknameWrapper = styled.div`
 `;
 
 const ThumbnailWrapper = styled.div`
-  width: 160px;
-  min-height: 160px;
-  background: var(--grey100);
+  width: 130px;
+  height: 130px;
+  background: white;
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -220,6 +238,7 @@ const ThumbnailWrapper = styled.div`
   align-items: center;
   border-radius: 8px;
   position: relative;
+  border: 1px solid var(--grey300);
 
   img {
     width: 100%;
@@ -229,7 +248,7 @@ const ThumbnailWrapper = styled.div`
   }
 
   span {
-    padding: 16px;
+    padding: 20px;
     word-break: keep-all;
     color: var(--grey500);
     font-size: 13px;
@@ -283,8 +302,8 @@ const Details = styled.ul`
     }
 
     img {
-      width: 120px;
-      height: 120px;
+      width: 60px;
+      height: 60px;
       border: 1px solid var(--grey300);
     }
   }

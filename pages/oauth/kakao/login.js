@@ -32,11 +32,11 @@ const KakaoLogin = ({ code }) => {
     fetchLogin();
   }, []);
 
-  const renderSignup = () => {
-    return <SNSSingup />;
-  };
+  if (!fetchDone) {
+    return <FullScreenSpinner />;
+  }
 
-  return fetchDone ? renderSignup() : <FullScreenSpinner />;
+  return <SNSSingup />;
 };
 
 KakaoLogin.getInitialProps = (ctx) => {
