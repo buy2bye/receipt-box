@@ -47,5 +47,5 @@ const ModalBox = styled.div`
   border: none;
   border-radius: 12px;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-  background-color: var(--grey200);
+  background-color: white;
 `;

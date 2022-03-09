@@ -10,8 +10,8 @@ import Layout from 'components/layout/Layout';
 import Agreements from './Agreements';
 import { fabClasses } from '@mui/material';
 
-import 이용약관 from 'components/signup/agreements/이용약관'
-import 개인정보수집동의 from 'components/signup/agreements/개인정보수집동의'
+import 이용약관 from 'components/signup/agreements/이용약관';
+import 개인정보수집동의 from 'components/signup/agreements/개인정보수집동의';
 
 const Signup = () => {
   const router = useRouter();
@@ -30,7 +30,7 @@ const Signup = () => {
     privacy: false,
     marketing: false,
   });
-  const [agreementView, setAgreementView] = useState()
+  const [agreementView, setAgreementView] = useState();
 
   const handleUserNameInput = (e) => {
     setUsername(e.target.value);
@@ -96,13 +96,12 @@ const Signup = () => {
   };
 
   const handleViewAgreement = (type) => {
-    console.log("handleView Agreement")
     if (type === '이용약관') {
-      setAgreementView(이용약관)
+      setAgreementView(이용약관);
     } else {
-      setAgreementView(개인정보수집동의)
+      setAgreementView(개인정보수집동의);
     }
-  }
+  };
 
   const handleRegister = () => {
     if (!isEmail.test(username)) {
@@ -133,7 +132,11 @@ const Signup = () => {
       alert('올바른 전화번호를 입력해주세요.');
       return;
     }
-    if (!agreements.ageLimit || !agreements.termsAndConditions || !agreements.privacy) {
+    if (
+      !agreements.ageLimit ||
+      !agreements.termsAndConditions ||
+      !agreements.privacy
+    ) {
       alert('이용 약관 동의에 체크해주세요.');
       return;
     }
@@ -146,7 +149,7 @@ const Signup = () => {
         birth_year: birthYear,
         email: username,
         phone: phone,
-        marketing_agreement: agreements.marketing
+        marketing_agreement: agreements.marketing,
       })
       .then((res) => {
         alert('가입이 완료되었습니다.');
@@ -236,7 +239,9 @@ const Signup = () => {
               onChange={(e) => setPhone(e.target.value)}
             />
             <label htmlFor='phone'>휴대폰 번호 (숫자만 입력)</label>
-            <PhoneAuthButton onClick={handleCheckPhone}>중복확인</PhoneAuthButton>
+            <PhoneAuthButton onClick={handleCheckPhone}>
+              중복확인
+            </PhoneAuthButton>
           </TextInput>
           <RadioGroup>
             <div className='title'>성별</div>
@@ -271,11 +276,7 @@ const Signup = () => {
             가입하기
           </Button>
         </Buttons>
-        {agreementView && (
-          <AgreementWrapper>
-            {agreementView}
-          </AgreementWrapper>
-        )}
+        {agreementView && <AgreementWrapper>{agreementView}</AgreementWrapper>}
       </Container>
     </>
   );
@@ -389,4 +390,4 @@ const AgreementWrapper = styled.div`
   background: white;
   width: 100%;
   position: absolute;
-`
+`;

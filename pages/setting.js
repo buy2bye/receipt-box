@@ -12,6 +12,7 @@ import WithdrawalReasons from 'components/setting/WithdrawalReasons';
 import Toggle from 'components/common/Toggle';
 import BottomPopup from 'components/popup/BottomPopup';
 import Button from 'components/button/Button';
+import TextModal from 'components/modal/TextModal';
 
 const SettingPage = ({ userInfo }) => {
   const [showNicknameChangePopup, setShowNicknameChangePopup] = useState(false);
@@ -20,6 +21,9 @@ const SettingPage = ({ userInfo }) => {
   const [marketingAgree, setMarketingAgree] = useState(
     userInfo.marketing_agreement
   );
+  const [marketingAgreementUpdatedTime, setMarketingAgreementUpdatedTime] =
+    useState('');
+  const [marketingAgreeChanged, setMarketingAgreeChanged] = useState(false);
   const [showWithdrawalReasonsPopup, setShowWithdrawalReasonsPopup] =
     useState(false);
   const [nickname, setNickname] = useState(userInfo.nickname);
@@ -63,11 +67,19 @@ const SettingPage = ({ userInfo }) => {
       });
   };
 
+  useEffect(() => {
+    if (marketingAgreementUpdatedTime !== '') setMarketingAgreeChanged(true);
+  }, [marketingAgreementUpdatedTime]);
+
   const handleMarketingAgreeChange = (e) => {
     setMarketingAgree(e.target.checked);
-    apiController().post('/api/user/change-marketing-agreement', {
-      marketing_agreement: e.target.checked,
-    });
+    apiController()
+      .post('/api/user/change-marketing-agreement', {
+        marketing_agreement: e.target.checked,
+      })
+      .then(({ data }) => {
+        setMarketingAgreementUpdatedTime(data.marketing_agreement_updated_time);
+      });
   };
 
   const renderRow = (title, content) => {
@@ -136,7 +148,10 @@ const SettingPage = ({ userInfo }) => {
           )}
         <Divider />
         {renderLink('카카오 문의하기', 'https://pf.kakao.com/_IxmxdJb/chat')}
-        {renderLink('공지사항', 'https://deeply-bench-f2d.notion.site/35bc1ccf4e1245c4bdcec0d5a2e5084c')}
+        {renderLink(
+          '공지사항',
+          'https://deeply-bench-f2d.notion.site/35bc1ccf4e1245c4bdcec0d5a2e5084c'
+        )}
         {renderLink('이용약관', '/agreements/terms-and-conditions')}
         {renderLink('개인정보처리방침', '/agreements/privacy-policy')}
         {renderRow(
@@ -181,6 +196,17 @@ const SettingPage = ({ userInfo }) => {
         onSubmit={handleChangePasswordSubmit}
         confirmText='변경하기'
       />
+      <TextModal
+        isOpen={marketingAgreeChanged}
+        onCloseClick={() => setMarketingAgreeChanged(false)}
+      >
+        <span style={{ fontWeight: 500 }}>마케팅 정보 수신 동의 완료</span>
+        <br />
+        <br />
+        - 전송자: 바이투바이 <br />- 수신 동의 일시:{' '}
+        {marketingAgreementUpdatedTime.slice(0, 10)}
+        <br />- 처리내용: 수신 {marketingAgree ? '동의' : '거부'} 처리 완료
+      </TextModal>
     </>
   );
 };

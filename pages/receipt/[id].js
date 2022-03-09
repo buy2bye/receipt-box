@@ -32,8 +32,6 @@ const ReceiptDetail = () => {
     deleteReceipt,
   } = receiptApi();
 
-  console.log(usedDealInfoShown);
-
   const fetchReceipt = async () => {
     const { data } = await getReceiptDetail(id);
     setReceipt(data);
