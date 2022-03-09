@@ -34,8 +34,8 @@ const Container = styled.div`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 100%;
-  height: 100%;
+  width: 80%;
+  height: auto;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -43,6 +43,7 @@ const Container = styled.div`
 `;
 
 const ModalBox = styled.div`
+  position: relative;
   border: none;
   border-radius: 12px;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;

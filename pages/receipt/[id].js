@@ -1,11 +1,16 @@
 import styled from '@emotion/styled';
+
 import receiptApi from 'api/receipt';
 import Button from 'components/button/Button';
 import FullScreenSpinner from 'components/common/FullScreenSpinner';
+import Toggle from 'components/common/Toggle';
 import Layout from 'components/layout/Layout';
+import Modal from 'components/modal/Modal';
+import TextModal from 'components/modal/TextModal';
 import BottomPopup from 'components/popup/BottomPopup';
 import BottomTextInputPopup from 'components/popup/BottomTextInputPopup';
 import DeleteReasons from 'components/receipt/DeleteReasons';
+import apiController from 'helpers/apiController';
 import WrapAuthPage from 'helpers/AuthWrapper';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
@@ -18,12 +23,16 @@ const ReceiptDetail = () => {
   const [showNicknameChangePopup, setShowNicknameChangePopup] = useState(false);
   const [deleteReasonsShown, setDeleteReasonsShown] = useState(false);
   const [receiptZoomedIn, setReceiptZoomedIn] = useState(false);
+  const [usedDealAlert, setUsedDealAlert] = useState(false);
+  const [usedDealInfoShown, setUsedDealInfoShown] = useState(false);
   const {
     getReceiptDetail,
     changeReceiptNickname,
     updateProductImage,
     deleteReceipt,
   } = receiptApi();
+
+  console.log(usedDealInfoShown);
 
   const fetchReceipt = async () => {
     const { data } = await getReceiptDetail(id);
@@ -33,6 +42,13 @@ const ReceiptDetail = () => {
   useEffect(() => {
     fetchReceipt();
   }, []);
+
+  const handleUsedDealAlertToggle = (e) => {
+    setUsedDealAlert(e.target.checked);
+    apiController().post(`/api/receipt/${id}/set-used-deal-alert`, {
+      used_deal_alert: e.target.checked,
+    });
+  };
 
   const handleDeleteButtonClick = () => {
     setDeleteReasonsShown(true);
@@ -160,6 +176,18 @@ const ReceiptDetail = () => {
             ))}
           </ExternalLinkList>
         )}
+        <UsedDeal>
+          <span>
+            중고 거래 매칭 알림
+            <button className='info' onClick={() => setUsedDealInfoShown(true)}>
+              ?
+            </button>
+          </span>
+          <Toggle
+            onToggle={handleUsedDealAlertToggle}
+            toggleState={usedDealAlert}
+          />
+        </UsedDeal>
       </Details>
 
       <ZoomReceipt
@@ -182,6 +210,16 @@ const ReceiptDetail = () => {
         onSubmit={handleNicknameSubmit}
         confirmText='변경하기'
       />
+
+      <TextModal
+        isOpen={usedDealInfoShown}
+        onCloseClick={() => setUsedDealInfoShown(false)}
+      >
+        ‘중고 거래 매칭 알림’ 을 켜두면
+        <br /> 중고 구매를 희망하는 분이 나타났을 때 바이투바이가 알려드려요 🙂{' '}
+        <br />
+        <br /> 중고 판매를 원치 않으시면 꺼두시면 됩니다.
+      </TextModal>
     </Container>
   );
 };
@@ -303,7 +341,6 @@ const Details = styled.ul`
     width: 100%;
 
     > span:first-of-type {
-      display: block;
       min-width: 80px;
       font-weight: 500;
     }
@@ -345,4 +382,33 @@ const ExternalLinkList = styled.li`
     font-size: 15px;
     border-radius: 16px;
   }
+`;
+
+const UsedDeal = styled.li`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  span {
+    display: flex;
+    align-items: center;
+  }
+
+  .info {
+    padding: 0;
+    width: 14px;
+    height: 14px;
+    font-size: 10px;
+    margin-left: 6px;
+    border: 1px solid var(--grey600);
+    border-radius: 50%;
+    color: var(--grey600);
+  }
+`;
+
+const UsedDealInfo = styled.div`
+  width: calc(100% - 40px);
+  height: auto;
+  padding: 20px;
 `;

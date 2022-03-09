@@ -3,18 +3,7 @@ import styled from '@emotion/styled';
 
 import Modal from './Modal';
 
-const TextModal = ({
-  isOpen,
-  titleText,
-  descriptionText,
-  noText,
-  yesText,
-  hideNoButton,
-  isPortal,
-  onNoClick,
-  onYesClick,
-  onInputChange,
-}) => {
+const TextModal = ({ isOpen, isPortal, onCloseClick, children }) => {
   return (
     <Modal
       isOpen={isOpen}
@@ -26,23 +15,10 @@ const TextModal = ({
       }}
       isPortal={isPortal}
     >
-      {titleText && <TitleText>{titleText}</TitleText>}
-      <DescriptionText>{descriptionText}</DescriptionText>
-      <TextInput
-        type='text'
-        placeholder='새로운 닉네임을 입력하세요'
-        onChange={onInputChange}
-      />
-      <WrapButtons>
-        {!hideNoButton && (
-          <Button id='noBtn' variant='basic' onClick={onNoClick}>
-            {noText}
-          </Button>
-        )}
-        <Button id='yesBtn' variant='primary' onClick={onYesClick}>
-          {yesText}
-        </Button>
-      </WrapButtons>
+      <DescriptionText>{children}</DescriptionText>
+      <CloseButton id='noBtn' variant='basic' onClick={onCloseClick}>
+        <img src='/icons/close-button.png' alt='close-button' />
+      </CloseButton>
     </Modal>
   );
 };
@@ -55,35 +31,24 @@ TextModal.defaultProps = {
 
 export default TextModal;
 
-const TitleText = styled.div`
-  font-size: 16px;
-  margin-bottom: 8px;
-`;
-
 const DescriptionText = styled.div`
-  flex: 1;
+  padding-top: 32px;
+  width: 90%;
   font-size: 14px;
-  margin-bottom: 8px;
+  padding-bottom: 8px;
+  line-height: 1.4;
 `;
 
-const TextInput = styled.input`
-  width: 100%;
-  height: 40px;
-  margin-bottom: 8px;
-  border-radius: 4px;
-  border: 1px solid black;
-`;
+const CloseButton = styled.button`
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 16px;
+  height: 16px;
+  padding: 0;
 
-const WrapButtons = styled.div`
-  display: flex;
-  justify-content: center;
-  gap: 4px;
-`;
-
-const Button = styled.button`
-  background: white;
-  width: 100%;
-  height: 40px;
-  border: 1px solid black;
-  border-radius: 4px;
+  img {
+    width: 100%;
+    height: 100%;
+  }
 `;
