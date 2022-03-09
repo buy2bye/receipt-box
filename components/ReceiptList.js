@@ -9,12 +9,12 @@ import Receipt from './Receipt';
 
 const ReceiptListPage = () => {
   const [receiptList, setReceiptList] = useState();
-  const [totalCount, setTotalCount] = useState(0)
+  const [totalCount, setTotalCount] = useState(0);
   useEffect(() => {
     const { getReceipts } = receiptApi();
     getReceipts().then((data) => {
-      setReceiptList(data.data.receiptList)
-      setTotalCount(data.data.totalCount)
+      setReceiptList(data.data.receiptList);
+      setTotalCount(data.data.totalCount);
     });
   }, []);
 
@@ -94,9 +94,12 @@ const UploadGuide = styled.div`
 const HeaderContainer = styled.div`
   width: 100%;
   display: flex;
+  border-bottom: 1px solid var(--grey100);
+  margin-bottom: 16px;
 
   h2 {
     flex: 8;
+    padding-bottom: 16px;
   }
 
   span {
@@ -104,4 +107,4 @@ const HeaderContainer = styled.div`
     font-size: 14px;
     padding-bottom: 24px;
   }
-`
+`;
