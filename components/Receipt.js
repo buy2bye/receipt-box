@@ -7,7 +7,7 @@ const Receipt = ({ item }) => {
 
   const imageSkeleton = (
     <div className='thumb'>
-      <span>이미지를 준비해 드릴게요</span>
+      <span>등록 중</span>
     </div>
   );
   const imageWrapper = (
@@ -38,26 +38,25 @@ export default Receipt;
 
 const Container = styled.div`
   cursor: pointer;
-  border-bottom: 1px solid var(--grey200);
   width: 100%;
-  height: 120px;
+  height: 104px;
   display: flex;
-  padding-bottom: 16px;
   gap: 16px;
 
   .thumb {
     height: 104px;
     width: 104px;
-    background: var(--grey100);
+    background: var(white);
     text-align: center;
     display: flex;
     justify-content: center;
     align-items: center;
     border-radius: 8px;
+    border: 1px solid var(--grey100);
 
     img {
-      width: 100%;
-      height: 100%;
+      width: 80%;
+      height: 80%;
       object-fit: cover;
       border-radius: 8px;
     }
@@ -88,7 +87,6 @@ const Container = styled.div`
     color: var(--grey600);
 
     b {
-      color: black;
       font-weight: 400;
     }
   }

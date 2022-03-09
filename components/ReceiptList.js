@@ -9,9 +9,13 @@ import Receipt from './Receipt';
 
 const ReceiptListPage = () => {
   const [receiptList, setReceiptList] = useState();
+  const [totalCount, setTotalCount] = useState(0)
   useEffect(() => {
     const { getReceipts } = receiptApi();
-    getReceipts().then((data) => setReceiptList(data.data.receiptList));
+    getReceipts().then((data) => {
+      setReceiptList(data.data.receiptList)
+      setTotalCount(data.data.totalCount)
+    });
   }, []);
 
   if (!receiptList) return <Layout hideTop>loading...</Layout>;
@@ -24,7 +28,10 @@ const ReceiptListPage = () => {
           <Subtitle>온라인 주문내역 캡쳐화면도 등록할 수 있어요 </Subtitle>
         </UploadGuideHeader>
       )}
-      <Title>내 물건 List</Title>
+      <HeaderContainer>
+        <Title>내 물건 List</Title>
+        <span>전체 {totalCount}</span>
+      </HeaderContainer>
       <ReceiptList>
         {receiptList.length < 1 && (
           <UploadGuide>
@@ -49,7 +56,7 @@ const ReceiptList = styled.div`
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 8px;
   position: relative;
 `;
 
@@ -83,3 +90,18 @@ const UploadGuide = styled.div`
     color: var(--grey500);
   }
 `;
+
+const HeaderContainer = styled.div`
+  width: 100%;
+  display: flex;
+
+  h2 {
+    flex: 8;
+  }
+
+  span {
+    flex 2;
+    font-size: 14px;
+    padding-bottom: 24px;
+  }
+`
