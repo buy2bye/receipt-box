@@ -139,6 +139,9 @@ const Signup = () => {
       alert('이용 약관 동의에 체크해주세요.');
       return;
     }
+
+    const BzTrackingId = localStorage.getItem('bz_tracking_id');
+
     apiController()
       .post('/api/auth/signup', {
         username: username,
@@ -149,6 +152,7 @@ const Signup = () => {
         email: username,
         phone: phone,
         marketing_agreement: agreements.marketing,
+        bz_tracking_id: BzTrackingId || '',
       })
       .then((res) => {
         alert('가입이 완료되었습니다.');

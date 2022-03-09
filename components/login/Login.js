@@ -88,7 +88,7 @@ const Login = () => {
         <div className='sign-up'>회원 가입하기</div>
       </Link>
       <Link href='https://pf.kakao.com/_IxmxdJb/chat'>
-        <div className='kakao-link'>고객센터 연락하기 ></div>
+        <div className='kakao-link'>고객센터 연락하기{' >'}</div>
       </Link>
     </EmailLoginForm>
   );
