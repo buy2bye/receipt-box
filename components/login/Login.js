@@ -90,7 +90,7 @@ const Login = () => {
   );
 
   return (
-    <Container hideTop hideBottom>
+    <Container hideTop showLogo hideSetting hideBottom>
       <Tutorial className='login__tutorial' />
       {isEmailLogin ? renderEmailLogin() : renderLoginMain()}
     </Container>

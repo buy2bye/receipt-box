@@ -1,17 +1,19 @@
 import styled from '@emotion/styled';
 import Link from 'next/link';
 
-const TopLogo = () => {
+const TopLogo = ({ hideSetting }) => {
   return (
     <Container>
       <Logo>
         <img src='/icons/logo_300.png' alt='buy2bye logo' />
       </Logo>
-      <Link href='/setting'>
-        <Setting>
-          <img src='/icons/setting.png' alt='setting' />
-        </Setting>
-      </Link>
+      {!hideSetting && (
+        <Link href='/setting'>
+          <Setting>
+            <img src='/icons/setting.png' alt='setting' />
+          </Setting>
+        </Link>
+      )}
     </Container>
   );
 };

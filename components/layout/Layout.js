@@ -5,7 +5,14 @@ import BottomNav from './BottomNav';
 import TopLogo from './TopLogo';
 import TopNav from './TopNav';
 
-const Layout = ({ children, className, hideTop, hideBottom, showLogo }) => {
+const Layout = ({
+  children,
+  className,
+  hideTop,
+  hideBottom,
+  showLogo,
+  hideSetting,
+}) => {
   useEffect(() => {
     const handleResize = () => {
       const vh = window.innerHeight * 0.01;
@@ -21,7 +28,7 @@ const Layout = ({ children, className, hideTop, hideBottom, showLogo }) => {
   return (
     <Container hideTop={hideTop}>
       {!hideTop && <TopNav />}
-      {showLogo && <TopLogo />}
+      {showLogo && <TopLogo hideSetting={hideSetting} />}
       <Body hideBottom={hideBottom} className={className}>
         {children}
       </Body>
