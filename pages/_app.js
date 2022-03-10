@@ -1,7 +1,36 @@
+import Script from 'next/script';
 import '../styles/globals.css';
 
 const ReceiptApp = ({ Component, pageProps }) => {
-  return <Component {...pageProps} />;
+  return (
+    <>
+      <Script
+        dangerouslySetInnerHTML={{
+          __html: `
+(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-TB3FVSD');
+`,
+        }}
+      />
+      <Script
+        async
+        src='https://www.googletagmanager.com/gtag/js?id=G-C3Y2KNT4G2'
+      />
+      <Script
+        dangerouslySetInnerHTML={{
+          __html: `window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-C3Y2KNT4G2');`,
+        }}
+      />
+      <Component {...pageProps} />
+    </>
+  );
 };
 
 ReceiptApp.getInitialProps = async ({ Component, ctx }) => {
