@@ -6,11 +6,17 @@ const Tutorial = ({ className }) => {
     <Container className={className}>
       <Swiper slidesPerView={1}>
         <SwiperSlide>
-          <img src='/tutorial1.png' alt='tutorial1' />
+          <img src='/tutorial_1.jpg' alt='tutorial1' />
         </SwiperSlide>
-        <SwiperSlide>Tutorial Slide 2</SwiperSlide>
-        <SwiperSlide>Tutorial Slide 3</SwiperSlide>
-        <SwiperSlide>Tutorial Slide 4</SwiperSlide>
+        <SwiperSlide>
+          <img src='/tutorial_2.jpg' alt='tutorial2' />
+        </SwiperSlide>
+        <SwiperSlide>
+          <img src='/tutorial_3.jpg' alt='tutorial3' />
+        </SwiperSlide>
+        <SwiperSlide>
+          <img src='/tutorial_4.jpg' alt='tutorial4' />
+        </SwiperSlide>
       </Swiper>
     </Container>
   );
