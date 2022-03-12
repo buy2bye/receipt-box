@@ -5,6 +5,7 @@ const ReceiptApp = ({ Component, pageProps }) => {
   return (
     <>
       <Script
+        id='gtm-initialize'
         dangerouslySetInnerHTML={{
           __html: `
 (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -16,10 +17,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         }}
       />
       <Script
+        id='gtm-import'
         async
         src='https://www.googletagmanager.com/gtag/js?id=G-C3Y2KNT4G2'
       />
       <Script
+        id='gtag-initialize'
         dangerouslySetInnerHTML={{
           __html: `window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
