@@ -22,7 +22,7 @@ const KakaoLogin = ({ code }) => {
 
     const { data: userInfo } = await apiController().get('/api/user/info');
     if (userInfo.nickname) {
-      router.push('/');
+      router.replace('/');
     } else {
       setFetchDone(true);
     }
