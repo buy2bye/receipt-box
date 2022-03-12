@@ -35,6 +35,7 @@ const ReceiptDetail = () => {
   const fetchReceipt = async () => {
     const { data } = await getReceiptDetail(id);
     setReceipt(data);
+    setUsedDealAlert(data.usedDealAlert);
   };
 
   useEffect(() => {
