@@ -34,7 +34,7 @@ const ReceiptListPage = () => {
           <Subtitle>온라인 주문내역 캡쳐화면도 등록할 수 있어요 </Subtitle>
         </UploadGuideHeader>
       )}
-      <HeaderContainer>
+      <HeaderContainer showBorder={receiptList.length > 0}>
         <Title>내 물건 리스트</Title>
         <span>전체 {totalCount}</span>
       </HeaderContainer>
@@ -100,6 +100,8 @@ const HeaderContainer = styled.div`
   width: 100%;
   display: flex;
   margin-bottom: 16px;
+  border-bottom: ${(props) =>
+    props.showBorder ? '1px solid var(--grey200)' : 'none'};
 
   h2 {
     flex: 8;
