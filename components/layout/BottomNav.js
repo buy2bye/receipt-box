@@ -37,7 +37,7 @@ const BottomNav = () => {
         accept='image/*'
         onChange={handleOnImageChange}
       />
-      <UploadButton htmlFor='upload-photo'>
+      <UploadButton htmlFor='upload-photo' id='upload-photo-label'>
         <img src='/icons/camera.png' alt='receipt-upload' />
       </UploadButton>
     </Container>
