@@ -403,6 +403,7 @@ const UsedDeal = styled.li`
     border: 1px solid var(--grey600);
     border-radius: 50%;
     color: var(--grey600);
+    margin-right: 16px;
   }
 `;
 
