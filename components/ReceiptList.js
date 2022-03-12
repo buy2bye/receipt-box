@@ -29,7 +29,7 @@ const ReceiptListPage = () => {
         </UploadGuideHeader>
       )}
       <HeaderContainer>
-        <Title>내 물건 List</Title>
+        <Title>내 물건 리스트</Title>
         <span>전체 {totalCount}</span>
       </HeaderContainer>
       <ReceiptList>
