@@ -8,7 +8,7 @@ const Container = styled.h3`
   margin: -8px 0 24px 0;
   width: 100%;
   text-align: left;
-  font-size: 16px;
+  font-size: 14px;
   color: var(--grey700);
   font-weight: 300;
 `;
