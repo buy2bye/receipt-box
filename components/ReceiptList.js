@@ -10,6 +10,7 @@ import Receipt from './Receipt';
 const ReceiptListPage = () => {
   const [receiptList, setReceiptList] = useState();
   const [totalCount, setTotalCount] = useState(0);
+
   useEffect(() => {
     const { getReceipts } = receiptApi();
     getReceipts().then((data) => {
@@ -74,7 +75,7 @@ const UploadGuideHeader = styled.div`
 
 const UploadGuide = styled.div`
   position: absolute;
-  top: 30%;
+  top: 40%;
   left: 50%;
   transform: translate(-50%, -50%);
   width: 100%;
@@ -85,7 +86,6 @@ const UploadGuide = styled.div`
   h3 {
     margin: 0;
     margin-bottom: 20px;
-    font-weight: 500;
     font-size: 16px;
     color: var(--grey600);
   }
@@ -100,7 +100,6 @@ const UploadGuide = styled.div`
 const HeaderContainer = styled.div`
   width: 100%;
   display: flex;
-  border-bottom: 1px solid var(--grey100);
   margin-bottom: 16px;
 
   h2 {
