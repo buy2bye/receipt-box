@@ -200,7 +200,9 @@ const SettingPage = ({ userInfo }) => {
         isOpen={marketingAgreeChanged}
         onCloseClick={() => setMarketingAgreeChanged(false)}
       >
-        <span style={{ fontWeight: 500 }}>마케팅 정보 수신 동의 완료</span>
+        <span style={{ fontWeight: 500 }}>
+          마케팅 정보 수신 {marketingAgree ? '동의' : '거부'} 완료
+        </span>
         <br />
         <br />
         - 전송자: 바이투바이 <br />- 수신 동의 일시:{' '}
