@@ -18,7 +18,12 @@ const ReceiptListPage = () => {
     });
   }, []);
 
-  if (!receiptList) return <Layout hideTop>loading...</Layout>;
+  if (!receiptList)
+    return (
+      <Layout hideTop showLogo>
+        loading...
+      </Layout>
+    );
 
   return (
     <Layout hideTop showLogo>
