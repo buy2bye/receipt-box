@@ -327,6 +327,7 @@ const TextInput = styled.div`
     ::placeholder {
       color: var(--grey400);
       font-weight: 300;
+      font-size: 14px;
     }
   }
 `;
