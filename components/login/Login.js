@@ -185,7 +185,7 @@ const EmailLoginForm = styled.div`
       margin-bottom: 12px;
       border-radius: 16px;
       padding: 24px 12px 0 12px;
-      font-size: 15px;
+      font-size: 16px;
       font-weight: 400;
       border: none;
       border: 1px solid var(--grey400);
