@@ -376,10 +376,10 @@ const ExternalLinkList = styled.li`
     justify-content: center;
     align-items: center;
     width: 100%;
-    padding: 16px 8px;
-    font-weight: 400;
-    font-size: 15px;
-    border-radius: 16px;
+    padding: 12px 8px;
+    font-weight: 300;
+    font-size: 14px;
+    border-radius: 8px;
   }
 `;
 

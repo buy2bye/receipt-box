@@ -32,17 +32,17 @@ TextModal.defaultProps = {
 export default TextModal;
 
 const DescriptionText = styled.div`
-  padding-top: 32px;
+  padding: 8px 0;
   width: 90%;
   font-size: 14px;
-  padding-bottom: 8px;
   line-height: 1.4;
+  word-break: keep-all;
 `;
 
 const CloseButton = styled.button`
   position: absolute;
-  top: 20px;
-  right: 20px;
+  top: 16px;
+  right: 16px;
   width: 16px;
   height: 16px;
   padding: 0;
