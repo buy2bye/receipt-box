@@ -9,8 +9,8 @@ const Container = styled.h2`
   padding-bottom: 24px;
   width: 100%;
   text-align: left;
-  font-size: 20px;
-  font-weight: 500;
+  font-size: 18px;
+  font-weight: 400;
   color: black;
   text-align: ${(props) => props.align || 'left'};
 `;
