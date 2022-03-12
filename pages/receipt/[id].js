@@ -376,7 +376,8 @@ const ExternalLinkList = styled.li`
     justify-content: center;
     align-items: center;
     width: 100%;
-    padding: 12px 8px;
+    max-width: 270px;
+    padding: 12px;
     font-weight: 300;
     font-size: 14px;
     border-radius: 8px;
