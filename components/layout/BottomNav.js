@@ -68,6 +68,6 @@ const UploadButton = styled.label`
   }
 
   img {
-    width: 70%;
+    width: 60%;
   }
 `;
