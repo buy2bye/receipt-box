@@ -43,6 +43,13 @@ input[type='file'] {
   display: none;
 }
 
+input[type='text']:focus,
+input[type='password']:focus,
+input[type='number']:focus {
+  border: 1px solid var(--primary) !important;
+  outline: none;
+}
+
 .swiper-wrapper {
   display: -webkit-inline-box;
   width: 100%;
