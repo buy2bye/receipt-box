@@ -185,6 +185,7 @@ const ReceiptDetail = () => {
           <Toggle
             onToggle={handleUsedDealAlertToggle}
             toggleState={usedDealAlert}
+            id='used-deal-switch'
           />
         </UsedDeal>
       </Details>

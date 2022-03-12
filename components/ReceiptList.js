@@ -99,18 +99,19 @@ const UploadGuide = styled.div`
 const HeaderContainer = styled.div`
   width: 100%;
   display: flex;
-  margin-bottom: 16px;
+  align-items: flex-end;
+  margin-bottom: 12px;
   border-bottom: ${(props) =>
     props.showBorder ? '1px solid var(--grey200)' : 'none'};
+  padding-bottom: 12px;
 
   h2 {
     flex: 8;
-    padding-bottom: 8px;
+    padding-bottom: 0;
   }
 
   span {
     flex: 2;
     font-size: 14px;
-    padding-bottom: 16px;
   }
 `;
