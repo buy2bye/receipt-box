@@ -105,6 +105,7 @@ export default Login;
 
 const Container = styled(Layout)`
   overflow-x: hidden;
+  padding: 0 0 24px 0;
 
   .login__tutorial {
     width: 100%;
@@ -117,6 +118,7 @@ const Container = styled(Layout)`
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    padding: 0 24px;
   }
 
   .login__login-button {
@@ -163,6 +165,7 @@ const EmailLoginForm = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 0 24px;
 
   .inputLabel {
     position: relative;
