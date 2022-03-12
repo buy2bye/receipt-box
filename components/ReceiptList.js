@@ -27,6 +27,7 @@ const ReceiptListPage = () => {
 
   return (
     <Layout hideTop showLogo>
+      <span>이건 테트 브랜치임</span>
       {receiptList.length < 1 && (
         <UploadGuideHeader>
           <Title>내 물건 영수증을 등록해보세요 🙂</Title>
