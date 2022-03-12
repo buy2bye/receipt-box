@@ -1,4 +1,3 @@
-import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import { useEffect } from 'react';
 import BottomNav from './BottomNav';
@@ -13,7 +12,7 @@ const Layout = ({
   showLogo,
   hideSetting,
   topNavColor,
-  onBackClick
+  onBackClick,
 }) => {
   useEffect(() => {
     const handleResize = () => {
@@ -29,7 +28,9 @@ const Layout = ({
 
   return (
     <Container hideTop={hideTop}>
-      {!hideTop && <TopNav topNavColor={topNavColor} onBackClick={onBackClick}/>}
+      {!hideTop && (
+        <TopNav topNavColor={topNavColor} onBackClick={onBackClick} />
+      )}
       {showLogo && <TopLogo hideSetting={hideSetting} />}
       <Body hideBottom={hideBottom} className={className}>
         {children}

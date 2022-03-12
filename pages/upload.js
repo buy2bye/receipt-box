@@ -1,5 +1,5 @@
 import WrapAuthPage from 'helpers/AuthWrapper';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import styled from '@emotion/styled';
 import Title from 'components/page/Title';
 import receiptApi from 'api/receipt';
@@ -7,11 +7,12 @@ import Layout from 'components/layout/Layout';
 import Button from 'components/button/Button';
 import BottomTextInputPopup from 'components/popup/BottomTextInputPopup';
 import { useRouter } from 'next/router';
+import { ImageContext } from 'contexts/ImageContext';
 
 const UploadPage = () => {
+  const { imageSrc, changeImageSrc, imageFile, changeImageFile } =
+    useContext(ImageContext);
   const router = useRouter();
-  const [imageSrc, setImageSrc] = useState('');
-  const [imageFile, setImageFile] = useState();
   const [nickname, setNickname] = useState('');
   const [showPopup, setShowPopup] = useState(false);
 
@@ -21,12 +22,12 @@ const UploadPage = () => {
 
     reader.onload = function (e) {
       // 썸네일 이미지 경로 설정
-      setImageSrc(e.target.result);
+      changeImageSrc(e.target.result);
     };
 
     if (files[0]) {
       reader.readAsDataURL(files[0]);
-      setImageFile(files[0]);
+      changeImageFile(files[0]);
     }
   };
 

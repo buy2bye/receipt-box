@@ -1,3 +1,4 @@
+import { ImageProvider } from 'contexts/ImageContext';
 import Script from 'next/script';
 import '../styles/globals.css';
 
@@ -31,7 +32,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   gtag('config', 'G-C3Y2KNT4G2');`,
         }}
       />
-      <Component {...pageProps} />
+      <ImageProvider>
+        <Component {...pageProps} />
+      </ImageProvider>
     </>
   );
 };
