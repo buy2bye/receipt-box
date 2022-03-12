@@ -105,12 +105,12 @@ const HeaderContainer = styled.div`
 
   h2 {
     flex: 8;
-    padding-bottom: 16px;
+    padding-bottom: 8px;
   }
 
   span {
-    flex 2;
+    flex: 2;
     font-size: 14px;
-    padding-bottom: 24px;
+    padding-bottom: 16px;
   }
 `;
