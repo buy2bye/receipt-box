@@ -39,13 +39,13 @@ export default Receipt;
 const Container = styled.div`
   cursor: pointer;
   width: 100%;
-  height: 104px;
+  height: 90px;
   display: flex;
   gap: 16px;
 
   .thumb {
-    height: 104px;
-    width: 104px;
+    height: 90px;
+    width: 90px;
     background: var(white);
     text-align: center;
     display: flex;
@@ -72,7 +72,7 @@ const Container = styled.div`
   .contents {
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
+    justify-content: center;
   }
 
   .name {
@@ -82,6 +82,7 @@ const Container = styled.div`
   }
 
   .date {
+    margin-top: 8px;
     font-size: 14px;
     font-weight: 300;
     color: var(--grey600);
