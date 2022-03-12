@@ -42,6 +42,7 @@ const Container = styled.div`
   .swiper {
     width: 100%;
     height: 100%;
+    padding-bottom: 32px;
   }
 
   .swiper-slide {
@@ -69,5 +70,13 @@ const Container = styled.div`
     width: 100%;
     height: 100%;
     object-fit: contain;
+  }
+
+  .swiper-pagination-bullet {
+    background: var(--grey600);
+  }
+
+  .swiper-pagination-bullet-active {
+    background: var(--grey900);
   }
 `;
