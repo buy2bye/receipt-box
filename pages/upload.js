@@ -78,7 +78,11 @@ const UploadPage = () => {
           <Button>
             <UploadButton htmlFor='upload-photo'>다시 올리기</UploadButton>
           </Button>
-          <Button primary onClick={handleSubmitPhotoClick}>
+          <Button
+            primary
+            onClick={handleSubmitPhotoClick}
+            className='receipt-register'
+          >
             등록하기
           </Button>
         </ButtonsWrapper>
@@ -100,6 +104,7 @@ const UploadPage = () => {
         onInputChange={handleNicknameChange}
         onSubmit={handleUpload}
         confirmText='등록하기'
+        buttonClass='receipt-register-confirm'
       />
     </Layout>
   );

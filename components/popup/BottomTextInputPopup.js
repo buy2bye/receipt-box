@@ -7,6 +7,7 @@ const BottomTextInputPopup = ({
   visible,
   setVisible,
   className,
+  buttonClass,
   title,
   onInputChange,
   onSubmit,
@@ -40,7 +41,12 @@ const BottomTextInputPopup = ({
         onKeyDown={handleKeyDown}
         value={value}
       />
-      <Button primary onClick={handleClick} isLoading={isFetching}>
+      <Button
+        className={buttonClass}
+        primary
+        onClick={handleClick}
+        isLoading={isFetching}
+      >
         {confirmText}
       </Button>
     </Container>
