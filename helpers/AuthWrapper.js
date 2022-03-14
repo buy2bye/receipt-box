@@ -19,12 +19,15 @@ const WrapAuthPage = (WrapperComponent, isLoginPage, isSNSSignupPage) => {
     } else if (isLoginPage && accessToken && refreshToken) {
       redirect('/', ctx);
     } else if (!isLoginPage) {
-      const { data: userInfo } = await apiController({ ctx: ctx }).get(
+      const res = await apiController({ ctx: ctx }).get(
         '/api/user/info'
       );
-      if (!isSNSSignupPage && !userInfo.username && !userInfo.nickname) {
-        // SNS 유저인데 닉네임 설정을 안했다
-        redirect('/snssignup', ctx);
+      if (res) {
+        const { data: userInfo } = res
+        if (!isSNSSignupPage && !userInfo.username && !userInfo.nickname) {
+          // SNS 유저인데 닉네임 설정을 안했다
+          redirect('/snssignup', ctx);
+        }
       }
     }
 
