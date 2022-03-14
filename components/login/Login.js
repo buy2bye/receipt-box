@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/router';
 import styled from '@emotion/styled';
 import Tutorial from '/components/login/Tutorial';
-import { KAKAO_AUTH_URL } from 'helpers/oauth/kakao';
+
 import apiController from 'helpers/apiController';
 import { setCookie } from 'helpers/cookie';
 import Link from 'next/link';
@@ -18,6 +18,11 @@ const Login = () => {
   const [isLoginFetching, setIsLoginFetching] = useState(false);
 
   const handleKakaoLogin = () => {
+    const CLIENT_ID = process.env.NEXT_PUBLIC_KAKAO_CLIENT_ID;
+    const REDIRECT_URI = `http://${window.location.host}/oauth/kakao/login`;
+
+    const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=code`;
+
     window.location.href = KAKAO_AUTH_URL;
   };
 
