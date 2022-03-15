@@ -11,24 +11,26 @@ const KakaoLogin = ({ code }) => {
   const router = useRouter();
   const [fetchDone, setFetchDone] = useState(false);
 
-  const fetchLogin = async () => {
-    const { data: tokenData } = await apiController({ isAuth: false }).post(
-      '/api/auth/kakao-login',
-      { code }
-    );
-
-    setCookie('accessToken', tokenData.accessToken);
-    setCookie('refreshToken', tokenData.refreshToken);
-
-    const { data: userInfo } = await apiController().get('/api/user/info');
-    if (userInfo.nickname) {
-      router.replace('/');
-    } else {
-      setFetchDone(true);
-    }
-  };
-
   useEffect(() => {
+    const BzTrackingId = localStorage.getItem('bz_tracking_id');
+
+    const fetchLogin = async () => {
+      const { data: tokenData } = await apiController({ isAuth: false }).post(
+        '/api/auth/kakao-login',
+        { code: code, bz_tracking_id: BzTrackingId }
+      );
+
+      setCookie('accessToken', tokenData.accessToken);
+      setCookie('refreshToken', tokenData.refreshToken);
+
+      const { data: userInfo } = await apiController().get('/api/user/info');
+      if (userInfo.nickname) {
+        router.replace('/');
+      } else {
+        setFetchDone(true);
+      }
+    };
+
     fetchLogin();
   }, []);
 
