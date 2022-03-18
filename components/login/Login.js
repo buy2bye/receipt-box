@@ -55,7 +55,7 @@ const Login = () => {
     <div className='login-buttons'>
       <button className='login__login-button kakao' onClick={handleKakaoLogin}>
         <img className='kakao-icon' src='icons/kakao.svg' alt='kakao-icon' />
-        <span>카카오로 시작하기</span>
+        <span>카카오루 시작하기</span>
       </button>
       <button className='login__login-button normal' onClick={handleEmailLogin}>
         <span>이메일로 시작하기</span>
