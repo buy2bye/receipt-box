@@ -8,6 +8,12 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 
 const Tutorial = ({ className }) => {
+  const params = {
+    autoplay: {
+      delay: 1000,
+      disableOninteraction: false
+    },
+  }
   return (
     <Container className={className}>
       <Swiper pagination modules={[Pagination]} slidesPerView={1}>
