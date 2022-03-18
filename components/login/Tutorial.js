@@ -1,23 +1,21 @@
 import styled from '@emotion/styled';
-import { Pagination } from 'swiper';
+import { Navigation, Pagination, Autoplay } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import React from 'react';
 
 // Import Swiper styles
 import 'swiper/css/bundle';
 import 'swiper/css';
 import 'swiper/css/pagination';
+import 'swiper/css/navigation';
 
 const Tutorial = ({ className }) => {
-  const params = {
-    autoplay: {
-      delay: 1000,
-      disableOninteraction: false
-    },
-  }
   return (
     <Container className={className}>
-      <Swiper pagination modules={[Pagination]} slidesPerView={1}>
+      <Swiper
+        pagination modules={[Pagination]}
+        slidesPerView={1}
+        navigation
+      >
         <SwiperSlide>
           <img src='/tutorial_1.jpg' alt='tutorial1' />
         </SwiperSlide>
