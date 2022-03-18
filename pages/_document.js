@@ -9,7 +9,10 @@ class MyDocument extends Document {
   render() {
     return (
       <Html>
-        <Head />
+        <Head>
+          <title>바투바개발</title>
+          <meta name="description" content="바이투바이 테스트서버입니다"></meta>
+        </Head>
         <body>
           <noscript
             dangerouslySetInnerHTML={{

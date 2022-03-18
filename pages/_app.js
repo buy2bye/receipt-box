@@ -6,10 +6,6 @@ import Head from 'next/head';
 const ReceiptApp = ({ Component, pageProps }) => {
   return (
     <>
-    <Head>
-      <title>바이투바이 - 내 물건과의 첫 만남부터 작별까지, 내 물건 관리 서비스</title>
-    </Head>
-    
       <Script
         id='gtm-initialize'
         dangerouslySetInnerHTML={{
