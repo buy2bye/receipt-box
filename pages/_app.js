@@ -1,7 +1,6 @@
 import { ImageProvider } from 'contexts/ImageContext';
 import Script from 'next/script';
 import '../styles/globals.css';
-import Head from 'next/head';
 
 const ReceiptApp = ({ Component, pageProps }) => {
   return (
