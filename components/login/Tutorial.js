@@ -15,7 +15,7 @@ const Tutorial = ({ className }) => {
         pagination modules={[Pagination]}
         slidesPerView={1}
         navigation
-        autoplay={{ delay: 5000, disableOnInteraction: false}}
+        autoplay={{ delay: 1000, disableOnInteraction: false}}
       >
         <SwiperSlide>
           <img src='/tutorial_1.jpg' alt='tutorial1' />
