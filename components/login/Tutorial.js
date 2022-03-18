@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 import { Pagination } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
+import React from 'react';
 
 // Import Swiper styles
 import 'swiper/css/bundle';
