@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
-import { Navigation, Pagination, Autoplay } from 'swiper';
+import { Pagination } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
+import SwiperCore, { Autoplay } from 'swiper';
 
 // Import Swiper styles
 import 'swiper/css/bundle';
@@ -8,14 +9,15 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 
+SwiperCore.use([Autoplay]);
+
 const Tutorial = ({ className }) => {
   return (
     <Container className={className}>
       <Swiper
         pagination modules={[Pagination]}
         slidesPerView={1}
-        navigation
-        autoplay={{ delay: 1000, disableOnInteraction: false}}
+        autoplay={{ delay: 1000 }}
       >
         <SwiperSlide>
           <img src='/tutorial_1.jpg' alt='tutorial1' />
