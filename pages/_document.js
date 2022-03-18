@@ -9,14 +9,7 @@ class MyDocument extends Document {
   render() {
     return (
       <Html>
-        <Head>
-          <title>바투바개발</title>
-          <meta name="description" content="바이투바이 테스트서버입니다"></meta>
-          <meta property="og:type" content="website"></meta>
-          <meta property="og:title" content="바투바개발S"></meta>
-          <meta property="og:description" content="바이투바이 테스트서버입니다S"></meta>
-          <meta property="og:url" content="http://dev.buy2bye.co.kr"></meta>
-        </Head>
+        <Head />
         <body>
           <noscript
             dangerouslySetInnerHTML={{
