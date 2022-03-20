@@ -53,6 +53,12 @@ const Login = () => {
 
   const renderLoginMain = () => (
     <div className='login-buttons'>
+      <button
+        className='login__login-button preview'
+        onClick={() => router.push('/preview')}
+      >
+        <span>서비스 둘러보기</span>
+      </button>
       <button className='login__login-button kakao' onClick={handleKakaoLogin}>
         <img className='kakao-icon' src='icons/kakao.svg' alt='kakao-icon' />
         <span>카카오로 시작하기</span>
@@ -140,6 +146,15 @@ const Container = styled(Layout)`
     :active {
       opacity: 0.6;
     }
+  }
+
+  .preview {
+    background: var(--white);
+    border: 1px solid var(--blue700);
+    color: var(--blue700);
+    border-radius: 8px;
+    margin-bottom: 32px;
+    height: 50px;
   }
 
   .kakao {

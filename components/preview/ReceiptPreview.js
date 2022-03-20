@@ -2,9 +2,7 @@ import styled from '@emotion/styled';
 import { calculateDateDiff, calculatePeriod } from 'helpers/utils';
 import Link from 'next/link';
 
-const Receipt = ({ item }) => {
-  const dateDiff = calculateDateDiff(item.productDate);
-
+const ReceiptPreview = ({ item }) => {
   const imageSkeleton = (
     <div className='thumb'>
       <span>등록 중</span>
@@ -17,24 +15,22 @@ const Receipt = ({ item }) => {
   );
 
   return (
-    <Link href={`/receipt/${item.id}`}>
+    <Link href={`/preview/${item.id}`}>
       <Container>
         {item.productImage ? imageWrapper : imageSkeleton}
         <div className='contents'>
           <h3 className='name'>{item?.nickname}</h3>
 
-          {dateDiff.okay && (
-            <span className='date'>
-              함께한 지 {dateDiff.data.dateDiff.toLocaleString()}일 째
-            </span>
-          )}
+          <span className='date'>
+            함께한 지 {item.dateDiff.toLocaleString()}일 째
+          </span>
         </div>
       </Container>
     </Link>
   );
 };
 
-export default Receipt;
+export default ReceiptPreview;
 
 const Container = styled.div`
   cursor: pointer;

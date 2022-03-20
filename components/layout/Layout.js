@@ -13,6 +13,7 @@ const Layout = ({
   hideSetting,
   topNavColor,
   onBackClick,
+  isPreview,
 }) => {
   useEffect(() => {
     const handleResize = () => {
@@ -35,7 +36,7 @@ const Layout = ({
       <Body hideBottom={hideBottom} className={className}>
         {children}
       </Body>
-      {!hideBottom && <BottomNav />}
+      {!hideBottom && <BottomNav isPreview={isPreview} />}
     </Container>
   );
 };

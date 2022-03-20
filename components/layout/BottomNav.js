@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useContext, useState } from 'react';
 
-const BottomNav = () => {
+const BottomNav = ({ isPreview }) => {
   const { imageSrc, changeImageSrc, imageFile, changeImageFile } =
     useContext(ImageContext);
   const router = useRouter();
@@ -28,6 +28,19 @@ const BottomNav = () => {
     handleImageUpload(e);
     router.push('/upload');
   };
+
+  if (isPreview)
+    return (
+      <Container>
+        <UploadButtonPreview
+          onClick={() => {
+            alert('영수증 등록을 위해서는 로그인이 필요합니다.');
+          }}
+        >
+          <img src='/icons/camera.png' alt='receipt-upload' />
+        </UploadButtonPreview>
+      </Container>
+    );
 
   return (
     <Container>
@@ -61,6 +74,27 @@ const UploadButton = styled.label`
   justify-content: center;
   align-items: center;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+
+  :active {
+    opacity: 0.5;
+    transition: 0.4s;
+  }
+
+  img {
+    width: 60%;
+  }
+`;
+
+const UploadButtonPreview = styled.button`
+  background-color: var(--primary);
+  width: 68px;
+  height: 68px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+  padding: 0;
 
   :active {
     opacity: 0.5;
