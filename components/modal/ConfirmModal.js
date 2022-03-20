@@ -80,6 +80,7 @@ const Button = styled.button`
   width: 100%;
   height: 40px;
   font-size: 13px;
+  color: var(--grey900);
 
   ${(props) =>
     props.primary

@@ -35,7 +35,7 @@ const ReceiptDetail = () => {
   };
 
   const handleProductImageChange = (e) => {
-    setPreviewModalText('이미지 등록을 위해서는 로그인이 필요합니다.');
+    setPreviewModalText('이미지 변경을 위해서는 로그인이 필요합니다.');
     setIsPreviewModalOpen(true);
   };
 
