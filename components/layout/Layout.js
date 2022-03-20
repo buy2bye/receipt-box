@@ -32,7 +32,7 @@ const Layout = ({
       {!hideTop && (
         <TopNav topNavColor={topNavColor} onBackClick={onBackClick} />
       )}
-      {showLogo && <TopLogo hideSetting={hideSetting} />}
+      {showLogo && <TopLogo hideSetting={hideSetting} isPreview={isPreview} />}
       <Body hideBottom={hideBottom} className={className}>
         {children}
       </Body>

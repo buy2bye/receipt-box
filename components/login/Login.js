@@ -153,7 +153,7 @@ const Container = styled(Layout)`
     border: 1px solid var(--blue700);
     color: var(--blue700);
     border-radius: 8px;
-    margin-bottom: 32px;
+    margin-bottom: 16px;
     height: 50px;
   }
 

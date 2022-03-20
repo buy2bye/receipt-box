@@ -1,7 +1,19 @@
 import styled from '@emotion/styled';
 import Link from 'next/link';
 
-const TopLogo = ({ hideSetting }) => {
+const TopLogo = ({ hideSetting, isPreview }) => {
+  if (isPreview)
+    return (
+      <Container>
+        <Logo>
+          <img src='/icons/logo_300.png' alt='buy2bye logo' />
+        </Logo>
+        <Setting onClick={() => alert('둘러보기에서는 설정이 불가능해요')}>
+          <img src='/icons/setting.png' alt='setting' />
+        </Setting>
+      </Container>
+    );
+
   return (
     <Container>
       <Logo>
