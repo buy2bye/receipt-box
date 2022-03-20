@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
-import ConfirmModal from 'components/modal/ConfirmModal';
 import apiController from 'helpers/apiController';
 import WrapAuthPage from 'helpers/AuthWrapper';
 import { kickout } from 'helpers/auth';

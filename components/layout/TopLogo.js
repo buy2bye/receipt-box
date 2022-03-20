@@ -1,17 +1,28 @@
 import styled from '@emotion/styled';
+import PreviewModal from 'components/preview/PreviewModal';
 import Link from 'next/link';
+import { useState } from 'react';
 
 const TopLogo = ({ hideSetting, isPreview }) => {
+  const [isPreviewModalOpen, setIsPreviewModalOpen] = useState(false);
+
   if (isPreview)
     return (
-      <Container>
-        <Logo>
-          <img src='/icons/logo_300.png' alt='buy2bye logo' />
-        </Logo>
-        <Setting onClick={() => alert('둘러보기에서는 설정이 불가능해요')}>
-          <img src='/icons/setting.png' alt='setting' />
-        </Setting>
-      </Container>
+      <>
+        <Container>
+          <Logo>
+            <img src='/icons/logo_300.png' alt='buy2bye logo' />
+          </Logo>
+          <Setting onClick={() => setIsPreviewModalOpen(true)}>
+            <img src='/icons/setting.png' alt='setting' />
+          </Setting>
+        </Container>
+        <PreviewModal
+          text='설정을 하려면 로그인이 필요합니다.'
+          isOpen={isPreviewModalOpen}
+          setIsOpen={setIsPreviewModalOpen}
+        />
+      </>
     );
 
   return (

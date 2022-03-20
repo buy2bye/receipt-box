@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import PreviewModal from 'components/preview/PreviewModal';
 import { ImageContext } from 'contexts/ImageContext';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -8,6 +9,7 @@ const BottomNav = ({ isPreview }) => {
   const { imageSrc, changeImageSrc, imageFile, changeImageFile } =
     useContext(ImageContext);
   const router = useRouter();
+  const [isPreviewModalOpen, setIsPreviewModalOpen] = useState(false);
 
   const handleImageUpload = (e) => {
     const reader = new FileReader();
@@ -34,11 +36,16 @@ const BottomNav = ({ isPreview }) => {
       <Container>
         <UploadButtonPreview
           onClick={() => {
-            alert('영수증 등록을 위해서는 로그인이 필요합니다.');
+            setIsPreviewModalOpen(true);
           }}
         >
           <img src='/icons/camera.png' alt='receipt-upload' />
         </UploadButtonPreview>
+        <PreviewModal
+          text='영수증 등록을 위해서는 로그인이 필요합니다.'
+          isOpen={isPreviewModalOpen}
+          setIsOpen={setIsPreviewModalOpen}
+        />
       </Container>
     );
 

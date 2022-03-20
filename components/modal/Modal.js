@@ -1,12 +1,14 @@
 import ReactDOM from 'react-dom';
 import styled from '@emotion/styled';
 
-const Modal = ({ isOpen, isPortal, modalBoxStyle, children }) => {
+const Modal = ({ isOpen, isPortal, modalBoxStyle, children, className }) => {
   const render = () => (
     <>
       <Overlay />
       <Container>
-        <ModalBox style={modalBoxStyle}>{children}</ModalBox>
+        <ModalBox style={modalBoxStyle} className={className}>
+          {children}
+        </ModalBox>
       </Container>
     </>
   );

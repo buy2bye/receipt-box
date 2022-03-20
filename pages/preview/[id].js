@@ -11,6 +11,7 @@ import DeleteReasons from 'components/receipt/DeleteReasons';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { receiptList } from 'data/previewData';
+import PreviewModal from 'components/preview/PreviewModal';
 
 const ReceiptDetail = () => {
   const router = useRouter();
@@ -22,6 +23,8 @@ const ReceiptDetail = () => {
   const [receiptZoomedIn, setReceiptZoomedIn] = useState(false);
   const [usedDealAlert, setUsedDealAlert] = useState(false);
   const [usedDealInfoShown, setUsedDealInfoShown] = useState(false);
+  const [isPreviewModalOpen, setIsPreviewModalOpen] = useState(false);
+  const [previewModalText, setPreviewModalText] = useState('');
 
   const handleDeleteButtonClick = () => {
     setDeleteReasonsShown(true);
@@ -32,11 +35,22 @@ const ReceiptDetail = () => {
   };
 
   const handleProductImageChange = (e) => {
-    alert('둘러보기에서는 이미지 등록이 불가능해요');
+    setPreviewModalText('이미지 등록을 위해서는 로그인이 필요합니다.');
+    setIsPreviewModalOpen(true);
   };
 
   const handleNicknameChange = (e) => {
     setNickname(e.target.value);
+  };
+
+  const handleNicknameSubmit = () => {
+    setPreviewModalText('닉네임 변경을 위해서는 로그인이 필요합니다.');
+    setIsPreviewModalOpen(true);
+  };
+
+  const handleDeleteSubmit = () => {
+    setPreviewModalText('영수증 삭제를 위해서는 로그인이 필요합니다.');
+    setIsPreviewModalOpen(true);
   };
 
   if (!receipt) {
@@ -54,7 +68,7 @@ const ReceiptDetail = () => {
       <DeleteReasons
         visible={deleteReasonsShown}
         setVisible={setDeleteReasonsShown}
-        onDelete={() => alert('둘러보기에서는 삭제가 불가능해요')}
+        onDelete={handleDeleteSubmit}
       />
       <NicknameWrapper>
         <span>{receipt.nickname}</span>
@@ -164,7 +178,7 @@ const ReceiptDetail = () => {
         title='변경할 닉네임을 입력해주세요'
         placeholder='예) 맥북 2022'
         onInputChange={handleNicknameChange}
-        onSubmit={() => alert('둘러보기에서는 변경이 불가능해요')}
+        onSubmit={handleNicknameSubmit}
         confirmText='변경하기'
       />
 
@@ -177,6 +191,11 @@ const ReceiptDetail = () => {
         <br />
         <br /> 중고 판매를 원치 않으시면 꺼두시면 됩니다.
       </TextModal>
+      <PreviewModal
+        text={previewModalText}
+        isOpen={isPreviewModalOpen}
+        setIsOpen={setIsPreviewModalOpen}
+      />
     </Container>
   );
 };

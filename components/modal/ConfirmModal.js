@@ -2,6 +2,7 @@ import React from 'react';
 import styled from '@emotion/styled';
 
 import Modal from './Modal';
+import { css } from '@emotion/react';
 
 const ConfirmModal = ({
   isOpen,
@@ -15,29 +16,22 @@ const ConfirmModal = ({
   onYesClick,
 }) => {
   return (
-    <Modal
-      isOpen={isOpen}
-      modalBoxStyle={{
-        maxWidth: '400px',
-        minWidth: '256px',
-        minHeight: '140px',
-        padding: '16px',
-      }}
-      isPortal={isPortal}
-    >
-      {titleText && <TitleText>{titleText}</TitleText>}
-      <DescriptionText>{descriptionText}</DescriptionText>
+    <Container isOpen={isOpen} isPortal={isPortal}>
+      <WrapContents>
+        {titleText && <TitleText>{titleText}</TitleText>}
+        <DescriptionText>{descriptionText}</DescriptionText>
+      </WrapContents>
       <WrapButtons>
         {!hideNoButton && (
-          <Button id='noBtn' variant='basic' onClick={onNoClick}>
+          <Button secondary variant='basic' onClick={onNoClick}>
             {noText}
           </Button>
         )}
-        <Button id='yesBtn' variant='primary' onClick={onYesClick}>
+        <Button primary variant='primary' onClick={onYesClick}>
           {yesText}
         </Button>
       </WrapButtons>
-    </Modal>
+    </Container>
   );
 };
 
@@ -49,6 +43,23 @@ ConfirmModal.defaultProps = {
 
 export default ConfirmModal;
 
+const Container = styled(Modal)`
+  max-width: 400px;
+  min-width: 256px;
+  min-height: 140px;
+  display: flex;
+  flex-direction: column;
+`;
+
+const WrapContents = styled.div`
+  flex: 1;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
+
 const TitleText = styled.div`
   font-size: 16px;
   padding: 4px;
@@ -56,25 +67,28 @@ const TitleText = styled.div`
 `;
 
 const DescriptionText = styled.div`
-  flex: 1;
-  font-size: 16px;
+  font-size: 14px;
   padding: 4px;
-  margin-bottom: 28px;
 `;
 
 const WrapButtons = styled.div`
   display: flex;
   justify-content: center;
-
-  > button:last-child {
-    margin-left: 8px;
-  }
 `;
 
 const Button = styled.button`
-  background: white;
   width: 100%;
   height: 40px;
-  border: 1px solid black;
-  border-radius: 4px;
+  font-size: 13px;
+
+  ${(props) =>
+    props.primary
+      ? css`
+          background: var(--primary);
+          border-radius: 0 0 12px 0;
+        `
+      : css`
+          background: var(--grey100);
+          border-radius: 0 0 0 12px;
+        `}
 `;

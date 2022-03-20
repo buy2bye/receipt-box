@@ -1,7 +1,6 @@
 import styled from '@emotion/styled';
 import Title from 'components/page/Title';
 import Layout from 'components/layout/Layout';
-import Receipt from 'components/Receipt';
 import ReceiptPreview from './ReceiptPreview';
 import { receiptList } from 'data/previewData';
 
@@ -15,13 +14,6 @@ const ReceiptListPreview = () => {
         <span>전체 {receiptList.length}</span>
       </HeaderContainer>
       <ReceiptList>
-        {receiptList.length < 1 && (
-          <UploadGuide>
-            <h3>등록된 영수증이 없어요.</h3>
-            <span>아래 카메라 버튼을 눌러</span>
-            <span>영수증을 촬영하세요!</span>
-          </UploadGuide>
-        )}
         {receiptList.map((item, index) => (
           <ReceiptPreview item={item} key={index} />
         ))}
