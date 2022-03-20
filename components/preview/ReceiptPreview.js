@@ -1,8 +1,10 @@
 import styled from '@emotion/styled';
-import { calculateDateDiff, calculatePeriod } from 'helpers/utils';
+import { calculateDateDiff } from 'helpers/utils';
 import Link from 'next/link';
 
 const ReceiptPreview = ({ item }) => {
+  const dateDiff = calculateDateDiff(item.productDate);
+
   const imageSkeleton = (
     <div className='thumb'>
       <span>등록 중</span>
@@ -22,7 +24,7 @@ const ReceiptPreview = ({ item }) => {
           <h3 className='name'>{item?.nickname}</h3>
 
           <span className='date'>
-            함께한 지 {item.dateDiff.toLocaleString()}일 째
+            함께한 지 {dateDiff.data.dateDiff.toLocaleString()}일 째
           </span>
         </div>
       </Container>

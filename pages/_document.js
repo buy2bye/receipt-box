@@ -11,13 +11,19 @@ class MyDocument extends Document {
       <Html>
         <Head>
           <title>바이투바이</title>
-          <meta name="description" content="물건관리 앱 바이투바이! 내 물건을 처음 만났을 떄(Buy)부터 작별할 때(Bye)까지 그 여정을 함께 합니다"></meta>
-          <meta property="og:type" content="website"></meta>
-          <meta property="og:title" content="바이투바이"></meta>
-          <meta property="og:description" content="물건관리 앱 바이투바이! 내 물건을 처음 만났을 떄(Buy)부터 작별할 때(Bye)까지 그 여정을 함께 합니다"></meta>
-          <meta property="og:url" content="https://buy2bye.co.kr"></meta>
-          <link rel="canonical" href="https://buy2bye.co.kr"></link>
-        </Head> 
+          <meta
+            name='description'
+            content='물건관리 앱 바이투바이! 내 물건을 처음 만났을 떄(Buy)부터 작별할 때(Bye)까지 그 여정을 함께 합니다'
+          ></meta>
+          <meta property='og:type' content='website'></meta>
+          <meta property='og:title' content='바이투바이'></meta>
+          <meta
+            property='og:description'
+            content='물건관리 앱 바이투바이! 내 물건을 처음 만났을 떄(Buy)부터 작별할 때(Bye)까지 그 여정을 함께 합니다'
+          ></meta>
+          <meta property='og:url' content='https://buy2bye.co.kr'></meta>
+          <link rel='canonical' href='https://buy2bye.co.kr'></link>
+        </Head>
         <body>
           <noscript
             dangerouslySetInnerHTML={{

@@ -2,7 +2,7 @@ export const receiptList = [
   {
     id: 156,
     nickname: '애플워치SE⌚️',
-    dateDiff: 8,
+    productDate: '2022-03-10',
     productImage:
       'https://buy2bye.s3.ap-northeast-2.amazonaws.com/main/product/156_product_adm_996caffe-b1e9-4ca3-87dd-ee52938f55d1.jpg',
     productName: '애플워치 Nike SE 40mm',
@@ -27,7 +27,7 @@ export const receiptList = [
   {
     id: 158,
     nickname: '와인 냉장고',
-    dateDiff: 51,
+    productDate: '2022-01-26',
     productImage:
       'https://buy2bye.s3.ap-northeast-2.amazonaws.com/main/product/158_product_adm_9825bde8-f3d0-4e1a-9618-48a9b3f7cf6c.jpg',
     productImage:
@@ -45,7 +45,7 @@ export const receiptList = [
   {
     id: 160,
     nickname: '커피머신☕️',
-    dateDiff: 469,
+    productDate: '2020-12-04',
     productImage: '',
     productName: null,
     productPlace: null,
@@ -60,7 +60,7 @@ export const receiptList = [
   {
     id: 159,
     nickname: '에어팟 프로',
-    dateDiff: 507,
+    productDate: '2020-10-27',
     productImage:
       'https://buy2bye.s3.ap-northeast-2.amazonaws.com/main/product/159_product_adm_5ce4ae13-0744-4202-864e-06a89bdd88af.jpg',
     productName: '에어팟 프로',
@@ -76,7 +76,7 @@ export const receiptList = [
   {
     id: 157,
     nickname: '첫 월급으로 산 가방🖤',
-    dateDiff: 1079,
+    productDate: '2019-04-04',
     productImage:
       'https://buy2bye.s3.ap-northeast-2.amazonaws.com/main/product/157_product_adm_de386d06-7ab9-4c9d-b0c7-39b52ccdd635.jpg',
     productName: '프라다 토트백',
