@@ -58,10 +58,10 @@ const UploadPage = () => {
       <UploadNotice>
         <h2>잠깐!</h2>
         <h2>✔️ <span>물건 구입</span> 영수증을 촬영하셨나요?</h2>
-        <h3>(또는 온라인 구매 내역 화면 캡쳐)<br></br>
+        <h3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(또는 온라인 구매 내역 화면 캡쳐)<br></br>
         <br></br>
-        물건 구입 영수증이 아닌<br></br>
-        식당/카페 방문 영수증은 등록이 어려워요😭</h3>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;물건 구입 영수증이 아닌<br></br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;식당/카페 방문 영수증은 등록이 어려워요😭</h3>
       </UploadNotice>
       <Thumbnail>
         {imageSrc ? (
