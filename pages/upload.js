@@ -1,7 +1,6 @@
 import WrapAuthPage from 'helpers/AuthWrapper';
 import { useContext, useState } from 'react';
 import styled from '@emotion/styled';
-import Title from 'components/page/Title';
 import receiptApi from 'api/receipt';
 import Layout from 'components/layout/Layout';
 import Button from 'components/button/Button';

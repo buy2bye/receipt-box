@@ -20,6 +20,9 @@ const Tutorial = ({ className }) => {
         autoplay={{ delay: 1000 }} //Swiper Autoplay
       >
         <SwiperSlide>
+          <img src='/tutorial_0.jpg' alt='tutorial1' />
+        </SwiperSlide>
+        <SwiperSlide>
           <img src='/tutorial_1.jpg' alt='tutorial1' />
         </SwiperSlide>
         <SwiperSlide>
