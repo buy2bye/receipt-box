@@ -121,7 +121,7 @@ const UploadPage = () => {
         visible={loading}
         setVisible={setLoading}
         title={'등록 중 입니다'}
-        height = '18vh'
+        height = '36vh'
         />
     </Layout>
   );
