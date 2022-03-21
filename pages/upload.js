@@ -43,12 +43,12 @@ const UploadPage = () => {
   };
 
   const handleUpload = async () => {
-    setLoading(false); //호진 업로딩시 팝업
+    setLoading(true); //호진 업로딩시 팝업
     //닉네임까지 입력 후 최종 영수증 업로드
     const { createReceipt } = receiptApi();
     createReceipt(nickname, imageFile)
       .then((res) => {
-        setLoading(true); //호진 업로딩시 팝업
+        setLoading(false); //호진 업로딩시 팝업
         alert('영수증이 등록되었습니다.');
         router.push('/');
       })
