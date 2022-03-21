@@ -16,7 +16,7 @@ const UploadPage = () => {
   const router = useRouter();
   const [nickname, setNickname] = useState('');
   const [showPopup, setShowPopup] = useState(false);
-  const [loading, setLoading] = useState(true);//호진 업로딩시 팝업
+  const [loading, setLoading] = useState(false);//호진 업로딩시 팝업
 
   const handleOnImageChange = (e) => {
     const reader = new FileReader();
