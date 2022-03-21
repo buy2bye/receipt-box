@@ -11,7 +11,7 @@ const apiController = (props = {}) => {
   axios.defaults.headers.post['Content-Type'] = 'multipart/form-data';
   axios.defaults.headers.delete.Accept = 'application/json';
   axios.defaults.headers.delete['Content-Type'] = 'application/json';
-  axios.defaults.timeout = 20000;
+  axios.defaults.timeout = 2000000;
   axios.defaults.baseURL = process.env.NEXT_PUBLIC_SERVER_HOST;
 
   const api = isAuth ? setAuthInterceptors(axios.create(), ctx) : axios;
