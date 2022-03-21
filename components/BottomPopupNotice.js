@@ -42,5 +42,5 @@ const Title = styled.span`
   width: 100%;
   font-size: 18px;
   text-align: center;
-  margin-top: 10px;
+  margin-bottom: 5px;
 `;
