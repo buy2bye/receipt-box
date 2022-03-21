@@ -182,7 +182,7 @@ const UploadNotice = styled.div`
   }
 
   h3 {
-    margin: 0;
+    margin: 0 0 10px 0;
     width: 100%;
     font-size: 14px;
     font-weight: 400;
