@@ -55,7 +55,13 @@ const UploadPage = () => {
 
   return (
     <Layout hideBottom>
-      <Title>글자가 잘 보이도록 촬영해주세요</Title>
+      <Notice>잠깐!</Notice>
+      <NoticeHead><mark>물건 구입</mark> 영수증을 촬영하셨나요?</NoticeHead>
+      <NoticeBody>(혹은 온라인 구매 내역 화면 캡쳐)<br></br>
+      <br></br>
+      ✔️ 물건 구입 영수증이 아닌<br></br>
+      식당 카페 방문 영수증은 등록이 어려워요😭
+      </NoticeBody>
       <Thumbnail>
         {imageSrc ? (
           <img src={imageSrc} alt='receipt-thumbnail' />
@@ -158,4 +164,28 @@ const UploadButton = styled.label`
   display: flex;
   justify-content: center;
   align-items: center;
+`;
+
+const Notice = styled.h2`
+  margin: 0;
+  width: 100%;
+  font-size: 18px;
+  font-weight: 800;
+  color: black;
+`;
+
+const NoticeHead = styled.h3`
+  margin: 0;
+  width: 100%;
+  font-size: 14px;
+  font-weight: 600;
+  color: black;
+`;
+
+const NoticeBody = styled.h3`
+  margin: 0 0 12px 0;
+  width: 100%;
+  font-size: 14px;
+  font-weight: 400;
+  color: black;
 `;

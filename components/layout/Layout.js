@@ -56,7 +56,7 @@ const Body = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 24px;
+  padding: 12px 24px 24px 24px;
   width: 100vw;
   position: relative;
   overflow-y: scroll;
