@@ -7,6 +7,8 @@ import Button from 'components/button/Button';
 import BottomTextInputPopup from 'components/popup/BottomTextInputPopup';
 import { useRouter } from 'next/router';
 import { ImageContext } from 'contexts/ImageContext';
+import BottomPopupNotice from 'components/BottomPopupNotice';//호진 업로딩시 팝업
+import ReactLoading from 'react-loading';
 
 const UploadPage = () => {
   const { imageSrc, changeImageSrc, imageFile, changeImageFile } =
@@ -14,6 +16,7 @@ const UploadPage = () => {
   const router = useRouter();
   const [nickname, setNickname] = useState('');
   const [showPopup, setShowPopup] = useState(false);
+  const [loading, setLoading] = useState(false);//호진 업로딩시 팝업
 
   const handleOnImageChange = (e) => {
     const reader = new FileReader();
@@ -40,14 +43,17 @@ const UploadPage = () => {
   };
 
   const handleUpload = async () => {
+    setLoading(true); //호진 업로딩시 팝업
     //닉네임까지 입력 후 최종 영수증 업로드
     const { createReceipt } = receiptApi();
     createReceipt(nickname, imageFile)
       .then((res) => {
+        setLoading(false); //호진 업로딩시 팝업
         alert('영수증이 등록되었습니다.');
         router.push('/');
       })
       .catch(({ response: res }) => {
+        setLoading(false); //호진 업로딩시 팝업
         alert('영수증 등록에 실패했습니다.');
       });
   };
@@ -112,6 +118,23 @@ const UploadPage = () => {
         confirmText='등록하기'
         buttonClass='receipt-register-confirm'
       />
+      <BottomPopupNotice
+        visible={loading}
+        setVisible={setLoading}
+        title={'등록 중 입니다😊'}
+        height = '18vh'
+        >
+        <LoadingContainer>
+          <ReactLoading
+            type='spin'
+            color='#AAAAAA'
+            height='15%'
+            width='15%'
+          >
+          </ReactLoading>
+        </LoadingContainer>
+          {/* <img src='/favicon.ico' alt='favicon' height='50px' width='50px'></img> */}
+      </BottomPopupNotice>
     </Layout>
   );
 };
@@ -186,5 +209,12 @@ const UploadNotice = styled.div`
     font-size: 14px;
     font-weight: 400;
     color: black;
+  }
+`;
+
+const LoadingContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  padding-bottom: 4vh;
   }
 `;
