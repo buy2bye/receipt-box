@@ -5,10 +5,10 @@ import BottomPopup from 'components/popup/BottomPopup';
 import { useState } from 'react';
 
 const reasons = [
-  '개인정보유출이 걱정되어서',
+  '재가입을 위해서',
   '서비스가 유용하지 않아서',
   '자주 이용하지 않아서',
-  '재가입을 위해서',
+  '개인정보유출이 걱정되어서',
   '직접 입력',
 ];
 

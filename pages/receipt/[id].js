@@ -335,6 +335,7 @@ const Details = styled.ul`
   margin-top: 24px;
   font-size: 14px;
   font-weight: 300;
+  width: 80%;
 
   li {
     display: flex;
