@@ -223,7 +223,9 @@ SettingPage.getInitialProps = async (ctx) => {
 
 export default WrapAuthPage(SettingPage);
 
-const Container = styled(Layout)``;
+const Container = styled(Layout)`
+  overflow-x: hidden;
+`;
 
 const SettingTitle = styled.div`
   position: fixed;
@@ -254,6 +256,7 @@ const RowTitle = styled.div`
 const RowContent = styled.div`
   color: var(--grey600);
   font-weight: 300;
+  overflow-x: scroll;
 `;
 
 const Divider = styled.div`
