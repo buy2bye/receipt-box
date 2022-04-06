@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/router';
+import Head from 'next/head'
+import Script from 'next/script';
 import styled from '@emotion/styled';
 import Tutorial from '/components/login/Tutorial';
 import apiController from 'helpers/apiController';
@@ -63,6 +65,7 @@ const Login = () => {
         <img className='kakao-icon' src='icons/kakao.svg' alt='kakao-icon' />
         <span>카카오로 시작하기</span>
       </button>
+      <button id='appleid-signin' className='login__login-button apple' data-color='black' data-border='true' data-type='sign in' />
       <button className='login__login-button normal' onClick={handleEmailLogin}>
         <span>이메일로 시작하기</span>
       </button>
@@ -105,6 +108,15 @@ const Login = () => {
 
   return (
     <Container hideTop showLogo hideSetting hideBottom>
+      <Head>
+        <meta name='appleid-signin-client-id' content={process.env.NEXT_PUBLIC_APPLE_CLIENT_ID} />
+        <meta name='appleid-signin-scope' content='email' />
+        <meta name='appleid-signin-redirect-uri' content={process.env.NEXT_PUBLIC_APPLE_REDIRECT_URI} />
+        <meta name='appleid-signin-state' content={process.env.NEXT_PUBLIC_APPLE_STATE} />
+        <meta name='appleid-signin-nonce' content={process.env.NEXT_PUBLIC_APPLE_NONCE} />
+        <meta name='appleid-signin-use-popup' content='false' />
+      </Head>
+      <Script type='text/javascript' src='https://appleid.cdn-apple.com/appleauth/static/jsapi/appleid/1/en_US/appleid.auth.js' />
       <Tutorial className='login__tutorial' />
       {isEmailLogin ? renderEmailLogin() : renderLoginMain()}
     </Container>
@@ -176,6 +188,10 @@ const Container = styled(Layout)`
     transform: translateY(-50%);
     width: 32px;
     height: 32px;
+  }
+
+  .apple > div {
+    max-width: none !important;
   }
 `;
 
