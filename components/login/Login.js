@@ -166,10 +166,10 @@ const Container = styled(Layout)`
 
   .login__login-button {
     width: 100%;
-    height: 60px;
-    margin-bottom: 12px;
-    border-radius: 16px;
-    font-size: 16px;
+    height: 40px;
+    margin-bottom: 8px;
+    border-radius: 4px;
+    font-size: 14px;
     font-weight: 400;
     display: flex;
     align-items: center;
