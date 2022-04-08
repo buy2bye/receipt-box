@@ -1,5 +1,4 @@
 import styled from '@emotion/styled';
-
 import receiptApi from 'api/receipt';
 import Button from 'components/button/Button';
 import FullScreenSpinner from 'components/common/FullScreenSpinner';
@@ -12,6 +11,7 @@ import BottomTextInputPopup from 'components/popup/BottomTextInputPopup';
 import DeleteReasons from 'components/receipt/DeleteReasons';
 import apiController from 'helpers/apiController';
 import WrapAuthPage from 'helpers/AuthWrapper';
+import { set } from 'lodash';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
@@ -25,6 +25,7 @@ const ReceiptDetail = () => {
   const [receiptZoomedIn, setReceiptZoomedIn] = useState(false);
   const [usedDealAlert, setUsedDealAlert] = useState(false);
   const [usedDealInfoShown, setUsedDealInfoShown] = useState(false);
+  const [newProductName, setNewProductName] = useState();
   const {
     getReceiptDetail,
     changeReceiptNickname,
@@ -82,6 +83,10 @@ const ReceiptDetail = () => {
     });
   };
 
+  const handleProductNameEdit = (e) => {
+    setNewProductName(e.target.innerText);
+  };
+
   if (!receipt) {
     return (
       <Container hideBottom topNavColor='var(--grey100)'>
@@ -136,23 +141,48 @@ const ReceiptDetail = () => {
 
       <Details>
         <li>
-          <span>상품명</span>
-          <span>{receipt.productName || '업데이트 후 알림을 드릴게요'}</span>
+          <label>상품명</label>
+          <span
+            contentEditable
+            onInput={handleProductNameEdit}
+            suppressContentEditableWarning={true}
+            id='name'
+          >
+            {receipt.productName}
+          </span>
         </li>
         <li>
-          <span>구매처</span>
-          <span>{receipt.productPlace || '업데이트 후 알림을 드릴게요'}</span>
+          <label>구매처</label>
+          <span
+            contentEditable
+            onInput={handleProductNameEdit}
+            suppressContentEditableWarning={true}
+          >
+            {receipt.productPlace}
+          </span>
         </li>
         <li>
-          <span>구매가</span>
-          <span>{receipt.productPrice || '업데이트 후 알림을 드릴게요'}</span>
+          <label>구매가</label>
+          <span
+            contentEditable
+            onInput={handleProductNameEdit}
+            suppressContentEditableWarning={true}
+          >
+            {receipt.productPrice}
+          </span>
         </li>
         <li>
-          <span>구매일자</span>
-          <span>{receipt.productDate || '업데이트 후 알림을 드릴게요'}</span>
+          <label>구매일자</label>
+          <span
+            contentEditable
+            onInput={handleProductNameEdit}
+            suppressContentEditableWarning={true}
+          >
+            {receipt.productDate}
+          </span>
         </li>
         <li>
-          <span>영수증</span>
+          <label>영수증</label>
           <img
             src={receipt?.imageList[0]}
             alt={receipt?.productName}
@@ -341,7 +371,7 @@ const Details = styled.ul`
     display: flex;
     width: 100%;
 
-    > span:first-of-type {
+    label {
       min-width: 80px;
       font-weight: 500;
     }
@@ -350,6 +380,10 @@ const Details = styled.ul`
       width: 60px;
       height: 60px;
       border: 1px solid var(--grey300);
+    }
+
+    span {
+      min-width: 80px;
     }
   }
 `;
