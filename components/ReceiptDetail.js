@@ -187,7 +187,7 @@ const ReceiptDetail = ({
       ) : (
         <>
           <DeleteReceipt onClick={handleDeleteButtonClick}>삭제하기</DeleteReceipt>
-          <EditReceipt onClick={onEditClick}>수정하기</EditReceipt>
+          <ModifyReceipt onClick={onEditClick}>수정하기</ModifyReceipt>
         </>
       )}
   
@@ -235,12 +235,12 @@ const ReceiptDetail = ({
         <li
           onClick={() => isEdit && setPopupOpen('productName')}
         >
-          <label>
+          <span>
             상품명
             {isEdit && (
               <span style={{color: 'var(--primary)'}}> (필수) </span>
             )}
-          </label>
+          </span>
           <span>
             {productName}
           </span>
@@ -248,12 +248,12 @@ const ReceiptDetail = ({
         <li
           onClick={() => isEdit && setPopupOpen('productPlace')}
         >
-          <label>
+          <span>
             구매처
             {isEdit && (
               <span style={{color: 'var(--grey400)'}}> (선택) </span>
             )}
-          </label>
+          </span>
           <span>
             {productPlace}
           </span>
@@ -261,12 +261,12 @@ const ReceiptDetail = ({
         <li
           onClick={() => isEdit && setPopupOpen('productPrice')}
         >
-          <label>
+          <span>
             구매가
             {isEdit && (
               <span style={{color: 'var(--grey400)'}}> (선택) </span>
             )}
-          </label>
+          </span>
           <span>
             {productPrice}
           </span>
@@ -274,18 +274,18 @@ const ReceiptDetail = ({
         <li
           onClick={() => isEdit && setPopupOpen('productDate')}
         >
-          <label>
+          <span>
             구매일자
             {isEdit && (
               <span style={{color: 'var(--grey400)'}}> (선택) </span>
             )}
-          </label>
+          </span>
           <span>
             {productDate}
           </span>
         </li>
         <li>
-          <label>영수증</label>
+          <span>영수증</span>
           <img
             src={receipt?.imageList[0]}
             alt={receipt?.productName}
@@ -380,10 +380,10 @@ const DeleteReceipt = styled.button`
   z-index: 2;
 `;
 
-const EditReceipt = styled.button`
+const ModifyReceipt = styled.button`
   position: fixed;
   top: 10px;
-  right: 70px;
+  right: 72px;
   height: 32px;
   background: transparent;
   padding: 8px;
@@ -482,7 +482,7 @@ const Details = styled.ul`
     display: flex;
     width: 100%;
 
-    label {
+    > span:first-of-type {
       min-width: 80px;
       font-weight: 500;
     }
@@ -491,10 +491,6 @@ const Details = styled.ul`
       width: 60px;
       height: 60px;
       border: 1px solid var(--grey300);
-    }
-
-    span {
-      min-width: 80px;
     }
   }
 `;
