@@ -31,7 +31,7 @@ const TopLogo = ({ hideSetting, isPreview }) => {
         <img src='/icons/logo_300.png' alt='buy2bye logo' />
       </Logo>
       {!hideSetting && (
-        <Link href='/setting'>
+        <Link href='/setting' passHref>
           <Setting>
             <img src='/icons/setting.png' alt='setting' />
           </Setting>

@@ -91,6 +91,7 @@ const SettingPage = ({ userInfo }) => {
         <Link
           style={{ color: 'black', textDecoration: 'underline' }}
           href={link}
+          passHref
         >
           <RowTitle>{text}</RowTitle>
         </Link>

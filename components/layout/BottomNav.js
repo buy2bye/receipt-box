@@ -2,8 +2,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/router';
 import styled from '@emotion/styled';
 import PreviewModal from 'components/preview/PreviewModal';
-
-
+import Link from 'next/link';
 
 const BottomNav = ({ isPreview }) => {
   const router = useRouter();
@@ -29,11 +28,11 @@ const BottomNav = ({ isPreview }) => {
 
   return (
     <Container>
-      <a href='/create'>
+      <Link href='/create' passHref>
         <UploadButton htmlFor='upload-photo'>
           <img src='/icons/plus.png' alt='receipt-upload' />
         </UploadButton>
-      </a>
+      </Link>
     </Container>
   );
 };
