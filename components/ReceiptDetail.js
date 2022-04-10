@@ -184,7 +184,9 @@ const ReceiptDetail = ({
       topNavColor='var(--grey100)'
       onBackClick={onBackClick}
     >
-      <TopBackground />
+      <TopBackground
+        backgroundImage={receipt.backgroundImage}
+      />
       {isEdit ? (
         <DeleteReceipt onClick={handleSaveClick}>저장하기</DeleteReceipt>
       ) : (
@@ -387,9 +389,14 @@ const TopBackground = styled.div`
   left: 0;
   width: 100vw;
   height: 146px;
-  background: var(--grey100);
   z-index: 0;
   border-bottom: 1px solid var(--grey300);
+
+  background: ${props =>
+    props.backgroundImage ?
+    `url(${props.backgroundImage})` :
+    'url(/bg/receipt-background.png)'
+  };
 `;
 
 const DeleteReceipt = styled.button`
