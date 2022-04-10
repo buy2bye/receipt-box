@@ -12,6 +12,7 @@ import DeleteReasons from 'components/receipt/DeleteReasons';
 import apiController from 'helpers/apiController';
 import WrapAuthPage from 'helpers/AuthWrapper';
 import _ from 'lodash';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
@@ -20,7 +21,7 @@ const ReceiptDetail = ({
   isEdit,
   onEditClick,
   onSaveClick,
-  onBackClick
+  onBackClick,
 }) => {
   const router = useRouter();
   const { id } = router.query;
@@ -32,11 +33,11 @@ const ReceiptDetail = ({
   const [productDate, setProductDate] = useState();
   const [usedDealAlert, setUsedDealAlert] = useState(false);
 
-  const [popupInfo, setPopupInfo] = useState()
+  const [popupInfo, setPopupInfo] = useState();
 
   const [deleteReasonsShown, setDeleteReasonsShown] = useState(false);
   const [receiptZoomedIn, setReceiptZoomedIn] = useState(false);
-  const [receiptZoomedIndex, setReceiptZoomedIndex] = useState(0)
+  const [receiptZoomedIndex, setReceiptZoomedIndex] = useState(0);
   const [receiptImageInfoShown, setReceiptImageInfoShown] = useState(false);
   const [usedDealInfoShown, setUsedDealInfoShown] = useState(false);
 
@@ -49,12 +50,9 @@ const ReceiptDetail = ({
       setProductDate(receipt.productDate);
       setUsedDealAlert(receipt.usedDealAlert);
     }
-  }, [receipt, isEdit])
+  }, [receipt, isEdit]);
 
-  const {
-    updateProductImage,
-    deleteReceipt,
-  } = receiptApi();
+  const { updateProductImage, deleteReceipt } = receiptApi();
 
   const handleUsedDealAlertToggle = (e) => {
     setUsedDealAlert(e.target.checked);
@@ -92,7 +90,7 @@ const ReceiptDetail = ({
           setPopupInfo(false);
         },
         confirmText: '변경하기',
-        value: nickname
+        value: nickname,
       });
     } else if (varType === 'productName') {
       setPopupInfo({
@@ -103,7 +101,7 @@ const ReceiptDetail = ({
           setPopupInfo(false);
         },
         confirmText: '변경하기',
-        value: productName
+        value: productName,
       });
     } else if (varType === 'productPlace') {
       setPopupInfo({
@@ -114,7 +112,7 @@ const ReceiptDetail = ({
           setPopupInfo(false);
         },
         confirmText: '변경하기',
-        value: productPlace
+        value: productPlace,
       });
     } else if (varType === 'productPrice') {
       setPopupInfo({
@@ -126,7 +124,7 @@ const ReceiptDetail = ({
         },
         confirmText: '변경하기',
         value: productPlace,
-        type: 'number'
+        type: 'number',
       });
     } else if (varType === 'productDate') {
       setPopupInfo({
@@ -138,12 +136,12 @@ const ReceiptDetail = ({
         },
         confirmText: '변경하기',
         value: productDate,
-        type: 'date'
+        type: 'date',
       });
     } else {
       setPopupInfo(false);
     }
-  }
+  };
 
   const handleSaveClick = () => {
     onSaveClick(
@@ -153,8 +151,8 @@ const ReceiptDetail = ({
       productPrice,
       productDate,
       usedDealAlert
-    )
-  }
+    );
+  };
 
   if (!receipt && !isEdit) {
     return (
@@ -162,7 +160,7 @@ const ReceiptDetail = ({
         <FullScreenSpinner />
       </Container>
     );
-  } 
+  }
 
   return (
     <Container
@@ -170,28 +168,27 @@ const ReceiptDetail = ({
       topNavColor='var(--grey100)'
       onBackClick={onBackClick}
     >
-      <TopBackground
-        backgroundImage={receipt.backgroundImage}
-      />
+      <TopBackground backgroundImage={receipt.backgroundImage} />
       {isEdit ? (
         <DeleteReceipt onClick={handleSaveClick}>저장하기</DeleteReceipt>
       ) : (
         <>
-          <DeleteReceipt onClick={handleDeleteButtonClick}>삭제하기</DeleteReceipt>
+          <DeleteReceipt onClick={handleDeleteButtonClick}>
+            삭제하기
+          </DeleteReceipt>
           <ModifyReceipt onClick={onEditClick}>수정하기</ModifyReceipt>
         </>
       )}
-  
+
       <DeleteReasons
         visible={deleteReasonsShown}
         setVisible={setDeleteReasonsShown}
         onDelete={handleDeleteSubmit}
       />
-      <NicknameWrapper
-        onClick={() => isEdit && setPopupOpen('nickname')}>
-        {isEdit ?
-        (nickname || '소중한 내 물건에게 별명을 지어주세요 (선택)') :
-        nickname}
+      <NicknameWrapper onClick={() => isEdit && setPopupOpen('nickname')}>
+        {isEdit
+          ? nickname || '소중한 내 물건에게 별명을 지어주세요 (선택)'
+          : nickname}
       </NicknameWrapper>
 
       {receipt?.productImage ? (
@@ -225,92 +222,75 @@ const ReceiptDetail = ({
       )}
 
       <Details>
-        <li
-          onClick={() => isEdit && setPopupOpen('productName')}
-        >
+        <li onClick={() => isEdit && setPopupOpen('productName')}>
           <span>
             상품명
             {isEdit && (
-              <span style={{color: 'var(--primary)'}}> (필수) </span>
+              <span style={{ color: 'var(--primary)' }}> (필수) </span>
             )}
           </span>
-          <span>
-            {productName}
-          </span>
+          <span>{productName}</span>
         </li>
-        <li
-          onClick={() => isEdit && setPopupOpen('productPlace')}
-        >
+        <li onClick={() => isEdit && setPopupOpen('productPlace')}>
           <span>
             구매처
             {isEdit && (
-              <span style={{color: 'var(--grey400)'}}> (선택) </span>
+              <span style={{ color: 'var(--grey400)' }}> (선택) </span>
             )}
           </span>
-          <span>
-            {productPlace}
-          </span>
+          <span>{productPlace}</span>
         </li>
-        <li
-          onClick={() => isEdit && setPopupOpen('productPrice')}
-        >
+        <li onClick={() => isEdit && setPopupOpen('productPrice')}>
           <span>
             구매가
             {isEdit && (
-              <span style={{color: 'var(--grey400)'}}> (선택) </span>
+              <span style={{ color: 'var(--grey400)' }}> (선택) </span>
             )}
           </span>
-          <span>
-            {productPrice}
-          </span>
+          <span>{productPrice}</span>
         </li>
-        <li
-          onClick={() => isEdit && setPopupOpen('productDate')}
-        >
+        <li onClick={() => isEdit && setPopupOpen('productDate')}>
           <span>
             구매일자
             {isEdit && (
-              <span style={{color: 'var(--grey400)'}}> (선택) </span>
+              <span style={{ color: 'var(--grey400)' }}> (선택) </span>
             )}
           </span>
-          <span>
-            {productDate}
-          </span>
+          <span>{productDate}</span>
         </li>
         <UsedDeal>
           <span>
             영수증/품질보증서 보관함
-            <button className='info' onClick={() => setReceiptImageInfoShown(true)}>
+            <button
+              className='info'
+              onClick={() => setReceiptImageInfoShown(true)}
+            >
               ?
             </button>
           </span>
         </UsedDeal>
         <li>
           {_.map(receipt?.imageList, (image, idx) => {
-            return <img
-              key={`receipt__image__${idx}`}
-              src={image}
-              alt={receipt?.productName}
-              onClick={() => {
-                setReceiptZoomedIndex(idx)
-                setReceiptZoomedIn(true)
-              }}
-            />
+            return (
+              <img
+                key={`receipt__image__${idx}`}
+                src={image}
+                alt={receipt?.productName}
+                onClick={() => {
+                  setReceiptZoomedIndex(idx);
+                  setReceiptZoomedIn(true);
+                }}
+              />
+            );
           })}
         </li>
         {receipt?.linkList.length > 0 && (
           <ExternalLinkList>
             <span>내 물건 관리 tip</span>
             {receipt.linkList.map((link, index) => (
-              <a
-                href={link.url}
-                target='_blank'
-                rel='noreferrer'
-                className='external-link'
-                key={index}
-              >
+              <Link href={link.url} className='external-link' key={index}>
                 {link.title}
-              </a>
+              </Link>
             ))}
           </ExternalLinkList>
         )}
@@ -334,7 +314,10 @@ const ReceiptDetail = ({
         setVisible={setReceiptZoomedIn}
         height='calc(100vw + 100px)'
       >
-        <img src={receipt?.imageList[receiptZoomedIndex]} alt={receipt?.productName} />
+        <img
+          src={receipt?.imageList[receiptZoomedIndex]}
+          alt={receipt?.productName}
+        />
         <a href={receipt?.imageList[receiptZoomedIndex]} download>
           <Button primary>다운로드</Button>
         </a>
@@ -343,7 +326,7 @@ const ReceiptDetail = ({
       <BottomTextInputPopup
         visible={popupInfo}
         setVisible={setPopupOpen}
-        {...popupInfo}  
+        {...popupInfo}
       />
 
       <TextModal
@@ -380,11 +363,10 @@ const TopBackground = styled.div`
   z-index: 0;
   border-bottom: 1px solid var(--grey300);
 
-  background: ${props =>
-    props.backgroundImage ?
-    `url(${props.backgroundImage})` :
-    'url(/bg/receipt-background.png)'
-  };
+  background: ${(props) =>
+    props.backgroundImage
+      ? `url(${props.backgroundImage})`
+      : 'url(/bg/receipt-background.png)'};
 `;
 
 const DeleteReceipt = styled.button`
