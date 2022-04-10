@@ -52,8 +52,6 @@ const ReceiptDetail = ({
   }, [receipt, isEdit])
 
   const {
-    getReceiptDetail,
-    changeReceiptNickname,
     updateProductImage,
     deleteReceipt,
   } = receiptApi();
@@ -82,10 +80,6 @@ const ReceiptDetail = ({
     };
 
     if (files[0]) reader.readAsDataURL(files[0]);
-  };
-
-  const handleNicknameChange = (e) => {
-    setNickname(e.target.value);
   };
 
   const setPopupOpen = (varType) => {
@@ -151,14 +145,6 @@ const ReceiptDetail = ({
     }
   }
 
-  const handleNicknameEdit = (e) => {
-    setNickname(e.target.innerText);
-  }
-
-  const handleProductNameEdit = (e) => {
-    setNewProductName(e.target.innerText);
-  };
-
   const handleSaveClick = () => {
     onSaveClick(
       nickname,
@@ -203,7 +189,9 @@ const ReceiptDetail = ({
       />
       <NicknameWrapper
         onClick={() => isEdit && setPopupOpen('nickname')}>
-        {nickname}
+        {isEdit ?
+        (nickname || '소중한 내 물건에게 별명을 지어주세요 (선택)') :
+        nickname}
       </NicknameWrapper>
 
       {receipt?.productImage ? (
