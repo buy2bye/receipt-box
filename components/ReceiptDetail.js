@@ -201,25 +201,27 @@ const ReceiptDetail = ({
             id='upload-photo'
             accept='image/*'
             onChange={handleProductImageChange}
-          />
-          <label className='change-image' htmlFor='upload-photo'>
-            <img src='/icons/edit.png' alt='edit' />
-          </label>
+          />          
         </ThumbnailWrapper>
       ) : (
         <ThumbnailWrapper>
-          <span>상품 이미지를 준비해 드릴게요</span>
+          <label htmlFor='upload-photo'>
+            <img
+              src='/icons/product-placeholder.png'
+              alt='placeholder'
+            />
+            {isEdit && (
+              <span>
+                내 물건의 프로필사진을 등록해보세요
+              </span>
+            )}
+          </label>
           <input
             type='file'
             id='upload-photo'
             accept='image/*'
             onChange={handleProductImageChange}
           />
-          {isEdit && (
-            <label className='new-image' htmlFor='upload-photo'>
-              직접 등록하기
-            </label>
-          )}
         </ThumbnailWrapper>
       )}
 
@@ -429,7 +431,15 @@ const ThumbnailWrapper = styled.div`
   position: relative;
   border: 1px solid var(--grey300);
 
+  label {
+    width: 100%;
+    height: 100%;
+  }
+
   img {
+    position: absolute;
+    top: 0px;
+    left: 0px;
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -437,6 +447,9 @@ const ThumbnailWrapper = styled.div`
   }
 
   span {
+    position: absolute;
+    width: 100%;
+    height: 100%;
     padding: 20px;
     word-break: keep-all;
     color: var(--grey500);
@@ -444,30 +457,7 @@ const ThumbnailWrapper = styled.div`
     flex: 1;
     display: flex;
     align-items: center;
-  }
-
-  .new-image {
-    font-weight: 500;
-    font-size: 12px;
-    text-decoration: underline;
-    text-underline-position: under;
-    color: var(--grey800);
-    padding-bottom: 16px;
-  }
-
-  .change-image {
-    position: absolute;
-    bottom: 4px;
-    right: 4px;
-    width: 24px;
-    height: 24px;
-    background: rgba(255, 255, 255, 0.6);
-    padding: 4px;
-    border-radius: 4px;
-
-    img {
-      border-radius: 0;
-    }
+    z-index: 1;
   }
 `;
 
