@@ -7,6 +7,7 @@ const Toggle = ({ onToggle, toggleState, id }) => {
         type='checkbox'
         onChange={onToggle}
         checked={toggleState}
+        readOnly
       />
       <span />
     </Container>

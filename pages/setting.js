@@ -25,13 +25,8 @@ const SettingPage = ({ userInfo }) => {
   const [marketingAgreeChanged, setMarketingAgreeChanged] = useState(false);
   const [showWithdrawalReasonsPopup, setShowWithdrawalReasonsPopup] =
     useState(false);
-  const [nickname, setNickname] = useState(userInfo.nickname);
 
-  const handleNicknameChange = (e) => {
-    setNickname(e.target.value);
-  };
-
-  const handleNicknameSubmit = () => {
+  const handleNicknameSubmit = (nickname) => {
     if (nickname !== userInfo.nickname) {
       apiController()
         .post('/api/user/set-nickname', { nickname: nickname })
@@ -183,10 +178,9 @@ const SettingPage = ({ userInfo }) => {
         visible={showNicknameChangePopup}
         setVisible={setShowNicknameChangePopup}
         title='변경할 닉네임을 입력해주세요'
-        onInputChange={handleNicknameChange}
         onSubmit={handleNicknameSubmit}
         confirmText='변경하기'
-        value={nickname}
+        value={userInfo.nickname}
       />
       <ChangePasswordPopup
         visible={showChangePasswordPopup}

@@ -36,6 +36,7 @@ const ReceiptDetail = ({
 
   const [deleteReasonsShown, setDeleteReasonsShown] = useState(false);
   const [receiptZoomedIn, setReceiptZoomedIn] = useState(false);
+  const [receiptZoomedIndex, setReceiptZoomedIndex] = useState(0)
   const [receiptImageInfoShown, setReceiptImageInfoShown] = useState(false);
   const [usedDealInfoShown, setUsedDealInfoShown] = useState(false);
 
@@ -295,11 +296,15 @@ const ReceiptDetail = ({
           </span>
         </UsedDeal>
         <li>
-          {_.map(receipt?.imageList, (image) => {
+          {_.map(receipt?.imageList, (image, idx) => {
             return <img
+              key={`receipt__image__${idx}`}
               src={image}
               alt={receipt?.productName}
-              onClick={() => setReceiptZoomedIn(true)}
+              onClick={() => {
+                setReceiptZoomedIndex(idx)
+                setReceiptZoomedIn(true)
+              }}
             />
           })}
         </li>
@@ -339,8 +344,8 @@ const ReceiptDetail = ({
         setVisible={setReceiptZoomedIn}
         height='calc(100vw + 100px)'
       >
-        <img src={receipt?.imageList[0]} alt={receipt?.productName} />
-        <a href={receipt?.imageList[0]} download>
+        <img src={receipt?.imageList[receiptZoomedIndex]} alt={receipt?.productName} />
+        <a href={receipt?.imageList[receiptZoomedIndex]} download>
           <Button primary>다운로드</Button>
         </a>
       </ZoomReceipt>
