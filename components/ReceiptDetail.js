@@ -171,7 +171,7 @@ const ReceiptDetail = ({
       onBackClick={onBackClick}
     >
       <TopBackground
-        backgroundImage={receipt.backgroundImage}
+        backgroundImage={receipt?.backgroundImage}
       />
       {isEdit ? (
         <DeleteReceipt onClick={handleSaveClick}>저장하기</DeleteReceipt>
