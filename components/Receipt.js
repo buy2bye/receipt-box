@@ -17,7 +17,7 @@ const Receipt = ({ item }) => {
   );
 
   return (
-    <Link href={`/receipt/${item.id}`}>
+    <Link href={`/receipt/${item.id}`} passHref>
       <Container>
         {item.productImage ? imageWrapper : imageSkeleton}
         <div className='contents'>

@@ -17,7 +17,7 @@ const ReceiptPreview = ({ item }) => {
   );
 
   return (
-    <Link href={`/preview/${item.id}`}>
+    <Link href={`/preview/${item.id}`} passHref>
       <Container>
         {item.productImage ? imageWrapper : imageSkeleton}
         <div className='contents'>

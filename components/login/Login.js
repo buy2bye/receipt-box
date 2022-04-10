@@ -103,10 +103,10 @@ const Login = () => {
         로그인
       </Button>
 
-      <Link href='/signup'>
+      <Link href='/signup' passHref>
         <div className='sign-up'>회원 가입하기</div>
       </Link>
-      <Link href='https://pf.kakao.com/_IxmxdJb/chat'>
+      <Link href='https://pf.kakao.com/_IxmxdJb/chat' passHref>
         <div className='kakao-link'>고객센터 연락하기{' >'}</div>
       </Link>
     </EmailLoginForm>
