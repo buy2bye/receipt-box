@@ -167,7 +167,7 @@ const ReceiptDetail = ({
     )
   }
 
-  if (!receipt) {
+  if (!receipt && !isEdit) {
     return (
       <Container hideBottom topNavColor='var(--grey100)'>
         <FullScreenSpinner />
@@ -201,7 +201,7 @@ const ReceiptDetail = ({
         {nickname}
       </NicknameWrapper>
 
-      {receipt.productImage ? (
+      {receipt?.productImage ? (
         <ThumbnailWrapper>
           <img src={receipt.productImage} alt={nickname} />
           <input
@@ -292,7 +292,7 @@ const ReceiptDetail = ({
             onClick={() => setReceiptZoomedIn(true)}
           />
         </li>
-        {receipt.linkList.length > 0 && (
+        {receipt?.linkList.length > 0 && (
           <ExternalLinkList>
             <span>내 물건 관리 tip</span>
             {receipt.linkList.map((link, index) => (
@@ -328,8 +328,8 @@ const ReceiptDetail = ({
         setVisible={setReceiptZoomedIn}
         height='calc(100vw + 100px)'
       >
-        <img src={receipt.imageList[0]} alt={receipt.productName} />
-        <a href={receipt.imageList[0]} download>
+        <img src={receipt?.imageList[0]} alt={receipt?.productName} />
+        <a href={receipt?.imageList[0]} download>
           <Button primary>다운로드</Button>
         </a>
       </ZoomReceipt>
