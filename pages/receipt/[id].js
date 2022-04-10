@@ -1,61 +1,52 @@
 import styled from '@emotion/styled';
-import { stepIconClasses } from '@mui/material';
+
 import receiptApi from 'api/receipt';
 import Button from 'components/button/Button';
 import FullScreenSpinner from 'components/common/FullScreenSpinner';
 import Toggle from 'components/common/Toggle';
 import Layout from 'components/layout/Layout';
+import Modal from 'components/modal/Modal';
 import TextModal from 'components/modal/TextModal';
 import BottomPopup from 'components/popup/BottomPopup';
 import BottomTextInputPopup from 'components/popup/BottomTextInputPopup';
 import DeleteReasons from 'components/receipt/DeleteReasons';
 import apiController from 'helpers/apiController';
 import WrapAuthPage from 'helpers/AuthWrapper';
-import _ from 'lodash';
-import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
-const ReceiptDetail = ({
-  receipt,
-  isEdit,
-  onEditClick,
-  onSaveClick,
-  onBackClick,
-}) => {
+const ReceiptDetail = () => {
   const router = useRouter();
   const { id } = router.query;
-
-  const [nickname, setNickname] = useState();
-  const [productName, setProductName] = useState();
-  const [productPrice, setProductPrice] = useState();
-  const [productPlace, setProductPlace] = useState();
-  const [productDate, setProductDate] = useState();
-  const [usedDealAlert, setUsedDealAlert] = useState(false);
-
-  const [popupInfo, setPopupInfo] = useState();
-
+  const [receipt, setReceipt] = useState();
+  const [nickname, setNickname] = useState('');
+  const [showNicknameChangePopup, setShowNicknameChangePopup] = useState(false);
   const [deleteReasonsShown, setDeleteReasonsShown] = useState(false);
   const [receiptZoomedIn, setReceiptZoomedIn] = useState(false);
-  const [receiptZoomedIndex, setReceiptZoomedIndex] = useState(0);
-  const [receiptImageInfoShown, setReceiptImageInfoShown] = useState(false);
+  const [usedDealAlert, setUsedDealAlert] = useState(false);
   const [usedDealInfoShown, setUsedDealInfoShown] = useState(false);
+  const {
+    getReceiptDetail,
+    changeReceiptNickname,
+    updateProductImage,
+    deleteReceipt,
+  } = receiptApi();
+
+  const fetchReceipt = async () => {
+    const { data } = await getReceiptDetail(id);
+    setReceipt(data);
+    setUsedDealAlert(data.usedDealAlert);
+  };
 
   useEffect(() => {
-    if (receipt) {
-      setNickname(receipt.nickname);
-      setProductName(receipt.productName);
-      setProductPrice(receipt.productPrice);
-      setProductPlace(receipt.productPlace);
-      setProductDate(receipt.productDate);
-      setUsedDealAlert(receipt.usedDealAlert);
-    }
-  }, [receipt, isEdit]);
-
-  const { updateProductImage, deleteReceipt } = receiptApi();
+    fetchReceipt();
+  }, []);
 
   const handleUsedDealAlertToggle = (e) => {
     setUsedDealAlert(e.target.checked);
+    apiController().post(`/api/receipt/${id}/set-used-deal-alert`, {
+      used_deal_alert: e.target.checked,
+    });
   };
 
   const handleDeleteButtonClick = () => {
@@ -80,81 +71,18 @@ const ReceiptDetail = ({
     if (files[0]) reader.readAsDataURL(files[0]);
   };
 
-  const setPopupOpen = (varType) => {
-    if (varType === 'nickname') {
-      setPopupInfo({
-        title: '닉네임을 입력해주세요',
-        placeholder: '예) 맥북 2022',
-        onSubmit: (value) => {
-          setNickname(value);
-          setPopupInfo(false);
-        },
-        confirmText: '변경하기',
-        value: nickname,
-      });
-    } else if (varType === 'productName') {
-      setPopupInfo({
-        title: '상품명을 입력해주세요',
-        placeholder: 'iPhone 13 (핑크)',
-        onSubmit: (value) => {
-          setProductName(value);
-          setPopupInfo(false);
-        },
-        confirmText: '변경하기',
-        value: productName,
-      });
-    } else if (varType === 'productPlace') {
-      setPopupInfo({
-        title: '구매처를 입력해주세요',
-        placeholder: '애플스토어 가로수길',
-        onSubmit: (value) => {
-          setProductPlace(value);
-          setPopupInfo(false);
-        },
-        confirmText: '변경하기',
-        value: productPlace,
-      });
-    } else if (varType === 'productPrice') {
-      setPopupInfo({
-        title: '구매가를 입력해주세요 (숫자만)',
-        placeholder: '1,090,000원',
-        onSubmit: (value) => {
-          setProductPrice(value);
-          setPopupInfo(false);
-        },
-        confirmText: '변경하기',
-        value: productPlace,
-        type: 'number',
-      });
-    } else if (varType === 'productDate') {
-      setPopupInfo({
-        title: '구매일자를 입력해주세요',
-        placeholder: '2022-03-25',
-        onSubmit: (value) => {
-          setProductDate(value);
-          setPopupInfo(false);
-        },
-        confirmText: '변경하기',
-        value: productDate,
-        type: 'date',
-      });
-    } else {
-      setPopupInfo(false);
-    }
+  const handleNicknameChange = (e) => {
+    setNickname(e.target.value);
   };
 
-  const handleSaveClick = () => {
-    onSaveClick(
-      nickname,
-      productName,
-      productPlace,
-      productPrice,
-      productDate,
-      usedDealAlert
-    );
+  const handleNicknameSubmit = () => {
+    changeReceiptNickname(id, nickname).then(() => {
+      getReceiptDetail(id).then((data) => setReceipt(data.data));
+      setShowNicknameChangePopup(false);
+    });
   };
 
-  if (!receipt && !isEdit) {
+  if (!receipt) {
     return (
       <Container hideBottom topNavColor='var(--grey100)'>
         <FullScreenSpinner />
@@ -163,37 +91,25 @@ const ReceiptDetail = ({
   }
 
   return (
-    <Container
-      hideBottom
-      topNavColor='var(--grey100)'
-      onBackClick={onBackClick}
-    >
-      <TopBackground backgroundImage={receipt?.backgroundImage} />
-      {isEdit ? (
-        <DeleteReceipt onClick={handleSaveClick}>저장하기</DeleteReceipt>
-      ) : (
-        <>
-          <DeleteReceipt onClick={handleDeleteButtonClick}>
-            삭제하기
-          </DeleteReceipt>
-          <ModifyReceipt onClick={onEditClick}>수정하기</ModifyReceipt>
-        </>
-      )}
-
+    <Container hideBottom topNavColor='var(--grey100)'>
+      <TopBackground />
+      <ModifyReceipt onClick={handleDeleteButtonClick}>수정하기</ModifyReceipt>
+      <DeleteReceipt onClick={handleDeleteButtonClick}>삭제하기</DeleteReceipt>
       <DeleteReasons
         visible={deleteReasonsShown}
         setVisible={setDeleteReasonsShown}
         onDelete={handleDeleteSubmit}
       />
-      <NicknameWrapper onClick={() => isEdit && setPopupOpen('nickname')}>
-        {isEdit
-          ? nickname || '소중한 내 물건에게 별명을 지어주세요 (선택)'
-          : nickname}
+      <NicknameWrapper>
+        <span>{receipt.nickname}</span>
+        <button onClick={() => setShowNicknameChangePopup(true)}>
+          <img src='/icons/edit.png' alt='edit' />
+        </button>
       </NicknameWrapper>
 
-      {receipt?.productImage ? (
+      {receipt.productImage ? (
         <ThumbnailWrapper>
-          <img src={receipt.productImage} alt={nickname} />
+          <img src={receipt.productImage} alt={receipt.nickname} />
           <input
             type='file'
             id='upload-photo'
@@ -213,87 +129,50 @@ const ReceiptDetail = ({
             accept='image/*'
             onChange={handleProductImageChange}
           />
-          {isEdit && (
-            <label className='new-image' htmlFor='upload-photo'>
-              직접 등록하기
-            </label>
-          )}
+          <label className='new-image' htmlFor='upload-photo'>
+            직접 등록하기
+          </label>
         </ThumbnailWrapper>
       )}
 
       <Details>
-        <li onClick={() => isEdit && setPopupOpen('productName')}>
-          <span>
-            상품명
-            {isEdit && (
-              <span style={{ color: 'var(--primary)' }}> (필수) </span>
-            )}
-          </span>
-          <span>{productName || '여기를 눌러 입력하세요'}</span>
-        </li>
-        <li onClick={() => isEdit && setPopupOpen('productPlace')}>
-          <span>
-            구매처
-            {isEdit && (
-              <span style={{ color: 'var(--grey400)' }}> (선택) </span>
-            )}
-          </span>
-          <span>{productPlace || '여기를 눌러 입력하세요'}</span>
-        </li>
-        <li onClick={() => isEdit && setPopupOpen('productPrice')}>
-          <span>
-            구매가
-            {isEdit && (
-              <span style={{ color: 'var(--grey400)' }}> (선택) </span>
-            )}
-          </span>
-          <span>
-            {`${parseInt(productPrice).toLocaleString()}원` ||
-              '여기를 눌러 입력하세요'}
-          </span>
-        </li>
-        <li onClick={() => isEdit && setPopupOpen('productDate')}>
-          <span>
-            구매일자
-            {isEdit && (
-              <span style={{ color: 'var(--grey400)' }}> (선택) </span>
-            )}
-          </span>
-          <span>{productDate || '여기를 눌러 입력하세요'}</span>
-        </li>
-        <UsedDeal>
-          <span>
-            영수증/품질보증서 보관함
-            <button
-              className='info'
-              onClick={() => setReceiptImageInfoShown(true)}
-            >
-              ?
-            </button>
-          </span>
-        </UsedDeal>
         <li>
-          {_.map(receipt?.imageList, (image, idx) => {
-            return (
-              <img
-                key={`receipt__image__${idx}`}
-                src={image}
-                alt={receipt?.productName}
-                onClick={() => {
-                  setReceiptZoomedIndex(idx);
-                  setReceiptZoomedIn(true);
-                }}
-              />
-            );
-          })}
+          <span>상품명</span>
+          <span>{receipt.productName || '업데이트 후 알림을 드릴게요'}</span>
         </li>
-        {receipt?.linkList.length > 0 && (
+        <li>
+          <span>구매처</span>
+          <span>{receipt.productPlace || '업데이트 후 알림을 드릴게요'}</span>
+        </li>
+        <li>
+          <span>구매가</span>
+          <span>{receipt.productPrice || '업데이트 후 알림을 드릴게요'}</span>
+        </li>
+        <li>
+          <span>구매일자</span>
+          <span>{receipt.productDate || '업데이트 후 알림을 드릴게요'}</span>
+        </li>
+        <li>
+          <span>영수증</span>
+          <img
+            src={receipt?.imageList[0]}
+            alt={receipt?.productName}
+            onClick={() => setReceiptZoomedIn(true)}
+          />
+        </li>
+        {receipt.linkList.length > 0 && (
           <ExternalLinkList>
             <span>내 물건 관리 tip</span>
             {receipt.linkList.map((link, index) => (
-              <Link href={link.url} className='external-link' key={index}>
+              <a
+                href={link.url}
+                target='_blank'
+                rel='noreferrer'
+                className='external-link'
+                key={index}
+              >
                 {link.title}
-              </Link>
+              </a>
             ))}
           </ExternalLinkList>
         )}
@@ -305,7 +184,7 @@ const ReceiptDetail = ({
             </button>
           </span>
           <Toggle
-            onToggle={isEdit ? handleUsedDealAlertToggle : null}
+            onToggle={handleUsedDealAlertToggle}
             toggleState={usedDealAlert}
             id='used-deal-switch'
           />
@@ -317,19 +196,20 @@ const ReceiptDetail = ({
         setVisible={setReceiptZoomedIn}
         height='calc(100vw + 100px)'
       >
-        <img
-          src={receipt?.imageList[receiptZoomedIndex]}
-          alt={receipt?.productName}
-        />
-        <a href={receipt?.imageList[receiptZoomedIndex]} download>
+        <img src={receipt.imageList[0]} alt={receipt.productName} />
+        <a href={receipt.imageList[0]} download>
           <Button primary>다운로드</Button>
         </a>
       </ZoomReceipt>
 
       <BottomTextInputPopup
-        visible={popupInfo}
-        setVisible={setPopupOpen}
-        {...popupInfo}
+        visible={showNicknameChangePopup}
+        setVisible={setShowNicknameChangePopup}
+        title='변경할 닉네임을 입력해주세요'
+        placeholder='예) 맥북 2022'
+        onInputChange={handleNicknameChange}
+        onSubmit={handleNicknameSubmit}
+        confirmText='변경하기'
       />
 
       <TextModal
@@ -340,14 +220,6 @@ const ReceiptDetail = ({
         <br /> 중고 구매를 희망하는 분이 나타났을 때 바이투바이가 알려드려요 🙂{' '}
         <br />
         <br /> 중고 판매를 원치 않으시면 꺼두시면 됩니다.
-      </TextModal>
-      <TextModal
-        isOpen={receiptImageInfoShown}
-        onCloseClick={() => setReceiptImageInfoShown(false)}
-      >
-        매번 찾아 헤맬 일 없도록 관련 서류를 보관하세요 😃
-        <br />
-        (예: 구매 영수증, 품질보증서, 구매 내역 캡쳐 등)
       </TextModal>
     </Container>
   );
@@ -363,19 +235,15 @@ const TopBackground = styled.div`
   left: 0;
   width: 100vw;
   height: 146px;
+  background: var(--grey100);
   z-index: 0;
   border-bottom: 1px solid var(--grey300);
-
-  background: ${(props) =>
-    props.backgroundImage
-      ? `url(${props.backgroundImage})`
-      : 'url(/bg/receipt-background.png)'};
 `;
 
-const DeleteReceipt = styled.button`
+const ModifyReceipt = styled.button`
   position: fixed;
   top: 10px;
-  right: 10px;
+  right: 72px;
   height: 32px;
   background: transparent;
   padding: 8px;
@@ -384,10 +252,10 @@ const DeleteReceipt = styled.button`
   z-index: 2;
 `;
 
-const ModifyReceipt = styled.button`
+const DeleteReceipt = styled.button`
   position: fixed;
   top: 10px;
-  right: 72px;
+  right: 10px;
   height: 32px;
   background: transparent;
   padding: 8px;
