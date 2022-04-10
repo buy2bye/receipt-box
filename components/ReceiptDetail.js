@@ -168,7 +168,9 @@ const ReceiptDetail = ({
       topNavColor='var(--grey100)'
       onBackClick={onBackClick}
     >
-      <TopBackground backgroundImage={receipt.backgroundImage} />
+      <TopBackground
+        backgroundImage={receipt?.backgroundImage}
+      />
       {isEdit ? (
         <DeleteReceipt onClick={handleSaveClick}>저장하기</DeleteReceipt>
       ) : (
