@@ -3,7 +3,11 @@ import styled from '@emotion/styled';
 const Toggle = ({ onToggle, toggleState, id }) => {
   return (
     <Container id={id}>
-      <input type='checkbox' onChange={onToggle} checked={toggleState} />
+      <input
+        type='checkbox'
+        onChange={onToggle}
+        checked={toggleState}
+      />
       <span />
     </Container>
   );

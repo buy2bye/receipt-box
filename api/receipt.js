@@ -29,6 +29,25 @@ const receiptApi = () => {
     return { data };
   };
 
+  const changeReceiptInfo = async (
+    id,
+    nickname,
+    productName,
+    productPlace,
+    productPrice,
+    productDate,
+    usedDealAlert
+  ) => {
+    await post(`/api/receipt/${id}/info`, {
+      nickname: nickname,
+      product_name: productName,
+      product_place: productPlace,
+      product_price: productPrice,
+      product_date: productDate,
+      used_deal_alert: usedDealAlert
+    });
+  }
+
   const changeReceiptNickname = async (id, nickname) => {
     const { data } = await post(`/api/receipt/${id}/set-nickname`, {
       nickname: nickname,
@@ -53,6 +72,7 @@ const receiptApi = () => {
     createReceipt,
     getReceipts,
     getReceiptDetail,
+    changeReceiptInfo,
     changeReceiptNickname,
     updateProductImage,
     deleteReceipt,
