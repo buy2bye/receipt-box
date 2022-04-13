@@ -1,5 +1,4 @@
 import styled from '@emotion/styled';
-import { stepIconClasses } from '@mui/material';
 import receiptApi from 'api/receipt';
 import Button from 'components/button/Button';
 import FullScreenSpinner from 'components/common/FullScreenSpinner';
@@ -9,9 +8,7 @@ import TextModal from 'components/modal/TextModal';
 import BottomPopup from 'components/popup/BottomPopup';
 import BottomTextInputPopup from 'components/popup/BottomTextInputPopup';
 import DeleteReasons from 'components/receipt/DeleteReasons';
-import apiController from 'helpers/apiController';
 import WrapAuthPage from 'helpers/AuthWrapper';
-import _, { set } from 'lodash';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
@@ -72,8 +69,10 @@ const ReceiptDetail = ({
   });
   const [popupInfo, setPopupInfo] = useState();
   const [byteImageList, setByteImageList] = useState([]);
-  const [imageList, setImageList] = useState([]);
+  const [removeImageIndexList, setRemoveImageIndexList] = useState([]);
+
   const [deleteReasonsShown, setDeleteReasonsShown] = useState(false);
+  const [receiptZoomedType, setReceiptZoomedType] = useState();
   const [receiptZoomedIn, setReceiptZoomedIn] = useState(false);
   const [receiptZoomedIndex, setReceiptZoomedIndex] = useState(0);
   const [receiptImageInfoShown, setReceiptImageInfoShown] = useState(false);
@@ -84,10 +83,12 @@ const ReceiptDetail = ({
     if (receipt) {
       setNewReceiptInfo(receipt);
     }
-  }, [receipt]);
+    setByteImageList([]);
+    setRemoveImageIndexList([]);
+  }, [receipt, isEdit]);
 
   const handleUsedDealAlertToggle = (e) => {
-    setNewReceiptInfo({ ...newReceiptInfo, usedDealAleart: e.target.checked });
+    setNewReceiptInfo({ ...newReceiptInfo, usedDealAlert: newReceiptInfo });
   };
 
   const handleDeleteButtonClick = () => {
@@ -135,7 +136,7 @@ const ReceiptDetail = ({
       alert('상품명을 입력해주세요.');
       return;
     }
-    onSaveClick(newReceiptInfo);
+    onSaveClick(newReceiptInfo, removeImageIndexList);
   };
 
   const handleAddReceiptClick = (e) => {
@@ -156,13 +157,18 @@ const ReceiptDetail = ({
   };
 
   const handleReceiptImageDelete = () => {
-    const newByteImageList = byteImageList;
-    const newImageList = newReceiptInfo.imageList;
+    if (receiptZoomedType === 'byte') {
+      const newByteImageList = byteImageList;
+      const newImageList = newReceiptInfo.imageList;
 
-    newByteImageList.splice(receiptZoomedIndex, 1);
-    newImageList.splice(receiptZoomedIndex, 1);
-    setByteImageList(newByteImageList);
-    setNewReceiptInfo({ ...newReceiptInfo, imageList: newImageList });
+      newByteImageList.splice(receiptZoomedIndex, 1);
+      newImageList.splice(receiptZoomedIndex, 1);
+      setByteImageList(newByteImageList);
+      setNewReceiptInfo({ ...newReceiptInfo, imageList: newImageList });
+    } else {
+      setRemoveImageIndexList(removeImageIndexList.concat(receiptZoomedIndex));
+    }
+
     setReceiptZoomedIn(false);
   };
 
@@ -173,9 +179,6 @@ const ReceiptDetail = ({
       </Container>
     );
   }
-
-  console.log(byteImageList);
-  console.log(newReceiptInfo);
 
   return (
     <Container
@@ -241,7 +244,8 @@ const ReceiptDetail = ({
             )}
           </span>
           <span>
-            {newReceiptInfo.productName || '이곳을 터치해 입력하세요'}
+            {newReceiptInfo.productName ||
+              (isEdit && '이곳을 터치해 입력하세요')}
           </span>
         </li>
         <li onClick={() => isEdit && setPopupOpen('productPlace')}>
@@ -252,7 +256,8 @@ const ReceiptDetail = ({
             )}
           </span>
           <span>
-            {newReceiptInfo.productPlace || '이곳을 터치해 입력하세요'}
+            {newReceiptInfo.productPlace ||
+              (isEdit && '이곳을 터치해 입력하세요')}
           </span>
         </li>
         <li onClick={() => isEdit && setPopupOpen('productPrice')}>
@@ -265,7 +270,7 @@ const ReceiptDetail = ({
           <span>
             {newReceiptInfo.productPrice
               ? `${parseInt(newReceiptInfo.productPrice).toLocaleString()}원`
-              : '이곳을 터치해 입력하세요'}
+              : isEdit && '이곳을 터치해 입력하세요'}
           </span>
         </li>
         <li onClick={() => isEdit && setPopupOpen('productDate')}>
@@ -276,7 +281,8 @@ const ReceiptDetail = ({
             )}
           </span>
           <span>
-            {newReceiptInfo.productDate || '이곳을 터치해 입력하세요'}
+            {newReceiptInfo.productDate ||
+              (isEdit && '이곳을 터치해 입력하세요')}
           </span>
         </li>
         <AddReceiptList>
@@ -290,29 +296,50 @@ const ReceiptDetail = ({
             </button>
           </span>
           <ReceiptImages>
+            {receipt?.imageList.map((imageURL, idx) => {
+              if (removeImageIndexList.includes(idx)) {
+                return null;
+              }
+              return (
+                <li key={`receipt__image__url__${idx}`}>
+                  <img
+                    src={imageURL}
+                    alt={`image_${idx}`}
+                    onClick={() => {
+                      setReceiptZoomedIndex(idx);
+                      setReceiptZoomedType('url');
+                      setReceiptZoomedIn(true);
+                    }}
+                  />
+                </li>
+              );
+            })}
             {byteImageList.map((image, idx) => (
-              <li>
+              <li key={`receipt__image__${idx}`}>
                 <img
-                  key={`receipt__image__${idx}`}
                   src={image}
                   alt={newReceiptInfo.imageList[idx].name}
                   onClick={() => {
                     setReceiptZoomedIndex(idx);
+                    setReceiptZoomedType('byte');
                     setReceiptZoomedIn(true);
                   }}
                 />
               </li>
             ))}
-
-            <AddReceiptImageLabel htmlFor='add-receipt-image'>
-              +
-            </AddReceiptImageLabel>
-            <input
-              type='file'
-              id='add-receipt-image'
-              accept='image/*'
-              onChange={handleAddReceiptClick}
-            />
+            {isEdit && (
+              <>
+                <AddReceiptImageLabel htmlFor='add-receipt-image'>
+                  +
+                </AddReceiptImageLabel>
+                <input
+                  type='file'
+                  id='add-receipt-image'
+                  accept='image/*'
+                  onChange={handleAddReceiptClick}
+                />
+              </>
+            )}
           </ReceiptImages>
         </AddReceiptList>
 
@@ -347,14 +374,27 @@ const ReceiptDetail = ({
         height='calc(100vw + 100px)'
       >
         <img
-          src={byteImageList[receiptZoomedIndex]}
+          src={
+            receiptZoomedType === 'byte'
+              ? byteImageList[receiptZoomedIndex]
+              : receipt?.imageList[receiptZoomedIndex]
+          }
           alt={receipt?.productName}
         />
         <div className='buttons__wrapper'>
-          <Button secondary onClick={handleReceiptImageDelete}>
-            삭제하기
-          </Button>
-          <a href={byteImageList[receiptZoomedIndex]} download>
+          {isEdit && (
+            <Button secondary onClick={handleReceiptImageDelete}>
+              삭제하기
+            </Button>
+          )}
+          <a
+            href={
+              receiptZoomedType === 'byte'
+                ? byteImageList[receiptZoomedIndex]
+                : receipt?.imageList[receiptZoomedIndex]
+            }
+            download
+          >
             <Button primary>다운로드</Button>
           </a>
         </div>
