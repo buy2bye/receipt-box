@@ -383,7 +383,7 @@ const ReceiptDetail = ({
         <img
           src={receiptZoomedType === 'byte' ?
             byteImageList[receiptZoomedIndex] :
-            receipt.imageList[receiptZoomedIndex]}
+            receipt?.imageList[receiptZoomedIndex]}
           alt={receipt?.productName}
         />
         <div className='buttons__wrapper'>
@@ -395,7 +395,7 @@ const ReceiptDetail = ({
           <a
             href={receiptZoomedType === 'byte' ?
               byteImageList[receiptZoomedIndex] :
-              receipt.imageList[receiptZoomedIndex]}
+              receipt?.imageList[receiptZoomedIndex]}
             download
           >
             <Button primary>다운로드</Button>
