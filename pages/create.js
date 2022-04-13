@@ -1,12 +1,20 @@
-import { useEffect, useState } from 'react';
-import { useRouter } from 'next/router';
-
+import receiptApi from 'api/receipt';
 import ReceiptDetail from 'components/ReceiptDetail';
 import WrapAuthPage from 'helpers/AuthWrapper';
+import { useRouter } from 'next/router';
 
 const ReceiptDetailPage = () => {
-  const handleSaveClick = async (newReceiptInfo, images) => {
-    await changeReceiptInfo(newReceiptInfo);
+  const router = useRouter();
+  const { createReceipt } = receiptApi();
+
+  const handleSaveClick = async (newReceiptInfo) => {
+    await createReceipt(newReceiptInfo);
+
+    // alert OK 누르면 메인으로 이동
+    if (alert('상품등록이 완료되었어요.')) {
+    } else {
+      router.replace('/');
+    }
   };
 
   return <ReceiptDetail isEdit onSaveClick={handleSaveClick} />;

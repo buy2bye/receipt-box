@@ -4,17 +4,27 @@ const { get, post } = apiController();
 
 const receiptApi = () => {
   //영수증 등록
-  const createReceipt = async (receiptInfo, receiptImageInfo) => {
+  const createReceipt = async (newReceiptInfo) => {
     const formData = new FormData();
-    formData.append('nickname', receiptInfo.nickname);
-    formData.append('product_name', receiptInfo.productName);
-    formData.append('product_place', receiptInfo.productPlace);
-    formData.append('product_price', receiptInfo.productPrice);
-    formData.append('product_date', receiptInfo.productDate);
-    formData.append('used_deal_alert', receiptInfo.usedDealAlert);
-    formData.append('product_image', receiptImageInfo.productImage);
-    formData.append('background_image', receiptImageInfo.backgroundImage);
-    receiptImageInfo.imageList.forEach((image) =>
+
+    // productName만 필수 입력
+    formData.append('product_name', newReceiptInfo.productName);
+
+    newReceiptInfo.nickname &&
+      formData.append('nickname', newReceiptInfo.nickname);
+    newReceiptInfo.productPlace &&
+      formData.append('product_place', newReceiptInfo.productPlace);
+    newReceiptInfo.productPrice &&
+      formData.append('product_price', newReceiptInfo.productPrice);
+    newReceiptInfo.productDate &&
+      formData.append('product_date', newReceiptInfo.productDate);
+    newReceiptInfo.usedDealAlert &&
+      formData.append('used_deal_alert', newReceiptInfo.usedDealAlert);
+    newReceiptInfo.productImage &&
+      formData.append('product_image', newReceiptInfo.productImage);
+    newReceiptInfo.backgroundImage &&
+      formData.append('background_image', newReceiptInfo.backgroundImage);
+    newReceiptInfo.imageList.forEach((image) =>
       form.append('image_list', image)
     );
 

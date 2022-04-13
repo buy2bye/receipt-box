@@ -73,29 +73,18 @@ const ReceiptDetail = ({
   const [popupInfo, setPopupInfo] = useState();
   const [byteImageList, setByteImageList] = useState([]);
   const [imageList, setImageList] = useState([]);
-
   const [deleteReasonsShown, setDeleteReasonsShown] = useState(false);
   const [receiptZoomedIn, setReceiptZoomedIn] = useState(false);
   const [receiptZoomedIndex, setReceiptZoomedIndex] = useState(0);
   const [receiptImageInfoShown, setReceiptImageInfoShown] = useState(false);
   const [usedDealInfoShown, setUsedDealInfoShown] = useState(false);
+  const { updateProductImage, deleteReceipt } = receiptApi();
 
   useEffect(() => {
     if (receipt) {
-      setNewReceiptInfo({
-        ...newReceiptInfo,
-        nickname: receipt.nickname,
-        productName: receipt.productName,
-        productPrice: receipt.productPrice,
-        productPlace: receipt.productPlace,
-        productDate: receipt.productDate,
-        usedDealAlert: receipt.usedDealAlert,
-        imageList: receipt.imageList,
-      });
+      setNewReceiptInfo(receipt);
     }
-  }, [receipt, isEdit]);
-
-  const { updateProductImage, deleteReceipt } = receiptApi();
+  }, [receipt]);
 
   const handleUsedDealAlertToggle = (e) => {
     setNewReceiptInfo({ ...newReceiptInfo, usedDealAleart: e.target.checked });
@@ -142,7 +131,11 @@ const ReceiptDetail = ({
   };
 
   const handleSaveClick = () => {
-    onSaveClick(newReceiptInfo, imageList);
+    if (!newReceiptInfo.productName) {
+      alert('상품명을 입력해주세요.');
+      return;
+    }
+    onSaveClick(newReceiptInfo);
   };
 
   const handleAddReceiptClick = (e) => {
@@ -155,18 +148,21 @@ const ReceiptDetail = ({
 
     if (files[0]) {
       reader.readAsDataURL(files[0]);
-      setImageList(imageList.concat(files[0]));
+      setNewReceiptInfo({
+        ...newReceiptInfo,
+        imageList: newReceiptInfo.imageList.concat(files[0]),
+      });
     }
   };
 
   const handleReceiptImageDelete = () => {
     const newByteImageList = byteImageList;
-    const newImageList = imageList;
+    const newImageList = newReceiptInfo.imageList;
 
     newByteImageList.splice(receiptZoomedIndex, 1);
     newImageList.splice(receiptZoomedIndex, 1);
     setByteImageList(newByteImageList);
-    setImageList(newImageList);
+    setNewReceiptInfo({ ...newReceiptInfo, imageList: newImageList });
     setReceiptZoomedIn(false);
   };
 
@@ -179,6 +175,7 @@ const ReceiptDetail = ({
   }
 
   console.log(byteImageList);
+  console.log(newReceiptInfo);
 
   return (
     <Container
@@ -298,7 +295,7 @@ const ReceiptDetail = ({
                 <img
                   key={`receipt__image__${idx}`}
                   src={image}
-                  alt={imageList[idx].name}
+                  alt={newReceiptInfo.imageList[idx].name}
                   onClick={() => {
                     setReceiptZoomedIndex(idx);
                     setReceiptZoomedIn(true);
