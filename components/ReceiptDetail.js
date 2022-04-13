@@ -244,7 +244,7 @@ const ReceiptDetail = ({
             )}
           </span>
           <span>
-            {newReceiptInfo.productName || '이곳을 터치해 입력하세요'}
+            {newReceiptInfo.productName || (isEdit && '이곳을 터치해 입력하세요')}
           </span>
         </li>
         <li onClick={() => isEdit && setPopupOpen('productPlace')}>
@@ -255,7 +255,7 @@ const ReceiptDetail = ({
             )}
           </span>
           <span>
-            {newReceiptInfo.productPlace || '이곳을 터치해 입력하세요'}
+            {newReceiptInfo.productPlace || (isEdit && '이곳을 터치해 입력하세요')}
           </span>
         </li>
         <li onClick={() => isEdit && setPopupOpen('productPrice')}>
@@ -268,7 +268,7 @@ const ReceiptDetail = ({
           <span>
             {newReceiptInfo.productPrice
               ? `${parseInt(newReceiptInfo.productPrice).toLocaleString()}원`
-              : '이곳을 터치해 입력하세요'}
+              : (isEdit && '이곳을 터치해 입력하세요')}
           </span>
         </li>
         <li onClick={() => isEdit && setPopupOpen('productDate')}>
@@ -279,7 +279,7 @@ const ReceiptDetail = ({
             )}
           </span>
           <span>
-            {newReceiptInfo.productDate || '이곳을 터치해 입력하세요'}
+            {newReceiptInfo.productDate || (isEdit && '이곳을 터치해 입력하세요')}
           </span>
         </li>
         <AddReceiptList>
