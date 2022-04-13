@@ -308,9 +308,8 @@ const ReceiptDetail = ({
                 return null;
               }
               return (
-                <li>
+                <li key={`receipt__image__url__${idx}`}>
                   <img
-                    key={`receipt__image__url__${idx}`}
                     src={imageURL}
                     alt={`image_${idx}`}
                     onClick={() => {
@@ -323,9 +322,8 @@ const ReceiptDetail = ({
               )
             })}
             {byteImageList.map((image, idx) => (
-              <li>
+              <li key={`receipt__image__${idx}`}>
                 <img
-                  key={`receipt__image__${idx}`}
                   src={image}
                   alt={imageList[idx].name}
                   onClick={() => {
