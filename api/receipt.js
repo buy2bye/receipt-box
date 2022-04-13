@@ -4,10 +4,18 @@ const { get, post } = apiController();
 
 const receiptApi = () => {
   //영수증 등록
-  const createReceipt = async (nickname, image) => {
+  const createReceipt = async (receiptInfo, receiptImageInfo) => {
     const formData = new FormData();
-    formData.append('nickname', nickname);
-    formData.append('image_list', image);
+    formData.append('nickname', receiptInfo.nickname);
+    formData.append('product_name', receiptInfo.productName);
+    formData.append('product_place', receiptInfo.productPlace);
+    formData.append('product_price', receiptInfo.productPrice);
+    formData.append('product_date', receiptInfo.productDate);
+    formData.append('used_deal_alert', receiptInfo.usedDealAlert);
+    formData.append('product_image', receiptImageInfo.productImage);
+    formData.append('background_image', receiptImageInfo.backgroundImage);
+    // receiptImageInfo.imageList for문 돌면서 append
+    // formData.append('image_list', receiptImageInfo.imageList);
 
     await post('/api/receipt/create', formData);
   };
@@ -44,9 +52,9 @@ const receiptApi = () => {
       product_place: productPlace,
       product_price: productPrice,
       product_date: productDate,
-      used_deal_alert: usedDealAlert
+      used_deal_alert: usedDealAlert,
     });
-  }
+  };
 
   const changeReceiptNickname = async (id, nickname) => {
     const { data } = await post(`/api/receipt/${id}/set-nickname`, {

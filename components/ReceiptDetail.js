@@ -59,7 +59,7 @@ const ReceiptDetail = ({
   const router = useRouter();
   const { id } = router.query;
 
-  const [receiptEdit, setReceiptEdit] = useState({
+  const [newReceiptInfo, setNewReceiptInfo] = useState({
     nickname: '',
     productImage: '',
     backgroundImage: '',
@@ -82,8 +82,8 @@ const ReceiptDetail = ({
 
   useEffect(() => {
     if (receipt) {
-      setReceiptEdit({
-        ...receiptEdit,
+      setNewReceiptInfo({
+        ...newReceiptInfo,
         nickname: receipt.nickname,
         productName: receipt.productName,
         productPrice: receipt.productPrice,
@@ -98,7 +98,7 @@ const ReceiptDetail = ({
   const { updateProductImage, deleteReceipt } = receiptApi();
 
   const handleUsedDealAlertToggle = (e) => {
-    setReceiptEdit({ ...receiptEdit, usedDealAleart: e.target.checked });
+    setNewReceiptInfo({ ...newReceiptInfo, usedDealAleart: e.target.checked });
   };
 
   const handleDeleteButtonClick = () => {
@@ -129,11 +129,11 @@ const ReceiptDetail = ({
         title: PopupInfo[varType].title,
         placeholder: PopupInfo[varType].placeholder,
         onSubmit: (value) => {
-          setReceiptEdit({ ...receiptEdit, [`${varType}`]: value });
+          setNewReceiptInfo({ ...newReceiptInfo, [`${varType}`]: value });
           setPopupInfo(false);
         },
         confirmText: '변경하기',
-        value: receiptEdit[`${varType}`],
+        value: newReceiptInfo[`${varType}`],
         type: PopupInfo[varType].type,
       });
     else {
@@ -142,14 +142,7 @@ const ReceiptDetail = ({
   };
 
   const handleSaveClick = () => {
-    onSaveClick(
-      receiptEdit.nickname,
-      receiptEdit.productName,
-      receiptEdit.productPlace,
-      receiptEdit.productPrice,
-      receiptEdit.productDate,
-      receiptEdit.usedDealAlert
-    );
+    onSaveClick(newReceiptInfo, imageList);
   };
 
   const handleAddReceiptClick = (e) => {
@@ -212,14 +205,14 @@ const ReceiptDetail = ({
       />
       <NicknameWrapper onClick={() => isEdit && setPopupOpen('nickname')}>
         {isEdit
-          ? receiptEdit.nickname ||
+          ? newReceiptInfo.nickname ||
             '소중한 내 물건에게 별명을 지어주세요 (선택)'
-          : receiptEdit.nickname}
+          : newReceiptInfo.nickname}
       </NicknameWrapper>
 
       {receipt?.productImage ? (
         <ThumbnailWrapper>
-          <img src={receipt.productImage} alt={receiptEdit.nickname} />
+          <img src={receipt.productImage} alt={newReceiptInfo.nickname} />
           <input
             type='file'
             id='upload-photo'
@@ -250,7 +243,9 @@ const ReceiptDetail = ({
               <span style={{ color: 'var(--primary)' }}> (필수) </span>
             )}
           </span>
-          <span>{receiptEdit.productName || '이곳을 터치해 입력하세요'}</span>
+          <span>
+            {newReceiptInfo.productName || '이곳을 터치해 입력하세요'}
+          </span>
         </li>
         <li onClick={() => isEdit && setPopupOpen('productPlace')}>
           <span>
@@ -259,7 +254,9 @@ const ReceiptDetail = ({
               <span style={{ color: 'var(--grey400)' }}> (선택) </span>
             )}
           </span>
-          <span>{receiptEdit.productPlace || '이곳을 터치해 입력하세요'}</span>
+          <span>
+            {newReceiptInfo.productPlace || '이곳을 터치해 입력하세요'}
+          </span>
         </li>
         <li onClick={() => isEdit && setPopupOpen('productPrice')}>
           <span>
@@ -269,8 +266,9 @@ const ReceiptDetail = ({
             )}
           </span>
           <span>
-            {`${parseInt(receiptEdit.productPrice).toLocaleString()}원` ||
-              '이곳을 터치해 입력하세요'}
+            {newReceiptInfo.productPrice
+              ? `${parseInt(newReceiptInfo.productPrice).toLocaleString()}원`
+              : '이곳을 터치해 입력하세요'}
           </span>
         </li>
         <li onClick={() => isEdit && setPopupOpen('productDate')}>
@@ -280,7 +278,9 @@ const ReceiptDetail = ({
               <span style={{ color: 'var(--grey400)' }}> (선택) </span>
             )}
           </span>
-          <span>{receiptEdit.productDate || '이곳을 터치해 입력하세요'}</span>
+          <span>
+            {newReceiptInfo.productDate || '이곳을 터치해 입력하세요'}
+          </span>
         </li>
         <AddReceiptList>
           <span>
@@ -338,7 +338,7 @@ const ReceiptDetail = ({
           </span>
           <Toggle
             onToggle={isEdit ? handleUsedDealAlertToggle : null}
-            toggleState={receiptEdit.usedDealAlert}
+            toggleState={newReceiptInfo.usedDealAlert}
             id='used-deal-switch'
           />
         </UsedDeal>
@@ -646,4 +646,5 @@ const AddReceiptImageLabel = styled.label`
   display: flex;
   justify-content: center;
   align-items: center;
+  font-size: 24px;
 `;
