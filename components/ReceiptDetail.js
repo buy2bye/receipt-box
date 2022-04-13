@@ -98,7 +98,7 @@ const ReceiptDetail = ({
   const { updateProductImage, deleteReceipt } = receiptApi();
 
   const handleUsedDealAlertToggle = (e) => {
-    setNewReceiptInfo({ ...newReceiptInfo, usedDealAleart: e.target.checked });
+    setNewReceiptInfo({ ...newReceiptInfo, usedDealAlert: newReceiptInfo });
   };
 
   const handleDeleteButtonClick = () => {
@@ -306,16 +306,17 @@ const ReceiptDetail = ({
                 />
               </li>
             ))}
-
-            <AddReceiptImageLabel htmlFor='add-receipt-image'>
-              +
-            </AddReceiptImageLabel>
-            <input
-              type='file'
-              id='add-receipt-image'
-              accept='image/*'
-              onChange={handleAddReceiptClick}
-            />
+            {isEdit && (<>
+              <AddReceiptImageLabel htmlFor='add-receipt-image'>
+                +
+              </AddReceiptImageLabel>
+              <input
+                type='file'
+                id='add-receipt-image'
+                accept='image/*'
+                onChange={handleAddReceiptClick}
+              />
+            </>)}
           </ReceiptImages>
         </AddReceiptList>
 
