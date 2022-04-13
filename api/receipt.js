@@ -56,6 +56,31 @@ const receiptApi = () => {
     });
   };
 
+  const changeReceiptImages = async (
+    id,
+    productImage,
+    backgroundImage,
+    imageList,
+    removeImageIndexList
+  ) => {
+    const formData = new FormData();
+    if (productImage) {
+      formData.append('product_image', productImage);
+    }
+    if (backgroundImage) {
+      formData.append('background_image', backgroundImage);
+    }
+    imageList.forEach((image) => {
+      formData.append('image_list', image)
+    });
+    removeImageIndexList.forEach((idx) => {
+      formData.append('remove_image_index_list', idx)
+    });
+    if (formData.length > 0) {
+      await post(`/api/receipt/${id}/images`, formData);
+    }
+  }
+
   const changeReceiptNickname = async (id, nickname) => {
     const { data } = await post(`/api/receipt/${id}/set-nickname`, {
       nickname: nickname,
@@ -81,6 +106,7 @@ const receiptApi = () => {
     getReceipts,
     getReceiptDetail,
     changeReceiptInfo,
+    changeReceiptImages,
     changeReceiptNickname,
     updateProductImage,
     deleteReceipt,

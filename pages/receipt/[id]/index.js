@@ -15,7 +15,8 @@ const ReceiptDetailPage = () => {
 
   const {
     getReceiptDetail,
-    changeReceiptInfo
+    changeReceiptInfo,
+    changeReceiptImages
   } = receiptApi();
 
   const fetchReceipt = async () => {
@@ -41,7 +42,8 @@ const ReceiptDetailPage = () => {
   }
 
   const handleSaveClick = async (
-    newReceiptInfo
+    newReceiptInfo,
+    imageList
   ) => {
     await changeReceiptInfo(
       id,
@@ -52,7 +54,15 @@ const ReceiptDetailPage = () => {
       newReceiptInfo.productDate,
       newReceiptInfo.usedDealAlert
     );
-    fetchReceipt()
+    await changeReceiptImages(
+      id,
+      null,
+      null,
+      imageList,
+      []
+    );
+    alert('정보 수정이 완료되었습니다!');
+    router.reload();
   }
 
   return (
