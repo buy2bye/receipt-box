@@ -41,21 +41,16 @@ const ReceiptDetailPage = () => {
   }
 
   const handleSaveClick = async (
-    nickname,
-    productName,
-    productPlace,
-    productPrice,
-    productDate,
-    usedDealAlert
+    newReceiptInfo
   ) => {
     await changeReceiptInfo(
       id,
-      nickname,
-      productName,
-      productPlace,
-      productPrice,
-      productDate,
-      usedDealAlert
+      newReceiptInfo.nickname,
+      newReceiptInfo.productName,
+      newReceiptInfo.productPlace,
+      newReceiptInfo.productPrice,
+      newReceiptInfo.productDate,
+      newReceiptInfo.usedDealAlert
     );
     fetchReceipt()
   }
