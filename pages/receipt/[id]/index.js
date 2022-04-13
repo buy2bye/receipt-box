@@ -43,7 +43,8 @@ const ReceiptDetailPage = () => {
 
   const handleSaveClick = async (
     newReceiptInfo,
-    imageList
+    imageList,
+    removeImageIndexList
   ) => {
     await changeReceiptInfo(
       id,
@@ -59,7 +60,7 @@ const ReceiptDetailPage = () => {
       null,
       null,
       imageList,
-      []
+      removeImageIndexList
     );
     alert('정보 수정이 완료되었습니다!');
     router.reload();

@@ -73,8 +73,10 @@ const ReceiptDetail = ({
   const [popupInfo, setPopupInfo] = useState();
   const [byteImageList, setByteImageList] = useState([]);
   const [imageList, setImageList] = useState([]);
+  const [removeImageIndexList, setRemoveImageIndexList] = useState([]);
 
   const [deleteReasonsShown, setDeleteReasonsShown] = useState(false);
+  const [receiptZoomedType, setReceiptZoomedType] = useState();
   const [receiptZoomedIn, setReceiptZoomedIn] = useState(false);
   const [receiptZoomedIndex, setReceiptZoomedIndex] = useState(0);
   const [receiptImageInfoShown, setReceiptImageInfoShown] = useState(false);
@@ -93,6 +95,9 @@ const ReceiptDetail = ({
         imageList: receipt.imageList,
       });
     }
+    setByteImageList([]);
+    setImageList([]);
+    setRemoveImageIndexList([]);
   }, [receipt, isEdit]);
 
   const { updateProductImage, deleteReceipt } = receiptApi();
@@ -142,7 +147,7 @@ const ReceiptDetail = ({
   };
 
   const handleSaveClick = () => {
-    onSaveClick(newReceiptInfo, imageList);
+    onSaveClick(newReceiptInfo, imageList, removeImageIndexList);
   };
 
   const handleAddReceiptClick = (e) => {
@@ -160,13 +165,18 @@ const ReceiptDetail = ({
   };
 
   const handleReceiptImageDelete = () => {
-    const newByteImageList = byteImageList;
-    const newImageList = imageList;
+    if (receiptZoomedType === 'byte') {
+      const newByteImageList = byteImageList;
+      const newImageList = imageList;
 
-    newByteImageList.splice(receiptZoomedIndex, 1);
-    newImageList.splice(receiptZoomedIndex, 1);
-    setByteImageList(newByteImageList);
-    setImageList(newImageList);
+      newByteImageList.splice(receiptZoomedIndex, 1);
+      newImageList.splice(receiptZoomedIndex, 1);
+      setByteImageList(newByteImageList);
+      setImageList(newImageList);
+    } else {
+      setRemoveImageIndexList(removeImageIndexList.concat(receiptZoomedIndex));
+    }
+
     setReceiptZoomedIn(false);
   };
 
@@ -293,6 +303,25 @@ const ReceiptDetail = ({
             </button>
           </span>
           <ReceiptImages>
+            {receipt?.imageList.map((imageURL, idx) => {
+              if (removeImageIndexList.includes(idx)) {
+                return null;
+              }
+              return (
+                <li>
+                  <img
+                    key={`receipt__image__url__${idx}`}
+                    src={imageURL}
+                    alt={`image_${idx}`}
+                    onClick={() => {
+                      setReceiptZoomedIndex(idx);
+                      setReceiptZoomedType('url');
+                      setReceiptZoomedIn(true);
+                    }}
+                  />
+                </li>
+              )
+            })}
             {byteImageList.map((image, idx) => (
               <li>
                 <img
@@ -301,6 +330,7 @@ const ReceiptDetail = ({
                   alt={imageList[idx].name}
                   onClick={() => {
                     setReceiptZoomedIndex(idx);
+                    setReceiptZoomedType('byte');
                     setReceiptZoomedIn(true);
                   }}
                 />
@@ -351,14 +381,23 @@ const ReceiptDetail = ({
         height='calc(100vw + 100px)'
       >
         <img
-          src={byteImageList[receiptZoomedIndex]}
+          src={receiptZoomedType === 'byte' ?
+            byteImageList[receiptZoomedIndex] :
+            receipt.imageList[receiptZoomedIndex]}
           alt={receipt?.productName}
         />
         <div className='buttons__wrapper'>
-          <Button secondary onClick={handleReceiptImageDelete}>
-            삭제하기
-          </Button>
-          <a href={byteImageList[receiptZoomedIndex]} download>
+          {isEdit && (
+            <Button secondary onClick={handleReceiptImageDelete}>
+              삭제하기
+            </Button>
+          )}
+          <a
+            href={receiptZoomedType === 'byte' ?
+              byteImageList[receiptZoomedIndex] :
+              receipt.imageList[receiptZoomedIndex]}
+            download
+          >
             <Button primary>다운로드</Button>
           </a>
         </div>

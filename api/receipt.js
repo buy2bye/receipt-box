@@ -64,19 +64,25 @@ const receiptApi = () => {
     removeImageIndexList
   ) => {
     const formData = new FormData();
+    let hasForm = false;
     if (productImage) {
       formData.append('product_image', productImage);
+      hasForm = true;
     }
     if (backgroundImage) {
       formData.append('background_image', backgroundImage);
+      hasForm = true;
     }
     imageList.forEach((image) => {
       formData.append('image_list', image)
+      hasForm = true;
     });
     removeImageIndexList.forEach((idx) => {
       formData.append('remove_image_index_list', idx)
+      hasForm = true;
     });
-    if (formData.length > 0) {
+
+    if (hasForm) {
       await post(`/api/receipt/${id}/images`, formData);
     }
   }
