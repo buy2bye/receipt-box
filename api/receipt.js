@@ -14,8 +14,9 @@ const receiptApi = () => {
     formData.append('used_deal_alert', receiptInfo.usedDealAlert);
     formData.append('product_image', receiptImageInfo.productImage);
     formData.append('background_image', receiptImageInfo.backgroundImage);
-    // receiptImageInfo.imageList for문 돌면서 append
-    // formData.append('image_list', receiptImageInfo.imageList);
+    receiptImageInfo.imageList.forEach((image) =>
+      form.append('image_list', image)
+    );
 
     await post('/api/receipt/create', formData);
   };
