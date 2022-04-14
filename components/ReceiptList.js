@@ -19,6 +19,10 @@ const ReceiptListPage = () => {
     });
   }, []);
 
+  const handleLoginClick = () => {
+    // TODO: 로그인 팝업 띄우기
+  };
+
   if (!receiptList)
     return (
       <Layout hideTop showLogo>
@@ -28,6 +32,7 @@ const ReceiptListPage = () => {
 
   return (
     <Layout hideTop showLogo>
+      <HeaderLeftButton onClick={handleLoginClick}>로그인하기</HeaderLeftButton>
       {receiptList.length < 1 && (
         <UploadGuideHeader>
           <Title>내 물건 영수증을 등록해보세요 🙂</Title>
@@ -114,4 +119,16 @@ const HeaderContainer = styled.div`
     flex: 2;
     font-size: 14px;
   }
+`;
+
+const HeaderLeftButton = styled.button`
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  height: 32px;
+  background: transparent;
+  padding: 8px;
+  color: var(--grey500);
+  font-size: 13px;
+  z-index: 2;
 `;
