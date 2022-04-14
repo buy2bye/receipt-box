@@ -25,7 +25,7 @@ const receiptApi = () => {
     newReceiptInfo.backgroundImage &&
       formData.append('background_image', newReceiptInfo.backgroundImage);
     newReceiptInfo.imageList.forEach((image) =>
-      form.append('image_list', image)
+      formData.append('image_list', image)
     );
 
     await post('/api/receipt/create', formData);

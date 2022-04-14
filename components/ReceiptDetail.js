@@ -69,6 +69,7 @@ const ReceiptDetail = ({
   });
   const [popupInfo, setPopupInfo] = useState();
   const [byteImageList, setByteImageList] = useState([]);
+  const [imageList, setImageList] = useState([]);
   const [removeImageIndexList, setRemoveImageIndexList] = useState([]);
 
   const [deleteReasonsShown, setDeleteReasonsShown] = useState(false);
@@ -84,6 +85,7 @@ const ReceiptDetail = ({
       setNewReceiptInfo(receipt);
     }
     setByteImageList([]);
+    setImageList([]);
     setRemoveImageIndexList([]);
   }, [receipt, isEdit]);
 
@@ -136,7 +138,7 @@ const ReceiptDetail = ({
       alert('상품명을 입력해주세요.');
       return;
     }
-    onSaveClick(newReceiptInfo, removeImageIndexList);
+    onSaveClick(newReceiptInfo, imageList, removeImageIndexList);
   };
 
   const handleAddReceiptClick = (e) => {
@@ -149,22 +151,19 @@ const ReceiptDetail = ({
 
     if (files[0]) {
       reader.readAsDataURL(files[0]);
-      setNewReceiptInfo({
-        ...newReceiptInfo,
-        imageList: newReceiptInfo.imageList.concat(files[0]),
-      });
+      setImageList(imageList.concat(files[0]));
     }
   };
 
   const handleReceiptImageDelete = () => {
     if (receiptZoomedType === 'byte') {
       const newByteImageList = byteImageList;
-      const newImageList = newReceiptInfo.imageList;
+      const newImageList = imageList;
 
       newByteImageList.splice(receiptZoomedIndex, 1);
       newImageList.splice(receiptZoomedIndex, 1);
       setByteImageList(newByteImageList);
-      setNewReceiptInfo({ ...newReceiptInfo, imageList: newImageList });
+      setImageList(newImageList);
     } else {
       setRemoveImageIndexList(removeImageIndexList.concat(receiptZoomedIndex));
     }
@@ -318,7 +317,7 @@ const ReceiptDetail = ({
               <li key={`receipt__image__${idx}`}>
                 <img
                   src={image}
-                  alt={newReceiptInfo.imageList[idx].name}
+                  alt={imageList[idx].name}
                   onClick={() => {
                     setReceiptZoomedIndex(idx);
                     setReceiptZoomedType('byte');

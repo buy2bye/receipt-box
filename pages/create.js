@@ -7,7 +7,9 @@ const ReceiptDetailPage = () => {
   const router = useRouter();
   const { createReceipt } = receiptApi();
 
-  const handleSaveClick = async (newReceiptInfo, removeImageIndexList) => {
+  const handleSaveClick = async (newReceiptInfo, imageList, removeImageIndexList) => {
+    newReceiptInfo.imageList = imageList;
+
     await createReceipt(newReceiptInfo);
 
     // alert OK 누르면 메인으로 이동
