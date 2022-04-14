@@ -2,14 +2,15 @@ import styled from '@emotion/styled';
 import Title from 'components/page/Title';
 import Subtitle from 'components/page/Subtitle';
 import Layout from 'components/layout/Layout';
-import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import receiptApi from 'api/receipt';
 import Receipt from './Receipt';
+import TextModal from './modal/TextModal';
 
 const ReceiptListPage = () => {
   const [receiptList, setReceiptList] = useState();
   const [totalCount, setTotalCount] = useState(0);
+  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
 
   useEffect(() => {
     const { getReceipts } = receiptApi();
@@ -20,7 +21,8 @@ const ReceiptListPage = () => {
   }, []);
 
   const handleLoginClick = () => {
-    // TODO: 로그인 팝업 띄우기
+    // TODO: 로그인 팝업 띄우기 TextModal -> ButtonModal 등으로 새로 정의해야함
+    setIsLoginModalOpen(true);
   };
 
   if (!receiptList)
@@ -55,6 +57,14 @@ const ReceiptListPage = () => {
           <Receipt item={item} key={index} />
         ))}
       </ReceiptList>
+      <TextModal
+        isOpen={isLoginModalOpen}
+        onCloseClick={() => setIsLoginModalOpen(false)}
+      >
+        <button>일반로그인</button>
+        <button>애플로그인</button>
+        <button>카카오로그인</button>
+      </TextModal>
     </Layout>
   );
 };
