@@ -212,12 +212,6 @@ const ReceiptDetail = ({
       {receipt?.productImage ? (
         <ThumbnailWrapper>
           <img src={receipt.productImage} alt={newReceiptInfo.nickname} />
-          <input
-            type='file'
-            id='upload-photo'
-            accept='image/*'
-            onChange={handleProductImageChange}
-          />
         </ThumbnailWrapper>
       ) : (
         <ThumbnailWrapper>
@@ -225,12 +219,14 @@ const ReceiptDetail = ({
             <img src='/icons/product-placeholder.png' alt='placeholder' />
             {isEdit && <span>내 물건의 프로필사진을 등록해보세요</span>}
           </label>
-          <input
-            type='file'
-            id='upload-photo'
-            accept='image/*'
-            onChange={handleProductImageChange}
-          />
+          {isEdit && (
+            <input
+              type='file'
+              id='upload-photo'
+              accept='image/*'
+              onChange={handleProductImageChange}
+            />
+          )}
         </ThumbnailWrapper>
       )}
 
