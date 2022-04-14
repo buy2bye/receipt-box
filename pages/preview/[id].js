@@ -228,9 +228,9 @@ const DeleteReceipt = styled.button`
 `;
 
 const NicknameWrapper = styled.div`
-  margin-bottom: 32px;
+  height: 52px;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 8px;
   z-index: 1;
 
