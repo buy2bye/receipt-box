@@ -6,11 +6,21 @@ import { useEffect, useState } from 'react';
 import receiptApi from 'api/receipt';
 import Receipt from './Receipt';
 import TextModal from './modal/TextModal';
+import Image from 'next/image';
+import FileInputLabel from './common/FileInputLabel';
+import apiController from 'helpers/apiController';
+import userApi from 'api/user';
+import BottomTextInputPopup from './popup/BottomTextInputPopup';
 
-const ReceiptListPage = () => {
+const ReceiptListPage = ({ userInfo }) => {
   const [receiptList, setReceiptList] = useState();
   const [totalCount, setTotalCount] = useState(0);
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+  const [showNicknameChangePopup, setShowNicknameChangePopup] = useState(false);
+
+  const { updateProfileImage, updateNickname } = userApi();
+
+  console.log(userInfo);
 
   useEffect(() => {
     const { getReceipts } = receiptApi();
@@ -25,6 +35,27 @@ const ReceiptListPage = () => {
     setIsLoginModalOpen(true);
   };
 
+  const handleProfileImageUpload = (e) => {
+    const reader = new FileReader();
+    const files = e.target.files;
+
+    reader.onload = function (e) {
+      updateProfileImage(files[0]);
+    };
+
+    if (files[0]) reader.readAsDataURL(files[0]);
+  };
+
+  const handleNicknameEditClick = () => {
+    setShowNicknameChangePopup(true);
+  };
+
+  const handleNicknameSubmit = async (nickname) => {
+    console.log(nickname);
+    await updateNickname(nickname);
+    window.location.reload();
+  };
+
   if (!receiptList)
     return (
       <Layout hideTop showLogo>
@@ -35,6 +66,28 @@ const ReceiptListPage = () => {
   return (
     <Layout hideTop showLogo>
       <HeaderLeftButton onClick={handleLoginClick}>로그인하기</HeaderLeftButton>
+      <Profile>
+        <ProfileImageWrapper>
+          {userInfo.profile_image ? (
+            <Image
+              src={userInfo.profile_image}
+              alt='user-profile'
+              layout='fill'
+            />
+          ) : (
+            <FileInputLabel
+              skeletonImage='/icons/add-user.png'
+              onChange={handleProfileImageUpload}
+              imageWidth='50%'
+              imageHeight='50%'
+            />
+          )}
+        </ProfileImageWrapper>
+        <Nickname onClick={handleNicknameEditClick}>
+          {userInfo.nickname}
+          <img src='/icons/edit.png' alt='edit' width={14} height={14} />
+        </Nickname>
+      </Profile>
       {receiptList.length < 1 && (
         <UploadGuideHeader>
           <Title>내 물건 영수증을 등록해보세요 🙂</Title>
@@ -43,7 +96,6 @@ const ReceiptListPage = () => {
       )}
       <HeaderContainer showBorder={receiptList.length > 0}>
         <Title>내 물건 리스트</Title>
-        <span>전체 {totalCount}</span>
       </HeaderContainer>
       <ReceiptList>
         {receiptList.length < 1 && (
@@ -65,6 +117,14 @@ const ReceiptListPage = () => {
         <button>애플로그인</button>
         <button>카카오로그인</button>
       </TextModal>
+      <BottomTextInputPopup
+        visible={showNicknameChangePopup}
+        setVisible={setShowNicknameChangePopup}
+        title='변경할 닉네임을 입력해주세요'
+        onSubmit={handleNicknameSubmit}
+        confirmText='변경하기'
+        value={userInfo.nickname}
+      />
     </Layout>
   );
 };
@@ -141,4 +201,38 @@ const HeaderLeftButton = styled.button`
   color: var(--grey500);
   font-size: 13px;
   z-index: 2;
+`;
+
+const Profile = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px 0 52px 0;
+`;
+
+const ProfileImageWrapper = styled.div`
+  position: relative;
+  width: 80px;
+  height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px;
+`;
+
+const Nickname = styled.div`
+  font-size: 16px;
+  font-weight: 300;
+  color: var(--grey600);
+  position: relative;
+
+  img {
+    position: absolute;
+    top: 50%;
+    right: -24px;
+    transform: translateY(-50%);
+    width: 14px;
+    height: 14px;
+  }
 `;
