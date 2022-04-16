@@ -502,6 +502,7 @@ const Container = styled(Layout)``;
 
 const TopBackground = styled.img`
   position: absolute;
+  object-fit: cover;
   top: 0px;
   left: 0;
   width: 100vw;
