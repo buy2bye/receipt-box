@@ -543,7 +543,8 @@ const NicknameWrapper = styled.div`
   align-items: flex-start;
   gap: 8px;
   z-index: 1;
-
+  font-weight: bold;
+  font-size: 20px;
   text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
 
   img {
