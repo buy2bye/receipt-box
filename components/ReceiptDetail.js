@@ -8,10 +8,12 @@ import TextModal from 'components/modal/TextModal';
 import BottomPopup from 'components/popup/BottomPopup';
 import BottomTextInputPopup from 'components/popup/BottomTextInputPopup';
 import DeleteReasons from 'components/receipt/DeleteReasons';
+import UploadPreview from 'components/receipt/UploadPreview';
 import WrapAuthPage from 'helpers/AuthWrapper';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { createPortal }  from 'react-dom';
 
 const PopupInfo = {
   nickname: {
@@ -72,6 +74,9 @@ const ReceiptDetail = ({
   const [newBackgroundImage, setNewBackgroundIamge] = useState();
 
   const [popupInfo, setPopupInfo] = useState();
+
+  const [previewImage, setPreviewImage] = useState();
+  const [previewByteImage, setPreviewByteImage] = useState();
   const [byteImageList, setByteImageList] = useState([]);
   const [imageList, setImageList] = useState([]);
   const [removeImageIndexList, setRemoveImageIndexList] = useState([]);
@@ -177,13 +182,21 @@ const ReceiptDetail = ({
     const files = e.target.files;
 
     reader.onload = function (e) {
-      setByteImageList(byteImageList.concat(e.target.result));
+      setPreviewByteImage(e.target.result)
     };
 
     if (files[0]) {
       reader.readAsDataURL(files[0]);
-      setImageList(imageList.concat(files[0]));
+      setPreviewImage(files[0])
     }
+  };
+
+  const handleUploadClick = () => {
+    setImageList(imageList.concat(previewImage));
+    setByteImageList(byteImageList.concat(previewByteImage));
+
+    setPreviewImage(null);
+    setPreviewByteImage(null);
   };
 
   const handleReceiptImageDelete = () => {
@@ -411,7 +424,13 @@ const ReceiptDetail = ({
           />
         </UsedDeal>
       </Details>
-
+      {previewByteImage && createPortal(
+        <UploadPreview
+          imageSrc={previewByteImage}
+          onBackClick={() => setPreviewByteImage(null)}
+          onUploadClick={handleUploadClick}
+        />, document.body
+      )}
       <ZoomReceipt
         visible={receiptZoomedIn}
         setVisible={setReceiptZoomedIn}
@@ -494,6 +513,7 @@ const DeleteReceipt = styled.button`
   padding: 8px;
   color: var(--grey500);
   font-size: 13px;
+  text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
   z-index: 2;
 `;
 
@@ -506,6 +526,7 @@ const ModifyReceipt = styled.button`
   padding: 8px;
   color: var(--grey500);
   font-size: 13px;
+  text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
   z-index: 2;
 `;
 
