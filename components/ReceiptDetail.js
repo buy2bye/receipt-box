@@ -82,7 +82,7 @@ const ReceiptDetail = ({
   const [receiptZoomedIndex, setReceiptZoomedIndex] = useState(0);
   const [receiptImageInfoShown, setReceiptImageInfoShown] = useState(false);
   const [usedDealInfoShown, setUsedDealInfoShown] = useState(false);
-  const { updateProductImage, deleteReceipt } = receiptApi();
+  const { deleteReceipt } = receiptApi();
 
   useEffect(() => {
     if (receipt) {
@@ -120,6 +120,23 @@ const ReceiptDetail = ({
     if (files[0]) {
       reader.readAsDataURL(files[0]);
       setNewProductImage(files[0]);
+    }
+  };
+
+  const handleBackgroundImageChange = (e) => {
+    const reader = new FileReader();
+    const files = e.target.files;
+
+    reader.onload = function (e) {
+      setNewReceiptInfo({
+        ...newReceiptInfo,
+        backgroundImage: e.target.result
+      });
+    };
+
+    if (files[0]) {
+      reader.readAsDataURL(files[0]);
+      setNewBackgroundIamge(files[0]);
     }
   };
 
@@ -199,18 +216,24 @@ const ReceiptDetail = ({
       topNavColor='var(--grey100)'
       onBackClick={onBackClick}
     >
-      <TopBackground backgroundImage={receipt?.backgroundImage} />
-      {isEdit ? (
+      {isEdit ? [
+        <label htmlFor='upload-background'>
+          <TopBackground src={newReceiptInfo?.backgroundImage || '/bg/receipt-background.png'} />
+        </label>,
+        <input
+          type='file'
+          id='upload-background'
+          accept='image/*'
+          onChange={handleBackgroundImageChange}
+        />,
         <DeleteReceipt onClick={handleSaveClick}>저장하기</DeleteReceipt>
-      ) : (
-        <>
-          <DeleteReceipt onClick={handleDeleteButtonClick}>
+      ] : [
+        <TopBackground src={newReceiptInfo?.backgroundImage || '/bg/receipt-background.png'} />,
+        <DeleteReceipt onClick={handleDeleteButtonClick}>
             삭제하기
-          </DeleteReceipt>
-          <ModifyReceipt onClick={onEditClick}>수정하기</ModifyReceipt>
-        </>
-      )}
-
+        </DeleteReceipt>,
+        <ModifyReceipt onClick={onEditClick}>수정하기</ModifyReceipt>
+      ]}
       <DeleteReasons
         visible={deleteReasonsShown}
         setVisible={setDeleteReasonsShown}
@@ -452,7 +475,7 @@ export default WrapAuthPage(ReceiptDetail);
 
 const Container = styled(Layout)``;
 
-const TopBackground = styled.div`
+const TopBackground = styled.img`
   position: absolute;
   top: 0px;
   left: 0;
@@ -460,11 +483,6 @@ const TopBackground = styled.div`
   height: 146px;
   z-index: 0;
   border-bottom: 1px solid var(--grey300);
-
-  background: ${(props) =>
-    props.backgroundImage
-      ? `url(${props.backgroundImage})`
-      : 'url(/bg/receipt-background.png)'};
 `;
 
 const DeleteReceipt = styled.button`
@@ -497,6 +515,8 @@ const NicknameWrapper = styled.div`
   align-items: flex-start;
   gap: 8px;
   z-index: 1;
+
+  text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
 
   img {
     width: 14px;
