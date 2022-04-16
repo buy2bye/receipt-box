@@ -538,7 +538,7 @@ const ModifyReceipt = styled.button`
 `;
 
 const NicknameWrapper = styled.div`
-  height: 52px;
+  margin: 20px 0 20px 0;
   display: flex;
   align-items: flex-start;
   gap: 8px;
