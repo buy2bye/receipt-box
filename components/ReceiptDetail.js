@@ -229,24 +229,28 @@ const ReceiptDetail = ({
       topNavColor='var(--grey100)'
       onBackClick={onBackClick}
     >
-      {isEdit ? [
-        <label htmlFor='upload-background'>
+      {isEdit ? (
+        <>
+          <label htmlFor='upload-background'>
+            <TopBackground src={newReceiptInfo?.backgroundImage || '/bg/receipt-background.png'} />
+          </label>
+          <input
+            type='file'
+            id='upload-background'
+            accept='image/*'
+            onChange={handleBackgroundImageChange}
+          />
+          <DeleteReceipt onClick={handleSaveClick}>저장하기</DeleteReceipt>
+        </>
+      ) : (
+        <>
           <TopBackground src={newReceiptInfo?.backgroundImage || '/bg/receipt-background.png'} />
-        </label>,
-        <input
-          type='file'
-          id='upload-background'
-          accept='image/*'
-          onChange={handleBackgroundImageChange}
-        />,
-        <DeleteReceipt onClick={handleSaveClick}>저장하기</DeleteReceipt>
-      ] : [
-        <TopBackground src={newReceiptInfo?.backgroundImage || '/bg/receipt-background.png'} />,
-        <DeleteReceipt onClick={handleDeleteButtonClick}>
-            삭제하기
-        </DeleteReceipt>,
-        <ModifyReceipt onClick={onEditClick}>수정하기</ModifyReceipt>
-      ]}
+          <DeleteReceipt onClick={handleDeleteButtonClick}>
+              삭제하기
+          </DeleteReceipt>
+          <ModifyReceipt onClick={onEditClick}>수정하기</ModifyReceipt>
+        </>
+      )}
       <DeleteReasons
         visible={deleteReasonsShown}
         setVisible={setDeleteReasonsShown}
@@ -261,17 +265,19 @@ const ReceiptDetail = ({
 
       {newReceiptInfo?.productImage ? (
         <ThumbnailWrapper>
-          {isEdit ? [
-            <label htmlFor='upload-photo'>
-              <img src={newReceiptInfo.productImage} alt={newReceiptInfo.nickname} />
-            </label>,
-            <input
-              type='file'
-              id='upload-photo'
-              accept='image/*'
-              onChange={handleProductImageChange}
-            />
-          ] : (
+          {isEdit ? (
+            <>
+              <label htmlFor='upload-photo'>
+                <img src={newReceiptInfo.productImage} alt={newReceiptInfo.nickname} />
+              </label>
+              <input
+                type='file'
+                id='upload-photo'
+                accept='image/*'
+                onChange={handleProductImageChange}
+              />
+            </>
+          ) : (
             <img src={newReceiptInfo.productImage} alt={newReceiptInfo.nickname} />
           )}
         </ThumbnailWrapper>
