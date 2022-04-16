@@ -67,6 +67,10 @@ const ReceiptDetail = ({
     imageList: [],
     usedDealAlert: false,
   });
+
+  const [newProductImage, setNewProductImage] = useState();
+  const [newBackgroundImage, setNewBackgroundIamge] = useState();
+
   const [popupInfo, setPopupInfo] = useState();
   const [byteImageList, setByteImageList] = useState([]);
   const [imageList, setImageList] = useState([]);
@@ -107,12 +111,16 @@ const ReceiptDetail = ({
     const files = e.target.files;
 
     reader.onload = function (e) {
-      updateProductImage(id, files[0]).then(() => {
-        fetchReceipt();
+      setNewReceiptInfo({
+        ...newReceiptInfo,
+        productImage: e.target.result
       });
     };
 
-    if (files[0]) reader.readAsDataURL(files[0]);
+    if (files[0]) {
+      reader.readAsDataURL(files[0]);
+      setNewProductImage(files[0]);
+    }
   };
 
   const setPopupOpen = (varType) => {
@@ -138,7 +146,13 @@ const ReceiptDetail = ({
       alert('상품명을 입력해주세요.');
       return;
     }
-    onSaveClick(newReceiptInfo, imageList, removeImageIndexList);
+    onSaveClick(
+      newReceiptInfo,
+      newProductImage,
+      newBackgroundImage,
+      imageList,
+      removeImageIndexList
+    );
   };
 
   const handleAddReceiptClick = (e) => {
@@ -209,9 +223,21 @@ const ReceiptDetail = ({
           : newReceiptInfo.nickname}
       </NicknameWrapper>
 
-      {receipt?.productImage ? (
+      {newReceiptInfo?.productImage ? (
         <ThumbnailWrapper>
-          <img src={receipt.productImage} alt={newReceiptInfo.nickname} />
+          {isEdit ? [
+            <label htmlFor='upload-photo'>
+              <img src={newReceiptInfo.productImage} alt={newReceiptInfo.nickname} />
+            </label>,
+            <input
+              type='file'
+              id='upload-photo'
+              accept='image/*'
+              onChange={handleProductImageChange}
+            />
+          ] : (
+            <img src={newReceiptInfo.productImage} alt={newReceiptInfo.nickname} />
+          )}
         </ThumbnailWrapper>
       ) : (
         <ThumbnailWrapper>
