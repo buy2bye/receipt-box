@@ -8,10 +8,12 @@ import TextModal from 'components/modal/TextModal';
 import BottomPopup from 'components/popup/BottomPopup';
 import BottomTextInputPopup from 'components/popup/BottomTextInputPopup';
 import DeleteReasons from 'components/receipt/DeleteReasons';
+import UploadPreview from 'components/receipt/UploadPreview';
 import WrapAuthPage from 'helpers/AuthWrapper';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { createPortal }  from 'react-dom';
 
 const PopupInfo = {
   nickname: {
@@ -67,7 +69,14 @@ const ReceiptDetail = ({
     imageList: [],
     usedDealAlert: false,
   });
+
+  const [newProductImage, setNewProductImage] = useState();
+  const [newBackgroundImage, setNewBackgroundIamge] = useState();
+
   const [popupInfo, setPopupInfo] = useState();
+
+  const [previewImage, setPreviewImage] = useState();
+  const [previewByteImage, setPreviewByteImage] = useState();
   const [byteImageList, setByteImageList] = useState([]);
   const [imageList, setImageList] = useState([]);
   const [removeImageIndexList, setRemoveImageIndexList] = useState([]);
@@ -78,7 +87,7 @@ const ReceiptDetail = ({
   const [receiptZoomedIndex, setReceiptZoomedIndex] = useState(0);
   const [receiptImageInfoShown, setReceiptImageInfoShown] = useState(false);
   const [usedDealInfoShown, setUsedDealInfoShown] = useState(false);
-  const { updateProductImage, deleteReceipt } = receiptApi();
+  const { deleteReceipt } = receiptApi();
 
   useEffect(() => {
     if (receipt) {
@@ -107,12 +116,33 @@ const ReceiptDetail = ({
     const files = e.target.files;
 
     reader.onload = function (e) {
-      updateProductImage(id, files[0]).then(() => {
-        fetchReceipt();
+      setNewReceiptInfo({
+        ...newReceiptInfo,
+        productImage: e.target.result
       });
     };
 
-    if (files[0]) reader.readAsDataURL(files[0]);
+    if (files[0]) {
+      reader.readAsDataURL(files[0]);
+      setNewProductImage(files[0]);
+    }
+  };
+
+  const handleBackgroundImageChange = (e) => {
+    const reader = new FileReader();
+    const files = e.target.files;
+
+    reader.onload = function (e) {
+      setNewReceiptInfo({
+        ...newReceiptInfo,
+        backgroundImage: e.target.result
+      });
+    };
+
+    if (files[0]) {
+      reader.readAsDataURL(files[0]);
+      setNewBackgroundIamge(files[0]);
+    }
   };
 
   const setPopupOpen = (varType) => {
@@ -138,7 +168,13 @@ const ReceiptDetail = ({
       alert('상품명을 입력해주세요.');
       return;
     }
-    onSaveClick(newReceiptInfo, imageList, removeImageIndexList);
+    onSaveClick(
+      newReceiptInfo,
+      newProductImage,
+      newBackgroundImage,
+      imageList,
+      removeImageIndexList
+    );
   };
 
   const handleAddReceiptClick = (e) => {
@@ -146,13 +182,21 @@ const ReceiptDetail = ({
     const files = e.target.files;
 
     reader.onload = function (e) {
-      setByteImageList(byteImageList.concat(e.target.result));
+      setPreviewByteImage(e.target.result)
     };
 
     if (files[0]) {
       reader.readAsDataURL(files[0]);
-      setImageList(imageList.concat(files[0]));
+      setPreviewImage(files[0])
     }
+  };
+
+  const handleUploadClick = () => {
+    setImageList(imageList.concat(previewImage));
+    setByteImageList(byteImageList.concat(previewByteImage));
+
+    setPreviewImage(null);
+    setPreviewByteImage(null);
   };
 
   const handleReceiptImageDelete = () => {
@@ -185,18 +229,28 @@ const ReceiptDetail = ({
       topNavColor='var(--grey100)'
       onBackClick={onBackClick}
     >
-      <TopBackground backgroundImage={receipt?.backgroundImage} />
       {isEdit ? (
-        <DeleteReceipt onClick={handleSaveClick}>저장하기</DeleteReceipt>
+        <>
+          <label htmlFor='upload-background'>
+            <TopBackground src={newReceiptInfo?.backgroundImage || '/bg/receipt-background.png'} />
+          </label>
+          <input
+            type='file'
+            id='upload-background'
+            accept='image/*'
+            onChange={handleBackgroundImageChange}
+          />
+          <DeleteReceipt onClick={handleSaveClick}>저장하기</DeleteReceipt>
+        </>
       ) : (
         <>
+          <TopBackground src={newReceiptInfo?.backgroundImage || '/bg/receipt-background.png'} />
           <DeleteReceipt onClick={handleDeleteButtonClick}>
-            삭제하기
+              삭제하기
           </DeleteReceipt>
           <ModifyReceipt onClick={onEditClick}>수정하기</ModifyReceipt>
         </>
       )}
-
       <DeleteReasons
         visible={deleteReasonsShown}
         setVisible={setDeleteReasonsShown}
@@ -209,9 +263,23 @@ const ReceiptDetail = ({
           : newReceiptInfo.nickname}
       </NicknameWrapper>
 
-      {receipt?.productImage ? (
+      {newReceiptInfo?.productImage ? (
         <ThumbnailWrapper>
-          <img src={receipt.productImage} alt={newReceiptInfo.nickname} />
+          {isEdit ? (
+            <>
+              <label htmlFor='upload-photo'>
+                <img src={newReceiptInfo.productImage} alt={newReceiptInfo.nickname} />
+              </label>
+              <input
+                type='file'
+                id='upload-photo'
+                accept='image/*'
+                onChange={handleProductImageChange}
+              />
+            </>
+          ) : (
+            <img src={newReceiptInfo.productImage} alt={newReceiptInfo.nickname} />
+          )}
         </ThumbnailWrapper>
       ) : (
         <ThumbnailWrapper>
@@ -362,7 +430,13 @@ const ReceiptDetail = ({
           />
         </UsedDeal>
       </Details>
-
+      {previewByteImage && createPortal(
+        <UploadPreview
+          imageSrc={previewByteImage}
+          onBackClick={() => setPreviewByteImage(null)}
+          onUploadClick={handleUploadClick}
+        />, document.body
+      )}
       <ZoomReceipt
         visible={receiptZoomedIn}
         setVisible={setReceiptZoomedIn}
@@ -426,19 +500,15 @@ export default WrapAuthPage(ReceiptDetail);
 
 const Container = styled(Layout)``;
 
-const TopBackground = styled.div`
+const TopBackground = styled.img`
   position: absolute;
+  object-fit: cover;
   top: 0px;
   left: 0;
   width: 100vw;
   height: 146px;
   z-index: 0;
   border-bottom: 1px solid var(--grey300);
-
-  background: ${(props) =>
-    props.backgroundImage
-      ? `url(${props.backgroundImage})`
-      : 'url(/bg/receipt-background.png)'};
 `;
 
 const DeleteReceipt = styled.button`
@@ -450,6 +520,7 @@ const DeleteReceipt = styled.button`
   padding: 8px;
   color: var(--grey500);
   font-size: 13px;
+  text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
   z-index: 2;
 `;
 
@@ -462,15 +533,19 @@ const ModifyReceipt = styled.button`
   padding: 8px;
   color: var(--grey500);
   font-size: 13px;
+  text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
   z-index: 2;
 `;
 
 const NicknameWrapper = styled.div`
-  height: 52px;
+  margin: 20px 0 20px 0;
   display: flex;
   align-items: flex-start;
   gap: 8px;
   z-index: 1;
+  font-weight: bold;
+  font-size: 20px;
+  text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
 
   img {
     width: 14px;

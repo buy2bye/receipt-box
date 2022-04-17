@@ -39,6 +39,8 @@ const ReceiptDetailPage = () => {
 
   const handleSaveClick = async (
     newReceiptInfo,
+    newProductImage,
+    newBackgroundImage,
     imageList,
     removeImageIndexList
   ) => {
@@ -54,8 +56,8 @@ const ReceiptDetailPage = () => {
 
     await changeReceiptImages(
       id,
-      null,
-      null,
+      newProductImage,
+      newBackgroundImage,
       imageList,
       removeImageIndexList
     );
