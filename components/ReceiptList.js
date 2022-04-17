@@ -17,6 +17,7 @@ const ReceiptListPage = ({ userInfo }) => {
   const [totalCount, setTotalCount] = useState(0);
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const [showNicknameChangePopup, setShowNicknameChangePopup] = useState(false);
+  const [selectedListType, setSelectedListType] = useState('grid');
 
   const { updateProfileImage, updateNickname } = userApi();
 
@@ -55,6 +56,8 @@ const ReceiptListPage = ({ userInfo }) => {
     window.location.reload();
   };
 
+  console.log(selectedListType);
+
   if (!receiptList)
     return (
       <Layout hideTop showLogo>
@@ -87,6 +90,20 @@ const ReceiptListPage = ({ userInfo }) => {
       )}
       <HeaderContainer showBorder={receiptList.length > 0}>
         <Title>내 물건 리스트</Title>
+        <ListTypes>
+          <ListType
+            src='/icons/grid-icon.png'
+            alt='grid-icon'
+            onClick={() => setSelectedListType('grid')}
+            selected={selectedListType === 'grid'}
+          />
+          <ListType
+            src='/icons/list-icon.png'
+            alt='list-icon'
+            onClick={() => setSelectedListType('list')}
+            selected={selectedListType === 'list'}
+          />
+        </ListTypes>
       </HeaderContainer>
       <ReceiptList>
         {receiptList.length < 1 && (
@@ -225,5 +242,27 @@ const Nickname = styled.div`
     transform: translateY(-50%);
     width: 14px;
     height: 14px;
+  }
+`;
+
+const ListTypes = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+
+  img {
+  }
+`;
+
+const ListType = styled.img`
+  opacity: ${(props) => (props.selected ? 1 : 0.4)};
+  :first-child {
+    width: 16px;
+    height: 16px;
+  }
+  :last-child {
+    width: 18px;
+    height: 18px;
   }
 `;
