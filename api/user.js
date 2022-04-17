@@ -6,11 +6,12 @@ const userApi = () => {
   //프로필 이미지 수정
   const updateProfileImage = async (image) => {
     const formData = new FormData();
-    formData.append('image', image);
+    formData.append('profile_image', image);
 
     try {
-      await post(`/api/user/set-profile-image`, formData);
+      const res = await post(`/api/user/set-profile-image`, formData);
 
+      console.log(res);
       alert('프로필 사진이 변경되었습니다.');
     } catch {
       alert('프로필 사진 등록에 실패했습니다.');
