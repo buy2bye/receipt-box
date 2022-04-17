@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 import { calculateDateDiff, calculatePeriod } from 'helpers/utils';
 import Link from 'next/link';
 
-const Receipt = ({ item }) => {
+const ReceiptGrid = ({ item }) => {
   const dateDiff = calculateDateDiff(item.productDate);
 
   const imageSkeleton = (
@@ -19,29 +19,20 @@ const Receipt = ({ item }) => {
   return (
     <Link href={`/receipt/${item.id}`} passHref>
       <Container>
-        {item.productImage ? imageWrapper : imageSkeleton}
-        <div className='contents'>
-          <h3 className='name'>
-            {item?.nickname || '내 물건에게 별명을 지어주세요'}
-          </h3>
-
-          {dateDiff.okay && (
-            <span className='date'>
-              함께한 지 {dateDiff.data.dateDiff.toLocaleString()}일 째
-            </span>
-          )}
-        </div>
+        <Thumbnail>
+          {item.productImage ? imageWrapper : imageSkeleton}
+        </Thumbnail>
       </Container>
     </Link>
   );
 };
 
-export default Receipt;
+export default ReceiptGrid;
 
 const Container = styled.div`
   cursor: pointer;
-  width: 100%;
-  height: 90px;
+  width: 100px;
+  height: 100px;
   display: flex;
   gap: 16px;
 
@@ -94,3 +85,5 @@ const Container = styled.div`
     }
   }
 `;
+
+const Thumbnail = styled.div``;

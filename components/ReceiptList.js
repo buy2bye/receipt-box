@@ -4,13 +4,12 @@ import Subtitle from 'components/page/Subtitle';
 import Layout from 'components/layout/Layout';
 import { useEffect, useState } from 'react';
 import receiptApi from 'api/receipt';
-import Receipt from './Receipt';
 import TextModal from './modal/TextModal';
-import Image from 'next/image';
 import FileInputLabel from './common/FileInputLabel';
-import apiController from 'helpers/apiController';
 import userApi from 'api/user';
 import BottomTextInputPopup from './popup/BottomTextInputPopup';
+import ReceiptsListView from './receipt/ReceiptsListView';
+import ReceiptsGridView from './receipt/ReceiptsGridView';
 
 const ReceiptListPage = ({ userInfo }) => {
   const [receiptList, setReceiptList] = useState();
@@ -105,18 +104,11 @@ const ReceiptListPage = ({ userInfo }) => {
           />
         </ListTypes>
       </HeaderContainer>
-      <ReceiptList>
-        {receiptList.length < 1 && (
-          <UploadGuide>
-            <h3>등록된 영수증이 없어요.</h3>
-            <span>아래 카메라 버튼을 눌러</span>
-            <span>영수증을 촬영하세요!</span>
-          </UploadGuide>
-        )}
-        {receiptList.map((item, index) => (
-          <Receipt item={item} key={index} />
-        ))}
-      </ReceiptList>
+      {selectedListType === 'grid' ? (
+        <ReceiptsGridView receiptList={receiptList} />
+      ) : (
+        <ReceiptsListView receiptList={receiptList} />
+      )}
       <TextModal
         isOpen={isLoginModalOpen}
         onCloseClick={() => setIsLoginModalOpen(false)}
@@ -139,44 +131,10 @@ const ReceiptListPage = ({ userInfo }) => {
 
 export default ReceiptListPage;
 
-const ReceiptList = styled.div`
-  width: 100%;
-  height: auto;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  position: relative;
-`;
-
 const UploadGuideHeader = styled.div`
   width: 100%;
   border-bottom: 1px solid var(--grey200);
   margin-bottom: 20px;
-`;
-
-const UploadGuide = styled.div`
-  position: absolute;
-  top: 40%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  h3 {
-    margin: 0;
-    margin-bottom: 20px;
-    font-size: 16px;
-    color: var(--grey600);
-  }
-
-  span {
-    font-size: 14px;
-    line-height: 20px;
-    color: var(--grey500);
-  }
 `;
 
 const HeaderContainer = styled.div`
@@ -256,12 +214,14 @@ const ListTypes = styled.div`
 `;
 
 const ListType = styled.img`
-  opacity: ${(props) => (props.selected ? 1 : 0.4)};
-  :first-child {
+  opacity: ${(props) => (props.selected ? 1 : 0.3)};
+  cursor: pointer;
+
+  :first-of-type {
     width: 16px;
     height: 16px;
   }
-  :last-child {
+  :last-of-type {
     width: 18px;
     height: 18px;
   }
