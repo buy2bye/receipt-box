@@ -9,10 +9,10 @@ const userApi = () => {
     formData.append('profile_image', image);
 
     try {
-      const res = await post(`/api/user/set-profile-image`, formData);
+      const { data } = await post(`/api/user/set-profile-image`, formData);
 
-      console.log(res);
-      alert('프로필 사진이 변경되었습니다.');
+      if (data.profile_image) alert('프로필 사진이 변경되었습니다.');
+      else alert('프로필 사진 등록에 실패했습니다.');
     } catch {
       alert('프로필 사진 등록에 실패했습니다.');
     }

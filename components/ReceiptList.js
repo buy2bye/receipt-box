@@ -20,8 +20,6 @@ const ReceiptListPage = ({ userInfo }) => {
 
   const { updateProfileImage, updateNickname } = userApi();
 
-  console.log(userInfo);
-
   useEffect(() => {
     const { getReceipts } = receiptApi();
     getReceipts().then((data) => {
@@ -39,8 +37,9 @@ const ReceiptListPage = ({ userInfo }) => {
     const reader = new FileReader();
     const files = e.target.files;
 
-    reader.onload = function (e) {
-      updateProfileImage(files[0]);
+    reader.onload = async function (e) {
+      await updateProfileImage(files[0]);
+      window.location.reload();
     };
 
     if (files[0]) reader.readAsDataURL(files[0]);
@@ -68,20 +67,12 @@ const ReceiptListPage = ({ userInfo }) => {
       <HeaderLeftButton onClick={handleLoginClick}>로그인하기</HeaderLeftButton>
       <Profile>
         <ProfileImageWrapper>
-          {userInfo.profile_image ? (
-            <Image
-              src={userInfo.profile_image}
-              alt='user-profile'
-              layout='fill'
-            />
-          ) : (
-            <FileInputLabel
-              skeletonImage='/icons/add-user.png'
-              onChange={handleProfileImageUpload}
-              imageWidth='50%'
-              imageHeight='50%'
-            />
-          )}
+          <FileInputLabel
+            image={userInfo.profile_image || '/icons/add-user.png'}
+            onChange={handleProfileImageUpload}
+            imageWidth={userInfo.profile_image ? '100%' : '50%'}
+            imageHeight={userInfo.profile_image ? '100%' : '50%'}
+          />
         </ProfileImageWrapper>
         <Nickname onClick={handleNicknameEditClick}>
           {userInfo.nickname}
