@@ -24,10 +24,11 @@ const Container = styled.div`
   width: 100%;
   height: auto;
   flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
   position: relative;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-row-gap: 8px;
+  grid-column-gap: 8px;
 `;
 
 const UploadGuide = styled.div`
