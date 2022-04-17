@@ -61,7 +61,7 @@ const UploadButton = styled.label`
   }
 
   img {
-    width: 60%;
+    width: 40%;
   }
 `;
 
@@ -82,6 +82,6 @@ const UploadButtonPreview = styled.button`
   }
 
   img {
-    width: 60%;
+    width: 40%;
   }
 `;

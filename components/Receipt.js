@@ -7,7 +7,7 @@ const Receipt = ({ item }) => {
 
   const imageSkeleton = (
     <div className='thumb'>
-      <span>등록 중</span>
+      <img src='/icons/main-product-placeholder.png' alt='pladeholder' />
     </div>
   );
   const imageWrapper = (
@@ -21,7 +21,9 @@ const Receipt = ({ item }) => {
       <Container>
         {item.productImage ? imageWrapper : imageSkeleton}
         <div className='contents'>
-          <h3 className='name'>{item?.nickname}</h3>
+          <h3 className='name'>
+            {item?.nickname || '내 물건에게 별명을 지어주세요'}
+          </h3>
 
           {dateDiff.okay && (
             <span className='date'>
@@ -77,7 +79,7 @@ const Container = styled.div`
 
   .name {
     margin: 0;
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 400;
   }
 
