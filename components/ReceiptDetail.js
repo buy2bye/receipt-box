@@ -240,7 +240,7 @@ const ReceiptDetail = ({
             accept='image/*'
             onChange={handleBackgroundImageChange}
           />
-          <DeleteReceipt onClick={handleSaveClick}>저장하기</DeleteReceipt>
+          <DeleteReceipt onClick={handleSaveClick}>저장</DeleteReceipt>
         </>
       ) : (
         <>
