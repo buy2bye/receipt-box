@@ -13,7 +13,7 @@ import WrapAuthPage from 'helpers/AuthWrapper';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
-import { createPortal }  from 'react-dom';
+import { createPortal } from 'react-dom';
 
 const PopupInfo = {
   nickname: {
@@ -118,7 +118,7 @@ const ReceiptDetail = ({
     reader.onload = function (e) {
       setNewReceiptInfo({
         ...newReceiptInfo,
-        productImage: e.target.result
+        productImage: e.target.result,
       });
     };
 
@@ -135,7 +135,7 @@ const ReceiptDetail = ({
     reader.onload = function (e) {
       setNewReceiptInfo({
         ...newReceiptInfo,
-        backgroundImage: e.target.result
+        backgroundImage: e.target.result,
       });
     };
 
@@ -182,12 +182,12 @@ const ReceiptDetail = ({
     const files = e.target.files;
 
     reader.onload = function (e) {
-      setPreviewByteImage(e.target.result)
+      setPreviewByteImage(e.target.result);
     };
 
     if (files[0]) {
       reader.readAsDataURL(files[0]);
-      setPreviewImage(files[0])
+      setPreviewImage(files[0]);
     }
   };
 
@@ -233,7 +233,11 @@ const ReceiptDetail = ({
       {isEdit ? (
         <>
           <label htmlFor='upload-background'>
-            <TopBackground src={newReceiptInfo?.backgroundImage || '/bg/receipt-background.png'} />
+            <TopBackground
+              src={
+                newReceiptInfo?.backgroundImage || '/bg/receipt-background.png'
+              }
+            />
           </label>
           <input
             type='file'
@@ -241,14 +245,25 @@ const ReceiptDetail = ({
             accept='image/*'
             onChange={handleBackgroundImageChange}
           />
+
           <DeleteReceipt onClick={handleSaveClick}>저장</DeleteReceipt>
+          <EditIcon
+            top={280}
+            right={10}
+            src='/icons/edit.png'
+            alt='edit-icon'
+            width={18}
+            height={18}
+          />
         </>
       ) : (
         <>
-          <TopBackground src={newReceiptInfo?.backgroundImage || '/bg/receipt-background.png'} />
-          <DeleteReceipt onClick={handleDeleteButtonClick}>
-              삭제
-          </DeleteReceipt>
+          <TopBackground
+            src={
+              newReceiptInfo?.backgroundImage || '/bg/receipt-background.png'
+            }
+          />
+          <DeleteReceipt onClick={handleDeleteButtonClick}>삭제</DeleteReceipt>
           <ModifyReceipt onClick={onEditClick}>수정</ModifyReceipt>
         </>
       )}
@@ -263,7 +278,18 @@ const ReceiptDetail = ({
           {isEdit ? (
             <>
               <label htmlFor='upload-photo'>
-                <img src={newReceiptInfo.productImage} alt={newReceiptInfo.nickname} />
+                <img
+                  src={newReceiptInfo.productImage}
+                  alt={newReceiptInfo.nickname}
+                />
+                <EditIcon
+                  top={112}
+                  right={10}
+                  src='/icons/edit.png'
+                  alt='edit-icon'
+                  width={16}
+                  height={16}
+                />
               </label>
               <input
                 type='file'
@@ -273,7 +299,10 @@ const ReceiptDetail = ({
               />
             </>
           ) : (
-            <img src={newReceiptInfo.productImage} alt={newReceiptInfo.nickname} />
+            <img
+              src={newReceiptInfo.productImage}
+              alt={newReceiptInfo.nickname}
+            />
           )}
         </ThumbnailWrapper>
       ) : (
@@ -295,9 +324,9 @@ const ReceiptDetail = ({
 
       <NicknameWrapper onClick={() => isEdit && setPopupOpen('nickname')}>
         {isEdit
-          ? newReceiptInfo.nickname ||
-            '내 물건에게 별명을 지어주세요'
+          ? newReceiptInfo.nickname || '내 물건에게 별명을 지어주세요'
           : newReceiptInfo.nickname}
+        <img src='/icons/edit.png' alt='edit-icon' />
       </NicknameWrapper>
 
       <Details>
@@ -311,6 +340,7 @@ const ReceiptDetail = ({
           <span>
             {newReceiptInfo.productName ||
               (isEdit && '이곳을 터치해 입력하세요')}
+            <img src='/icons/edit.png' alt='edit-icon' />
           </span>
         </li>
         <li onClick={() => isEdit && setPopupOpen('productPlace')}>
@@ -323,6 +353,7 @@ const ReceiptDetail = ({
           <span>
             {newReceiptInfo.productPlace ||
               (isEdit && '이곳을 터치해 입력하세요')}
+            <img src='/icons/edit.png' alt='edit-icon' />
           </span>
         </li>
         <li onClick={() => isEdit && setPopupOpen('productPrice')}>
@@ -336,6 +367,7 @@ const ReceiptDetail = ({
             {newReceiptInfo.productPrice
               ? `${parseInt(newReceiptInfo.productPrice).toLocaleString()}원`
               : isEdit && '이곳을 터치해 입력하세요'}
+            <img src='/icons/edit.png' alt='edit-icon' />
           </span>
         </li>
         <li onClick={() => isEdit && setPopupOpen('productDate')}>
@@ -348,6 +380,7 @@ const ReceiptDetail = ({
           <span>
             {newReceiptInfo.productDate ||
               (isEdit && '이곳을 터치해 입력하세요')}
+            <img src='/icons/edit.png' alt='edit-icon' />
           </span>
         </li>
         <AddReceiptList>
@@ -432,13 +465,15 @@ const ReceiptDetail = ({
           />
         </UsedDeal>
       </Details>
-      {previewByteImage && createPortal(
-        <UploadPreview
-          imageSrc={previewByteImage}
-          onBackClick={() => setPreviewByteImage(null)}
-          onUploadClick={handleUploadClick}
-        />, document.body
-      )}
+      {previewByteImage &&
+        createPortal(
+          <UploadPreview
+            imageSrc={previewByteImage}
+            onBackClick={() => setPreviewByteImage(null)}
+            onUploadClick={handleUploadClick}
+          />,
+          document.body
+        )}
       <ZoomReceipt
         visible={receiptZoomedIn}
         setVisible={setReceiptZoomedIn}
@@ -543,7 +578,7 @@ const ModifyReceipt = styled.button`
 const NicknameWrapper = styled.div`
   margin: 20px 0 20px 0;
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   gap: 8px;
   z-index: 1;
   font-weight: bold;
@@ -586,7 +621,7 @@ const ThumbnailWrapper = styled.div`
   img {
     position: absolute;
     top: 0px;
-    left: 0px;
+    right: 0px;
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -616,10 +651,11 @@ const Details = styled.ul`
   margin-top: 24px;
   font-size: 14px;
   font-weight: 300;
-  width: 75%;
+  width: 85%;
 
   li {
     display: flex;
+    align-items: center;
     width: 100%;
 
     > span:first-of-type {
@@ -632,6 +668,13 @@ const Details = styled.ul`
       width: 60px;
       height: 60px;
       border: 1px solid var(--grey300);
+    }
+
+    span > img {
+      width: 14px;
+      height: 14px;
+      border: none;
+      margin-left: 8px;
     }
   }
 `;
@@ -757,5 +800,18 @@ const AddReceiptImageLabel = styled.label`
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 24px;
+`;
+
+const EditIcon = styled.img`
+  position: absolute;
+  top: ${({ top }) => `${top}px` || 0} !important;
+  bottom: ${({ bottom }) => `${bottom}px` || 0} !important;
+  left: ${({ left }) => `${left}px` || 0} !important;
+  right: ${({ right }) => `${right}px` || 0} !important;
+  width: ${({ width }) => `${width}px`} !important;
+  height: ${({ height }) => `${height}px`} !important;
+  z-index: 99;
+  border-radius: 2px !important;
+  background: rgba(255, 255, 255, 0.5);
+  padding: 2px;
 `;
