@@ -99,7 +99,7 @@ const ReceiptDetail = ({
   }, [receipt, isEdit]);
 
   const handleUsedDealAlertToggle = (e) => {
-    setNewReceiptInfo({ ...newReceiptInfo, usedDealAlert: newReceiptInfo });
+    setNewReceiptInfo({ ...newReceiptInfo, usedDealAlert: e.target.checked });
   };
 
   const handleDeleteButtonClick = () => {
