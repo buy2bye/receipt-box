@@ -326,7 +326,7 @@ const ReceiptDetail = ({
         {isEdit
           ? newReceiptInfo.nickname || '내 물건에게 별명을 지어주세요'
           : newReceiptInfo.nickname}
-        <img src='/icons/edit.png' alt='edit-icon' />
+        {isEdit && <img src='/icons/edit.png' alt='edit-icon' />}
       </NicknameWrapper>
 
       <Details>
@@ -340,7 +340,7 @@ const ReceiptDetail = ({
           <span>
             {newReceiptInfo.productName ||
               (isEdit && '이곳을 터치해 입력하세요')}
-            <img src='/icons/edit.png' alt='edit-icon' />
+            {isEdit && <img src='/icons/edit.png' alt='edit-icon' />}
           </span>
         </li>
         <li onClick={() => isEdit && setPopupOpen('productPlace')}>
@@ -353,7 +353,7 @@ const ReceiptDetail = ({
           <span>
             {newReceiptInfo.productPlace ||
               (isEdit && '이곳을 터치해 입력하세요')}
-            <img src='/icons/edit.png' alt='edit-icon' />
+            {isEdit && <img src='/icons/edit.png' alt='edit-icon' />}
           </span>
         </li>
         <li onClick={() => isEdit && setPopupOpen('productPrice')}>
@@ -367,7 +367,7 @@ const ReceiptDetail = ({
             {newReceiptInfo.productPrice
               ? `${parseInt(newReceiptInfo.productPrice).toLocaleString()}원`
               : isEdit && '이곳을 터치해 입력하세요'}
-            <img src='/icons/edit.png' alt='edit-icon' />
+            {isEdit && <img src='/icons/edit.png' alt='edit-icon' />}
           </span>
         </li>
         <li onClick={() => isEdit && setPopupOpen('productDate')}>
@@ -380,7 +380,7 @@ const ReceiptDetail = ({
           <span>
             {newReceiptInfo.productDate ||
               (isEdit && '이곳을 터치해 입력하세요')}
-            <img src='/icons/edit.png' alt='edit-icon' />
+            {isEdit && <img src='/icons/edit.png' alt='edit-icon' />}
           </span>
         </li>
         <AddReceiptList>
