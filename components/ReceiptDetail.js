@@ -510,6 +510,7 @@ const TopBackground = styled.img`
   width: 100vw;
   height: 310px;
   z-index: 0;
+  filter: brightness(0.9);
   border-bottom: 1px solid var(--grey300);
 `;
 
@@ -520,9 +521,9 @@ const DeleteReceipt = styled.button`
   height: 32px;
   background: transparent;
   padding: 8px;
-  color: var(--grey500);
   font-size: 13px;
-  text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
+  color: white;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
   z-index: 2;
 `;
 
@@ -533,9 +534,9 @@ const ModifyReceipt = styled.button`
   height: 32px;
   background: transparent;
   padding: 8px;
-  color: var(--grey500);
   font-size: 13px;
-  text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
+  color: white;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
   z-index: 2;
 `;
 
