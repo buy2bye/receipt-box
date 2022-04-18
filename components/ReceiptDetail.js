@@ -246,9 +246,9 @@ const ReceiptDetail = ({
         <>
           <TopBackground src={newReceiptInfo?.backgroundImage || '/bg/receipt-background.png'} />
           <DeleteReceipt onClick={handleDeleteButtonClick}>
-              삭제하기
+              삭제
           </DeleteReceipt>
-          <ModifyReceipt onClick={onEditClick}>수정하기</ModifyReceipt>
+          <ModifyReceipt onClick={onEditClick}>수정</ModifyReceipt>
         </>
       )}
       <DeleteReasons
@@ -256,12 +256,6 @@ const ReceiptDetail = ({
         setVisible={setDeleteReasonsShown}
         onDelete={handleDeleteSubmit}
       />
-      <NicknameWrapper onClick={() => isEdit && setPopupOpen('nickname')}>
-        {isEdit
-          ? newReceiptInfo.nickname ||
-            '소중한 내 물건에게 별명을 지어주세요 (선택)'
-          : newReceiptInfo.nickname}
-      </NicknameWrapper>
 
       {newReceiptInfo?.productImage ? (
         <ThumbnailWrapper>
@@ -297,6 +291,13 @@ const ReceiptDetail = ({
           )}
         </ThumbnailWrapper>
       )}
+
+      <NicknameWrapper onClick={() => isEdit && setPopupOpen('nickname')}>
+        {isEdit
+          ? newReceiptInfo.nickname ||
+            '소중한 내 물건에게 별명을 지어주세요 (선택)'
+          : newReceiptInfo.nickname}
+      </NicknameWrapper>
 
       <Details>
         <li onClick={() => isEdit && setPopupOpen('productName')}>
@@ -506,7 +507,7 @@ const TopBackground = styled.img`
   top: 0px;
   left: 0;
   width: 100vw;
-  height: 146px;
+  height: 310px;
   z-index: 0;
   border-bottom: 1px solid var(--grey300);
 `;
@@ -527,7 +528,7 @@ const DeleteReceipt = styled.button`
 const ModifyReceipt = styled.button`
   position: fixed;
   top: 10px;
-  right: 72px;
+  right: 54px;
   height: 32px;
   background: transparent;
   padding: 8px;
@@ -573,6 +574,7 @@ const ThumbnailWrapper = styled.div`
   border-radius: 8px;
   position: relative;
   border: 1px solid var(--grey300);
+  margin-top: 230px;
 
   label {
     width: 100%;
