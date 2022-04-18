@@ -12,6 +12,7 @@ const Layout = ({
   showLogo,
   hideSetting,
   topNavColor,
+  topNavInBody,
   onBackClick,
   isPreview,
 }) => {
@@ -29,11 +30,20 @@ const Layout = ({
 
   return (
     <Container hideTop={hideTop}>
-      {!hideTop && (
+      {!hideTop && !topNavInBody && (
         <TopNav topNavColor={topNavColor} onBackClick={onBackClick} />
       )}
       {showLogo && <TopLogo hideSetting={hideSetting} isPreview={isPreview} />}
       <Body hideBottom={hideBottom} className={className}>
+        {!hideTop && topNavInBody && (
+          <TopNav
+            topNavColor={topNavColor}
+            onBackClick={onBackClick}
+            style={{
+              marginTop: '-12px',
+            }}
+          />
+        )}
         {children}
       </Body>
       {!hideBottom && <BottomNav isPreview={isPreview} />}

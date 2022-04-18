@@ -226,7 +226,8 @@ const ReceiptDetail = ({
   return (
     <Container
       hideBottom
-      topNavColor='var(--grey100)'
+      topNavColor='transparent'
+      topNavInBody
       onBackClick={onBackClick}
     >
       {isEdit ? (
@@ -513,7 +514,7 @@ const TopBackground = styled.img`
 `;
 
 const DeleteReceipt = styled.button`
-  position: fixed;
+  position: absolute;
   top: 10px;
   right: 10px;
   height: 32px;
@@ -526,7 +527,7 @@ const DeleteReceipt = styled.button`
 `;
 
 const ModifyReceipt = styled.button`
-  position: fixed;
+  position: absolute;
   top: 10px;
   right: 54px;
   height: 32px;

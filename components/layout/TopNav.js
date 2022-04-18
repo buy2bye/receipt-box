@@ -1,17 +1,22 @@
 import styled from '@emotion/styled';
 import { useRouter } from 'next/router';
 
-const TopNav = ({ topNavColor = 'transparent', onBackClick }) => {
+const TopNav = ({
+  topNavColor = 'transparent',
+  onBackClick,
+  style
+}) => {
   const router = useRouter();
 
   return (
-    <Container background={topNavColor}>
+    <Container background={topNavColor} style={style}>
       <button
         onClick={() => {
           onBackClick ? onBackClick() : router.back();
         }}
       >
-        <img src='/icons/left-arrow.png' alt='left-arrow' />
+        &lt;
+        {/* <img src='/icons/left-arrow.png' alt='left-arrow' /> */}
       </button>
     </Container>
   );
@@ -37,6 +42,11 @@ const Container = styled.div`
     align-items: center;
     background: transparent;
     padding: 0;
+
+    color: black;
+    text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
+    font-size: 30px;
+    font-weight: 100;
 
     img {
       width: 20px;
