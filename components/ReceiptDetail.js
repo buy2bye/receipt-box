@@ -295,7 +295,7 @@ const ReceiptDetail = ({
       <NicknameWrapper onClick={() => isEdit && setPopupOpen('nickname')}>
         {isEdit
           ? newReceiptInfo.nickname ||
-            '소중한 내 물건에게 별명을 지어주세요 (선택)'
+            '내 물건에게 별명을 지어주세요'
           : newReceiptInfo.nickname}
       </NicknameWrapper>
 
