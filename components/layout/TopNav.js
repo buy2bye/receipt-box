@@ -44,8 +44,7 @@ const Container = styled.div`
     padding: 0;
 
     color: black;
-    text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
-    font-size: 30px;
+    font-size: 25px;
     font-weight: 100;
 
     img {

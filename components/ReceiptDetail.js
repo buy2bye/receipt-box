@@ -545,7 +545,7 @@ const TopBackground = styled.img`
   width: 100vw;
   height: 310px;
   z-index: 0;
-  filter: brightness(0.9);
+  filter: brightness(0.7);
   border-bottom: 1px solid var(--grey300);
 `;
 
@@ -557,8 +557,8 @@ const DeleteReceipt = styled.button`
   background: transparent;
   padding: 8px;
   font-size: 13px;
+  font-weight: 200;
   color: white;
-  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
   z-index: 2;
 `;
 
@@ -570,8 +570,8 @@ const ModifyReceipt = styled.button`
   background: transparent;
   padding: 8px;
   font-size: 13px;
+  font-weight: 200;
   color: white;
-  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
   z-index: 2;
 `;
 
@@ -611,7 +611,7 @@ const ThumbnailWrapper = styled.div`
   border-radius: 8px;
   position: relative;
   border: 1px solid var(--grey300);
-  margin-top: 230px;
+  margin-top: 190px;
 
   label {
     width: 100%;
@@ -655,7 +655,7 @@ const Details = styled.ul`
 
   li {
     display: flex;
-    align-items: center;
+    align-items: normal;
     width: 100%;
 
     > span:first-of-type {
@@ -712,7 +712,6 @@ const ExternalLinkList = styled.li`
     justify-content: center;
     align-items: center;
     width: 100%;
-    max-width: 270px;
     padding: 12px;
     font-weight: 300;
     font-size: 14px;
