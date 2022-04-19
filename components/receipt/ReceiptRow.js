@@ -1,8 +1,13 @@
 import styled from '@emotion/styled';
 import { calculateDateDiff, calculatePeriod } from 'helpers/utils';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
+import { useState } from 'react';
+import SummaryPopup from './SummaryPopup';
 
 const ReceiptRow = ({ item }) => {
+  const router = useRouter();
+  const [isSummaryShown, setIsSummaryShown] = useState(false);
   const dateDiff = calculateDateDiff(item.productDate);
 
   const imageSkeleton = (
@@ -16,9 +21,13 @@ const ReceiptRow = ({ item }) => {
     </div>
   );
 
+  const handleShowDetailClick = () => {
+    router.push(`/receipt/${item.id}`);
+  };
+
   return (
-    <Link href={`/receipt/${item.id}`} passHref>
-      <Container>
+    <>
+      <Container onClick={() => setIsSummaryShown(true)}>
         {item.productImage ? imageWrapper : imageSkeleton}
         <div className='contents'>
           <h3 className='name'>
@@ -32,7 +41,16 @@ const ReceiptRow = ({ item }) => {
           )}
         </div>
       </Container>
-    </Link>
+      {isSummaryShown && (
+        <SummaryPopup
+          onCloseClick={() => {
+            setIsSummaryShown(false);
+          }}
+          item={item}
+          onShowDetailClick={handleShowDetailClick}
+        />
+      )}
+    </>
   );
 };
 
