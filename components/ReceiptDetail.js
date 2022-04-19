@@ -14,6 +14,8 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
+import BottomPopupNotice from 'components/BottomPopupNotice';//호진 업로딩시 팝업
+import ReactLoading from 'react-loading';//호진 업로딩시 팝업
 
 const PopupInfo = {
   nickname: {
@@ -57,6 +59,8 @@ const ReceiptDetail = ({
 }) => {
   const router = useRouter();
   const { id } = router.query;
+
+  const [loading, setLoading] = useState(false);//호진 업로딩시 팝업
 
   const [newReceiptInfo, setNewReceiptInfo] = useState({
     nickname: '',
@@ -168,6 +172,7 @@ const ReceiptDetail = ({
       alert('상품명을 입력해주세요.');
       return;
     }
+    setLoading(true); //호진 업로딩시 팝업
     onSaveClick(
       newReceiptInfo,
       newProductImage,
@@ -529,6 +534,22 @@ const ReceiptDetail = ({
         <br />
         (예: 구매 영수증, 품질보증서, 구매 내역 캡쳐 등)
       </TextModal>
+      <BottomPopupNotice //등록 중 팝업
+        visible={loading}
+        setVisible={setLoading}
+        title={'등록 중 입니다😊'}
+        height = '18vh'
+        >
+        <LoadingContainer>
+          <ReactLoading
+            type='spin'
+            color='#AAAAAA'
+            height='15%'
+            width='15%'
+          >
+          </ReactLoading>
+        </LoadingContainer>
+      </BottomPopupNotice>
     </Container>
   );
 };
@@ -811,4 +832,11 @@ const EditIcon = styled.img`
   border-radius: 2px !important;
   background: rgba(255, 255, 255, 0);
   padding: 2px;
+`;
+
+const LoadingContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  padding-bottom: 4vh;
+  }
 `;
