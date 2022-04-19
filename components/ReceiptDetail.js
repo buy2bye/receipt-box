@@ -649,7 +649,7 @@ const Details = styled.ul`
   margin-top: 24px;
   font-size: 14px;
   font-weight: 300;
-  width: 65%;
+  width: 68%;
 
   li {
     display: flex;
