@@ -809,6 +809,6 @@ const EditIcon = styled.img`
   height: ${({ height }) => `${height}px`} !important;
   z-index: 99;
   border-radius: 2px !important;
-  background: rgba(255, 255, 255, 0.5);
+  background: rgba(255, 255, 255, 0);
   padding: 2px;
 `;
