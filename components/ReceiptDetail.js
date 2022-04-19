@@ -260,7 +260,7 @@ const ReceiptDetail = ({
         <>
           <TopBackground
             src={
-              newReceiptInfo?.backgroundImage || '/bg/receipt-background.png'
+              newReceiptInfo?.backgroundImage || '/bg/receipt-background-create.png'
             }
           />
           <DeleteReceipt onClick={handleDeleteButtonClick}>삭제</DeleteReceipt>
@@ -557,7 +557,7 @@ const DeleteReceipt = styled.button`
   background: transparent;
   padding: 8px;
   font-size: 13px;
-  color: white;
+  color: var(--grey300);
   z-index: 2;
 `;
 
@@ -569,7 +569,7 @@ const ModifyReceipt = styled.button`
   background: transparent;
   padding: 8px;
   font-size: 13px;
-  color: white;
+  color: var(--grey300);
   z-index: 2;
 `;
 

@@ -43,7 +43,7 @@ const Container = styled.div`
     background: transparent;
     padding: 0;
 
-    color: black;
+    color: var(--grey300);
     font-size: 25px;
 
     img {
