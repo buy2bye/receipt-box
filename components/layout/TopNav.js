@@ -45,7 +45,6 @@ const Container = styled.div`
 
     color: black;
     font-size: 25px;
-    font-weight: 100;
 
     img {
       width: 20px;

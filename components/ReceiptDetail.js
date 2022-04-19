@@ -557,7 +557,6 @@ const DeleteReceipt = styled.button`
   background: transparent;
   padding: 8px;
   font-size: 13px;
-  font-weight: 200;
   color: white;
   z-index: 2;
 `;
@@ -570,7 +569,6 @@ const ModifyReceipt = styled.button`
   background: transparent;
   padding: 8px;
   font-size: 13px;
-  font-weight: 200;
   color: white;
   z-index: 2;
 `;
