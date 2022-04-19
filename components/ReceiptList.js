@@ -50,12 +50,9 @@ const ReceiptListPage = ({ userInfo }) => {
   };
 
   const handleNicknameSubmit = async (nickname) => {
-    console.log(nickname);
     await updateNickname(nickname);
     window.location.reload();
   };
-
-  console.log(selectedListType);
 
   if (!receiptList)
     return (
