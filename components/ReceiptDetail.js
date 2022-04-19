@@ -235,7 +235,7 @@ const ReceiptDetail = ({
           <label htmlFor='upload-background'>
             <TopBackground
               src={
-                newReceiptInfo?.backgroundImage || '/bg/receipt-background.png'
+                newReceiptInfo?.backgroundImage || '/bg/receipt-background-create.png'
               }
             />
           </label>
@@ -260,7 +260,7 @@ const ReceiptDetail = ({
         <>
           <TopBackground
             src={
-              newReceiptInfo?.backgroundImage || '/bg/receipt-background-create.png'
+              newReceiptInfo?.backgroundImage || '/bg/receipt-background.png'
             }
           />
           <DeleteReceipt onClick={handleDeleteButtonClick}>삭제</DeleteReceipt>
