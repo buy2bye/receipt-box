@@ -1,35 +1,15 @@
 import styled from '@emotion/styled';
-import Link from 'next/link';
-import { useRouter } from 'next/router';
-import { useState } from 'react';
-import SummaryPopup from './SummaryPopup';
 
-const ReceiptGrid = ({ item }) => {
-  const router = useRouter();
-  const [isSummaryShown, setIsSummaryShown] = useState(false);
-
-  const handleShowDetailClick = () => {
-    router.push(`/receipt/${item.id}`);
-  };
-
+const ReceiptGrid = ({ item, onClick }) => {
   return (
     <Container>
-      <Thumbnail onClick={() => setIsSummaryShown(true)}>
+      <Thumbnail onClick={onClick}>
         {item.productImage ? (
           <img src={item?.productImage} alt={item?.nickname} />
         ) : (
           <img src='/icons/main-product-placeholder.png' alt='pladeholder' />
         )}
       </Thumbnail>
-      {isSummaryShown && (
-        <SummaryPopup
-          onCloseClick={() => {
-            setIsSummaryShown(false);
-          }}
-          item={item}
-          onShowDetailClick={handleShowDetailClick}
-        />
-      )}
     </Container>
   );
 };

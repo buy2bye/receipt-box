@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 import ReceiptRow from './ReceiptRow';
 
-const ReceiptsListView = ({ receiptList }) => {
+const ReceiptsListView = ({ receiptList, onItemClick }) => {
   return (
     <Container>
       {receiptList.length < 1 && (
@@ -12,7 +12,11 @@ const ReceiptsListView = ({ receiptList }) => {
         </UploadGuide>
       )}
       {receiptList.map((item, index) => (
-        <ReceiptRow item={item} key={index} />
+        <ReceiptRow
+          item={item}
+          key={index}
+          onClick={() => onItemClick(item)}
+        />
       ))}
     </Container>
   );

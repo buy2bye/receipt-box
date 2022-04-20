@@ -3,6 +3,7 @@ import Title from 'components/page/Title';
 import Subtitle from 'components/page/Subtitle';
 import Layout from 'components/layout/Layout';
 import { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
 import receiptApi from 'api/receipt';
 import TextModal from './modal/TextModal';
 import FileInputLabel from './common/FileInputLabel';
@@ -10,6 +11,7 @@ import userApi from 'api/user';
 import BottomTextInputPopup from './popup/BottomTextInputPopup';
 import ReceiptsListView from './receipt/ReceiptsListView';
 import ReceiptsGridView from './receipt/ReceiptsGridView';
+import SummaryPopup from './receipt/SummaryPopup';
 
 const ReceiptListPage = ({ userInfo }) => {
   const [receiptList, setReceiptList] = useState();
@@ -17,6 +19,7 @@ const ReceiptListPage = ({ userInfo }) => {
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const [showNicknameChangePopup, setShowNicknameChangePopup] = useState(false);
   const [selectedListType, setSelectedListType] = useState('grid');
+  const [summaryItem, setSummaryItem] = useState();
 
   const { updateProfileImage, updateNickname } = userApi();
 
@@ -53,6 +56,14 @@ const ReceiptListPage = ({ userInfo }) => {
     await updateNickname(nickname);
     window.location.reload();
   };
+
+  const handleItemClick = (item) => {
+    setSummaryItem(item);
+  }
+
+  const handleShowDetailClick = () => {
+    router.push(`/receipt/${summaryItem.id}`);
+  }
 
   if (!receiptList)
     return (
@@ -102,9 +113,15 @@ const ReceiptListPage = ({ userInfo }) => {
         </ListTypes>
       </HeaderContainer>
       {selectedListType === 'grid' ? (
-        <ReceiptsGridView receiptList={receiptList} />
+        <ReceiptsGridView
+          receiptList={receiptList}
+          onItemClick={handleItemClick}
+        />
       ) : (
-        <ReceiptsListView receiptList={receiptList} />
+        <ReceiptsListView
+          receiptList={receiptList}
+          onItemClick={handleItemClick}
+        />
       )}
       <TextModal
         isOpen={isLoginModalOpen}
@@ -114,6 +131,13 @@ const ReceiptListPage = ({ userInfo }) => {
         <button>애플로그인</button>
         <button>카카오로그인</button>
       </TextModal>
+      {summaryItem && (
+        <SummaryPopup
+          onCloseClick={() => setSummaryItem(null)}
+          item={summaryItem}
+          onShowDetailClick={handleShowDetailClick}
+        />
+      )}
       <BottomTextInputPopup
         visible={showNicknameChangePopup}
         setVisible={setShowNicknameChangePopup}

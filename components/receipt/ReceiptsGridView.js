@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 import ReceiptGrid from './ReceiptGrid';
 
-const ReceiptsGridView = ({ receiptList }) => {
+const ReceiptsGridView = ({ receiptList, onItemClick }) => {
   return (
     <Container>
       {receiptList.length < 1 && (
@@ -12,7 +12,11 @@ const ReceiptsGridView = ({ receiptList }) => {
         </UploadGuide>
       )}
       {receiptList.map((item, index) => (
-        <ReceiptGrid item={item} key={index} />
+        <ReceiptGrid
+          item={item}
+          key={index}
+          onClick={() => onItemClick(item)}
+        />
       ))}
     </Container>
   );
