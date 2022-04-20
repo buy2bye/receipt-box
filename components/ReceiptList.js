@@ -16,6 +16,7 @@ import SummaryPopup from './receipt/SummaryPopup';
 const ReceiptListPage = ({ userInfo }) => {
   const [receiptList, setReceiptList] = useState();
   const [totalCount, setTotalCount] = useState(0);
+  const [totalPrice, setTotalPrice] = useState(0);
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const [showNicknameChangePopup, setShowNicknameChangePopup] = useState(false);
   const [selectedListType, setSelectedListType] = useState('grid');
@@ -28,6 +29,7 @@ const ReceiptListPage = ({ userInfo }) => {
     getReceipts().then((data) => {
       setReceiptList(data.data.receiptList);
       setTotalCount(data.data.totalCount);
+      setTotalPrice(data.data.productPriceSum)
     });
   }, []);
 
