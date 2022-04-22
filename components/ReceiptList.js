@@ -14,6 +14,7 @@ import ReceiptsGridView from './receipt/ReceiptsGridView';
 import SummaryPopup from './receipt/SummaryPopup';
 
 const ReceiptListPage = ({ userInfo }) => {
+  const router = useRouter();
   const [receiptList, setReceiptList] = useState();
   const [totalCount, setTotalCount] = useState(0);
   const [totalPrice, setTotalPrice] = useState(0);
