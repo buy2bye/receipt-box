@@ -676,11 +676,16 @@ const Details = styled.ul`
     display: flex;
     align-items: normal;
     width: 100%;
+    overflow: hidden;
 
     > span:first-of-type {
       min-width: 92px;
       font-weight: 500;
       flex: 1;
+    }
+
+    > span:last-of-type {
+      text-align: right;
     }
 
     img {
