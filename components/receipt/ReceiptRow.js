@@ -1,8 +1,7 @@
 import styled from '@emotion/styled';
-import { calculateDateDiff, calculatePeriod } from 'helpers/utils';
-import Link from 'next/link';
+import { calculateDateDiff } from 'helpers/utils';
 
-const Receipt = ({ item }) => {
+const ReceiptRow = ({ item, onClick }) => {
   const dateDiff = calculateDateDiff(item.productDate);
 
   const imageSkeleton = (
@@ -17,8 +16,8 @@ const Receipt = ({ item }) => {
   );
 
   return (
-    <Link href={`/receipt/${item.id}`} passHref>
-      <Container>
+    <>
+      <Container onClick={onClick}>
         {item.productImage ? imageWrapper : imageSkeleton}
         <div className='contents'>
           <h3 className='name'>
@@ -32,11 +31,11 @@ const Receipt = ({ item }) => {
           )}
         </div>
       </Container>
-    </Link>
+    </>
   );
 };
 
-export default Receipt;
+export default ReceiptRow;
 
 const Container = styled.div`
   cursor: pointer;
