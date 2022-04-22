@@ -30,7 +30,7 @@ const ReceiptListPage = ({ userInfo }) => {
     getReceipts().then((data) => {
       setReceiptList(data.data.receiptList);
       setTotalCount(data.data.totalCount);
-      setTotalPrice(data.data.productPriceSum)
+      setTotalPrice(data.data.productPriceSum);
     });
   }, []);
 
@@ -62,11 +62,11 @@ const ReceiptListPage = ({ userInfo }) => {
 
   const handleItemClick = (item) => {
     setSummaryItem(item);
-  }
+  };
 
   const handleShowDetailClick = () => {
     router.push(`/receipt/${summaryItem.id}`);
-  }
+  };
 
   if (!receiptList)
     return (
@@ -81,14 +81,14 @@ const ReceiptListPage = ({ userInfo }) => {
       <Profile>
         <ProfileImageWrapper>
           <FileInputLabel
-            image={userInfo.profile_image || '/icons/add-user.png'}
+            image={userInfo.data.profile_image || '/icons/add-user.png'}
             onChange={handleProfileImageUpload}
-            imageWidth={userInfo.profile_image ? '100%' : '50%'}
-            imageHeight={userInfo.profile_image ? '100%' : '50%'}
+            imageWidth={userInfo.data.profile_image ? '100%' : '50%'}
+            imageHeight={userInfo.data.profile_image ? '100%' : '50%'}
           />
         </ProfileImageWrapper>
         <Nickname onClick={handleNicknameEditClick}>
-          {userInfo.nickname}
+          {userInfo.data.nickname}
           <img src='/icons/edit.png' alt='edit' width={14} height={14} />
         </Nickname>
       </Profile>
@@ -147,7 +147,7 @@ const ReceiptListPage = ({ userInfo }) => {
         title='변경할 닉네임을 입력해주세요'
         onSubmit={handleNicknameSubmit}
         confirmText='변경하기'
-        value={userInfo.nickname}
+        value={userInfo.data.nickname}
       />
     </Layout>
   );

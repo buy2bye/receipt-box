@@ -31,9 +31,20 @@ const userApi = () => {
     }
   };
 
+  const getUserInfo = async () => {
+    try {
+      const { data } = await apiController().get('/api/user/info');
+
+      return { logged: true, data: data };
+    } catch {
+      return { logged: false, data: {} };
+    }
+  };
+
   return {
     updateProfileImage,
     updateNickname,
+    getUserInfo,
   };
 };
 
