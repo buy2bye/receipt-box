@@ -8,8 +8,6 @@ const ReceiptDetailPage = ({ query }) => {
   const router = useRouter();
   const { createReceipt } = receiptApi();
 
-  console.log(query);
-
   const handleSaveClick = async (
     newReceiptInfo,
     newProductImage,
@@ -33,7 +31,11 @@ const ReceiptDetailPage = ({ query }) => {
   if (query.preview === 'yes')
     return <ReceiptDetailPreview isEdit onSaveClick={handleSaveClick} />;
 
-  return <ReceiptDetail isEdit onSaveClick={handleSaveClick} />;
+  return <ReceiptDetail
+    isEdit
+    onSaveClick={handleSaveClick}
+    onBackClick={() => router.replace('/')}
+  />;
 };
 
 export default ReceiptDetailPage;
