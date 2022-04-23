@@ -22,48 +22,12 @@ const receiptPreview = {
   productPlace: '더현대서울 이샵',
   productPrice: 359000,
   imageList: ['/preview/preview-receipt.jpeg'],
-  linkList: [],
   backgroundImage: '/preview/preview-background.jpg',
 };
 
 const ReceiptDetail = () => {
-  const router = useRouter();
   const receipt = receiptPreview;
-  const [nickname, setNickname] = useState('');
-  const [showNicknameChangePopup, setShowNicknameChangePopup] = useState(false);
-  const [deleteReasonsShown, setDeleteReasonsShown] = useState(false);
-  const [receiptZoomedIn, setReceiptZoomedIn] = useState(false);
-  const [usedDealAlert, setUsedDealAlert] = useState(false);
   const [usedDealInfoShown, setUsedDealInfoShown] = useState(false);
-  const [isPreviewModalOpen, setIsPreviewModalOpen] = useState(false);
-  const [previewModalText, setPreviewModalText] = useState('');
-
-  const handleDeleteButtonClick = () => {
-    setDeleteReasonsShown(true);
-  };
-
-  const handleUsedDealAlertToggle = (e) => {
-    setUsedDealAlert(e.target.checked);
-  };
-
-  const handleProductImageChange = (e) => {
-    setPreviewModalText('이미지 변경을 위해서는 로그인이 필요합니다.');
-    setIsPreviewModalOpen(true);
-  };
-
-  const handleNicknameChange = (e) => {
-    setNickname(e.target.value);
-  };
-
-  const handleNicknameSubmit = () => {
-    setPreviewModalText('닉네임 변경을 위해서는 로그인이 필요합니다.');
-    setIsPreviewModalOpen(true);
-  };
-
-  const handleDeleteSubmit = () => {
-    setPreviewModalText('영수증 삭제를 위해서는 로그인이 필요합니다.');
-    setIsPreviewModalOpen(true);
-  };
 
   return (
     <Container hideBottom topNavInBody topNavColor='transparent'>
@@ -100,22 +64,6 @@ const ReceiptDetail = () => {
             <img src={receiptPreview.imageList[0]} alt='preview-receipt' />
           </li>
         </AddReceiptList>
-        {receipt.linkList.length > 0 && (
-          <ExternalLinkList>
-            <span>내 물건 관리 tip</span>
-            {receipt.linkList.map((link, index) => (
-              <a
-                href={link.url}
-                target='_blank'
-                rel='noreferrer'
-                className='external-link'
-                key={index}
-              >
-                {link.title}
-              </a>
-            ))}
-          </ExternalLinkList>
-        )}
         <UsedDeal>
           <span>
             중고 거래 매칭 알림
@@ -123,34 +71,9 @@ const ReceiptDetail = () => {
               ?
             </button>
           </span>
-          <Toggle
-            onToggle={handleUsedDealAlertToggle}
-            toggleState={true}
-            id='used-deal-switch'
-          />
+          <Toggle toggleState={true} id='used-deal-switch' />
         </UsedDeal>
       </Details>
-
-      <ZoomReceipt
-        visible={receiptZoomedIn}
-        setVisible={setReceiptZoomedIn}
-        height='calc(100vw + 100px)'
-      >
-        <img src={receipt.imageList[0]} alt={receipt.productName} />
-        <a href={receipt.imageList[0]} download>
-          <Button primary>다운로드</Button>
-        </a>
-      </ZoomReceipt>
-
-      <BottomTextInputPopup
-        visible={showNicknameChangePopup}
-        setVisible={setShowNicknameChangePopup}
-        title='변경할 닉네임을 입력해주세요'
-        placeholder='예) 맥북 2022'
-        onInputChange={handleNicknameChange}
-        onSubmit={handleNicknameSubmit}
-        confirmText='변경하기'
-      />
 
       <TextModal
         isOpen={usedDealInfoShown}
@@ -161,11 +84,6 @@ const ReceiptDetail = () => {
         <br />
         <br /> 중고 판매를 원치 않으시면 꺼두시면 됩니다.
       </TextModal>
-      <PreviewModal
-        text={previewModalText}
-        isOpen={isPreviewModalOpen}
-        setIsOpen={setIsPreviewModalOpen}
-      />
     </Container>
   );
 };
