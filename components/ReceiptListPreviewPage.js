@@ -1,17 +1,14 @@
 import styled from '@emotion/styled';
 import Title from 'components/page/Title';
-import Subtitle from 'components/page/Subtitle';
 import Layout from 'components/layout/Layout';
 import { useState } from 'react';
 import { useRouter } from 'next/router';
-import TextModal from './modal/TextModal';
-import FileInputLabel from './common/FileInputLabel';
-import userApi from 'api/user';
-import BottomTextInputPopup from './popup/BottomTextInputPopup';
 import ReceiptsListView from './receipt/ReceiptsListView';
 import ReceiptsGridView from './receipt/ReceiptsGridView';
 import SummaryPopup from './receipt/SummaryPopup';
 import LoginModal from './login/LoginModal';
+import TextModal from './modal/TextModal';
+import HeaderTextModal from './modal/HeaderTextModal';
 
 const receiptList = [
   {
@@ -70,6 +67,8 @@ const ReceiptListPreviewPage = ({ userInfo }) => {
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const [selectedListType, setSelectedListType] = useState('grid');
   const [summaryItem, setSummaryItem] = useState();
+  const totalPrice = 15370000;
+  const [isTotalPriceModalShown, setIsTotalPriceModalShown] = useState(false);
 
   const handleLoginClick = () => {
     setIsLoginModalOpen(true);
@@ -83,6 +82,10 @@ const ReceiptListPreviewPage = ({ userInfo }) => {
     router.push(`/preview/${summaryItem.id}`);
   };
 
+  const handleTotalPriceButtonClick = () => {
+    setIsTotalPriceModalShown(true);
+  };
+
   return (
     <Layout hideTop showLogo isPreview>
       <HeaderLeftButton onClick={handleLoginClick}>로그인하기</HeaderLeftButton>
@@ -94,6 +97,9 @@ const ReceiptListPreviewPage = ({ userInfo }) => {
       </Profile>
       <HeaderContainer showBorder>
         <Title>내 물건 리스트</Title>
+        <TotalPriceButton onClick={handleTotalPriceButtonClick}>
+          ₩
+        </TotalPriceButton>
         <ListTypes>
           <ListType
             src='/icons/grid-icon.png'
@@ -132,6 +138,13 @@ const ReceiptListPreviewPage = ({ userInfo }) => {
           onShowDetailClick={handleShowDetailClick}
         />
       )}
+      <HeaderTextModal
+        isOpen={isTotalPriceModalShown}
+        onCloseClick={() => setIsTotalPriceModalShown(false)}
+        title='구매가 합계'
+      >
+        {totalPrice.toLocaleString()}원
+      </HeaderTextModal>
     </Layout>
   );
 };
@@ -141,21 +154,31 @@ export default ReceiptListPreviewPage;
 const HeaderContainer = styled.div`
   width: 100%;
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   margin-bottom: 12px;
   border-bottom: ${(props) =>
     props.showBorder ? '1px solid var(--grey200)' : 'none'};
   padding-bottom: 12px;
 
   h2 {
-    flex: 8;
     padding-bottom: 0;
+    width: auto;
   }
 
   span {
-    flex: 2;
     font-size: 14px;
   }
+`;
+
+const TotalPriceButton = styled.button`
+  width: 16px;
+  height: 16px;
+  border: 1px solid black;
+  border-radius: 50%;
+  margin-left: 6px;
+  text-align: center;
+  padding: 0;
+  font-size: 10px;
 `;
 
 const HeaderLeftButton = styled.button`
@@ -210,8 +233,9 @@ const Nickname = styled.div`
 `;
 
 const ListTypes = styled.div`
+  flex: 1;
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
   align-items: center;
   gap: 12px;
 
