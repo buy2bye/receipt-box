@@ -77,7 +77,6 @@ const ReceiptListPage = ({ userInfo }) => {
 
   return (
     <Layout hideTop showLogo>
-      <HeaderLeftButton onClick={handleLoginClick}>로그인하기</HeaderLeftButton>
       <Profile>
         <ProfileImageWrapper>
           <FileInputLabel
