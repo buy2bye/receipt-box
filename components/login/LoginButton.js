@@ -35,7 +35,7 @@ const LoginButton = ({ type, onClick }) => {
             name='appleid-signin-redirect-uri'
             content={process.env.NEXT_PUBLIC_APPLE_REDIRECT_URI}
           />
-          <meta name='appleid-signin-state' content={router.pathname} />
+          <meta name='appleid-signin-state' content={router.pathname.replace(/\//g, "")} />
           <meta
             name='appleid-signin-nonce'
             content={process.env.NEXT_PUBLIC_APPLE_NONCE}

@@ -47,13 +47,9 @@ AppleLogin.getInitialProps = async (ctx) => {
   const data = await parse(req);
   const { code, state, id_token: idToken } = data;
 
-  // if (error) {
-  //   redirect('/login', ctx);
-  // }
-
   return {
     code,
-    state,
+    state: state ? '/' + state : '/',
     idToken,
   };
 };
