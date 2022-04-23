@@ -18,7 +18,14 @@ const SummaryPopup = ({ onCloseClick, item, onShowDetailClick }) => {
       <SummaryHeader>{item.nickname}</SummaryHeader>
       <SummaryContent>
         <SummaryContentRow label='모델' content={item.productName} />
-        <SummaryContentRow label='구매가' content={item.productPrice} />
+        <SummaryContentRow
+          label='구매가'
+          content={
+            item.productPrice
+              ? `${parseInt(item.productPrice).toLocaleString()}원`
+              : ''
+          }
+        />
         <SummaryContentRow label='구매일자' content={item.productDate} />
         <SummaryContentRow label='구매처' content={item.productPlace} />
       </SummaryContent>

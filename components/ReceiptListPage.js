@@ -12,12 +12,14 @@ import BottomTextInputPopup from './popup/BottomTextInputPopup';
 import ReceiptsListView from './receipt/ReceiptsListView';
 import ReceiptsGridView from './receipt/ReceiptsGridView';
 import SummaryPopup from './receipt/SummaryPopup';
+import HeaderTextModal from './modal/HeaderTextModal';
 
 const ReceiptListPage = ({ userInfo }) => {
   const router = useRouter();
   const [receiptList, setReceiptList] = useState();
   const [totalCount, setTotalCount] = useState(0);
   const [totalPrice, setTotalPrice] = useState(0);
+  const [isTotalPriceModalShown, setIsTotalPriceModalShown] = useState(false);
   const [showNicknameChangePopup, setShowNicknameChangePopup] = useState(false);
   const [selectedListType, setSelectedListType] = useState('grid');
   const [summaryItem, setSummaryItem] = useState();
@@ -62,6 +64,10 @@ const ReceiptListPage = ({ userInfo }) => {
     router.push(`/receipt/${summaryItem.id}`);
   };
 
+  const handleTotalPriceButtonClick = () => {
+    setIsTotalPriceModalShown(true);
+  };
+
   if (!receiptList)
     return (
       <Layout hideTop showLogo>
@@ -87,6 +93,9 @@ const ReceiptListPage = ({ userInfo }) => {
       </Profile>
       <HeaderContainer showBorder={receiptList.length > 0}>
         <Title>내 물건 리스트</Title>
+        <TotalPriceButton onClick={handleTotalPriceButtonClick}>
+          ₩
+        </TotalPriceButton>
         <ListTypes>
           <ListType
             src='/icons/grid-icon.png'
@@ -128,6 +137,13 @@ const ReceiptListPage = ({ userInfo }) => {
         confirmText='변경하기'
         value={userInfo.data.nickname}
       />
+      <HeaderTextModal
+        isOpen={isTotalPriceModalShown}
+        onCloseClick={() => setIsTotalPriceModalShown(false)}
+        title='구매가 합계'
+      >
+        {totalPrice.toLocaleString()}원
+      </HeaderTextModal>
     </Layout>
   );
 };
@@ -137,33 +153,21 @@ export default ReceiptListPage;
 const HeaderContainer = styled.div`
   width: 100%;
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   margin-bottom: 12px;
   border-bottom: ${(props) =>
     props.showBorder ? '1px solid var(--grey200)' : 'none'};
   padding-bottom: 12px;
 
   h2 {
-    flex: 8;
     padding-bottom: 0;
+    width: auto;
   }
 
   span {
     flex: 2;
     font-size: 14px;
   }
-`;
-
-const HeaderLeftButton = styled.button`
-  position: fixed;
-  top: 10px;
-  left: 10px;
-  height: 32px;
-  background: transparent;
-  padding: 8px;
-  color: var(--grey500);
-  font-size: 13px;
-  z-index: 2;
 `;
 
 const Profile = styled.div`
@@ -201,8 +205,9 @@ const Nickname = styled.div`
 `;
 
 const ListTypes = styled.div`
+  flex: 1;
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
   align-items: center;
   gap: 12px;
 
@@ -222,4 +227,15 @@ const ListType = styled.img`
     width: 18px;
     height: 18px;
   }
+`;
+
+const TotalPriceButton = styled.button`
+  width: 16px;
+  height: 16px;
+  border: 1px solid black;
+  border-radius: 50%;
+  margin-left: 6px;
+  text-align: center;
+  padding: 0;
+  font-size: 10px;
 `;
