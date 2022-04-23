@@ -23,7 +23,8 @@ const Container = styled.div`
 const Thumbnail = styled.button`
   cursor: pointer;
   width: 100%;
-  height: 100%;
+  max-width: calc((100vw - 48px - 16px) / 3);
+  height: auto;
   aspect-ratio: 1/1;
   border-radius: 8px;
   background: white;

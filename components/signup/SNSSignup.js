@@ -5,7 +5,7 @@ import styled from '@emotion/styled';
 import apiController from 'helpers/apiController';
 import Title from 'components/page/Title';
 
-const SNSSingup = () => {
+const SNSSingup = ({ redirect }) => {
   const router = useRouter();
   const [nickname, setNickname] = useState('');
 
@@ -18,7 +18,7 @@ const SNSSingup = () => {
     apiController()
       .post('/api/user/set-nickname', { nickname: nickname })
       .then((res) => {
-        router.push('/');
+        router.push(`/${redirect}`);
       })
       .catch((error) => {
         const { status } = error.response;
@@ -30,7 +30,7 @@ const SNSSingup = () => {
     apiController()
       .post('/api/user/set-nickname', { nickname: null })
       .then((res) => {
-        router.push('/');
+        router.push(`/${redirect}`);
       });
   };
 

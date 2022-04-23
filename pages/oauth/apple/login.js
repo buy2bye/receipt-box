@@ -8,7 +8,7 @@ import { setCookie } from 'helpers/cookie';
 import { redirect } from 'helpers/utils';
 import FullScreenSpinner from 'components/common/FullScreenSpinner';
 
-const AppleLogin = ({ code, idToken }) => {
+const AppleLogin = ({ code, state, idToken }) => {
   const router = useRouter();
   const [fetchDone, setFetchDone] = useState(false);
 
@@ -26,7 +26,7 @@ const AppleLogin = ({ code, idToken }) => {
 
       const { data: userInfo } = await apiController().get('/api/user/info');
       if (userInfo.nickname) {
-        router.replace('/');
+        router.replace(`/${state}`);
       } else {
         setFetchDone(true);
       }
@@ -39,13 +39,13 @@ const AppleLogin = ({ code, idToken }) => {
     return <FullScreenSpinner />;
   }
 
-  return <SNSSingup />;
+  return <SNSSingup redirect={state} />;
 };
 
 AppleLogin.getInitialProps = async (ctx) => {
   const { req } = ctx;
   const data = await parse(req);
-  const { code, id_token: idToken } = data;
+  const { code, state, id_token: idToken } = data;
 
   // if (error) {
   //   redirect('/login', ctx);
@@ -53,7 +53,8 @@ AppleLogin.getInitialProps = async (ctx) => {
 
   return {
     code,
-    idToken
+    state,
+    idToken,
   };
 };
 

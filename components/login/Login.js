@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
 import Script from 'next/script';
@@ -18,11 +18,15 @@ const Login = () => {
   const [password, setPassword] = useState();
   const [isLoginFetching, setIsLoginFetching] = useState(false);
 
+  useEffect(() => {
+    console.log(router.query);
+  }, []);
+
   const handleKakaoLogin = () => {
     const CLIENT_ID = process.env.NEXT_PUBLIC_KAKAO_CLIENT_ID;
     const REDIRECT_URI = process.env.NEXT_PUBLIC_KAKAO_REDIRECT_URI;
 
-    const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=code`;
+    const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=code&state=aa`;
 
     window.location.href = KAKAO_AUTH_URL;
   };
@@ -124,10 +128,7 @@ const Login = () => {
           name='appleid-signin-redirect-uri'
           content={process.env.NEXT_PUBLIC_APPLE_REDIRECT_URI}
         />
-        <meta
-          name='appleid-signin-state'
-          content={process.env.NEXT_PUBLIC_APPLE_STATE}
-        />
+        <meta name='appleid-signin-state' content='aa' />
         <meta
           name='appleid-signin-nonce'
           content={process.env.NEXT_PUBLIC_APPLE_NONCE}

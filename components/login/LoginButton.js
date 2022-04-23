@@ -1,9 +1,26 @@
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import Head from 'next/head';
+import { useRouter } from 'next/router';
 import Script from 'next/script';
+import { useEffect } from 'react';
 
 const LoginButton = ({ type, onClick }) => {
+  const router = useRouter();
+
+  const handleKakaoLoginClick = () => {
+    const CLIENT_ID = process.env.NEXT_PUBLIC_KAKAO_CLIENT_ID;
+    const REDIRECT_URI = process.env.NEXT_PUBLIC_KAKAO_REDIRECT_URI;
+
+    const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=code&state=${router.pathname}`;
+
+    window.location.href = KAKAO_AUTH_URL;
+  };
+
+  const handleEmailLoginClick = () => {
+    router.push(`/login?type=email&redirect=${router.pathname}`);
+  };
+
   // apple login
   if (type === 'apple')
     return (
@@ -18,10 +35,7 @@ const LoginButton = ({ type, onClick }) => {
             name='appleid-signin-redirect-uri'
             content={process.env.NEXT_PUBLIC_APPLE_REDIRECT_URI}
           />
-          <meta
-            name='appleid-signin-state'
-            content={process.env.NEXT_PUBLIC_APPLE_STATE}
-          />
+          <meta name='appleid-signin-state' content={router.pathname} />
           <meta
             name='appleid-signin-nonce'
             content={process.env.NEXT_PUBLIC_APPLE_NONCE}
@@ -46,7 +60,7 @@ const LoginButton = ({ type, onClick }) => {
   // kakao login
   if (type === 'kakao')
     return (
-      <Container type='kakao'>
+      <Container type='kakao' onClick={handleKakaoLoginClick}>
         <img className='kakao-icon' src='icons/kakao.svg' alt='kakao-icon' />
         <span>카카오로 시작하기</span>
       </Container>
@@ -54,7 +68,7 @@ const LoginButton = ({ type, onClick }) => {
 
   // email login
   return (
-    <Container type='email'>
+    <Container type='email' onClick={handleEmailLoginClick}>
       <span>이메일로 시작하기</span>
     </Container>
   );
