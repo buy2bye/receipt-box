@@ -14,7 +14,6 @@ import 개인정보수집동의 from 'components/signup/agreements/개인정보�
 
 const Signup = () => {
   const router = useRouter();
-
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [passwordCheck, setPasswordCheck] = useState('');
@@ -22,7 +21,6 @@ const Signup = () => {
   const [gender, setGender] = useState();
   const [phone, setPhone] = useState();
   const [birthYear, setBirthYear] = useState();
-
   const [agreements, setAgreements] = useState({
     ageLimit: false,
     termsAndConditions: false,
@@ -165,7 +163,7 @@ const Signup = () => {
             const { data } = res;
             setCookie('accessToken', data.accessToken);
             setCookie('refreshToken', data.refreshToken);
-            router.push('/');
+            router.query.redirect ? router.push(redirect) : router.push('/');
           });
       })
       .catch(({ response: res }) => {

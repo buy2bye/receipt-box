@@ -18,7 +18,7 @@ const SNSSingup = ({ redirect }) => {
     apiController()
       .post('/api/user/set-nickname', { nickname: nickname })
       .then((res) => {
-        router.push(`/${redirect}`);
+        router.push(redirect);
       })
       .catch((error) => {
         const { status } = error.response;
@@ -30,7 +30,7 @@ const SNSSingup = ({ redirect }) => {
     apiController()
       .post('/api/user/set-nickname', { nickname: null })
       .then((res) => {
-        router.push(`/${redirect}`);
+        router.push(redirect);
       });
   };
 

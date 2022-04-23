@@ -26,7 +26,7 @@ const AppleLogin = ({ code, state, idToken }) => {
 
       const { data: userInfo } = await apiController().get('/api/user/info');
       if (userInfo.nickname) {
-        router.replace(`/${state}`);
+        router.replace(state);
       } else {
         setFetchDone(true);
       }

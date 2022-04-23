@@ -16,8 +16,6 @@ const Home = () => {
     fetchUser();
   }, []);
 
-  console.log(userInfo);
-
   if (!userInfo.logged) return <ReceiptListPreviewPage />;
 
   return <ReceiptListPage userInfo={userInfo} />;

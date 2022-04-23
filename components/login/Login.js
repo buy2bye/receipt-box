@@ -26,7 +26,7 @@ const Login = () => {
     const CLIENT_ID = process.env.NEXT_PUBLIC_KAKAO_CLIENT_ID;
     const REDIRECT_URI = process.env.NEXT_PUBLIC_KAKAO_REDIRECT_URI;
 
-    const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=code&state=aa`;
+    const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=code`;
 
     window.location.href = KAKAO_AUTH_URL;
   };
@@ -45,7 +45,9 @@ const Login = () => {
         const { data } = res;
         setCookie('accessToken', data.accessToken);
         setCookie('refreshToken', data.refreshToken);
-        router.push('/');
+        router.query.redirect
+          ? router.push(router.query.redirect)
+          : router.push('/');
       })
       .catch(() => {
         alert('아이디나 비밀번호나 없거나 올바르지 않습니다.');
@@ -107,7 +109,14 @@ const Login = () => {
         로그인
       </Button>
 
-      <Link href='/signup' passHref>
+      <Link
+        href={
+          router.query.redirect
+            ? `/signup?redirect=${router.query.redirect}`
+            : '/signup'
+        }
+        passHref
+      >
         <div className='sign-up'>회원 가입하기</div>
       </Link>
       <Link href='https://pf.kakao.com/_IxmxdJb/chat' passHref>

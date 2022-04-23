@@ -2,8 +2,6 @@ import styled from '@emotion/styled';
 import ReceiptGrid from './ReceiptGrid';
 
 const ReceiptsGridView = ({ receiptList, onItemClick }) => {
-  console.log(receiptList);
-
   return (
     <Container>
       {receiptList.length < 1 && (
