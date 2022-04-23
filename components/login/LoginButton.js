@@ -1,17 +1,46 @@
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
+import Head from 'next/head';
+import Script from 'next/script';
 
 const LoginButton = ({ type, onClick }) => {
   // apple login
   if (type === 'apple')
     return (
-      <Container
-        id='appleid-signin'
-        type='apple'
-        data-color='black'
-        data-border='true'
-        data-type='sign in'
-      />
+      <>
+        <Head>
+          <meta
+            name='appleid-signin-client-id'
+            content={process.env.NEXT_PUBLIC_APPLE_CLIENT_ID}
+          />
+          <meta name='appleid-signin-scope' content='email' />
+          <meta
+            name='appleid-signin-redirect-uri'
+            content={process.env.NEXT_PUBLIC_APPLE_REDIRECT_URI}
+          />
+          <meta
+            name='appleid-signin-state'
+            content={process.env.NEXT_PUBLIC_APPLE_STATE}
+          />
+          <meta
+            name='appleid-signin-nonce'
+            content={process.env.NEXT_PUBLIC_APPLE_NONCE}
+          />
+          <meta name='appleid-signin-use-popup' content='false' />
+        </Head>
+        <Script
+          type='text/javascript'
+          src='https://appleid.cdn-apple.com/appleauth/static/jsapi/appleid/1/en_US/appleid.auth.js'
+        />
+
+        <Container
+          id='appleid-signin'
+          type='apple'
+          data-color='black'
+          data-border='true'
+          data-type='sign in'
+        />
+      </>
     );
 
   // kakao login
@@ -35,7 +64,7 @@ export default LoginButton;
 
 const Container = styled.button`
   width: 100%;
-  height: 48px;
+  height: 44px;
   margin-bottom: 8px;
   border-radius: 8px;
   font-size: 14px;

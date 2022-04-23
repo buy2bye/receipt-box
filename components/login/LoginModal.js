@@ -1,5 +1,7 @@
 import styled from '@emotion/styled';
 import Modal from 'components/modal/Modal';
+import Head from 'next/head';
+import Script from 'next/script';
 import LoginButton from './LoginButton';
 
 const LoginModal = ({ isOpen, onCloseClick }) => {
@@ -15,8 +17,8 @@ const LoginModal = ({ isOpen, onCloseClick }) => {
       </ModalHeader>
       <Description>서비스 이용을 위해서는 로그인이 필요합니다.</Description>
       <LoginButton type='kakao' />
-      <LoginButton type='apple' />
       <LoginButton type='email' />
+      <LoginButton type='apple' />
     </Container>
   );
 };
