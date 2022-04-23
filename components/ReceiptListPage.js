@@ -91,6 +91,11 @@ const ReceiptListPage = ({ userInfo }) => {
           <img src='/icons/edit.png' alt='edit' width={14} height={14} />
         </Nickname>
       </Profile>
+      {receiptList.length === 0 && (
+        <UploadGuideText>
+          우측 하단의 '+' 버튼을 눌러 내 물건을 등록해보세요🙂
+        </UploadGuideText>
+      )}
       <HeaderContainer showBorder={receiptList.length > 0}>
         <Title>내 물건 리스트</Title>
         <TotalPriceButton onClick={handleTotalPriceButtonClick}>
@@ -154,7 +159,7 @@ const HeaderContainer = styled.div`
   width: 100%;
   display: flex;
   align-items: center;
-  margin-bottom: 12px;
+  margin: 12px 0;
   border-bottom: ${(props) =>
     props.showBorder ? '1px solid var(--grey200)' : 'none'};
   padding-bottom: 12px;
@@ -175,7 +180,7 @@ const Profile = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 20px 0 52px 0;
+  padding: 20px 0 32px 0;
 `;
 
 const ProfileImageWrapper = styled.div`
@@ -238,4 +243,13 @@ const TotalPriceButton = styled.button`
   text-align: center;
   padding: 0;
   font-size: 10px;
+`;
+
+const UploadGuideText = styled.div`
+  font-size: 12px;
+  font-weight: 500;
+  margin-bottom: 40px;
+  padding: 10px 16px;
+  background: var(--grey200);
+  border-radius: 20px;
 `;

@@ -95,6 +95,9 @@ const ReceiptListPreviewPage = ({ userInfo }) => {
         </ProfileImageWrapper>
         <Nickname>슬버</Nickname>
       </Profile>
+      <UploadGuideText>
+        우측 하단의 '+' 버튼을 눌러 내 물건을 등록해보세요🙂
+      </UploadGuideText>
       <HeaderContainer showBorder>
         <Title>내 물건 리스트</Title>
         <TotalPriceButton onClick={handleTotalPriceButtonClick}>
@@ -155,7 +158,7 @@ const HeaderContainer = styled.div`
   width: 100%;
   display: flex;
   align-items: center;
-  margin-bottom: 12px;
+  margin: 12px 0;
   border-bottom: ${(props) =>
     props.showBorder ? '1px solid var(--grey200)' : 'none'};
   padding-bottom: 12px;
@@ -198,7 +201,7 @@ const Profile = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 20px 0 52px 0;
+  padding: 20px 0 32px 0;
 `;
 
 const ProfileImageWrapper = styled.div`
@@ -255,4 +258,13 @@ const ListType = styled.img`
     width: 18px;
     height: 18px;
   }
+`;
+
+const UploadGuideText = styled.div`
+  font-size: 12px;
+  font-weight: 500;
+  margin-bottom: 40px;
+  padding: 10px 16px;
+  background: var(--grey200);
+  border-radius: 20px;
 `;
