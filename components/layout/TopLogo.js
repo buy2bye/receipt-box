@@ -13,7 +13,10 @@ const TopLogo = ({ hideSetting, isPreview }) => {
           <Logo>
             <img src='/icons/logo_300.png' alt='buy2bye logo' />
           </Logo>
-          <Setting onClick={() => setIsPreviewModalOpen(true)}>
+          <Setting
+            onClick={() => setIsPreviewModalOpen(true)}
+            disabled={isPreview}
+          >
             <img src='/icons/setting.png' alt='setting' />
           </Setting>
         </Container>

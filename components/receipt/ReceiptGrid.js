@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 const ReceiptGrid = ({ item, onClick }) => {
   return (
     <Container>
-      <Thumbnail onClick={onClick}>
+      <Thumbnail onClick={onClick} disabled={item.disabled}>
         {item.productImage ? (
           <img src={item?.productImage} alt={item?.nickname} />
         ) : (
@@ -20,7 +20,7 @@ const Container = styled.div`
   position: relative;
 `;
 
-const Thumbnail = styled.div`
+const Thumbnail = styled.button`
   cursor: pointer;
   width: 100%;
   height: 100%;

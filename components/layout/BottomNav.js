@@ -6,29 +6,10 @@ import Link from 'next/link';
 
 const BottomNav = ({ isPreview }) => {
   const router = useRouter();
-  const [isPreviewModalOpen, setIsPreviewModalOpen] = useState(false);
-
-  if (isPreview)
-    return (
-      <Container>
-        <UploadButtonPreview
-          onClick={() => {
-            setIsPreviewModalOpen(true);
-          }}
-        >
-          <img src='/icons/plus.png' alt='receipt-upload' />
-        </UploadButtonPreview>
-        <PreviewModal
-          text='영수증 등록을 위해서는 로그인이 필요합니다.'
-          isOpen={isPreviewModalOpen}
-          setIsOpen={setIsPreviewModalOpen}
-        />
-      </Container>
-    );
 
   return (
     <Container>
-      <Link href='/create' passHref>
+      <Link href={isPreview ? `/create?preview=true` : '/create'} passHref>
         <UploadButton htmlFor='upload-photo'>
           <img src='/icons/plus.png' alt='receipt-upload' />
         </UploadButton>

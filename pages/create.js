@@ -30,4 +30,4 @@ const ReceiptDetailPage = () => {
   return <ReceiptDetail isEdit onSaveClick={handleSaveClick} />;
 };
 
-export default WrapAuthPage(ReceiptDetailPage);
+export default ReceiptDetailPage;

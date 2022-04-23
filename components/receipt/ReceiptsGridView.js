@@ -6,9 +6,9 @@ const ReceiptsGridView = ({ receiptList, onItemClick }) => {
     <Container>
       {receiptList.length < 1 && (
         <UploadGuide>
-          <h3>등록된 영수증이 없어요.</h3>
-          <span>아래 카메라 버튼을 눌러</span>
-          <span>영수증을 촬영하세요!</span>
+          <h3>등록된 물건이 없어요.</h3>
+          <span>오른쪽 아래의 + 버튼을 눌러</span>
+          <span>물건을 등록하세요!</span>
         </UploadGuide>
       )}
       {receiptList.map((item, index) => (

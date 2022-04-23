@@ -92,12 +92,6 @@ const ReceiptListPage = ({ userInfo }) => {
           <img src='/icons/edit.png' alt='edit' width={14} height={14} />
         </Nickname>
       </Profile>
-      {receiptList.length < 1 && (
-        <UploadGuideHeader>
-          <Title>내 물건 영수증을 등록해보세요 🙂</Title>
-          <Subtitle>온라인 주문내역 캡쳐화면도 등록할 수 있어요 </Subtitle>
-        </UploadGuideHeader>
-      )}
       <HeaderContainer showBorder={receiptList.length > 0}>
         <Title>내 물건 리스트</Title>
         <ListTypes>
@@ -154,12 +148,6 @@ const ReceiptListPage = ({ userInfo }) => {
 };
 
 export default ReceiptListPage;
-
-const UploadGuideHeader = styled.div`
-  width: 100%;
-  border-bottom: 1px solid var(--grey200);
-  margin-bottom: 20px;
-`;
 
 const HeaderContainer = styled.div`
   width: 100%;

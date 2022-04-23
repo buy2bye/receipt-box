@@ -11,6 +11,55 @@ import BottomTextInputPopup from './popup/BottomTextInputPopup';
 import ReceiptsListView from './receipt/ReceiptsListView';
 import ReceiptsGridView from './receipt/ReceiptsGridView';
 import SummaryPopup from './receipt/SummaryPopup';
+import LoginModal from './login/LoginModal';
+
+const receiptList = [
+  {
+    id: 1,
+    nickname: '지원이의 아이폰13',
+    productDate: '2022-05-24',
+    productImage: '',
+    productName: 'iPhone 13 (핑크)',
+    productPlace: '애플스토어 가로수길',
+    productPrice: 1090000,
+  },
+  {
+    nickname: '지원이의 아이폰13',
+    productName: 'iPhone 13 (핑크)',
+    productPrice: 1090000,
+    disabled: true,
+  },
+  {
+    nickname: '지원이의 아이폰13',
+    productName: 'iPhone 13 (핑크)',
+    productPrice: 1090000,
+    disabled: true,
+  },
+  {
+    nickname: '지원이의 아이폰13',
+    productName: 'iPhone 13 (핑크)',
+    productPrice: 1090000,
+    disabled: true,
+  },
+  {
+    nickname: '지원이의 아이폰13',
+    productName: 'iPhone 13 (핑크)',
+    productPrice: 1090000,
+    disabled: true,
+  },
+  {
+    nickname: '지원이의 아이폰13',
+    productName: 'iPhone 13 (핑크)',
+    productPrice: 1090000,
+    disabled: true,
+  },
+  {
+    nickname: '지원이의 아이폰13',
+    productName: 'iPhone 13 (핑크)',
+    productPrice: 1090000,
+    disabled: true,
+  },
+];
 
 const ReceiptListPreviewPage = ({ userInfo }) => {
   const router = useRouter();
@@ -56,7 +105,7 @@ const ReceiptListPreviewPage = ({ userInfo }) => {
   };
 
   return (
-    <Layout hideTop showLogo>
+    <Layout hideTop showLogo isPreview>
       <HeaderLeftButton onClick={handleLoginClick}>로그인하기</HeaderLeftButton>
       <Profile>
         <ProfileImageWrapper>
@@ -68,16 +117,11 @@ const ReceiptListPreviewPage = ({ userInfo }) => {
           />
         </ProfileImageWrapper>
         <Nickname onClick={handleNicknameEditClick}>
+          문지
           <img src='/icons/edit.png' alt='edit' width={14} height={14} />
         </Nickname>
       </Profile>
-      {/* {receiptList.length < 1 && (
-        <UploadGuideHeader>
-          <Title>내 물건 영수증을 등록해보세요 🙂</Title>
-          <Subtitle>온라인 주문내역 캡쳐화면도 등록할 수 있어요 </Subtitle>
-        </UploadGuideHeader>
-      )} */}
-      {/* <HeaderContainer showBorder={receiptList.length > 0}>
+      <HeaderContainer showBorder>
         <Title>내 물건 리스트</Title>
         <ListTypes>
           <ListType
@@ -93,8 +137,8 @@ const ReceiptListPreviewPage = ({ userInfo }) => {
             selected={selectedListType === 'list'}
           />
         </ListTypes>
-      </HeaderContainer> */}
-      {/* {selectedListType === 'grid' ? (
+      </HeaderContainer>
+      {selectedListType === 'grid' ? (
         <ReceiptsGridView
           receiptList={receiptList}
           onItemClick={handleItemClick}
@@ -104,15 +148,12 @@ const ReceiptListPreviewPage = ({ userInfo }) => {
           receiptList={receiptList}
           onItemClick={handleItemClick}
         />
-      )} */}
-      <TextModal
+      )}
+      <LoginModal
         isOpen={isLoginModalOpen}
         onCloseClick={() => setIsLoginModalOpen(false)}
-      >
-        <button>일반로그인</button>
-        <button>애플로그인</button>
-        <button>카카오로그인</button>
-      </TextModal>
+      />
+
       {summaryItem && (
         <SummaryPopup
           onCloseClick={() => setSummaryItem(null)}
@@ -133,12 +174,6 @@ const ReceiptListPreviewPage = ({ userInfo }) => {
 };
 
 export default ReceiptListPreviewPage;
-
-const UploadGuideHeader = styled.div`
-  width: 100%;
-  border-bottom: 1px solid var(--grey200);
-  margin-bottom: 20px;
-`;
 
 const HeaderContainer = styled.div`
   width: 100%;

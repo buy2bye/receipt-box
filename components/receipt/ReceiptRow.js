@@ -16,32 +16,31 @@ const ReceiptRow = ({ item, onClick }) => {
   );
 
   return (
-    <>
-      <Container onClick={onClick}>
-        {item.productImage ? imageWrapper : imageSkeleton}
-        <div className='contents'>
-          <h3 className='name'>
-            {item?.nickname || '내 물건에게 별명을 지어주세요'}
-          </h3>
+    <Container onClick={onClick} disabled={item.disabled}>
+      {item.productImage ? imageWrapper : imageSkeleton}
+      <div className='contents'>
+        <h3 className='name'>
+          {item?.nickname || '내 물건에게 별명을 지어주세요'}
+        </h3>
 
-          {dateDiff.okay && (
-            <span className='date'>
-              함께한 지 {dateDiff.data.dateDiff.toLocaleString()}일 째
-            </span>
-          )}
-        </div>
-      </Container>
-    </>
+        {dateDiff.okay && (
+          <span className='date'>
+            함께한 지 {dateDiff.data.dateDiff.toLocaleString()}일 째
+          </span>
+        )}
+      </div>
+    </Container>
   );
 };
 
 export default ReceiptRow;
 
-const Container = styled.div`
+const Container = styled.button`
   cursor: pointer;
   width: 100%;
   height: 90px;
   display: flex;
+  align-items: center;
   gap: 16px;
 
   .thumb {

@@ -31,7 +31,7 @@ export default SummaryPopup;
 
 const Container = styled.div`
   position: fixed;
-  width: 200px;
+  width: 240px;
   height: 240px;
   top: 50%;
   left: 50%;
