@@ -48,6 +48,9 @@ const Description = styled.span`
 
 const Logo = styled.div`
   width: 80px;
+  display: flex;
+  align-items: center;
+
   img {
     width: 100%;
     height: auto;

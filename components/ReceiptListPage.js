@@ -13,6 +13,7 @@ import ReceiptsListView from './receipt/ReceiptsListView';
 import ReceiptsGridView from './receipt/ReceiptsGridView';
 import SummaryPopup from './receipt/SummaryPopup';
 import HeaderTextModal from './modal/HeaderTextModal';
+import LogoHeaderModal from './modal/LogoHeaderModal';
 
 const ReceiptListPage = ({ userInfo }) => {
   const router = useRouter();
@@ -23,8 +24,22 @@ const ReceiptListPage = ({ userInfo }) => {
   const [showNicknameChangePopup, setShowNicknameChangePopup] = useState(false);
   const [selectedListType, setSelectedListType] = useState('grid');
   const [summaryItem, setSummaryItem] = useState();
-
+  const [isBadgeModalShown, setIsBadgeModalShown] = useState(false);
   const { updateProfileImage, updateNickname } = userApi();
+
+  // TODO: count별로 뱃지 이미지 변경
+  const badgeImage =
+    totalCount > 40
+      ? '/icons/box.png'
+      : totalCount > 30
+      ? '/icons/box.png'
+      : totalCount > 20
+      ? '/icons/box.png'
+      : totalCount > 10
+      ? '/icons/box.png'
+      : totalCount > 1
+      ? '/icons/box.png'
+      : '/icons/box.png';
 
   useEffect(() => {
     const { getReceipts } = receiptApi();
@@ -68,6 +83,10 @@ const ReceiptListPage = ({ userInfo }) => {
     setIsTotalPriceModalShown(true);
   };
 
+  const handleBadgeClick = () => {
+    setIsBadgeModalShown(true);
+  };
+
   if (!receiptList)
     return (
       <Layout hideTop showLogo>
@@ -86,10 +105,13 @@ const ReceiptListPage = ({ userInfo }) => {
             imageHeight={userInfo.data.profile_image ? '100%' : '50%'}
           />
         </ProfileImageWrapper>
-        <Nickname onClick={handleNicknameEditClick}>
-          {userInfo.data.nickname}
-          <img src='/icons/edit.png' alt='edit' width={14} height={14} />
-        </Nickname>
+        <NicknameWrapper>
+          <img src={badgeImage} alt='user-badge' onClick={handleBadgeClick} />
+          <Nickname onClick={handleNicknameEditClick}>
+            {userInfo.data.nickname}
+            <img src='/icons/edit.png' alt='edit' width={14} height={14} />
+          </Nickname>
+        </NicknameWrapper>
       </Profile>
       {receiptList.length === 0 && (
         <UploadGuideText>
@@ -149,6 +171,15 @@ const ReceiptListPage = ({ userInfo }) => {
       >
         {totalPrice.toLocaleString()}원
       </HeaderTextModal>
+      <LogoHeaderModal
+        isOpen={isBadgeModalShown}
+        onCloseClick={() => setIsBadgeModalShown(false)}
+      >
+        무소유: 0개 등록 시<br /> 미니멀리스트 : 1~10개 등록 시<br /> 초보
+        수집가 : 11~20개 등록 시<br /> 프로수집가 지망생 : 21~30개 등록 시<br />
+        나는야 프로수집가 : 31~40개 등록 시<br /> 진정한 수집광 : 41~50개 등록
+        시<br />
+      </LogoHeaderModal>
     </Layout>
   );
 };
@@ -198,12 +229,11 @@ const Nickname = styled.div`
   font-weight: 400;
   color: var(--grey600);
   position: relative;
+  display: flex;
+  align-items: center;
 
   img {
-    position: absolute;
-    top: 50%;
-    right: -24px;
-    transform: translateY(-50%);
+    margin-left: 8px;
     width: 14px;
     height: 14px;
   }
@@ -252,4 +282,15 @@ const UploadGuideText = styled.div`
   padding: 10px 16px;
   background: var(--grey200);
   border-radius: 20px;
+`;
+
+const NicknameWrapper = styled.div`
+  display: flex;
+  align-items: center;
+
+  > img {
+    width: 20px;
+    height: 20px;
+    margin-right: 4px;
+  }
 `;

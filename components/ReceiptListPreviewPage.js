@@ -9,6 +9,7 @@ import SummaryPopup from './receipt/SummaryPopup';
 import LoginModal from './login/LoginModal';
 import TextModal from './modal/TextModal';
 import HeaderTextModal from './modal/HeaderTextModal';
+import LogoHeaderModal from './modal/LogoHeaderModal';
 
 const receiptList = [
   {
@@ -69,6 +70,7 @@ const ReceiptListPreviewPage = ({ userInfo }) => {
   const [summaryItem, setSummaryItem] = useState();
   const totalPrice = 15370000;
   const [isTotalPriceModalShown, setIsTotalPriceModalShown] = useState(false);
+  const [isBadgeModalShown, setIsBadgeModalShown] = useState(false);
 
   const handleLoginClick = () => {
     setIsLoginModalOpen(true);
@@ -86,6 +88,10 @@ const ReceiptListPreviewPage = ({ userInfo }) => {
     setIsTotalPriceModalShown(true);
   };
 
+  const handleBadgeClick = () => {
+    setIsBadgeModalShown(true);
+  };
+
   return (
     <Layout hideTop showLogo isPreview>
       <HeaderLeftButton onClick={handleLoginClick}>로그인하기</HeaderLeftButton>
@@ -93,7 +99,14 @@ const ReceiptListPreviewPage = ({ userInfo }) => {
         <ProfileImageWrapper>
           <img src='/preview/preview-profile.png' alt='preview-profile' />
         </ProfileImageWrapper>
-        <Nickname>슬버</Nickname>
+        <NicknameWrapper>
+          <img
+            src='/icons/box.png'
+            alt='user-badge'
+            onClick={handleBadgeClick}
+          />
+          <Nickname>슬버</Nickname>
+        </NicknameWrapper>
       </Profile>
       <UploadGuideText>
         우측 하단의 '+' 버튼을 눌러 내 물건을 등록해보세요🙂
@@ -148,6 +161,15 @@ const ReceiptListPreviewPage = ({ userInfo }) => {
       >
         {totalPrice.toLocaleString()}원
       </HeaderTextModal>
+      <LogoHeaderModal
+        isOpen={isBadgeModalShown}
+        onCloseClick={() => setIsBadgeModalShown(false)}
+      >
+        무소유: 0개 등록 시<br /> 미니멀리스트 : 1~10개 등록 시<br /> 초보
+        수집가 : 11~20개 등록 시<br /> 프로수집가 지망생 : 21~30개 등록 시<br />
+        나는야 프로수집가 : 31~40개 등록 시<br /> 진정한 수집광 : 41~50개 등록
+        시<br />
+      </LogoHeaderModal>
     </Layout>
   );
 };
@@ -267,4 +289,15 @@ const UploadGuideText = styled.div`
   padding: 10px 16px;
   background: var(--grey200);
   border-radius: 20px;
+`;
+
+const NicknameWrapper = styled.div`
+  display: flex;
+  align-items: center;
+
+  > img {
+    width: 20px;
+    height: 20px;
+    margin-right: 4px;
+  }
 `;
