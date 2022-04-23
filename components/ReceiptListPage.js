@@ -186,13 +186,13 @@ const Profile = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 40px 0 52px 0;
+  padding: 20px 0 52px 0;
 `;
 
 const ProfileImageWrapper = styled.div`
   position: relative;
-  width: 80px;
-  height: 80px;
+  width: 100px;
+  height: 100px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -200,8 +200,8 @@ const ProfileImageWrapper = styled.div`
 `;
 
 const Nickname = styled.div`
-  font-size: 16px;
-  font-weight: 300;
+  font-size: 14px;
+  font-weight: 400;
   color: var(--grey600);
   position: relative;
 

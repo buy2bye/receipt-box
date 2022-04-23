@@ -16,47 +16,51 @@ import LoginModal from './login/LoginModal';
 const receiptList = [
   {
     id: 1,
-    nickname: '지원이의 아이폰13',
-    productDate: '2022-05-24',
-    productImage: '',
-    productName: 'iPhone 13 (핑크)',
-    productPlace: '애플스토어 가로수길',
-    productPrice: 1090000,
+    nickname: '나의 첫 애플워치',
+    productDate: '2022-03-10',
+    productImage: '/preview/preview-applewatch.png',
+    productName: 'Apple Watch Nike SE',
+    productPlace: '더현대서울 이샵',
+    productPrice: 359000,
   },
   {
-    nickname: '지원이의 아이폰13',
-    productName: 'iPhone 13 (핑크)',
-    productPrice: 1090000,
+    id: 2,
+    productImage: '/preview/preview-2.jpeg',
     disabled: true,
   },
   {
-    nickname: '지원이의 아이폰13',
-    productName: 'iPhone 13 (핑크)',
-    productPrice: 1090000,
+    id: 3,
+    productImage: '/preview/preview-3.jpeg',
     disabled: true,
   },
   {
-    nickname: '지원이의 아이폰13',
-    productName: 'iPhone 13 (핑크)',
-    productPrice: 1090000,
+    id: 4,
+    productImage: '/preview/preview-4.jpeg',
     disabled: true,
   },
   {
-    nickname: '지원이의 아이폰13',
-    productName: 'iPhone 13 (핑크)',
-    productPrice: 1090000,
+    id: 5,
+    productImage: '/preview/preview-5.jpeg',
     disabled: true,
   },
   {
-    nickname: '지원이의 아이폰13',
-    productName: 'iPhone 13 (핑크)',
-    productPrice: 1090000,
+    id: 6,
+    productImage: '/preview/preview-6.jpeg',
     disabled: true,
   },
   {
-    nickname: '지원이의 아이폰13',
-    productName: 'iPhone 13 (핑크)',
-    productPrice: 1090000,
+    id: 7,
+    productImage: '/preview/preview-7.jpeg',
+    disabled: true,
+  },
+  {
+    id: 8,
+    productImage: '/preview/preview-8.jpeg',
+    disabled: true,
+  },
+  {
+    id: 9,
+    productImage: '/preview/preview-9.jpeg',
     disabled: true,
   },
 ];
@@ -109,17 +113,9 @@ const ReceiptListPreviewPage = ({ userInfo }) => {
       <HeaderLeftButton onClick={handleLoginClick}>로그인하기</HeaderLeftButton>
       <Profile>
         <ProfileImageWrapper>
-          <FileInputLabel
-            image='/icons/add-user.png'
-            onChange={handleProfileImageUpload}
-            imageWidth='100%'
-            imageHeight='100%'
-          />
+          <img src='/preview/preview-profile.png' />
         </ProfileImageWrapper>
-        <Nickname onClick={handleNicknameEditClick}>
-          문지
-          <img src='/icons/edit.png' alt='edit' width={14} height={14} />
-        </Nickname>
+        <Nickname onClick={handleNicknameEditClick}>슬버</Nickname>
       </Profile>
       <HeaderContainer showBorder>
         <Title>내 물건 리스트</Title>
@@ -212,22 +208,27 @@ const Profile = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 40px 0 52px 0;
+  padding: 20px 0 52px 0;
 `;
 
 const ProfileImageWrapper = styled.div`
   position: relative;
-  width: 80px;
-  height: 80px;
+  width: 100px;
+  height: 100px;
   display: flex;
   justify-content: center;
   align-items: center;
   margin-bottom: 10px;
+
+  img {
+    width: 100%;
+    height: 100%;
+  }
 `;
 
 const Nickname = styled.div`
-  font-size: 16px;
-  font-weight: 300;
+  font-size: 14px;
+  font-weight: 400;
   color: var(--grey600);
   position: relative;
 
