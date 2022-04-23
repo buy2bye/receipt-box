@@ -56,7 +56,7 @@ const SummaryHeader = styled.div`
   height: 40px;
   min-height: 40px;
   border-radius: 8px 8px 0 0;
-  padding: 0 8px;
+  padding: 0 12px;
 `;
 
 const SummaryContent = styled.div`

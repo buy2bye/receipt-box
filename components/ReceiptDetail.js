@@ -14,8 +14,8 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
-import BottomPopupNotice from 'components/BottomPopupNotice';//호진 업로딩시 팝업
-import ReactLoading from 'react-loading';//호진 업로딩시 팝업
+import BottomPopupNotice from 'components/BottomPopupNotice'; //호진 업로딩시 팝업
+import ReactLoading from 'react-loading'; //호진 업로딩시 팝업
 
 const PopupInfo = {
   nickname: {
@@ -60,7 +60,7 @@ const ReceiptDetail = ({
   const router = useRouter();
   const { id } = router.query;
 
-  const [loading, setLoading] = useState(false);//호진 업로딩시 팝업
+  const [loading, setLoading] = useState(false); //호진 업로딩시 팝업
 
   const [newReceiptInfo, setNewReceiptInfo] = useState({
     nickname: '',
@@ -240,7 +240,8 @@ const ReceiptDetail = ({
           <label htmlFor='upload-background'>
             <TopBackground
               src={
-                newReceiptInfo?.backgroundImage || '/bg/receipt-background-create.png'
+                newReceiptInfo?.backgroundImage ||
+                '/bg/receipt-background-create.png'
               }
             />
           </label>
@@ -343,8 +344,7 @@ const ReceiptDetail = ({
             )}
           </span>
           <span>
-            {newReceiptInfo.productName ||
-              (isEdit && '터치하여 입력하세요')}
+            {newReceiptInfo.productName || (isEdit && '터치하여 입력하세요')}
             {isEdit && <img src='/icons/edit.png' alt='edit-icon' />}
           </span>
         </li>
@@ -356,8 +356,7 @@ const ReceiptDetail = ({
             )}
           </span>
           <span>
-            {newReceiptInfo.productPlace ||
-              (isEdit && '터치하여 입력하세요')}
+            {newReceiptInfo.productPlace || (isEdit && '터치하여 입력하세요')}
             {isEdit && <img src='/icons/edit.png' alt='edit-icon' />}
           </span>
         </li>
@@ -383,8 +382,7 @@ const ReceiptDetail = ({
             )}
           </span>
           <span>
-            {newReceiptInfo.productDate ||
-              (isEdit && '터치하여 입력하세요')}
+            {newReceiptInfo.productDate || (isEdit && '터치하여 입력하세요')}
             {isEdit && <img src='/icons/edit.png' alt='edit-icon' />}
           </span>
         </li>
@@ -538,16 +536,15 @@ const ReceiptDetail = ({
         visible={loading}
         setVisible={setLoading}
         title={'등록 중 입니다😊'}
-        height = '18vh'
-        >
+        height='18vh'
+      >
         <LoadingContainer>
           <ReactLoading
             type='spin'
             color='#AAAAAA'
             height='15%'
             width='15%'
-          >
-          </ReactLoading>
+          ></ReactLoading>
         </LoadingContainer>
       </BottomPopupNotice>
     </Container>
@@ -556,7 +553,9 @@ const ReceiptDetail = ({
 
 export default WrapAuthPage(ReceiptDetail);
 
-const Container = styled(Layout)``;
+const Container = styled(Layout)`
+  overflow-x: hidden;
+`;
 
 const TopBackground = styled.img`
   position: absolute;

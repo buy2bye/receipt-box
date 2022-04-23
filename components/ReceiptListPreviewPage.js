@@ -16,7 +16,7 @@ import LoginModal from './login/LoginModal';
 const receiptList = [
   {
     id: 1,
-    nickname: '나의 첫 애플워치',
+    nickname: '나의 첫 애플워치 (예시)',
     productDate: '2022-03-10',
     productImage: '/preview/preview-applewatch.png',
     productName: 'Apple Watch Nike SE',
@@ -68,36 +68,11 @@ const receiptList = [
 const ReceiptListPreviewPage = ({ userInfo }) => {
   const router = useRouter();
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
-  const [showNicknameChangePopup, setShowNicknameChangePopup] = useState(false);
   const [selectedListType, setSelectedListType] = useState('grid');
   const [summaryItem, setSummaryItem] = useState();
 
-  const { updateProfileImage, updateNickname } = userApi();
-
   const handleLoginClick = () => {
-    // TODO: 로그인 팝업 띄우기 TextModal -> ButtonModal 등으로 새로 정의해야함
     setIsLoginModalOpen(true);
-  };
-
-  const handleProfileImageUpload = (e) => {
-    const reader = new FileReader();
-    const files = e.target.files;
-
-    reader.onload = async function (e) {
-      await updateProfileImage(files[0]);
-      window.location.reload();
-    };
-
-    if (files[0]) reader.readAsDataURL(files[0]);
-  };
-
-  const handleNicknameEditClick = () => {
-    setShowNicknameChangePopup(true);
-  };
-
-  const handleNicknameSubmit = async (nickname) => {
-    await updateNickname(nickname);
-    window.location.reload();
   };
 
   const handleItemClick = (item) => {
@@ -105,7 +80,7 @@ const ReceiptListPreviewPage = ({ userInfo }) => {
   };
 
   const handleShowDetailClick = () => {
-    router.push(`/receipt/${summaryItem.id}`);
+    router.push(`/preview/${summaryItem.id}`);
   };
 
   return (
@@ -113,9 +88,9 @@ const ReceiptListPreviewPage = ({ userInfo }) => {
       <HeaderLeftButton onClick={handleLoginClick}>로그인하기</HeaderLeftButton>
       <Profile>
         <ProfileImageWrapper>
-          <img src='/preview/preview-profile.png' />
+          <img src='/preview/preview-profile.png' alt='preview-profile' />
         </ProfileImageWrapper>
-        <Nickname onClick={handleNicknameEditClick}>슬버</Nickname>
+        <Nickname>슬버</Nickname>
       </Profile>
       <HeaderContainer showBorder>
         <Title>내 물건 리스트</Title>
@@ -157,14 +132,6 @@ const ReceiptListPreviewPage = ({ userInfo }) => {
           onShowDetailClick={handleShowDetailClick}
         />
       )}
-      {/* <BottomTextInputPopup
-        visible={showNicknameChangePopup}
-        setVisible={setShowNicknameChangePopup}
-        title='변경할 닉네임을 입력해주세요'
-        onSubmit={handleNicknameSubmit}
-        confirmText='변경하기'
-        value={userInfo.data.nickname}
-      /> */}
     </Layout>
   );
 };
