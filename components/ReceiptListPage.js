@@ -18,7 +18,6 @@ const ReceiptListPage = ({ userInfo }) => {
   const [receiptList, setReceiptList] = useState();
   const [totalCount, setTotalCount] = useState(0);
   const [totalPrice, setTotalPrice] = useState(0);
-  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const [showNicknameChangePopup, setShowNicknameChangePopup] = useState(false);
   const [selectedListType, setSelectedListType] = useState('grid');
   const [summaryItem, setSummaryItem] = useState();
@@ -33,11 +32,6 @@ const ReceiptListPage = ({ userInfo }) => {
       setTotalPrice(data.data.productPriceSum);
     });
   }, []);
-
-  const handleLoginClick = () => {
-    // TODO: 로그인 팝업 띄우기 TextModal -> ButtonModal 등으로 새로 정의해야함
-    setIsLoginModalOpen(true);
-  };
 
   const handleProfileImageUpload = (e) => {
     const reader = new FileReader();
@@ -119,14 +113,6 @@ const ReceiptListPage = ({ userInfo }) => {
           onItemClick={handleItemClick}
         />
       )}
-      <TextModal
-        isOpen={isLoginModalOpen}
-        onCloseClick={() => setIsLoginModalOpen(false)}
-      >
-        <button>일반로그인</button>
-        <button>애플로그인</button>
-        <button>카카오로그인</button>
-      </TextModal>
       {summaryItem && (
         <SummaryPopup
           onCloseClick={() => setSummaryItem(null)}

@@ -9,7 +9,7 @@ const BottomNav = ({ isPreview }) => {
 
   return (
     <Container>
-      <Link href={isPreview ? `/create?preview=true` : '/create'} passHref>
+      <Link href={isPreview ? `/create?preview=yes` : '/create'} passHref>
         <UploadButton htmlFor='upload-photo'>
           <img src='/icons/plus.png' alt='receipt-upload' />
         </UploadButton>

@@ -41,10 +41,9 @@ const ModalHeader = styled.div`
 `;
 
 const Description = styled.span`
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 300;
-  padding: 8px;
-  padding-top: 4px;
+  padding: 12px 8px;
 `;
 
 const Logo = styled.div`

@@ -1,11 +1,14 @@
 import receiptApi from 'api/receipt';
 import ReceiptDetail from 'components/ReceiptDetail';
+import ReceiptDetailPreview from 'components/ReceiptDetailPreview';
 import WrapAuthPage from 'helpers/AuthWrapper';
 import { useRouter } from 'next/router';
 
-const ReceiptDetailPage = () => {
+const ReceiptDetailPage = ({ query }) => {
   const router = useRouter();
   const { createReceipt } = receiptApi();
+
+  console.log(query);
 
   const handleSaveClick = async (
     newReceiptInfo,
@@ -27,7 +30,16 @@ const ReceiptDetailPage = () => {
     }
   };
 
+  if (query.preview === 'yes')
+    return <ReceiptDetailPreview isEdit onSaveClick={handleSaveClick} />;
+
   return <ReceiptDetail isEdit onSaveClick={handleSaveClick} />;
 };
 
 export default ReceiptDetailPage;
+
+ReceiptDetailPage.getInitialProps = (ctx) => {
+  const { query } = ctx;
+
+  return { query };
+};
