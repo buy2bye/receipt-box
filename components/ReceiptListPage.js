@@ -223,7 +223,7 @@ const ProfileImageWrapper = styled.div`
   margin-bottom: 10px;
 
   img {
-    border-radius: 8px;
+    border-radius: 40%;
   }
 `;
 
