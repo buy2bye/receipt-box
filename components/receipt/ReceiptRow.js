@@ -73,6 +73,7 @@ const Container = styled.button`
     display: flex;
     flex-direction: column;
     justify-content: center;
+    text-align: left;
   }
 
   .name {
