@@ -67,7 +67,7 @@ const ReceiptListPreviewPage = ({ userInfo }) => {
   const router = useRouter();
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const [selectedListType, setSelectedListType] = useState('grid');
-  const [summaryItem, setSummaryItem] = useState();
+  const [summaryItem, setSummaryItem] = useState(receiptList[0]);
   const totalPrice = 15370000;
   const [isTotalPriceModalShown, setIsTotalPriceModalShown] = useState(false);
   const [isBadgeModalShown, setIsBadgeModalShown] = useState(false);
