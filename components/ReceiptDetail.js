@@ -344,7 +344,7 @@ const ReceiptDetail = ({
             )}
           </span>
           <span>
-            {newReceiptInfo.productName || (isEdit && '터치하여 입력하세요')}
+            {newReceiptInfo.productName || (isEdit ? '터치하여 입력하세요' : '정보없음')}
             {isEdit && <img src='/icons/edit.png' alt='edit-icon' />}
           </span>
         </li>
@@ -356,7 +356,7 @@ const ReceiptDetail = ({
             )}
           </span>
           <span>
-            {newReceiptInfo.productPlace || (isEdit && '터치하여 입력하세요')}
+            {newReceiptInfo.productPlace || (isEdit ? '터치하여 입력하세요' : '정보없음')}
             {isEdit && <img src='/icons/edit.png' alt='edit-icon' />}
           </span>
         </li>
@@ -370,7 +370,7 @@ const ReceiptDetail = ({
           <span>
             {newReceiptInfo.productPrice
               ? `${parseInt(newReceiptInfo.productPrice).toLocaleString()}원`
-              : isEdit && '터치하여 입력하세요'}
+              :  (isEdit ? '터치하여 입력하세요' : '정보없음')}
             {isEdit && <img src='/icons/edit.png' alt='edit-icon' />}
           </span>
         </li>
@@ -382,7 +382,7 @@ const ReceiptDetail = ({
             )}
           </span>
           <span>
-            {newReceiptInfo.productDate || (isEdit && '터치하여 입력하세요')}
+            {newReceiptInfo.productDate || (isEdit ? '터치하여 입력하세요' : '정보없음')}
             {isEdit && <img src='/icons/edit.png' alt='edit-icon' />}
           </span>
         </li>

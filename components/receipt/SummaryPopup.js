@@ -15,19 +15,19 @@ const SummaryPopup = ({ onCloseClick, item, onShowDetailClick }) => {
       <CloseButton onClick={onCloseClick}>
         <img src='/icons/close-button-white.png' alt='close-button' />
       </CloseButton>
-      <SummaryHeader>{item.nickname}</SummaryHeader>
+      <SummaryHeader>{item.nickname || '정보없음'}</SummaryHeader>
       <SummaryContent>
-        <SummaryContentRow label='모델' content={item.productName} />
+        <SummaryContentRow label='모델' content={item.productName || '정보없음'} />
         <SummaryContentRow
           label='구매가'
           content={
             item.productPrice
               ? `${parseInt(item.productPrice).toLocaleString()}원`
-              : ''
+              : '정보없음'
           }
         />
-        <SummaryContentRow label='구매일자' content={item.productDate} />
-        <SummaryContentRow label='구매처' content={item.productPlace} />
+        <SummaryContentRow label='구매일자' content={item.productDate || '정보없음'} />
+        <SummaryContentRow label='구매처' content={item.productPlace || '정보없음'} />
       </SummaryContent>
       <ShowDetailButton onClick={onShowDetailClick}>상세 보기</ShowDetailButton>
     </Container>
