@@ -221,6 +221,10 @@ const ProfileImageWrapper = styled.div`
   justify-content: center;
   align-items: center;
   margin-bottom: 10px;
+
+  img {
+    border-radius: 8px;
+  }
 `;
 
 const Nickname = styled.div`
