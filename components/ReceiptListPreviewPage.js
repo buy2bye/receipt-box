@@ -109,7 +109,7 @@ const ReceiptListPreviewPage = ({ userInfo }) => {
         </NicknameWrapper>
       </Profile>
       <UploadGuideText>
-        우측 하단의 '+' 버튼을 눌러 내 물건을 등록해보세요🙂
+        우측 하단의 &#39;+&#39; 버튼을 눌러 내 물건을 등록해보세요🙂
       </UploadGuideText>
       <HeaderContainer showBorder>
         <Title>내 물건 리스트</Title>

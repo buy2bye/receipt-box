@@ -114,7 +114,7 @@ const ReceiptListPage = ({ userInfo }) => {
       </Profile>
       {receiptList.length === 0 && (
         <UploadGuideText>
-          우측 하단의 '+' 버튼을 눌러 내 물건을 등록해보세요🙂
+          우측 하단의 &#39;+&#39; 버튼을 눌러 내 물건을 등록해보세요🙂
         </UploadGuideText>
       )}
       <HeaderContainer showBorder={receiptList.length > 0}>
