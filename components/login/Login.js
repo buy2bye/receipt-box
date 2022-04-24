@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
 import Script from 'next/script';
@@ -17,10 +17,6 @@ const Login = () => {
   const [username, setUsername] = useState();
   const [password, setPassword] = useState();
   const [isLoginFetching, setIsLoginFetching] = useState(false);
-
-  useEffect(() => {
-    console.log(router.query);
-  }, []);
 
   const handleKakaoLogin = () => {
     const CLIENT_ID = process.env.NEXT_PUBLIC_KAKAO_CLIENT_ID;

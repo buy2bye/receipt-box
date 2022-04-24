@@ -34,7 +34,6 @@ const userApi = () => {
   const getUserInfo = async (ctx) => {
     try {
       const { data } = await apiController({ ctx }).get('/api/user/info');
-      console.log(data)
 
       return { logged: true, data: data };
     } catch {
