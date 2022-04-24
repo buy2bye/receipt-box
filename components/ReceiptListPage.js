@@ -107,9 +107,8 @@ const ReceiptListPage = ({ userInfo }) => {
         </ProfileImageWrapper>
         <NicknameWrapper>
           <img src={badgeImage} alt='user-badge' onClick={handleBadgeClick} />
-          <Nickname onClick={handleNicknameEditClick}>
+          <Nickname>
             {userInfo.data.nickname}
-            <img src='/icons/edit.png' alt='edit' width={14} height={14} />
           </Nickname>
         </NicknameWrapper>
       </Profile>
