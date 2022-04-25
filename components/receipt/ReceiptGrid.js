@@ -18,13 +18,15 @@ export default ReceiptGrid;
 
 const Container = styled.div`
   position: relative;
+
+  width: calc((100vw - 48px - 16px) / 3);
+  height: calc((100vw - 48px - 16px) / 3);
 `;
 
 const Thumbnail = styled.button`
   cursor: pointer;
   width: 100%;
-  max-width: calc((100vw - 48px - 16px) / 3);
-  height: auto;
+  height: 100%;
   aspect-ratio: 1/1;
   border-radius: 8px;
   background: white;

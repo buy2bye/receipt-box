@@ -26,8 +26,7 @@ export default ReceiptsGridView;
 
 const Container = styled.div`
   width: 100%;
-  height: auto;
-  flex: 1;
+  height: fit-content;
   position: relative;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
