@@ -14,12 +14,12 @@ import LogoHeaderModal from './modal/LogoHeaderModal';
 const receiptList = [
   {
     id: 1,
-    nickname: '나의 첫 애플워치 (예시)',
+    nickname: '쵸파 피규어 (예시)',
     productDate: '2022-03-10',
-    productImage: '/preview/preview-applewatch.png',
-    productName: 'Apple Watch Nike SE',
-    productPlace: '더현대서울 이샵',
-    productPrice: 359000,
+    productImage: '/preview/preview-chopper.png',
+    productName: '쵸파 탱크 프라모델',
+    productPlace: '애니통(네이버쇼핑)',
+    productPrice: 9600,
   },
   {
     id: 2,
@@ -97,7 +97,7 @@ const ReceiptListPreviewPage = ({ userInfo }) => {
 
   return (
     <Layout hideTop showLogo isPreview>
-      <HeaderLeftButton onClick={handleLoginClick}>로그인하기</HeaderLeftButton>
+      <HeaderLeftButton onClick={handleLoginClick}>로그인</HeaderLeftButton>
       <Profile>
         <ProfileImageWrapper>
           <img src='/preview/preview-profile.png' alt='preview-profile' />
@@ -112,10 +112,10 @@ const ReceiptListPreviewPage = ({ userInfo }) => {
         </NicknameWrapper>
       </Profile>
       <UploadGuideText>
-        우측 하단의 &#39;+&#39; 버튼을 눌러 내 물건을 등록해보세요🙂
+        우측 하단의 &#39;+&#39; 버튼을 눌러 내 애장품을 등록해보세요🙂
       </UploadGuideText>
       <HeaderContainer showBorder>
-        <Title>내 물건 리스트</Title>
+        <Title>내 애장품 리스트</Title>
         <TotalPriceButton onClick={handleTotalPriceButtonClick}>
           ₩
         </TotalPriceButton>

@@ -103,7 +103,6 @@ const TopBackground = styled.img`
   height: 310px;
   z-index: 0;
   filter: brightness(0.7);
-  border-bottom: 1px solid var(--grey300);
 `;
 
 const NicknameWrapper = styled.div`

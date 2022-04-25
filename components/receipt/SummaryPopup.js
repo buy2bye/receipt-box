@@ -24,7 +24,7 @@ const SummaryPopup = ({
       </CloseButton>
       <SummaryHeader>{item.nickname || '정보없음'}</SummaryHeader>
       <SummaryContent>
-        <SummaryContentRow label='모델' content={item.productName || '정보없음'} />
+        <SummaryContentRow label='상품명' content={item.productName || '정보없음'} />
         <SummaryContentRow
           label='구매가'
           content={

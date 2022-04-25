@@ -315,7 +315,7 @@ const ReceiptDetail = ({
         <ThumbnailWrapper>
           <label htmlFor='upload-photo'>
             <img src='/icons/product-placeholder.png' alt='placeholder' />
-            {isEdit && <span>내 물건의 프로필사진을 등록해보세요</span>}
+            {isEdit && <span>내 애장품의 프로필사진을 등록해보세요</span>}
           </label>
           {isEdit && (
             <input
@@ -330,7 +330,7 @@ const ReceiptDetail = ({
 
       <NicknameWrapper onClick={() => isEdit && setPopupOpen('nickname')}>
         {isEdit
-          ? newReceiptInfo.nickname || '내 물건에게 별명을 지어주세요'
+          ? newReceiptInfo.nickname || '내 애장품에게 별명을 지어주세요'
           : newReceiptInfo.nickname}
         {isEdit && <img src='/icons/edit.png' alt='edit-icon' />}
       </NicknameWrapper>
@@ -446,7 +446,7 @@ const ReceiptDetail = ({
 
         {receipt?.linkList.length > 0 && (
           <ExternalLinkList>
-            <span>내 물건 관리 tip</span>
+            <span>내 애장품 관리 tip</span>
             {receipt.linkList.map((link, index) => (
               <Link href={link.url} className='external-link' key={index}>
                 {link.title}
@@ -566,7 +566,6 @@ const TopBackground = styled.img`
   height: 310px;
   z-index: 0;
   filter: brightness(0.7);
-  border-bottom: 1px solid var(--grey300);
 `;
 
 const DeleteReceipt = styled.button`

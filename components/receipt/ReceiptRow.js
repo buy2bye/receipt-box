@@ -30,7 +30,7 @@ const ReceiptRow = ({ item, onClick }) => {
       {item.productImage ? imageWrapper : imageSkeleton}
       <div className='contents'>
         <h3 className='name'>
-          {item?.nickname || '내 물건에게 별명을 지어주세요'}
+          {item?.nickname || '내 애장품에게 별명을 지어주세요'}
         </h3>
 
         {dateDiff.okay && (

@@ -117,11 +117,11 @@ const ReceiptListPage = ({ userInfo }) => {
       </Profile>
       {receiptList.length === 0 && (
         <UploadGuideText>
-          우측 하단의 &#39;+&#39; 버튼을 눌러 내 물건을 등록해보세요🙂
+          우측 하단의 &#39;+&#39; 버튼을 눌러 내 애장품을 등록해보세요🙂
         </UploadGuideText>
       )}
       <HeaderContainer showBorder={receiptList.length > 0}>
-        <Title>내 물건 리스트</Title>
+        <Title>내 애장품 리스트</Title>
         <TotalPriceButton onClick={handleTotalPriceButtonClick}>
           ₩
         </TotalPriceButton>

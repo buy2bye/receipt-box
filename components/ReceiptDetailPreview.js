@@ -51,11 +51,11 @@ const ReceiptDetailPreview = () => {
 
       <ThumbnailWrapper onClick={handleEditClick}>
         <img src='/icons/product-placeholder.png' alt='placeholder' />
-        <span>내 물건의 프로필사진을 등록해보세요</span>
+        <span>내 애장품의 프로필사진을 등록해보세요</span>
       </ThumbnailWrapper>
 
       <NicknameWrapper onClick={handleEditClick}>
-        내 물건에게 별명을 지어주세요
+        내 애장품에게 별명을 지어주세요
         <img src='/icons/edit.png' alt='edit-icon' />
       </NicknameWrapper>
 
@@ -171,7 +171,6 @@ const TopBackground = styled.img`
   height: 310px;
   z-index: 0;
   filter: brightness(0.7);
-  border-bottom: 1px solid var(--grey300);
 `;
 
 const DeleteReceipt = styled.button`
