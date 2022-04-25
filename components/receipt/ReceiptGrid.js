@@ -33,6 +33,7 @@ const Thumbnail = styled.button`
   justify-content: center;
   align-items: center;
   border: 1px solid var(--grey100);
+  padding: 0;
 
   img {
     width: 100%;
