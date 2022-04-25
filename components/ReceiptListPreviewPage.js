@@ -9,7 +9,7 @@ import SummaryPopup from './receipt/SummaryPopup';
 import LoginModal from './login/LoginModal';
 import TextModal from './modal/TextModal';
 import HeaderTextModal from './modal/HeaderTextModal';
-import LogoHeaderModal from './modal/LogoHeaderModal';
+import BadgeModal from './modal/BadgeModal';
 
 const receiptList = [
   {
@@ -169,15 +169,10 @@ const ReceiptListPreviewPage = ({ userInfo }) => {
       >
         {totalPrice.toLocaleString()}원
       </HeaderTextModal>
-      <LogoHeaderModal
+      <BadgeModal
         isOpen={isBadgeModalShown}
         onCloseClick={() => setIsBadgeModalShown(false)}
-      >
-        무소유: 0개 등록 시<br /> 미니멀리스트 : 1~10개 등록 시<br /> 초보
-        수집가 : 11~20개 등록 시<br /> 프로수집가 지망생 : 21~30개 등록 시<br />
-        나는야 프로수집가 : 31~40개 등록 시<br /> 진정한 수집광 : 41~50개 등록
-        시<br />
-      </LogoHeaderModal>
+      />
     </Layout>
   );
 };

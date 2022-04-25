@@ -13,7 +13,7 @@ import ReceiptsListView from './receipt/ReceiptsListView';
 import ReceiptsGridView from './receipt/ReceiptsGridView';
 import SummaryPopup from './receipt/SummaryPopup';
 import HeaderTextModal from './modal/HeaderTextModal';
-import LogoHeaderModal from './modal/LogoHeaderModal';
+import BadgeModal from './modal/BadgeModal';
 
 const ReceiptListPage = ({ userInfo }) => {
   const router = useRouter();
@@ -178,25 +178,10 @@ const ReceiptListPage = ({ userInfo }) => {
       >
         {totalPrice.toLocaleString()}원
       </HeaderTextModal>
-      <LogoHeaderModal
+      <BadgeModal
         isOpen={isBadgeModalShown}
         onCloseClick={() => setIsBadgeModalShown(false)}
-      >
-        <span>
-          <img src='/icons/badge/badge-0.png' width={BADGE_MODAL_IMG_SIZE} height={BADGE_MODAL_IMG_SIZE} />
-          무소유: 0개 등록 시 <br />
-          <img src='/icons/badge/badge-1.png' width={BADGE_MODAL_IMG_SIZE} height={BADGE_MODAL_IMG_SIZE} />
-          미니멀리스트 : 1~10개 등록 시<br />
-          <img src='/icons/badge/badge-11.png' width={BADGE_MODAL_IMG_SIZE} height={BADGE_MODAL_IMG_SIZE} />
-          초보 수집가 : 11~20개 등록 시<br />
-          <img src='/icons/badge/badge-21.png' width={BADGE_MODAL_IMG_SIZE} height={BADGE_MODAL_IMG_SIZE} />
-          프로수집가 지망생 : 21~30개 등록 시<br />
-          <img src='/icons/badge/badge-31.png' width={BADGE_MODAL_IMG_SIZE} height={BADGE_MODAL_IMG_SIZE} />
-          나는야 프로수집가 : 31~40개 등록 시<br />
-          <img src='/icons/badge/badge-41.png' width={BADGE_MODAL_IMG_SIZE} height={BADGE_MODAL_IMG_SIZE} />
-          진정한 수집광 : 41~50개 등록시
-        </span>  
-      </LogoHeaderModal>
+      />
     </Layout>
   );
 };
