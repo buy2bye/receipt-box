@@ -15,13 +15,13 @@ import PreviewModal from 'components/preview/PreviewModal';
 
 const receiptPreview = {
   id: 1,
-  nickname: '나의 첫 애플워치',
+  nickname: '쵸파 피규어',
   productDate: '2022-03-10',
-  productImage: '/preview/preview-applewatch.png',
-  productName: 'Apple Watch Nike SE',
-  productPlace: '더현대서울 이샵',
-  productPrice: 359000,
-  imageList: ['/preview/preview-receipt.jpeg'],
+  productImage: '/preview/preview-chopper.png',
+  productName: '쵸파 탱크 프라모델',
+  productPlace: '애니통(네이버쇼핑)',
+  productPrice: 11000,
+  imageList: ['/preview/preview-receipt-chopper.jpeg'],
   backgroundImage: '/preview/preview-background.jpg',
 };
 

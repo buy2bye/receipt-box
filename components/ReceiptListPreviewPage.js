@@ -19,7 +19,7 @@ const receiptList = [
     productImage: '/preview/preview-chopper.png',
     productName: '쵸파 탱크 프라모델',
     productPlace: '애니통(네이버쇼핑)',
-    productPrice: 9600,
+    productPrice: 11000,
   },
   {
     id: 2,
