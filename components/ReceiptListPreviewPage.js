@@ -23,42 +23,42 @@ const receiptList = [
   },
   {
     id: 2,
-    productImage: '/preview/preview-2.jpeg',
+    productImage: '/preview/preview-2.png',
     disabled: true,
   },
   {
     id: 3,
-    productImage: '/preview/preview-3.jpeg',
+    productImage: '/preview/preview-3.png',
     disabled: true,
   },
   {
     id: 4,
-    productImage: '/preview/preview-4.jpeg',
+    productImage: '/preview/preview-4.png',
     disabled: true,
   },
   {
     id: 5,
-    productImage: '/preview/preview-5.jpeg',
+    productImage: '/preview/preview-5.png',
     disabled: true,
   },
   {
     id: 6,
-    productImage: '/preview/preview-6.jpeg',
+    productImage: '/preview/preview-6.png',
     disabled: true,
   },
   {
     id: 7,
-    productImage: '/preview/preview-7.jpeg',
+    productImage: '/preview/preview-7.png',
     disabled: true,
   },
   {
     id: 8,
-    productImage: '/preview/preview-8.jpeg',
+    productImage: '/preview/preview-8.png',
     disabled: true,
   },
   {
     id: 9,
-    productImage: '/preview/preview-9.jpeg',
+    productImage: '/preview/preview-9.png',
     disabled: true,
   },
 ];
