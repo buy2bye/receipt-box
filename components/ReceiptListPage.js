@@ -28,19 +28,18 @@ const ReceiptListPage = ({ userInfo }) => {
   const [isBadgeModalShown, setIsBadgeModalShown] = useState(false);
   const { updateProfileImage, updateNickname } = userApi();
 
-  // TODO: count별로 뱃지 이미지 변경
   const badgeImage =
     totalCount > 40
-      ? '/icons/box.png'
+      ? '/icons/badge/badge-41.png'
       : totalCount > 30
-      ? '/icons/box.png'
+      ? '/icons/badge/badge-31.png'
       : totalCount > 20
-      ? '/icons/box.png'
+      ? '/icons/badge/badge-21.png'
       : totalCount > 10
-      ? '/icons/box.png'
+      ? '/icons/badge/badge-11.png'
       : totalCount > 1
-      ? '/icons/box.png'
-      : '/icons/box.png';
+      ? '/icons/badge/badge-1.png'
+      : '/icons/badge/badge-0.png';
 
   useEffect(() => {
     const { getReceipts } = receiptApi();
@@ -95,6 +94,8 @@ const ReceiptListPage = ({ userInfo }) => {
         loading...
       </Layout>
     );
+
+  const BADGE_MODAL_IMG_SIZE = 16;
 
   return (
     <Layout hideTop showLogo>
@@ -181,10 +182,20 @@ const ReceiptListPage = ({ userInfo }) => {
         isOpen={isBadgeModalShown}
         onCloseClick={() => setIsBadgeModalShown(false)}
       >
-        무소유: 0개 등록 시<br /> 미니멀리스트 : 1~10개 등록 시<br /> 초보
-        수집가 : 11~20개 등록 시<br /> 프로수집가 지망생 : 21~30개 등록 시<br />
-        나는야 프로수집가 : 31~40개 등록 시<br /> 진정한 수집광 : 41~50개 등록
-        시<br />
+        <span>
+          <img src='/icons/badge/badge-0.png' width={BADGE_MODAL_IMG_SIZE} height={BADGE_MODAL_IMG_SIZE} />
+          무소유: 0개 등록 시 <br />
+          <img src='/icons/badge/badge-1.png' width={BADGE_MODAL_IMG_SIZE} height={BADGE_MODAL_IMG_SIZE} />
+          미니멀리스트 : 1~10개 등록 시<br />
+          <img src='/icons/badge/badge-11.png' width={BADGE_MODAL_IMG_SIZE} height={BADGE_MODAL_IMG_SIZE} />
+          초보 수집가 : 11~20개 등록 시<br />
+          <img src='/icons/badge/badge-21.png' width={BADGE_MODAL_IMG_SIZE} height={BADGE_MODAL_IMG_SIZE} />
+          프로수집가 지망생 : 21~30개 등록 시<br />
+          <img src='/icons/badge/badge-31.png' width={BADGE_MODAL_IMG_SIZE} height={BADGE_MODAL_IMG_SIZE} />
+          나는야 프로수집가 : 31~40개 등록 시<br />
+          <img src='/icons/badge/badge-41.png' width={BADGE_MODAL_IMG_SIZE} height={BADGE_MODAL_IMG_SIZE} />
+          진정한 수집광 : 41~50개 등록시
+        </span>  
       </LogoHeaderModal>
     </Layout>
   );
