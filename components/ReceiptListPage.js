@@ -24,7 +24,7 @@ const ReceiptListPage = ({ userInfo }) => {
   const [showNicknameChangePopup, setShowNicknameChangePopup] = useState(false);
   const [selectedListType, setSelectedListType] = useState('grid');
   const [summaryItem, setSummaryItem] = useState();
-  const [summaryPosition, setSummaryPosition] = useState({})
+  const [summaryPosition, setSummaryPosition] = useState({});
   const [isBadgeModalShown, setIsBadgeModalShown] = useState(false);
   const { updateProfileImage, updateNickname } = userApi();
 

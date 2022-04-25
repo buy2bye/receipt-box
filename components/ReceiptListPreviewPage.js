@@ -68,6 +68,8 @@ const ReceiptListPreviewPage = ({ userInfo }) => {
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const [selectedListType, setSelectedListType] = useState('grid');
   const [summaryItem, setSummaryItem] = useState(receiptList[0]);
+  const [summaryPosition, setSummaryPosition] = useState({});
+  // TODO 최초 summary position 잡기
   const totalPrice = 15370000;
   const [isTotalPriceModalShown, setIsTotalPriceModalShown] = useState(false);
   const [isBadgeModalShown, setIsBadgeModalShown] = useState(false);
@@ -76,8 +78,9 @@ const ReceiptListPreviewPage = ({ userInfo }) => {
     setIsLoginModalOpen(true);
   };
 
-  const handleItemClick = (item) => {
+  const handleItemClick = (item, x, y, translateX) => {
     setSummaryItem(item);
+    setSummaryPosition({ x, y, translateX })
   };
 
   const handleShowDetailClick = () => {
@@ -131,29 +134,33 @@ const ReceiptListPreviewPage = ({ userInfo }) => {
           />
         </ListTypes>
       </HeaderContainer>
-      {selectedListType === 'grid' ? (
-        <ReceiptsGridView
-          receiptList={receiptList}
-          onItemClick={handleItemClick}
-        />
-      ) : (
-        <ReceiptsListView
-          receiptList={receiptList}
-          onItemClick={handleItemClick}
-        />
-      )}
+      <div style={{width: '100%', position: 'relative'}}>
+        {selectedListType === 'grid' ? (
+          <ReceiptsGridView
+            receiptList={receiptList}
+            onItemClick={handleItemClick}
+          />
+        ) : (
+          <ReceiptsListView
+            receiptList={receiptList}
+            onItemClick={handleItemClick}
+          />
+        )}
+        {summaryItem && (
+          <SummaryPopup
+            onCloseClick={() => setSummaryItem(null)}
+            item={summaryItem}
+            posX={summaryPosition.x}
+            posY={summaryPosition.y}
+            translateX={summaryPosition.translateX}
+            onShowDetailClick={handleShowDetailClick}
+          />
+        )}
+      </div>
       <LoginModal
         isOpen={isLoginModalOpen}
         onCloseClick={() => setIsLoginModalOpen(false)}
       />
-
-      {summaryItem && (
-        <SummaryPopup
-          onCloseClick={() => setSummaryItem(null)}
-          item={summaryItem}
-          onShowDetailClick={handleShowDetailClick}
-        />
-      )}
       <HeaderTextModal
         isOpen={isTotalPriceModalShown}
         onCloseClick={() => setIsTotalPriceModalShown(false)}
