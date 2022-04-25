@@ -27,6 +27,9 @@ const receiptPreview = {
 
 const ReceiptDetail = () => {
   const receipt = receiptPreview;
+  const [receiptZoomedIn, setReceiptZoomedIn] = useState(false);
+  const [receiptZoomedIndex, setReceiptZoomedIndex] = useState(0);
+  const [receiptImageInfoShown, setReceiptImageInfoShown] = useState(false);
   const [usedDealInfoShown, setUsedDealInfoShown] = useState(false);
 
   return (
@@ -59,9 +62,24 @@ const ReceiptDetail = () => {
           <span>{receipt.productDate}</span>
         </li>
         <AddReceiptList>
-          <span>영수증/품질보증서 보관함</span>
+          <span>
+            영수증/품질보증서 보관함
+            <button
+              className='info'
+              onClick={() => setReceiptImageInfoShown(true)}
+            >
+              ?
+            </button>
+          </span>
           <li>
-            <img src={receiptPreview.imageList[0]} alt='preview-receipt' />
+            <img
+              src={receiptPreview.imageList[0]}
+              alt='preview-receipt'
+              onClick={() => {
+                setReceiptZoomedIndex(0);
+                setReceiptZoomedIn(true);
+              }}
+            />
           </li>
         </AddReceiptList>
         <UsedDeal>
@@ -74,6 +92,16 @@ const ReceiptDetail = () => {
           <Toggle toggleState={true} id='used-deal-switch' />
         </UsedDeal>
       </Details>
+      <ZoomReceipt
+        visible={receiptZoomedIn}
+        setVisible={setReceiptZoomedIn}
+        height='calc(100vw + 100px)'
+      >
+        <img
+          src={receiptPreview.imageList[receiptZoomedIndex]}
+          alt={receipt?.productName}
+        />
+      </ZoomReceipt>
 
       <TextModal
         isOpen={usedDealInfoShown}
@@ -83,6 +111,14 @@ const ReceiptDetail = () => {
         <br /> 중고 구매를 희망하는 분이 나타났을 때 바이투바이가 알려드려요 🙂{' '}
         <br />
         <br /> 중고 판매를 원치 않으시면 꺼두시면 됩니다.
+      </TextModal>
+      <TextModal
+        isOpen={receiptImageInfoShown}
+        onCloseClick={() => setReceiptImageInfoShown(false)}
+      >
+        매번 찾아 헤맬 일 없도록 관련 서류를 보관하세요 😃
+        <br />
+        (예: 구매 영수증, 품질보증서, 구매 내역 캡쳐 등)
       </TextModal>
     </Container>
   );
