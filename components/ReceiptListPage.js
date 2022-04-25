@@ -95,8 +95,6 @@ const ReceiptListPage = ({ userInfo }) => {
       </Layout>
     );
 
-  const BADGE_MODAL_IMG_SIZE = 16;
-
   return (
     <Layout hideTop showLogo>
       <Profile>
