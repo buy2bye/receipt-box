@@ -9,9 +9,16 @@ const SummaryContentRow = ({ label, content }) => {
   );
 };
 
-const SummaryPopup = ({ onCloseClick, item, onShowDetailClick }) => {
+const SummaryPopup = ({
+    onCloseClick,
+    item,
+    onShowDetailClick,
+    posX,
+    posY,
+    translateX='-50'
+}) => {
   return (
-    <Container>
+    <Container posX={posX} posY={posY} translateX={translateX}>
       <CloseButton onClick={onCloseClick}>
         <img src='/icons/close-button-white.png' alt='close-button' />
       </CloseButton>
@@ -37,15 +44,15 @@ const SummaryPopup = ({ onCloseClick, item, onShowDetailClick }) => {
 export default SummaryPopup;
 
 const Container = styled.div`
-  position: fixed;
+  position: absolute;
   width: 240px;
   height: 240px;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  top: ${(props) => props.posY}px;
+  left: ${(props) => props.posX}px;
+  transform: translate(${props => props.translateX}%, 0%);
   background: white;
   border-radius: 8px;
-  z-index: 100;
+  z-index: 1;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
   display: flex;
   flex-direction: column;

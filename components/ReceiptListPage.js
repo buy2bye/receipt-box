@@ -24,6 +24,7 @@ const ReceiptListPage = ({ userInfo }) => {
   const [showNicknameChangePopup, setShowNicknameChangePopup] = useState(false);
   const [selectedListType, setSelectedListType] = useState('grid');
   const [summaryItem, setSummaryItem] = useState();
+  const [summaryPosition, setSummaryPosition] = useState({})
   const [isBadgeModalShown, setIsBadgeModalShown] = useState(false);
   const { updateProfileImage, updateNickname } = userApi();
 
@@ -71,8 +72,9 @@ const ReceiptListPage = ({ userInfo }) => {
     window.location.reload();
   };
 
-  const handleItemClick = (item) => {
+  const handleItemClick = (item, x, y, translateX) => {
     setSummaryItem(item);
+    setSummaryPosition({ x, y, translateX })
   };
 
   const handleShowDetailClick = () => {
@@ -137,24 +139,29 @@ const ReceiptListPage = ({ userInfo }) => {
           />
         </ListTypes>
       </HeaderContainer>
-      {selectedListType === 'grid' ? (
-        <ReceiptsGridView
-          receiptList={receiptList}
-          onItemClick={handleItemClick}
-        />
-      ) : (
-        <ReceiptsListView
-          receiptList={receiptList}
-          onItemClick={handleItemClick}
-        />
-      )}
-      {summaryItem && (
-        <SummaryPopup
-          onCloseClick={() => setSummaryItem(null)}
-          item={summaryItem}
-          onShowDetailClick={handleShowDetailClick}
-        />
-      )}
+      <div style={{width: '100%', position: 'relative'}}>
+        {selectedListType === 'grid' ? (
+          <ReceiptsGridView
+            receiptList={receiptList}
+            onItemClick={handleItemClick}
+          />
+        ) : (
+          <ReceiptsListView
+            receiptList={receiptList}
+            onItemClick={handleItemClick}
+          />
+        )}
+        {summaryItem && (
+          <SummaryPopup
+            onCloseClick={() => setSummaryItem(null)}
+            item={summaryItem}
+            posX={summaryPosition.x}
+            posY={summaryPosition.y}
+            translateX={summaryPosition.translateX}
+            onShowDetailClick={handleShowDetailClick}
+          />
+        )}
+      </div>
       <BottomTextInputPopup
         visible={showNicknameChangePopup}
         setVisible={setShowNicknameChangePopup}

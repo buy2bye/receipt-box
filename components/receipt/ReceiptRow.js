@@ -1,7 +1,9 @@
 import styled from '@emotion/styled';
 import { calculateDateDiff } from 'helpers/utils';
+import { useRef } from 'react';
 
 const ReceiptRow = ({ item, onClick }) => {
+  const containerRef = useRef();
   const dateDiff = calculateDateDiff(item.productDate);
 
   const imageSkeleton = (
@@ -15,8 +17,16 @@ const ReceiptRow = ({ item, onClick }) => {
     </div>
   );
 
+  const handleClick = () => {
+    onClick(item, containerRef);
+  }
+
   return (
-    <Container onClick={onClick} disabled={item.disabled}>
+    <Container
+      onClick={handleClick}
+      disabled={item.disabled}
+      ref={containerRef}
+    >
       {item.productImage ? imageWrapper : imageSkeleton}
       <div className='contents'>
         <h3 className='name'>

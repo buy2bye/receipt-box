@@ -1,9 +1,16 @@
 import styled from '@emotion/styled';
+import { useRef } from 'react';
 
 const ReceiptGrid = ({ item, onClick }) => {
+  const containerRef = useRef();
+
+  const handleClick = () => {
+    onClick(item, containerRef);
+  }
+
   return (
-    <Container>
-      <Thumbnail onClick={onClick} disabled={item.disabled}>
+    <Container ref={containerRef}>
+      <Thumbnail onClick={handleClick} disabled={item.disabled}>
         {item.productImage ? (
           <img src={item?.productImage} alt={item?.nickname} />
         ) : (

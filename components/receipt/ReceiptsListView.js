@@ -2,6 +2,15 @@ import styled from '@emotion/styled';
 import ReceiptRow from './ReceiptRow';
 
 const ReceiptsListView = ({ receiptList, onItemClick }) => {
+
+  const handleItemClick = (item, containerRef) => {
+    const rect = containerRef.current.getBoundingClientRect();
+    const top = containerRef.current.offsetTop + rect.height * 0.8;
+    let left = containerRef.current.offsetLeft;
+
+    onItemClick(item, left + rect.width * 0.5, top, - 50);
+  };
+
   return (
     <Container>
       {receiptList.length < 1 && (
@@ -12,7 +21,11 @@ const ReceiptsListView = ({ receiptList, onItemClick }) => {
         </UploadGuide>
       )}
       {receiptList.map((item, index) => (
-        <ReceiptRow item={item} key={index} onClick={() => onItemClick(item)} />
+        <ReceiptRow
+          item={item}
+          key={index}
+          onClick={handleItemClick}
+        />
       ))}
     </Container>
   );

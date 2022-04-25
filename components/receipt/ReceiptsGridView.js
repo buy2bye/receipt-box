@@ -2,6 +2,24 @@ import styled from '@emotion/styled';
 import ReceiptGrid from './ReceiptGrid';
 
 const ReceiptsGridView = ({ receiptList, onItemClick }) => {
+
+  const handleItemClick = (item, containerRef) => {
+    const rect = containerRef.current.getBoundingClientRect();
+    const top = containerRef.current.offsetTop + rect.height * 0.8;
+    let left = containerRef.current.offsetLeft;
+
+    if (window.innerWidth * 0.51 < left) {
+      // is right
+      onItemClick(item, left + rect.width * 0.3, top, -100);
+    } else if (window.innerWidth * 0.3 > left) {
+      // is left
+      onItemClick(item, left + rect.width * 0.7, top, 0);
+    } else {
+      // is center
+      onItemClick(item, left + rect.width * 0.5, top, -50);
+    }
+  }
+
   return (
     <Container>
       {receiptList.length < 1 && (
@@ -15,7 +33,7 @@ const ReceiptsGridView = ({ receiptList, onItemClick }) => {
         <ReceiptGrid
           item={item}
           key={index}
-          onClick={() => onItemClick(item)}
+          onClick={handleItemClick}
         />
       ))}
     </Container>
