@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 import Title from 'components/page/Title';
 import Layout from 'components/layout/Layout';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import ReceiptsListView from './receipt/ReceiptsListView';
 import ReceiptsGridView from './receipt/ReceiptsGridView';
@@ -69,10 +69,10 @@ const ReceiptListPreviewPage = ({ userInfo }) => {
   const [selectedListType, setSelectedListType] = useState('grid');
   const [summaryItem, setSummaryItem] = useState(receiptList[0]);
   const [summaryPosition, setSummaryPosition] = useState({});
-  // TODO 최초 summary position 잡기
   const totalPrice = 15370000;
   const [isTotalPriceModalShown, setIsTotalPriceModalShown] = useState(false);
   const [isBadgeModalShown, setIsBadgeModalShown] = useState(false);
+
 
   const handleLoginClick = () => {
     setIsLoginModalOpen(true);
@@ -139,6 +139,7 @@ const ReceiptListPreviewPage = ({ userInfo }) => {
           <ReceiptsGridView
             receiptList={receiptList}
             onItemClick={handleItemClick}
+            isPreview
           />
         ) : (
           <ReceiptsListView

@@ -1,12 +1,18 @@
 import styled from '@emotion/styled';
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
 
-const ReceiptGrid = ({ item, onClick }) => {
+const ReceiptGrid = ({ item, onClick, autoClick }) => {
   const containerRef = useRef();
 
   const handleClick = () => {
     onClick(item, containerRef);
   }
+
+  useEffect(() => {
+    if (autoClick) {
+      onClick(item, containerRef);
+    }
+  }, []);
 
   return (
     <Container ref={containerRef}>

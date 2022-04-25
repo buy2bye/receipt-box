@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 import ReceiptGrid from './ReceiptGrid';
 
-const ReceiptsGridView = ({ receiptList, onItemClick }) => {
+const ReceiptsGridView = ({ receiptList, onItemClick, isPreview }) => {
 
   const handleItemClick = (item, containerRef) => {
     const rect = containerRef.current.getBoundingClientRect();
@@ -34,6 +34,7 @@ const ReceiptsGridView = ({ receiptList, onItemClick }) => {
           item={item}
           key={index}
           onClick={handleItemClick}
+          autoClick={isPreview && 0 === index}
         />
       ))}
     </Container>
