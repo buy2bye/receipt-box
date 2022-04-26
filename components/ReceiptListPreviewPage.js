@@ -14,8 +14,8 @@ import BadgeModal from './modal/BadgeModal';
 const receiptList = [
   {
     id: 1,
-    nickname: '쵸파 피규어 (예시)',
-    productDate: '2022-03-10',
+    nickname: '귀여운 쵸파 (예시)',
+    productDate: '2022-04-13',
     productImage: '/preview/preview-chopper.png',
     productName: '쵸파 탱크 프라모델',
     productPlace: '애니통(네이버쇼핑)',
@@ -23,42 +23,100 @@ const receiptList = [
   },
   {
     id: 2,
+    nickname: '아이언맨',
+    productDate: '2022-03-01',
     productImage: '/preview/preview-2.png',
     disabled: true,
   },
   {
     id: 3,
+    nickname: 'M24 채피',
+    productDate: '2022-02-02',
     productImage: '/preview/preview-3.png',
     disabled: true,
   },
   {
     id: 4,
+    nickname: '생일선물로 받은 맥북',
+    productDate: '2021-12-30',
     productImage: '/preview/preview-4.png',
     disabled: true,
   },
   {
     id: 5,
+    nickname: '엄마가 사준 애플워치SE',
+    productDate: '2021-11-29',
     productImage: '/preview/preview-5.png',
     disabled: true,
   },
   {
     id: 6,
+    nickname: '첫 아이폰13',
+    productDate: '2021-10-15',
     productImage: '/preview/preview-6.png',
     disabled: true,
   },
   {
     id: 7,
+    nickname: 'GTX1080 Ti',
+    productDate: '2021-09-30',
     productImage: '/preview/preview-7.png',
     disabled: true,
   },
   {
     id: 8,
+    nickname: 'ASUS Prime H410M-K',
+    productDate: '2021-09-28',
     productImage: '/preview/preview-8.png',
     disabled: true,
   },
   {
     id: 9,
+    nickname: '하이닉스 Gold P31',
+    productDate: '2021-09-15',
     productImage: '/preview/preview-9.png',
+    disabled: true,
+  },
+  {
+    id: 10,
+    nickname: '첫 월급으로 산 프라다 버킷백',
+    productDate: '2021-08-07',
+    productImage: '/preview/preview-10.png',
+    disabled: true,
+  },
+  {
+    id: 11,
+    nickname: '1주년 기념선물 딥디크 탐다오',
+    productDate: '2021-07-13',
+    productImage: '/preview/preview-11.png',
+    disabled: true,
+  },
+  {
+    id: 12,
+    nickname: '이얼즈어고 가디건',
+    productDate: '2021-06-30',
+    productImage: '/preview/preview-12.png',
+    disabled: true,
+  },
+  {
+    id: 13,
+    nickname: '스코틀랜드에서 사온 맥캘란',
+    productDate: '2021-05-05',
+    productImage: '/preview/preview-13.png',
+    disabled: true,
+  },
+  {
+    id: 14,
+    nickname: '발렌타인에 마신 돔페리뇽 발렌타인',
+    productDate: '2021-03-14',
+    productImage: '/preview/preview-14.png',
+    disabled: true,
+  },
+  {
+    id: 15,
+    nickname: '크리스마스에 마신 글렌알라키',
+    productDate: '2020-12-24',
+    productImage: '/preview/preview-15.png',
     disabled: true,
   },
 ];
@@ -104,11 +162,11 @@ const ReceiptListPreviewPage = ({ userInfo }) => {
         </ProfileImageWrapper>
         <NicknameWrapper>
           <img
-            src='/icons/box.png'
+            src='/icons/badge/badge-11.png'
             alt='user-badge'
             onClick={handleBadgeClick}
           />
-          <Nickname>슬버</Nickname>
+          <Nickname>나는야수집가</Nickname>
         </NicknameWrapper>
       </Profile>
       <UploadGuideText>

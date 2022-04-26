@@ -238,7 +238,7 @@ const Signup = () => {
           <TextInput>
             <input
               type='number'
-              placeholder='등록완료 알림을 보내드려요'
+              placeholder='중고거래 매칭 알림을 보내드려요'
               id='phone'
               onChange={(e) => setPhone(e.target.value)}
             />
