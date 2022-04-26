@@ -15,14 +15,14 @@ import PreviewModal from 'components/preview/PreviewModal';
 
 const receiptPreview = {
   id: 1,
-  nickname: '쵸파 피규어',
-  productDate: '2022-03-10',
+  nickname: '귀여운 쵸파',
+  productDate: '2022-04-13',
   productImage: '/preview/preview-chopper.png',
   productName: '쵸파 탱크 프라모델',
   productPlace: '애니통(네이버쇼핑)',
   productPrice: 11000,
   imageList: ['/preview/preview-receipt-chopper.jpeg'],
-  backgroundImage: '/preview/preview-background.jpg',
+  backgroundImage: '/preview/preview-background-onepiece.jpeg',
 };
 
 const ReceiptDetail = () => {
