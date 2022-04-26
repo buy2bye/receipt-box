@@ -22,7 +22,7 @@ const ReceiptDetailPage = ({ query }) => {
     await createReceipt(newReceiptInfo);
 
     // alert OK 누르면 메인으로 이동
-    if (alert('상품등록이 완료되었어요.')) {
+    if (alert('애장품등록이 완료되었어요.')) {
     } else {
       router.replace('/');
     }

@@ -64,7 +64,7 @@ const UploadGuide = styled.div`
   align-items: center;
 
   h3 {
-    margin: 0;
+    margin: 50% 0 0 0;
     margin-bottom: 20px;
     font-size: 16px;
     color: var(--grey600);

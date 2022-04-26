@@ -79,7 +79,7 @@ const receiptList = [
   },
   {
     id: 10,
-    nickname: '첫 월급으로 산 프라다 버캣백',
+    nickname: '첫 월급으로 산 프라다 버킷백',
     productDate: '2021-08-07',
     productImage: '/preview/preview-10.png',
     disabled: true,

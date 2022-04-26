@@ -25,6 +25,7 @@ const SummaryPopup = ({
       <SummaryHeader>{item.nickname || '정보없음'}</SummaryHeader>
       <SummaryContent>
         <SummaryContentRow label='상품명' content={item.productName || '정보없음'} />
+        <SummaryContentRow label='구매처' content={item.productPlace || '정보없음'} />
         <SummaryContentRow
           label='구매가'
           content={
@@ -34,7 +35,6 @@ const SummaryPopup = ({
           }
         />
         <SummaryContentRow label='구매일자' content={item.productDate || '정보없음'} />
-        <SummaryContentRow label='구매처' content={item.productPlace || '정보없음'} />
       </SummaryContent>
       <ShowDetailButton onClick={onShowDetailClick}>상세 보기</ShowDetailButton>
     </Container>

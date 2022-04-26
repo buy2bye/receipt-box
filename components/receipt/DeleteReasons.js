@@ -5,8 +5,7 @@ import BottomPopup from 'components/popup/BottomPopup';
 import { useState } from 'react';
 
 const reasons = [
-  '영수증이 필요한 시간이 지나서',
-  '영수증 재촬영을 위해서',
+  '재등록을 위해서',
   '다른 상품으로 교환해서',
   '환불해서',
   '판매해서',

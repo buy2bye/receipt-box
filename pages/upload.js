@@ -49,12 +49,12 @@ const UploadPage = () => {
     createReceipt(nickname, imageFile)
       .then((res) => {
         setLoading(false); //호진 업로딩시 팝업
-        alert('영수증이 등록되었습니다.');
+        alert('애장품이 등록되었습니다.');
         router.push('/');
       })
       .catch(({ response: res }) => {
         setLoading(false); //호진 업로딩시 팝업
-        alert('영수증 등록에 실패했습니다.');
+        alert('애장품 등록에 실패했습니다.');
       });
   };
 
