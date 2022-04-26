@@ -11,7 +11,7 @@ const ReceiptsGridView = ({ receiptList, onItemClick, isPreview }) => {
     if (window.innerWidth * 0.51 < left) {
       // is right
       onItemClick(item, left + rect.width * 0.3, top, -100);
-    } else if (window.innerWidth * 0.3 > left) {
+    } else if (window.innerWidth * 0.2 > left) {
       // is left
       onItemClick(item, left + rect.width * 0.7, top, 0);
     } else {
