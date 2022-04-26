@@ -163,7 +163,7 @@ const Signup = () => {
             const { data } = res;
             setCookie('accessToken', data.accessToken);
             setCookie('refreshToken', data.refreshToken);
-            router.query.redirect ? router.push(redirect) : router.push('/');
+            router.query.redirect ? router.push(router.query.redirect) : router.push('/');
           });
       })
       .catch(({ response: res }) => {
