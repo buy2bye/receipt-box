@@ -4,6 +4,7 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import Script from 'next/script';
 import { useEffect } from 'react';
+import AppleLogin from 'react-apple-login'
 
 const LoginButton = ({ type, onClick }) => {
   const router = useRouter();
@@ -24,37 +25,22 @@ const LoginButton = ({ type, onClick }) => {
   // apple login
   if (type === 'apple')
     return (
-      <>
-        <Head>
-          <meta
-            name='appleid-signin-client-id'
-            content={process.env.NEXT_PUBLIC_APPLE_CLIENT_ID}
-          />
-          <meta name='appleid-signin-scope' content='email' />
-          <meta
-            name='appleid-signin-redirect-uri'
-            content={process.env.NEXT_PUBLIC_APPLE_REDIRECT_URI}
-          />
-          <meta name='appleid-signin-state' content={router.pathname.replace(/\//g, "")} />
-          <meta
-            name='appleid-signin-nonce'
-            content={process.env.NEXT_PUBLIC_APPLE_NONCE}
-          />
-          <meta name='appleid-signin-use-popup' content='false' />
-        </Head>
-        <Script
-          type='text/javascript'
-          src='https://appleid.cdn-apple.com/appleauth/static/jsapi/appleid/1/en_US/appleid.auth.js'
+      <Container type='apple'>
+        <AppleLogin
+          clientId={process.env.NEXT_PUBLIC_APPLE_CLIENT_ID}
+          scope="email"
+          redirectURI={process.env.NEXT_PUBLIC_APPLE_REDIRECT_URI}
+          state={router.pathname.replace(/\//g, "")}
+          nonce={process.env.NEXT_PUBLIC_APPLE_NONCE}
+          usePopup={false}
+          responseType="code id_token"
+          responseMode="form_post"
+          designProp={{
+            width: 228,
+            height: 44
+          }}
         />
-
-        <Container
-          id='appleid-signin'
-          type='apple'
-          data-color='black'
-          data-border='true'
-          data-type='sign in'
-        />
-      </>
+      </Container>
     );
 
   // kakao login
@@ -98,6 +84,8 @@ const Container = styled.button`
       ? css`
           > div {
             max-width: none !important;
+            width: 100%;
+            height: 100%;
           }
         `
       : type === 'kakao'
