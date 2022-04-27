@@ -148,10 +148,10 @@ const Signup = () => {
         username: username,
         password: password,
         nickname: nickname,
-        gender: gender,
-        birth_year: birthYear,
+        gender: gender || 0,
+        birth_year: birthYear || 0,
         email: username,
-        phone: phone,
+        phone: phone || '',
         marketing_agreement: agreements.marketing,
         bz_tracking_id: BzTrackingId || '',
       })
