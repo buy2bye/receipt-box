@@ -22,7 +22,7 @@ const receiptPreview = {
   productPlace: '네이버쇼핑',
   productPrice: 2799000,
   imageList: ['/preview/preview-receipt-1.png'],
-  backgroundImage: '/preview/preview-background-avengers.jpg',
+  backgroundImage: '/preview/preview-background-avengers.jpeg',
 };
 
 const ReceiptDetail = () => {
