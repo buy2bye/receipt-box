@@ -7,7 +7,7 @@ import { redirect } from 'helpers/utils';
 export const kickout = (ctx) => {
   removeCookie('accessToken', ctx);
   removeCookie('refreshToken', ctx);
-  redirect('/login', ctx);
+  redirect('/', ctx);
 };
 
 export function setAuthInterceptors(instance, ctx) {
@@ -43,16 +43,13 @@ export function setAuthInterceptors(instance, ctx) {
       // refreshToken 으로 accessToken을 재발급 받는다.
       if (401 === status) {
         if (!_.includes(error.config.url, '/api/auth/refresh')) {
-          const refreshResult = await axios.post(
-            '/api/auth/refresh',
-            null,
-            {
+          const refreshResult = await axios
+            .post('/api/auth/refresh', null, {
               headers: {
                 Authorization: `Bearer ${getCookie('refreshToken', ctx)}`,
               },
-            }
-          ).catch((err) => {
-          });
+            })
+            .catch((err) => {});
 
           if (!refreshResult) {
             return kickout(ctx);

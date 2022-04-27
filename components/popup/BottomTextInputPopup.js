@@ -1,6 +1,6 @@
+import { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
 import Button from 'components/button/Button';
-import { useState } from 'react';
 import BottomPopup from './BottomPopup';
 
 const BottomTextInputPopup = ({
@@ -9,23 +9,36 @@ const BottomTextInputPopup = ({
   className,
   buttonClass,
   title,
-  onInputChange,
   onSubmit,
   placeholder,
   value,
   confirmText = '다음',
+  type = 'text'
 }) => {
   const [isFetching, setIsFetching] = useState(false);
+  const [innerValue, setInnerValue] = useState(value);
+
+  useEffect(() => {
+    if (!visible) {
+      setInnerValue('')
+    } else {
+      setInnerValue(value);
+    }
+  }, [value, visible])
 
   const handleClick = async () => {
     setIsFetching(true);
-    await onSubmit();
+    await onSubmit(innerValue);
     setIsFetching(false);
   };
 
   const handleKeyDown = (e) => {
     if (e.keyCode === 13) handleClick();
   };
+  
+  const handleChange = (e) => [
+    setInnerValue(e.target.value)
+  ]
 
   return (
     <Container
@@ -35,11 +48,11 @@ const BottomTextInputPopup = ({
       title={title}
     >
       <TextInput
-        type='text'
+        type={type}
         placeholder={placeholder}
-        onChange={onInputChange}
+        onChange={handleChange}
         onKeyDown={handleKeyDown}
-        value={value}
+        value={innerValue}
       />
       <Button
         className={buttonClass}

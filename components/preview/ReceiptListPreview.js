@@ -9,7 +9,7 @@ const ReceiptListPreview = () => {
     <Layout hideTop showLogo isPreview>
       <HeaderContainer showBorder={receiptList.length > 0}>
         <Title>
-          내 물건 리스트 <PreviewText>(예시)</PreviewText>
+          내 애장품 리스트 <PreviewText>(예시)</PreviewText>
         </Title>
         <span>전체 {receiptList.length}</span>
       </HeaderContainer>

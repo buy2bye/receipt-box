@@ -3,18 +3,20 @@ import { useRouter } from 'next/router';
 
 const TopNav = ({
   topNavColor = 'transparent',
-  onBackClick
+  onBackClick,
+  style
 }) => {
   const router = useRouter();
 
   return (
-    <Container background={topNavColor}>
+    <Container background={topNavColor} style={style}>
       <button
         onClick={() => {
           onBackClick ? onBackClick() : router.back();
         }}
       >
-        <img src='/icons/left-arrow.png' />
+        &lt;
+        {/* <img src='/icons/left-arrow.png' alt='left-arrow' /> */}
       </button>
     </Container>
   );
@@ -40,6 +42,9 @@ const Container = styled.div`
     align-items: center;
     background: transparent;
     padding: 0;
+
+    color: var(--grey300);
+    font-size: 25px;
 
     img {
       width: 20px;

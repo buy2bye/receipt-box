@@ -14,7 +14,6 @@ import 개인정보수집동의 from 'components/signup/agreements/개인정보�
 
 const Signup = () => {
   const router = useRouter();
-
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [passwordCheck, setPasswordCheck] = useState('');
@@ -22,7 +21,6 @@ const Signup = () => {
   const [gender, setGender] = useState();
   const [phone, setPhone] = useState();
   const [birthYear, setBirthYear] = useState();
-
   const [agreements, setAgreements] = useState({
     ageLimit: false,
     termsAndConditions: false,
@@ -92,8 +90,10 @@ const Signup = () => {
   const handleGenderChange = (e) => {
     if (e.target.value === 'm') {
       setGender(1);
-    } else {
+    } else if (e.target.value === 'f') {
       setGender(2);
+    } else {
+      setGender(3);
     }
   };
 
@@ -122,18 +122,18 @@ const Signup = () => {
       alert('닉네임을 입력해주세요.');
       return;
     }
-    if (!isBirthYear.test(birthYear)) {
-      alert('출생연도 4자리를 입력해주세요.');
-      return;
-    }
-    if (!gender) {
-      alert('성별을 확인해주세요.');
-      return;
-    }
-    if (!isPhone.test(phone)) {
-      alert('올바른 전화번호를 입력해주세요.');
-      return;
-    }
+    // if (!isBirthYear.test(birthYear)) {
+    //   alert('출생연도 4자리를 입력해주세요.');
+    //   return;
+    // }
+    // if (!gender) {
+    //   alert('성별을 확인해주세요.');
+    //   return;
+    // }
+    // if (!isPhone.test(phone)) {
+    //   alert('올바른 전화번호를 입력해주세요.');
+    //   return;
+    // }
     if (
       !agreements.ageLimit ||
       !agreements.termsAndConditions ||
@@ -150,10 +150,10 @@ const Signup = () => {
         username: username,
         password: password,
         nickname: nickname,
-        gender: gender,
-        birth_year: birthYear,
+        gender: gender || null,
+        birth_year: birthYear || null,
         email: username,
-        phone: phone,
+        phone: phone || null,
         marketing_agreement: agreements.marketing,
         bz_tracking_id: BzTrackingId || '',
       })
@@ -165,7 +165,9 @@ const Signup = () => {
             const { data } = res;
             setCookie('accessToken', data.accessToken);
             setCookie('refreshToken', data.refreshToken);
-            router.push('/');
+            router.query.redirect
+              ? router.push(router.query.redirect)
+              : router.push('/');
           });
       })
       .catch(({ response: res }) => {
@@ -235,22 +237,22 @@ const Signup = () => {
               id='birth_year'
               onChange={(e) => setBirthYear(e.target.value)}
             />
-            <label htmlFor='birth_year'>출생연도 4자리</label>
+            <label htmlFor='birth_year'>출생연도 4자리 (선택)</label>
           </TextInput>
           <TextInput>
             <input
               type='number'
-              placeholder='등록완료 알림을 보내드려요'
+              placeholder='중고거래 매칭 알림을 보내드려요'
               id='phone'
               onChange={(e) => setPhone(e.target.value)}
             />
-            <label htmlFor='phone'>휴대폰 번호 (숫자만 입력)</label>
+            <label htmlFor='phone'>휴대폰 번호 (선택, 숫자만 입력)</label>
             <PhoneAuthButton onClick={handleCheckPhone}>
               중복확인
             </PhoneAuthButton>
           </TextInput>
           <RadioGroup>
-            <div className='title'>성별</div>
+            <div className='title'>성별 (선택)</div>
             <div className='genders'>
               <input
                 type='radio'
@@ -267,8 +269,15 @@ const Signup = () => {
                 value='f'
                 onChange={handleGenderChange}
               />
-
               <label htmlFor='gender_f'>여자</label>
+              <input
+                type='radio'
+                id='gender_o'
+                name='gender'
+                value='o'
+                onChange={handleGenderChange}
+              />
+              <label htmlFor='gender_o'>기타</label>
             </div>
           </RadioGroup>
           <Agreements

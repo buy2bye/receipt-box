@@ -41,7 +41,9 @@ const Login = () => {
         const { data } = res;
         setCookie('accessToken', data.accessToken);
         setCookie('refreshToken', data.refreshToken);
-        router.push('/');
+        router.query.redirect
+          ? router.push(router.query.redirect)
+          : router.push('/');
       })
       .catch(() => {
         alert('아이디나 비밀번호나 없거나 올바르지 않습니다.');
@@ -103,10 +105,17 @@ const Login = () => {
         로그인
       </Button>
 
-      <Link href='/signup'>
+      <Link
+        href={
+          router.query.redirect
+            ? `/signup?redirect=${router.query.redirect}`
+            : '/signup'
+        }
+        passHref
+      >
         <div className='sign-up'>회원 가입하기</div>
       </Link>
-      <Link href='https://pf.kakao.com/_IxmxdJb/chat'>
+      <Link href='https://pf.kakao.com/_IxmxdJb/chat' passHref>
         <div className='kakao-link'>고객센터 연락하기{' >'}</div>
       </Link>
     </EmailLoginForm>
@@ -124,10 +133,7 @@ const Login = () => {
           name='appleid-signin-redirect-uri'
           content={process.env.NEXT_PUBLIC_APPLE_REDIRECT_URI}
         />
-        <meta
-          name='appleid-signin-state'
-          content={process.env.NEXT_PUBLIC_APPLE_STATE}
-        />
+        <meta name='appleid-signin-state' content='aa' />
         <meta
           name='appleid-signin-nonce'
           content={process.env.NEXT_PUBLIC_APPLE_NONCE}
