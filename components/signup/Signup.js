@@ -90,8 +90,10 @@ const Signup = () => {
   const handleGenderChange = (e) => {
     if (e.target.value === 'm') {
       setGender(1);
-    } else {
+    } else if (e.target.value === 'f') {
       setGender(2);
+    } else {
+      setGender(3);
     }
   };
 
@@ -267,8 +269,15 @@ const Signup = () => {
                 value='f'
                 onChange={handleGenderChange}
               />
-
               <label htmlFor='gender_f'>여자</label>
+              <input
+                type='radio'
+                id='gender_o'
+                name='gender'
+                value='o'
+                onChange={handleGenderChange}
+              />
+              <label htmlFor='gender_o'>기타</label>
             </div>
           </RadioGroup>
           <Agreements
