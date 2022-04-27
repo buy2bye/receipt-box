@@ -15,14 +15,14 @@ import PreviewModal from 'components/preview/PreviewModal';
 
 const receiptPreview = {
   id: 1,
-  nickname: '귀여운 쵸파',
+  nickname: '나의 영웅 아이언맨',
   productDate: '2022-04-13',
-  productImage: '/preview/preview-chopper.png',
-  productName: '쵸파 탱크 프라모델',
-  productPlace: '애니통(네이버쇼핑)',
-  productPrice: 11000,
-  imageList: ['/preview/preview-receipt-chopper.jpeg'],
-  backgroundImage: '/preview/preview-background-onepiece.jpeg',
+  productImage: '/preview/preview-1.png',
+  productName: '아이언맨 MK85 1/4',
+  productPlace: '네이버쇼핑',
+  productPrice: 2799000,
+  imageList: ['/preview/preview-receipt-1.png'],
+  backgroundImage: '/preview/preview-background-avengers.jpg',
 };
 
 const ReceiptDetail = () => {

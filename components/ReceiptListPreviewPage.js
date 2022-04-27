@@ -14,16 +14,16 @@ import BadgeModal from './modal/BadgeModal';
 const receiptList = [
   {
     id: 1,
-    nickname: '귀여운 쵸파 (예시)',
+    nickname: '나의 영웅 아이언맨 (예시)',
     productDate: '2022-04-13',
-    productImage: '/preview/preview-chopper.png',
-    productName: '쵸파 탱크 프라모델',
-    productPlace: '애니통(네이버쇼핑)',
-    productPrice: 11000,
+    productImage: '/preview/preview-1.png',
+    productName: '아이언맨 MK85 1/4',
+    productPlace: '네이버쇼핑',
+    productPrice: 2799000,
   },
   {
     id: 2,
-    nickname: '아이언맨',
+    nickname: '작고 소듕한 해리',
     productDate: '2022-03-01',
     productImage: '/preview/preview-2.png',
     disabled: true,
