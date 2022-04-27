@@ -120,18 +120,18 @@ const Signup = () => {
       alert('닉네임을 입력해주세요.');
       return;
     }
-    if (!isBirthYear.test(birthYear)) {
-      alert('출생연도 4자리를 입력해주세요.');
-      return;
-    }
-    if (!gender) {
-      alert('성별을 확인해주세요.');
-      return;
-    }
-    if (!isPhone.test(phone)) {
-      alert('올바른 전화번호를 입력해주세요.');
-      return;
-    }
+    // if (!isBirthYear.test(birthYear)) {
+    //   alert('출생연도 4자리를 입력해주세요.');
+    //   return;
+    // }
+    // if (!gender) {
+    //   alert('성별을 확인해주세요.');
+    //   return;
+    // }
+    // if (!isPhone.test(phone)) {
+    //   alert('올바른 전화번호를 입력해주세요.');
+    //   return;
+    // }
     if (
       !agreements.ageLimit ||
       !agreements.termsAndConditions ||
@@ -163,7 +163,9 @@ const Signup = () => {
             const { data } = res;
             setCookie('accessToken', data.accessToken);
             setCookie('refreshToken', data.refreshToken);
-            router.query.redirect ? router.push(router.query.redirect) : router.push('/');
+            router.query.redirect
+              ? router.push(router.query.redirect)
+              : router.push('/');
           });
       })
       .catch(({ response: res }) => {
