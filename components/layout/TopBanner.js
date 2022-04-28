@@ -1,8 +1,62 @@
 import styled from '@emotion/styled';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
 
 const TopBanner = () => {
-  // TODO: display 분기 및 랜딩 url 분기
+  const [isBannerShown, setIsBannerShown] = useState(false);
+  const [bannerType, setBannerType] = useState();
+  const router = useRouter();
+
+  useEffect(() => {
+    console.log(navigator.userAgent);
+    if (/android/i.test(navigator.userAgent)) {
+      if (
+        typeof window.SwingJavascriptInterface != 'undefined' ||
+        navigator.userAgent.indexOf('SWING2APP') >= 0
+      ) {
+        // 앱 사용일 경우
+        return;
+      } // 브라우저 사용일 경우
+      else {
+        setIsBannerShown(true);
+        setBannerType('android');
+      }
+    } else if (
+      /iPad|iPhone|iPod/.test(navigator.userAgent) &&
+      !window.MSStream
+    ) {
+      if (
+        /(iPhone|iPod|iPad).*AppleWebKit(?!.*Safari)/i.test(
+          navigator.userAgent
+        ) ||
+        navigator.userAgent.indexOf('SwingWebView') >= 0
+      ) {
+        // 앱 사용일 경우
+        return;
+      } // 브라우저 사용일 경우
+      else {
+        setIsBannerShown(true);
+        setBannerType('ios');
+      }
+    }
+  }, []);
+
+  const handleBannerClick = () => {
+    if (bannerType === 'ios') {
+      router.push(
+        'https://apps.apple.com/kr/app/%EB%B0%94%EC%9D%B4%ED%88%AC%EB%B0%94%EC%9D%B4/id1614219353'
+      );
+    }
+    if (bannerType === 'android') {
+      router.push(
+        'https://play.google.com/store/apps/details?id=com.hustay.swing.dd63def91598f4c1fbf8fee04f0480d11'
+      );
+    }
+  };
+
+  if (!isBannerShown) return <div></div>;
+
   return (
     <Container>
       <Image
@@ -10,6 +64,7 @@ const TopBanner = () => {
         objectFit='contain'
         src='/banner/app-landing-banner.png'
         alt='app-landing-banner'
+        onClick={handleBannerClick}
       />
     </Container>
   );
