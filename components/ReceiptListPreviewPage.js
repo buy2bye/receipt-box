@@ -173,7 +173,7 @@ const ReceiptListPreviewPage = ({ userInfo }) => {
         우측 하단의 &#39;+&#39; 버튼을 눌러 내 애장품을 등록해보세요🙂
       </UploadGuideText>
       <HeaderContainer showBorder>
-        <Title>내 애장품 리스트</Title>
+        <Title>내 애장품 컬렉션</Title>
         <TotalPriceButton onClick={handleTotalPriceButtonClick}>
           ₩
         </TotalPriceButton>
