@@ -14,7 +14,7 @@ import BadgeModal from './modal/BadgeModal';
 const receiptList = [
   {
     id: 1,
-    nickname: '나의 영웅 아이언맨 (예시)',
+    nickname: '나의 영웅 아이언맨 피규어 (예시)',
     productDate: '2022-04-13',
     productImage: '/preview/preview-1.png',
     productName: '아이언맨 MK85 1/4',
@@ -23,7 +23,7 @@ const receiptList = [
   },
   {
     id: 2,
-    nickname: '작고 소듕한 해리',
+    nickname: '피규어에 입덕하게 해준 해리포터',
     productDate: '2022-03-01',
     productImage: '/preview/preview-2.png',
     disabled: true,

@@ -15,7 +15,7 @@ import PreviewModal from 'components/preview/PreviewModal';
 
 const receiptPreview = {
   id: 1,
-  nickname: '나의 영웅 아이언맨',
+  nickname: '나의 영웅 아이언맨 피규어',
   productDate: '2022-04-13',
   productImage: '/preview/preview-1.png',
   productName: '아이언맨 MK85 1/4',
