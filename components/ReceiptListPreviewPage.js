@@ -131,14 +131,13 @@ const ReceiptListPreviewPage = ({ userInfo }) => {
   const [isTotalPriceModalShown, setIsTotalPriceModalShown] = useState(false);
   const [isBadgeModalShown, setIsBadgeModalShown] = useState(false);
 
-
   const handleLoginClick = () => {
     setIsLoginModalOpen(true);
   };
 
   const handleItemClick = (item, x, y, translateX) => {
     setSummaryItem(item);
-    setSummaryPosition({ x, y, translateX })
+    setSummaryPosition({ x, y, translateX });
   };
 
   const handleShowDetailClick = () => {
@@ -154,8 +153,12 @@ const ReceiptListPreviewPage = ({ userInfo }) => {
   };
 
   return (
-    <Layout hideTop showLogo isPreview>
-      <HeaderLeftButton onClick={handleLoginClick}>로그인</HeaderLeftButton>
+    <Layout
+      hideTop
+      showLogo
+      isPreview
+      onLoginClick={() => setIsLoginModalOpen(true)}
+    >
       <Profile>
         <ProfileImageWrapper>
           <img src='/preview/preview-profile.png' alt='preview-profile' />
@@ -192,7 +195,7 @@ const ReceiptListPreviewPage = ({ userInfo }) => {
           />
         </ListTypes>
       </HeaderContainer>
-      <div style={{width: '100%', position: 'relative'}}>
+      <div style={{ width: '100%', position: 'relative' }}>
         {selectedListType === 'grid' ? (
           <ReceiptsGridView
             receiptList={receiptList}
@@ -268,7 +271,7 @@ const TotalPriceButton = styled.button`
 `;
 
 const HeaderLeftButton = styled.button`
-  position: fixed;
+  position: absolute;
   top: 10px;
   left: 10px;
   height: 32px;

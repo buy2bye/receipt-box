@@ -125,8 +125,7 @@ const SettingPage = ({ userInfo }) => {
 
   return (
     <>
-      <Container hideBottom>
-        <SettingTitle>설정</SettingTitle>
+      <Container hideBottom navTitle='설정'>
         {renderRow('계정', userInfo.username || userInfo.snsIdentifier)}
         {renderRow(
           '닉네임',
@@ -220,14 +219,6 @@ export default WrapAuthPage(SettingPage);
 
 const Container = styled(Layout)`
   overflow-x: hidden;
-`;
-
-const SettingTitle = styled.div`
-  position: fixed;
-  top: 16px;
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 16px;
 `;
 
 const Row = styled.div`
