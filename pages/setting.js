@@ -146,6 +146,10 @@ const SettingPage = ({ userInfo }) => {
           '공지사항',
           'https://deeply-bench-f2d.notion.site/35bc1ccf4e1245c4bdcec0d5a2e5084c'
         )}
+        {renderLink(
+          '이벤트 🆕',
+          'https://deeply-bench-f2d.notion.site/8f74e9cd78714ca3844a671a40dd2fe4'
+        )}
         {renderLink('이용약관', '/agreements/terms-and-conditions')}
         {renderLink('개인정보처리방침', '/agreements/privacy-policy')}
         {renderRow(
