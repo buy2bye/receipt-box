@@ -128,9 +128,9 @@ const Buttons = styled.div`
     }
   }
   .primary {
-    background: var(--blue500);
-    border-color: var(--blue500);
-    color: white;
+    background: var(--primary);
+    border-color: var(--primary);
+    color: black;
   }
 
   .secondary {

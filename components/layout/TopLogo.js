@@ -4,13 +4,16 @@ import LoginModal from 'components/login/LoginModal';
 import Link from 'next/link';
 import { useState } from 'react';
 
-const TopLogo = ({ hideSetting, isPreview }) => {
+const TopLogo = ({ hideSetting, isPreview, onLoginClick }) => {
   const [isPreviewModalOpen, setIsPreviewModalOpen] = useState(false);
 
   if (isPreview)
     return (
       <>
         <Container>
+          {isPreview && (
+            <HeaderLeftButton onClick={onLoginClick}>로그인</HeaderLeftButton>
+          )}
           <Logo>
             <img src='/icons/logo_300.png' alt='buy2bye logo' />
           </Logo>
@@ -77,4 +80,16 @@ const Setting = styled.button`
     width: auto;
     opacity: 0.3;
   }
+`;
+
+const HeaderLeftButton = styled.button`
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  height: 32px;
+  background: transparent;
+  padding: 8px;
+  color: var(--grey500);
+  font-size: 13px;
+  z-index: 2;
 `;

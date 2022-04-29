@@ -125,8 +125,7 @@ const SettingPage = ({ userInfo }) => {
 
   return (
     <>
-      <Container hideBottom>
-        <SettingTitle>설정</SettingTitle>
+      <Container hideBottom navTitle='설정'>
         {renderRow('계정', userInfo.username || userInfo.snsIdentifier)}
         {renderRow(
           '닉네임',
@@ -146,6 +145,10 @@ const SettingPage = ({ userInfo }) => {
         {renderLink(
           '공지사항',
           'https://deeply-bench-f2d.notion.site/35bc1ccf4e1245c4bdcec0d5a2e5084c'
+        )}
+        {renderLink(
+          '이벤트 🆕',
+          'https://deeply-bench-f2d.notion.site/8f74e9cd78714ca3844a671a40dd2fe4'
         )}
         {renderLink('이용약관', '/agreements/terms-and-conditions')}
         {renderLink('개인정보처리방침', '/agreements/privacy-policy')}
@@ -220,14 +223,6 @@ export default WrapAuthPage(SettingPage);
 
 const Container = styled(Layout)`
   overflow-x: hidden;
-`;
-
-const SettingTitle = styled.div`
-  position: fixed;
-  top: 16px;
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 16px;
 `;
 
 const Row = styled.div`
