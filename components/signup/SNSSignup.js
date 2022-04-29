@@ -128,8 +128,8 @@ const Buttons = styled.div`
     }
   }
   .primary {
-    background: var(--blue500);
-    border-color: var(--blue500);
+    background: var(--primary);
+    border-color: var(--primary);
     color: white;
   }
 
