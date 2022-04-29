@@ -130,7 +130,7 @@ const Buttons = styled.div`
   .primary {
     background: var(--primary);
     border-color: var(--primary);
-    color: white;
+    color: black;
   }
 
   .secondary {
