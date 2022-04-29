@@ -2,7 +2,7 @@ export const receiptList = [
   {
     id: 156,
     nickname: '애플워치SE⌚️',
-    productDate: '2022-03-10',
+    productDate: '2022-04-13',
     productImage:
       'https://buy2bye.s3.ap-northeast-2.amazonaws.com/main/product/156_product_adm_996caffe-b1e9-4ca3-87dd-ee52938f55d1.jpg',
     productName: '애플워치 Nike SE 40mm',

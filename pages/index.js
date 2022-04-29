@@ -1,8 +1,19 @@
-import ReceiptListPage from 'components/ReceiptList';
-import WrapAuthPage from 'helpers/AuthWrapper';
+import userApi from 'api/user';
+import ReceiptListPage from 'components/ReceiptListPage';
+import ReceiptListPreviewPage from 'components/ReceiptListPreviewPage';
 
-const Home = () => {
-  return <ReceiptListPage />;
+const Home = ({ userInfo }) => {
+  if (!userInfo.logged) return <ReceiptListPreviewPage />;
+
+  return <ReceiptListPage userInfo={userInfo} />;
 };
 
-export default WrapAuthPage(Home);
+Home.getInitialProps = async (ctx) => {
+  const { getUserInfo } = userApi();
+  const userInfo = await getUserInfo(ctx);
+  return {
+    userInfo
+  }
+}
+
+export default Home;

@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import BottomNav from './BottomNav';
+import TopBanner from './TopBanner';
 import TopLogo from './TopLogo';
 import TopNav from './TopNav';
 
@@ -12,8 +13,11 @@ const Layout = ({
   showLogo,
   hideSetting,
   topNavColor,
+  topNavInBody,
   onBackClick,
   isPreview,
+  onLoginClick,
+  navTitle,
 }) => {
   useEffect(() => {
     const handleResize = () => {
@@ -29,14 +33,36 @@ const Layout = ({
 
   return (
     <Container hideTop={hideTop}>
-      {!hideTop && (
-        <TopNav topNavColor={topNavColor} onBackClick={onBackClick} />
-      )}
-      {showLogo && <TopLogo hideSetting={hideSetting} isPreview={isPreview} />}
-      <Body hideBottom={hideBottom} className={className}>
-        {children}
-      </Body>
-      {!hideBottom && <BottomNav isPreview={isPreview} />}
+      <TopBanner />
+      <BodyWrapper>
+        {!hideTop && !topNavInBody && (
+          <TopNav
+            topNavColor={topNavColor}
+            onBackClick={onBackClick}
+            title={navTitle}
+          />
+        )}
+        {showLogo && (
+          <TopLogo
+            hideSetting={hideSetting}
+            isPreview={isPreview}
+            onLoginClick={onLoginClick}
+          />
+        )}
+        <Body hideBottom={hideBottom} className={className}>
+          {!hideTop && topNavInBody && (
+            <TopNav
+              topNavColor={topNavColor}
+              onBackClick={onBackClick}
+              style={{
+                marginTop: '-12px',
+              }}
+            />
+          )}
+          {children}
+        </Body>
+        {!hideBottom && <BottomNav isPreview={isPreview} />}
+      </BodyWrapper>
     </Container>
   );
 };
@@ -51,6 +77,11 @@ const Container = styled.div`
   flex-direction: column;
 `;
 
+const BodyWrapper = styled.div`
+  width: 100%;
+  height: auto;
+`;
+
 const Body = styled.div`
   flex: 1;
   display: flex;
@@ -58,6 +89,7 @@ const Body = styled.div`
   align-items: center;
   padding: 12px 24px 24px 24px;
   width: 100vw;
+  height: 100vh;
   position: relative;
   overflow-y: scroll;
 `;

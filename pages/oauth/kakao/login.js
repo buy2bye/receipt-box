@@ -7,7 +7,7 @@ import { setCookie } from 'helpers/cookie';
 import { redirect } from 'helpers/utils';
 import FullScreenSpinner from 'components/common/FullScreenSpinner';
 
-const KakaoLogin = ({ code }) => {
+const KakaoLogin = ({ code, state }) => {
   const router = useRouter();
   const [fetchDone, setFetchDone] = useState(false);
 
@@ -25,7 +25,7 @@ const KakaoLogin = ({ code }) => {
 
       const { data: userInfo } = await apiController().get('/api/user/info');
       if (userInfo.nickname) {
-        router.replace('/');
+        router.replace(state);
       } else {
         setFetchDone(true);
       }
@@ -38,12 +38,12 @@ const KakaoLogin = ({ code }) => {
     return <FullScreenSpinner />;
   }
 
-  return <SNSSingup />;
+  return <SNSSingup redirect={state} />;
 };
 
 KakaoLogin.getInitialProps = (ctx) => {
   const { query } = ctx;
-  const { code, error } = query;
+  const { code, state, error } = query;
 
   const LOGIN_REQUIRED_ERRORS = [
     'login_required',
@@ -60,6 +60,7 @@ KakaoLogin.getInitialProps = (ctx) => {
   }
   return {
     code,
+    state,
   };
 };
 

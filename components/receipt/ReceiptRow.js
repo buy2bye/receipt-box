@@ -1,13 +1,14 @@
 import styled from '@emotion/styled';
-import { calculateDateDiff, calculatePeriod } from 'helpers/utils';
-import Link from 'next/link';
+import { calculateDateDiff } from 'helpers/utils';
+import { useRef } from 'react';
 
-const Receipt = ({ item }) => {
+const ReceiptRow = ({ item, onClick }) => {
+  const containerRef = useRef();
   const dateDiff = calculateDateDiff(item.productDate);
 
   const imageSkeleton = (
     <div className='thumb'>
-      <span>등록 중</span>
+      <img src='/icons/main-product-placeholder.png' alt='pladeholder' />
     </div>
   );
   const imageWrapper = (
@@ -16,31 +17,40 @@ const Receipt = ({ item }) => {
     </div>
   );
 
-  return (
-    <Link href={`/receipt/${item.id}`}>
-      <Container>
-        {item.productImage ? imageWrapper : imageSkeleton}
-        <div className='contents'>
-          <h3 className='name'>{item?.nickname}</h3>
+  const handleClick = () => {
+    onClick(item, containerRef);
+  }
 
-          {dateDiff.okay && (
-            <span className='date'>
-              함께한 지 {dateDiff.data.dateDiff.toLocaleString()}일 째
-            </span>
-          )}
-        </div>
-      </Container>
-    </Link>
+  return (
+    <Container
+      onClick={handleClick}
+      disabled={item.disabled}
+      ref={containerRef}
+    >
+      {item.productImage ? imageWrapper : imageSkeleton}
+      <div className='contents'>
+        <h3 className='name'>
+          {item?.nickname || '내 애장품에게 별명을 지어주세요'}
+        </h3>
+
+        {dateDiff.okay && (
+          <span className='date'>
+            함께한 지 {dateDiff.data.dateDiff.toLocaleString()}일 째
+          </span>
+        )}
+      </div>
+    </Container>
   );
 };
 
-export default Receipt;
+export default ReceiptRow;
 
-const Container = styled.div`
+const Container = styled.button`
   cursor: pointer;
   width: 100%;
   height: 90px;
   display: flex;
+  align-items: center;
   gap: 16px;
 
   .thumb {
@@ -73,11 +83,12 @@ const Container = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: center;
+    text-align: left;
   }
 
   .name {
     margin: 0;
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 400;
   }
 

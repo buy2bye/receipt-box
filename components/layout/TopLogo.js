@@ -1,26 +1,33 @@
 import styled from '@emotion/styled';
 import PreviewModal from 'components/preview/PreviewModal';
+import LoginModal from 'components/login/LoginModal';
 import Link from 'next/link';
 import { useState } from 'react';
 
-const TopLogo = ({ hideSetting, isPreview }) => {
+const TopLogo = ({ hideSetting, isPreview, onLoginClick }) => {
   const [isPreviewModalOpen, setIsPreviewModalOpen] = useState(false);
 
   if (isPreview)
     return (
       <>
         <Container>
+          {isPreview && (
+            <HeaderLeftButton onClick={onLoginClick}>로그인</HeaderLeftButton>
+          )}
           <Logo>
             <img src='/icons/logo_300.png' alt='buy2bye logo' />
           </Logo>
-          <Setting onClick={() => setIsPreviewModalOpen(true)}>
+          <Setting
+            onClick={() => {
+              setIsPreviewModalOpen(true);
+            }}
+          >
             <img src='/icons/setting.png' alt='setting' />
           </Setting>
         </Container>
-        <PreviewModal
-          text='설정을 하려면 로그인이 필요합니다.'
+        <LoginModal
           isOpen={isPreviewModalOpen}
-          setIsOpen={setIsPreviewModalOpen}
+          onCloseClick={() => setIsPreviewModalOpen(false)}
         />
       </>
     );
@@ -31,7 +38,7 @@ const TopLogo = ({ hideSetting, isPreview }) => {
         <img src='/icons/logo_300.png' alt='buy2bye logo' />
       </Logo>
       {!hideSetting && (
-        <Link href='/setting'>
+        <Link href='/setting' passHref>
           <Setting>
             <img src='/icons/setting.png' alt='setting' />
           </Setting>
@@ -73,4 +80,16 @@ const Setting = styled.button`
     width: auto;
     opacity: 0.3;
   }
+`;
+
+const HeaderLeftButton = styled.button`
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  height: 32px;
+  background: transparent;
+  padding: 8px;
+  color: var(--grey500);
+  font-size: 13px;
+  z-index: 2;
 `;

@@ -1,21 +1,19 @@
 import styled from '@emotion/styled';
 import { useRouter } from 'next/router';
 
-const TopNav = ({
-  topNavColor = 'transparent',
-  onBackClick
-}) => {
+const TopNav = ({ topNavColor = 'transparent', onBackClick, title, style }) => {
   const router = useRouter();
 
   return (
-    <Container background={topNavColor}>
+    <Container background={topNavColor} style={style}>
       <button
         onClick={() => {
           onBackClick ? onBackClick() : router.back();
         }}
       >
-        <img src='/icons/left-arrow.png' />
+        &lt;
       </button>
+      <NavTitle>{title}</NavTitle>
     </Container>
   );
 };
@@ -41,9 +39,20 @@ const Container = styled.div`
     background: transparent;
     padding: 0;
 
+    color: var(--grey300);
+    font-size: 25px;
+
     img {
       width: 20px;
       height: 20px;
     }
   }
+`;
+
+const NavTitle = styled.div`
+  position: absolute;
+  top: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 16px;
 `;

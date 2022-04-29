@@ -4,16 +4,35 @@ const { get, post } = apiController();
 
 const receiptApi = () => {
   //영수증 등록
-  const createReceipt = async (nickname, image) => {
+  const createReceipt = async (newReceiptInfo) => {
     const formData = new FormData();
-    formData.append('nickname', nickname);
-    formData.append('image_list', image);
+
+    // productName만 필수 입력
+    formData.append('product_name', newReceiptInfo.productName);
+
+    newReceiptInfo.nickname &&
+      formData.append('nickname', newReceiptInfo.nickname);
+    newReceiptInfo.productPlace &&
+      formData.append('product_place', newReceiptInfo.productPlace);
+    newReceiptInfo.productPrice &&
+      formData.append('product_price', newReceiptInfo.productPrice);
+    newReceiptInfo.productDate &&
+      formData.append('product_date', newReceiptInfo.productDate);
+    newReceiptInfo.usedDealAlert &&
+      formData.append('used_deal_alert', newReceiptInfo.usedDealAlert);
+    newReceiptInfo.productImage &&
+      formData.append('product_image', newReceiptInfo.productImage);
+    newReceiptInfo.backgroundImage &&
+      formData.append('background_image', newReceiptInfo.backgroundImage);
+    newReceiptInfo.imageList.forEach((image) =>
+      formData.append('image_list', image)
+    );
 
     await post('/api/receipt/create', formData);
   };
 
   //영수증 리스트 가져오기
-  const getReceipts = async (page = 1, length = 100) => {
+  const getReceipts = async (page = 1, length = 0) => {
     const { data } = await get('/api/receipt/list', {
       page: page,
       length: length,
@@ -28,6 +47,56 @@ const receiptApi = () => {
 
     return { data };
   };
+
+  const changeReceiptInfo = async (
+    id,
+    nickname,
+    productName,
+    productPlace,
+    productPrice,
+    productDate,
+    usedDealAlert
+  ) => {
+    await post(`/api/receipt/${id}/info`, {
+      nickname: nickname,
+      product_name: productName,
+      product_place: productPlace,
+      product_price: productPrice,
+      product_date: productDate,
+      used_deal_alert: usedDealAlert,
+    });
+  };
+
+  const changeReceiptImages = async (
+    id,
+    productImage,
+    backgroundImage,
+    imageList,
+    removeImageIndexList
+  ) => {
+    const formData = new FormData();
+    let hasForm = false;
+    if (productImage) {
+      formData.append('product_image', productImage);
+      hasForm = true;
+    }
+    if (backgroundImage) {
+      formData.append('background_image', backgroundImage);
+      hasForm = true;
+    }
+    imageList.forEach((image) => {
+      formData.append('image_list', image)
+      hasForm = true;
+    });
+    removeImageIndexList.forEach((idx) => {
+      formData.append('remove_image_index_list', idx)
+      hasForm = true;
+    });
+
+    if (hasForm) {
+      await post(`/api/receipt/${id}/images`, formData);
+    }
+  }
 
   const changeReceiptNickname = async (id, nickname) => {
     const { data } = await post(`/api/receipt/${id}/set-nickname`, {
@@ -53,6 +122,8 @@ const receiptApi = () => {
     createReceipt,
     getReceipts,
     getReceiptDetail,
+    changeReceiptInfo,
+    changeReceiptImages,
     changeReceiptNickname,
     updateProductImage,
     deleteReceipt,

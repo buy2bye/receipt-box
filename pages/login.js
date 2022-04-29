@@ -3,7 +3,7 @@ import WrapAuthPage from 'helpers/AuthWrapper';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 
-const LoginPage = ({ ctx }) => {
+const LoginPage = () => {
   const router = useRouter();
 
   useEffect(() => {

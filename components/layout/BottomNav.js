@@ -1,65 +1,19 @@
+import { useState } from 'react';
+import { useRouter } from 'next/router';
 import styled from '@emotion/styled';
 import PreviewModal from 'components/preview/PreviewModal';
-import { ImageContext } from 'contexts/ImageContext';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
-import { useContext, useState } from 'react';
 
 const BottomNav = ({ isPreview }) => {
-  const { imageSrc, changeImageSrc, imageFile, changeImageFile } =
-    useContext(ImageContext);
   const router = useRouter();
-  const [isPreviewModalOpen, setIsPreviewModalOpen] = useState(false);
-
-  const handleImageUpload = (e) => {
-    const reader = new FileReader();
-    const files = e.target.files;
-
-    reader.onload = function (e) {
-      // 썸네일 이미지 경로 설정
-      changeImageSrc(e.target.result);
-    };
-
-    if (files[0]) {
-      reader.readAsDataURL(files[0]);
-      changeImageFile(files[0]);
-    }
-  };
-
-  const handleOnImageChange = (e) => {
-    handleImageUpload(e);
-    router.push('/upload');
-  };
-
-  if (isPreview)
-    return (
-      <Container>
-        <UploadButtonPreview
-          onClick={() => {
-            setIsPreviewModalOpen(true);
-          }}
-        >
-          <img src='/icons/camera.png' alt='receipt-upload' />
-        </UploadButtonPreview>
-        <PreviewModal
-          text='영수증 등록을 위해서는 로그인이 필요합니다.'
-          isOpen={isPreviewModalOpen}
-          setIsOpen={setIsPreviewModalOpen}
-        />
-      </Container>
-    );
 
   return (
     <Container>
-      <input
-        type='file'
-        id='upload-photo'
-        accept='image/*'
-        onChange={handleOnImageChange}
-      />
-      <UploadButton htmlFor='upload-photo'>
-        <img src='/icons/camera.png' alt='receipt-upload' />
-      </UploadButton>
+      <Link href={isPreview ? `/create?preview=yes` : '/create'} passHref>
+        <UploadButton htmlFor='upload-photo'>
+          <img src='/icons/plus.png' alt='receipt-upload' />
+        </UploadButton>
+      </Link>
     </Container>
   );
 };
@@ -74,8 +28,8 @@ const Container = styled.div`
 
 const UploadButton = styled.label`
   background-color: var(--primary);
-  width: 68px;
-  height: 68px;
+  width: 55px;
+  height: 55px;
   border-radius: 50%;
   display: flex;
   justify-content: center;
@@ -88,14 +42,14 @@ const UploadButton = styled.label`
   }
 
   img {
-    width: 60%;
+    width: 40%;
   }
 `;
 
 const UploadButtonPreview = styled.button`
   background-color: var(--primary);
-  width: 68px;
-  height: 68px;
+  width: 55px;
+  height: 55px;
   border-radius: 50%;
   display: flex;
   justify-content: center;
@@ -109,6 +63,6 @@ const UploadButtonPreview = styled.button`
   }
 
   img {
-    width: 60%;
+    width: 40%;
   }
 `;
