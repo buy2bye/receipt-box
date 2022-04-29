@@ -8,8 +8,11 @@ const TopBanner = () => {
   const [bannerType, setBannerType] = useState();
   const router = useRouter();
 
+  console.log(router.asPath);
+
   useEffect(() => {
     console.log(navigator.userAgent);
+
     if (/android/i.test(navigator.userAgent)) {
       if (
         typeof window.SwingJavascriptInterface != 'undefined' ||
@@ -18,7 +21,7 @@ const TopBanner = () => {
         // 앱 사용일 경우
         return;
       } // 브라우저 사용일 경우
-      else {
+      else if (router.asPath === '/') {
         setIsBannerShown(true);
         setBannerType('android');
       }
@@ -35,7 +38,7 @@ const TopBanner = () => {
         // 앱 사용일 경우
         return;
       } // 브라우저 사용일 경우
-      else {
+      else if (router.asPath === '/') {
         setIsBannerShown(true);
         setBannerType('ios');
       }
