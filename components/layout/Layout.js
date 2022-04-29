@@ -89,6 +89,7 @@ const Body = styled.div`
   align-items: center;
   padding: 12px 24px 24px 24px;
   width: 100vw;
+  height: 100vh;
   position: relative;
   overflow-y: scroll;
 `;
