@@ -15,7 +15,7 @@ const reasons = [
 ];
 
 const DeleteReasons = ({ visible, setVisible, onDelete }) => {
-  const [reason, setReason] = useState('영수증이 필요한 시간이 지나서');
+  const [reason, setReason] = useState(reasons[0]);
   const [isFetching, setIsFetching] = useState(false);
 
   const handleCancel = () => {
@@ -38,7 +38,7 @@ const DeleteReasons = ({ visible, setVisible, onDelete }) => {
     >
       <SelectBox
         options={reasons}
-        defaultValue='영수증이 필요한 시간이 지나서'
+        defaultValue={reasons[0]}
         setResult={setReason}
       />
       <ButtonsWrapper>
