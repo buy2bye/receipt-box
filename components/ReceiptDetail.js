@@ -444,16 +444,6 @@ const ReceiptDetail = ({
           </ReceiptImages>
         </AddReceiptList>
 
-        {receipt?.linkList.length > 0 && (
-          <ExternalLinkList>
-            <span>내 애장품 관리 tip</span>
-            {receipt.linkList.map((link, index) => (
-              <Link href={link.url} className='external-link' key={index}>
-                {link.title}
-              </Link>
-            ))}
-          </ExternalLinkList>
-        )}
         <UsedDeal>
           <span>
             중고 거래 매칭 알림
@@ -467,6 +457,16 @@ const ReceiptDetail = ({
             id='used-deal-switch'
           />
         </UsedDeal>
+        {receipt?.linkList.length > 0 && (
+          <ExternalLinkList>
+            <span>내 애장품 관리 tip</span>
+            {receipt.linkList.map((link, index) => (
+              <Link href={link.url} className='external-link' key={index}>
+                {link.title}
+              </Link>
+            ))}
+          </ExternalLinkList>
+        )}
       </Details>
       {previewByteImage &&
         createPortal(
@@ -683,7 +683,7 @@ const Details = styled.ul`
     }
 
     > span:last-of-type {
-      text-align: right;
+      text-align: left;
     }
 
     img {
@@ -724,7 +724,7 @@ const ExternalLinkList = styled.li`
   gap: 8px;
 
   span {
-    padding-bottom: 8px;
+    padding-bottom: 0px;
   }
 
   a {

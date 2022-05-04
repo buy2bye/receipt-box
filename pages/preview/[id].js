@@ -232,7 +232,7 @@ const Details = styled.ul`
     }
 
     > span:last-of-type {
-      text-align: right;
+      text-align: left;
     }
 
     img {
@@ -273,7 +273,7 @@ const ExternalLinkList = styled.li`
   gap: 8px;
 
   span {
-    padding-bottom: 8px;
+    padding-bottom: 0px;
   }
 
   a {
