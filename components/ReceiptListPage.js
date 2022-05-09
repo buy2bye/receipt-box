@@ -29,7 +29,17 @@ const ReceiptListPage = ({ userInfo }) => {
   const { updateProfileImage, updateNickname } = userApi();
 
   const badgeImage =
-    totalCount > 40
+    totalCount > 200
+      ? '/icons/badge/badge-201.png'
+      : totalCount > 140
+      ? '/icons/badge/badge-141.png'
+      : totalCount > 100
+      ? '/icons/badge/badge-101.png'
+      : totalCount > 70
+      ? '/icons/badge/badge-71.png'
+      : totalCount > 50
+      ? '/icons/badge/badge-51.png'
+      : totalCount > 40
       ? '/icons/badge/badge-41.png'
       : totalCount > 30
       ? '/icons/badge/badge-31.png'
