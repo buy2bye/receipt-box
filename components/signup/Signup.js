@@ -237,7 +237,7 @@ const Signup = () => {
               id='birth_year'
               onChange={(e) => setBirthYear(e.target.value)}
             />
-            <label htmlFor='birth_year'>출생연도 4자리</label>
+            <label htmlFor='birth_year'>출생연도 4자리(선택)</label>
           </TextInput>
           <TextInput>
             <input
@@ -246,13 +246,13 @@ const Signup = () => {
               id='phone'
               onChange={(e) => setPhone(e.target.value)}
             />
-            <label htmlFor='phone'>휴대폰 번호 (숫자만 입력)</label>
+            <label htmlFor='phone'>휴대폰 번호 (선택, 숫자만 입력)</label>
             <PhoneAuthButton onClick={handleCheckPhone}>
               중복확인
             </PhoneAuthButton>
           </TextInput>
           <RadioGroup>
-            <div className='title'>성별</div>
+            <div className='title'>성별(선택)</div>
             <div className='genders'>
               <input
                 type='radio'
