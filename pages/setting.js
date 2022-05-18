@@ -152,7 +152,7 @@ const SettingPage = ({ userInfo }) => {
         )}
         {renderLink(
           '이벤트 🆕',
-          'https://deeply-bench-f2d.notion.site/8f74e9cd78714ca3844a671a40dd2fe4'
+          'https://deeply-bench-f2d.notion.site/363aa79533664f48919d38623f436a47'
         )}
         {renderLink('이용약관', '/agreements/terms-and-conditions')}
         {renderLink('개인정보처리방침', '/agreements/privacy-policy')}
