@@ -7,7 +7,7 @@ import '../styles/globals.css';
 const ReceiptApp = ({ Component, pageProps }) => {
   useEffect(() => {
     !window.ChannelIO && loadScriptChannelTalk();
-    bootChannelTalk(false);
+    bootChannelTalk(true);
   }, []);
 
   return (
