@@ -12,8 +12,8 @@ Home.getInitialProps = async (ctx) => {
   const { getUserInfo } = userApi();
   const userInfo = await getUserInfo(ctx);
   return {
-    userInfo
-  }
-}
+    userInfo,
+  };
+};
 
 export default Home;

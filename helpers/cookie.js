@@ -10,6 +10,7 @@ export const setCookie = (key, value, ctx) => {
   const setFn = isBrowser ? sSetCookie : nookies.set
   setFn(ctx, key, value, {
     path: '/',
+    maxAge: 365 * 24 * 60 * 60  // 1 years
   })
 }
 

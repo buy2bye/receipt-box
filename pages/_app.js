@@ -1,8 +1,15 @@
 import { ImageProvider } from 'contexts/ImageContext';
+import { bootChannelTalk, loadScriptChannelTalk } from 'helpers/channelTalk';
 import Script from 'next/script';
+import { useEffect } from 'react';
 import '../styles/globals.css';
 
 const ReceiptApp = ({ Component, pageProps }) => {
+  useEffect(() => {
+    !window.ChannelIO && loadScriptChannelTalk();
+    bootChannelTalk(true);
+  }, []);
+
   return (
     <>
       <Script
