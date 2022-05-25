@@ -48,6 +48,12 @@ const PopupInfo = {
     confirmText: '변경하기',
     type: 'date',
   },
+  memo: {
+    title: '메모를 입력해주세요.',
+    placeholder: '추가로 기록하고 싶은 사항을 작성하세요.',
+    confirmText: '변경하기',
+    type: 'text'
+  }
 };
 
 const ReceiptDetail = ({
@@ -383,6 +389,18 @@ const ReceiptDetail = ({
           </span>
           <span>
             {newReceiptInfo.productDate || (isEdit ? '터치하여 입력하세요' : '정보없음')}
+            {isEdit && <img src='/icons/edit.png' alt='edit-icon' />}
+          </span>
+        </li>
+        <li onClick={() => isEdit && setPopupOpen('memo')}>
+          <span>
+            메모
+            {isEdit && (
+              <span style={{ color: 'var(--grey400)' }}> (선택) </span>
+            )}
+          </span>
+          <span>
+            {newReceiptInfo.memo || (isEdit ? '추가로 기록하고 싶은 사항을 작성하세요.' : '정보없음')}
             {isEdit && <img src='/icons/edit.png' alt='edit-icon' />}
           </span>
         </li>

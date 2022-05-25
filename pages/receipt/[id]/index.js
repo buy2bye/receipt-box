@@ -51,7 +51,8 @@ const ReceiptDetailPage = () => {
       newReceiptInfo.productPlace,
       newReceiptInfo.productPrice,
       newReceiptInfo.productDate,
-      newReceiptInfo.usedDealAlert
+      newReceiptInfo.usedDealAlert,
+      newReceiptInfo.memo
     );
 
     await changeReceiptImages(
