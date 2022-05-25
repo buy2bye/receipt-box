@@ -24,6 +24,14 @@ const TopLogo = ({ hideSetting, isPreview, onLoginClick }) => {
           >
             <img src='/icons/setting.png' alt='setting' />
           </Setting>
+          <a
+            target='_blank'
+            href='https://www.naver.com/' passHref
+            rel='noreferrer'>
+            <Market>
+              <img src='/icons/market.png' alt='setting' />
+            </Market>
+          </a>
         </Container>
         <LoginModal
           isOpen={isPreviewModalOpen}
@@ -93,7 +101,7 @@ const Setting = styled.button`
 const Market = styled.button`
   position: absolute;
   top: 0;
-  right: 40px;
+  right: 35px;
   width: 60px;
   height: 60px;
   background: none;
