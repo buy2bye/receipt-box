@@ -44,6 +44,14 @@ const TopLogo = ({ hideSetting, isPreview, onLoginClick }) => {
           </Setting>
         </Link>
       )}
+      <a 
+      target= '_blank'
+      href='https://www.naver.com/' passHref
+      rel='noreferrer'>
+        <Market>
+          <img src='/icons/market.png' alt='setting' />
+        </Market>
+      </a>
     </Container>
   );
 };
@@ -76,7 +84,22 @@ const Setting = styled.button`
   background: none;
 
   img {
-    height: 40%;
+    height: 45%;
+    width: auto;
+    opacity: 0.3;
+  }
+`;
+
+const Market = styled.button`
+  position: absolute;
+  top: 0;
+  right: 40px;
+  width: 60px;
+  height: 60px;
+  background: none;
+
+  img {
+    height: 45%;
     width: auto;
     opacity: 0.3;
   }
