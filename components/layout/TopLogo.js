@@ -87,13 +87,14 @@ const Setting = styled.button`
   position: absolute;
   top: 0;
   right: 0;
-  width: 60px;
+  width: 40px;
   height: 60px;
+  ppadding: 0 6px 0 6px;
   background: none;
 
   img {
-    height: 45%;
-    width: auto;
+    height: auto;
+    width: 100%;
     opacity: 0.3;
   }
 `;
@@ -101,14 +102,15 @@ const Setting = styled.button`
 const Market = styled.button`
   position: absolute;
   top: 0;
-  right: 35px;
-  width: 60px;
+  right: 40px;
+  width: 40px;
   height: 60px;
+  ppadding: 0 6px 0 6px;
   background: none;
 
   img {
-    height: 45%;
-    width: auto;
+    height: auto;
+    width: 100%;
     opacity: 0.3;
   }
 `;
