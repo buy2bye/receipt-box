@@ -93,8 +93,8 @@ const Setting = styled.button`
   background: none;
 
   img {
-    height: auto;
-    width: 100%;
+    height: 45%;
+    width: auto;
     opacity: 0.3;
   }
 `;
@@ -109,8 +109,8 @@ const Market = styled.button`
   background: none;
 
   img {
-    height: auto;
-    width: 100%;
+    height: 45%;
+    width: auto;
     opacity: 0.3;
   }
 `;
