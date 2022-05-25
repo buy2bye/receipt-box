@@ -400,7 +400,7 @@ const ReceiptDetail = ({
             )}
           </span>
           <span>
-            {newReceiptInfo.memo || (isEdit ? '추가로 기록하고 싶은 사항을 작성하세요.' : '정보없음')}
+            {newReceiptInfo.memo || (isEdit ? '터치하여 입력하세요' : '정보없음')}
             {isEdit && <img src='/icons/edit.png' alt='edit-icon' />}
           </span>
         </li>
@@ -701,7 +701,7 @@ const Details = styled.ul`
     }
 
     > span:last-of-type {
-      text-align: left;
+      text-align: right;
     }
 
     img {
