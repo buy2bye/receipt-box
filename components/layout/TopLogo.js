@@ -89,7 +89,7 @@ const Setting = styled.button`
   right: 0;
   width: 40px;
   height: 60px;
-  ppadding: 0 6px 0 6px;
+  padding: 0 6px 0 6px;
   background: none;
 
   img {
@@ -105,7 +105,7 @@ const Market = styled.button`
   right: 40px;
   width: 40px;
   height: 60px;
-  ppadding: 0 6px 0 6px;
+  padding: 0 6px 0 6px;
   background: none;
 
   img {
