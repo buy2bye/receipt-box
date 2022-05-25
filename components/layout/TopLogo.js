@@ -89,7 +89,7 @@ const Setting = styled.button`
   right: 0;
   width: 40px;
   height: 60px;
-  padding: 0 6px 0 6px;
+  padding: 0 9px 0 3px;
   background: none;
 
   img {
