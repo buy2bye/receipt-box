@@ -29,7 +29,7 @@ const TopLogo = ({ hideSetting, isPreview, onLoginClick }) => {
             href='https://smartstore.naver.com/buy2bye/products/6720106860'
             rel='noreferrer'>
             <Market>
-              <img src='/icons/market.png' alt='setting' />
+              <img src='/icons/market.png' alt='market' />
             </Market>
           </a>
         </Container>
@@ -52,12 +52,12 @@ const TopLogo = ({ hideSetting, isPreview, onLoginClick }) => {
           </Setting>
         </Link>
       )}
-      <a 
-      target= '_blank'
-      href='https://smartstore.naver.com/buy2bye/products/6720106860'
-      rel='noreferrer'>
+      <a
+        target='_blank'
+        href='https://smartstore.naver.com/buy2bye/products/6720106860'
+        rel='noreferrer'>
         <Market>
-          <img src='/icons/market.png' alt='setting' />
+          <img src='/icons/market.png' alt='market' />
         </Market>
       </a>
     </Container>
