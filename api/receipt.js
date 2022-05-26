@@ -20,6 +20,8 @@ const receiptApi = () => {
       formData.append('product_date', newReceiptInfo.productDate);
     newReceiptInfo.usedDealAlert &&
       formData.append('used_deal_alert', newReceiptInfo.usedDealAlert);
+      newReceiptInfo.memo &&
+      formData.append('memo', newReceiptInfo.memo);
     newReceiptInfo.productImage &&
       formData.append('product_image', newReceiptInfo.productImage);
     newReceiptInfo.backgroundImage &&
@@ -55,7 +57,8 @@ const receiptApi = () => {
     productPlace,
     productPrice,
     productDate,
-    usedDealAlert
+    usedDealAlert,
+    memo
   ) => {
     await post(`/api/receipt/${id}/info`, {
       nickname: nickname,
@@ -64,6 +67,7 @@ const receiptApi = () => {
       product_price: productPrice,
       product_date: productDate,
       used_deal_alert: usedDealAlert,
+      memo: memo
     });
   };
 

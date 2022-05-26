@@ -47,7 +47,7 @@ const Container = styled.div`
   position: absolute;
   width: 240px;
   height: 240px;
-  top: ${(props) => props.posY}px;
+  top: ${(props) => props.posY-70}px;
   left: ${(props) => props.posX}px;
   transform: translate(${props => props.translateX}%, 0%);
   background: white;

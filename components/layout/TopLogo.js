@@ -24,6 +24,14 @@ const TopLogo = ({ hideSetting, isPreview, onLoginClick }) => {
           >
             <img src='/icons/setting.png' alt='setting' />
           </Setting>
+          <a
+            target='_blank'
+            href='https://smartstore.naver.com/buy2bye/products/6720106860'
+            rel='noreferrer'>
+            <Market>
+              <img src='/icons/market.png' alt='setting' />
+            </Market>
+          </a>
         </Container>
         <LoginModal
           isOpen={isPreviewModalOpen}
@@ -44,6 +52,14 @@ const TopLogo = ({ hideSetting, isPreview, onLoginClick }) => {
           </Setting>
         </Link>
       )}
+      <a 
+      target= '_blank'
+      href='https://smartstore.naver.com/buy2bye/products/6720106860'
+      rel='noreferrer'>
+        <Market>
+          <img src='/icons/market.png' alt='setting' />
+        </Market>
+      </a>
     </Container>
   );
 };
@@ -71,12 +87,29 @@ const Setting = styled.button`
   position: absolute;
   top: 0;
   right: 0;
-  width: 60px;
+  width: 40px;
   height: 60px;
+  padding: 0 9px 0 3px;
   background: none;
 
   img {
-    height: 40%;
+    height: 45%;
+    width: auto;
+    opacity: 0.3;
+  }
+`;
+
+const Market = styled.button`
+  position: absolute;
+  top: 0;
+  right: 40px;
+  width: 40px;
+  height: 60px;
+  padding: 0 6px 0 6px;
+  background: none;
+
+  img {
+    height: 45%;
     width: auto;
     opacity: 0.3;
   }
