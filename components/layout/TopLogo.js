@@ -52,11 +52,14 @@ const TopLogo = ({ hideSetting, isPreview, onLoginClick }) => {
           </Setting>
         </Link>
       )}
-      <Link href='https://smartstore.naver.com/buy2bye/products/6720106860' passHref>
-          <Market>
-            <img src='/icons/market.png' alt='market' />
-          </Market>
-        </Link>
+      <a
+        target='_blank'
+        href='https://smartstore.naver.com/buy2bye/products/6720106860'
+        rel='noreferrer'>
+        <Market>
+          <img src='/icons/market.png' alt='market' />
+        </Market>
+      </a>
     </Container>
   );
 };
