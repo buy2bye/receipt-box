@@ -30,6 +30,8 @@ const ReceiptListPage = ({ userInfo }) => {
   const [isCollectionListOpen, setIsCollectionListOpen] = useState(false);
   const { updateProfileImage, updateNickname } = userApi();
 
+  const collections = ['col1', 'col2', 'col3', 'col4', 'col5', 'col6'];
+
   const badgeImage =
     totalCount > 200
       ? '/icons/badge/badge-201.png'
@@ -128,6 +130,7 @@ const ReceiptListPage = ({ userInfo }) => {
           우측 하단의 &#39;+&#39; 버튼을 눌러 내 애장품을 등록해보세요🙂
         </UploadGuideText>
       )}
+
       <HeaderContainer showBorder={receiptList.length > 0}>
         <Title>내 애장품 컬렉션</Title>
         <CollectionListToggleWrapper>
@@ -162,6 +165,19 @@ const ReceiptListPage = ({ userInfo }) => {
           />
         </ListTypes>
       </HeaderContainer>
+
+      {/* collection 리스트 */}
+      <CollectionList isOpen={isCollectionListOpen}>
+        {collections.map((collection) => (
+          <CollectionSelectButton
+            isSelected={true}
+            isOpen={isCollectionListOpen}
+          >
+            {collection}
+          </CollectionSelectButton>
+        ))}
+      </CollectionList>
+
       <div style={{ width: '100%', position: 'relative' }}>
         {selectedListType === 'grid' ? (
           <ReceiptsGridView
@@ -252,6 +268,31 @@ const CollectionListToggle = styled.button`
     css`
       transform: rotate(-180deg);
     `}
+`;
+
+const CollectionList = styled.div`
+  width: 100%;
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  transition: 0.4s all;
+
+  ${(props) =>
+    props.isOpen
+      ? css`
+          height: 100px;
+        `
+      : css`
+          height: 0;
+        `}
+`;
+
+const CollectionSelectButton = styled.button`
+  padding: 4px 16px;
+  border: 1px solid var(--grey400);
+  border-radius: 12px;
+  opacity: ${(props) => (props.isOpen ? 1 : 0)};
+  transition: 0.4s all;
 `;
 
 const Profile = styled.div`
