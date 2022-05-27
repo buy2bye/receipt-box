@@ -14,6 +14,7 @@ import ReceiptsGridView from './receipt/ReceiptsGridView';
 import SummaryPopup from './receipt/SummaryPopup';
 import HeaderTextModal from './modal/HeaderTextModal';
 import BadgeModal from './modal/BadgeModal';
+import { css } from '@emotion/react';
 
 const ReceiptListPage = ({ userInfo }) => {
   const router = useRouter();
@@ -26,6 +27,7 @@ const ReceiptListPage = ({ userInfo }) => {
   const [summaryItem, setSummaryItem] = useState();
   const [summaryPosition, setSummaryPosition] = useState({});
   const [isBadgeModalShown, setIsBadgeModalShown] = useState(false);
+  const [isCollectionListOpen, setIsCollectionListOpen] = useState(false);
   const { updateProfileImage, updateNickname } = userApi();
 
   const badgeImage =
@@ -83,7 +85,7 @@ const ReceiptListPage = ({ userInfo }) => {
 
   const handleItemClick = (item, x, y, translateX) => {
     setSummaryItem(item);
-    setSummaryPosition({ x, y, translateX })
+    setSummaryPosition({ x, y, translateX });
   };
 
   const handleShowDetailClick = () => {
@@ -118,9 +120,7 @@ const ReceiptListPage = ({ userInfo }) => {
         </ProfileImageWrapper>
         <NicknameWrapper>
           <img src={badgeImage} alt='user-badge' onClick={handleBadgeClick} />
-          <Nickname>
-            {userInfo.data.nickname}
-          </Nickname>
+          <Nickname>{userInfo.data.nickname}</Nickname>
         </NicknameWrapper>
       </Profile>
       {receiptList.length === 0 && (
@@ -130,9 +130,23 @@ const ReceiptListPage = ({ userInfo }) => {
       )}
       <HeaderContainer showBorder={receiptList.length > 0}>
         <Title>내 애장품 컬렉션</Title>
+        <CollectionListToggleWrapper>
+          <CollectionListToggle
+            isOpen={isCollectionListOpen}
+            onClick={() => setIsCollectionListOpen(!isCollectionListOpen)}
+          >
+            <img
+              src='/icons/down-arrow.png'
+              alt='collection-list-toggle-arrow'
+            />
+          </CollectionListToggle>
+        </CollectionListToggleWrapper>
         <TotalPriceButton onClick={handleTotalPriceButtonClick}>
           ₩
         </TotalPriceButton>
+        <EditButton onClick={handleTotalPriceButtonClick}>
+          <img src='/icons/edit.png' alt='edit' />
+        </EditButton>
         <ListTypes>
           <ListType
             src='/icons/grid-icon.png'
@@ -148,7 +162,7 @@ const ReceiptListPage = ({ userInfo }) => {
           />
         </ListTypes>
       </HeaderContainer>
-      <div style={{width: '100%', position: 'relative'}}>
+      <div style={{ width: '100%', position: 'relative' }}>
         {selectedListType === 'grid' ? (
           <ReceiptsGridView
             receiptList={receiptList}
@@ -201,6 +215,7 @@ const HeaderContainer = styled.div`
   display: flex;
   align-items: center;
   margin: 12px 0;
+  gap: 12px;
   border-bottom: ${(props) =>
     props.showBorder ? '1px solid var(--grey200)' : 'none'};
   padding-bottom: 12px;
@@ -214,6 +229,29 @@ const HeaderContainer = styled.div`
     flex: 2;
     font-size: 14px;
   }
+`;
+
+const CollectionListToggleWrapper = styled.div`
+  flex: 1;
+`;
+
+const CollectionListToggle = styled.button`
+  padding: 0;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  transition: 0.4s all;
+
+  img {
+    width: 12px;
+    height: 12px;
+  }
+
+  ${(props) =>
+    props.isOpen &&
+    css`
+      transform: rotate(-180deg);
+    `}
 `;
 
 const Profile = styled.div`
@@ -254,7 +292,7 @@ const Nickname = styled.div`
 `;
 
 const ListTypes = styled.div`
-  flex: 1;
+  /* flex: 1; */
   display: flex;
   justify-content: flex-end;
   align-items: center;
@@ -278,15 +316,24 @@ const ListType = styled.img`
   }
 `;
 
-const TotalPriceButton = styled.button`
+const HeaderButton = styled.button`
   width: 16px;
   height: 16px;
-  border: 1px solid black;
-  border-radius: 50%;
-  margin-left: 6px;
+
   text-align: center;
   padding: 0;
   font-size: 10px;
+`;
+
+const TotalPriceButton = styled(HeaderButton)`
+  border: 1px solid black;
+  border-radius: 50%;
+`;
+const EditButton = styled(HeaderButton)`
+  img {
+    width: 100%;
+    height: 100%;
+  }
 `;
 
 const UploadGuideText = styled.div`
