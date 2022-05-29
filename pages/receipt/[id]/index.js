@@ -9,15 +9,22 @@ const ReceiptDetailPage = () => {
   const router = useRouter();
   const { id } = router.query;
 
+  const [categories, setCategories] = useState([]);
   const [receipt, setReceipt] = useState();
   const [isEdit, setEditMode] = useState(false);
 
-  const { getReceiptDetail, changeReceiptInfo, changeReceiptImages } =
-    receiptApi();
+  const {
+    getCategories,
+    getReceiptDetail,
+    changeReceiptInfo,
+    changeReceiptImages
+ } = receiptApi();
 
   const fetchReceipt = async () => {
-    const { data } = await getReceiptDetail(id);
-    setReceipt(data);
+    const { data: categorieData } = await getCategories();
+    const { data: receipt } = await getReceiptDetail(id);
+    setCategories(categorieData.categoryList)
+    setReceipt(receipt);
     setEditMode(false);
   };
 
@@ -52,7 +59,8 @@ const ReceiptDetailPage = () => {
       newReceiptInfo.productPrice,
       newReceiptInfo.productDate,
       newReceiptInfo.usedDealAlert,
-      newReceiptInfo.memo
+      newReceiptInfo.memo,
+      newReceiptInfo.category.id
     );
 
     await changeReceiptImages(
@@ -68,6 +76,7 @@ const ReceiptDetailPage = () => {
 
   return (
     <ReceiptDetail
+      categories={categories}
       receipt={receipt}
       isEdit={isEdit}
       onEditClick={handleEditClick}
