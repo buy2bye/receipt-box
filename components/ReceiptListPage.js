@@ -110,10 +110,10 @@ const ReceiptListPage = ({ userInfo }) => {
       <Profile>
         <ProfileImageWrapper>
           <FileInputLabel
-            image={userInfo.data.profileImage || '/icons/add-user.png'}
+            image={userInfo.data.profile_image || '/icons/add-user.png'}
             onChange={handleProfileImageUpload}
-            imageWidth={userInfo.data.profileImage ? '100%' : '50%'}
-            imageHeight={userInfo.data.profileImage ? '100%' : '50%'}
+            imageWidth={userInfo.data.profile_image ? '100%' : '50%'}
+            imageHeight={userInfo.data.profile_image ? '100%' : '50%'}
           />
         </ProfileImageWrapper>
         <NicknameWrapper>
