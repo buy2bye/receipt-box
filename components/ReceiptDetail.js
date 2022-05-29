@@ -7,7 +7,6 @@ import Layout from 'components/layout/Layout';
 import TextModal from 'components/modal/TextModal';
 import BottomPopup from 'components/popup/BottomPopup';
 import BottomTextInputPopup from 'components/popup/BottomTextInputPopup';
-import BottomDropdown from 'components/popup/BottomDropdown'
 import DeleteReasons from 'components/receipt/DeleteReasons';
 import UploadPreview from 'components/receipt/UploadPreview';
 import WrapAuthPage from 'helpers/AuthWrapper';
@@ -58,7 +57,6 @@ const PopupInfo = {
 };
 
 const ReceiptDetail = ({
-  categories,
   receipt,
   isEdit,
   onEditClick,
@@ -71,7 +69,6 @@ const ReceiptDetail = ({
   const [loading, setLoading] = useState(false); //호진 업로딩시 팝업
 
   const [newReceiptInfo, setNewReceiptInfo] = useState({
-    category: {},
     nickname: '',
     productImage: '',
     backgroundImage: '',
@@ -87,7 +84,6 @@ const ReceiptDetail = ({
   const [newBackgroundImage, setNewBackgroundIamge] = useState();
 
   const [popupInfo, setPopupInfo] = useState();
-  const [categoryDropdownOpen, setCategoryDropdownOpen] = useState();
 
   const [previewImage, setPreviewImage] = useState();
   const [previewByteImage, setPreviewByteImage] = useState();
@@ -124,14 +120,6 @@ const ReceiptDetail = ({
     await deleteReceipt(id, reason);
     router.replace('/');
   };
-
-  const handleSelectCateogry = (name) => {
-    const newCategory = categories.filter((category) => category.name === name)[0];
-    setNewReceiptInfo({
-      ...newReceiptInfo,
-      category: newCategory,
-    })
-  }
 
   const handleProductImageChange = (e) => {
     const reader = new FileReader();
@@ -354,18 +342,6 @@ const ReceiptDetail = ({
       </NicknameWrapper>
 
       <Details>
-        <li onClick={() => isEdit && setCategoryDropdownOpen(true)}>
-          <span>
-            카테고리
-            {isEdit && (
-              <span style={{ color: 'var(--primary)' }}> (필수) </span>
-            )}
-          </span>
-          <span>
-            {newReceiptInfo.category.name || '선택해주세요.'}
-            {isEdit && <img src='/icons/edit.png' alt='edit-icon' />}
-          </span>
-        </li>
         <li onClick={() => isEdit && setPopupOpen('productName')}>
           <span>
             상품명
@@ -555,14 +531,6 @@ const ReceiptDetail = ({
         visible={popupInfo}
         setVisible={setPopupOpen}
         {...popupInfo}
-      />
-      <BottomDropdown
-        visible={categoryDropdownOpen}
-        setVisible={setCategoryDropdownOpen}
-        title="카테고리를 선택해주세요."
-        items={categories.map((item) => item.name)}
-        defaultValue={newReceiptInfo.category.name}
-        onSelect={handleSelectCateogry}
       />
 
       <TextModal

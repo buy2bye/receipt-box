@@ -3,12 +3,6 @@ import apiController from 'helpers/apiController';
 const { get, post } = apiController();
 
 const receiptApi = () => {
-  // 카테고리 목록
-  const getCategories = async () => {
-    const { data } = await get('/api/receipt/category/list');
-    return { data };
-  }
-  
   //영수증 등록
   const createReceipt = async (newReceiptInfo) => {
     const formData = new FormData();
@@ -28,8 +22,6 @@ const receiptApi = () => {
       formData.append('used_deal_alert', newReceiptInfo.usedDealAlert);
       newReceiptInfo.memo &&
       formData.append('memo', newReceiptInfo.memo);
-      newReceiptInfo.category &&
-      formData.append('category_id', newReceiptInfo.category.id);
     newReceiptInfo.productImage &&
       formData.append('product_image', newReceiptInfo.productImage);
     newReceiptInfo.backgroundImage &&
@@ -66,8 +58,7 @@ const receiptApi = () => {
     productPrice,
     productDate,
     usedDealAlert,
-    memo,
-    categoryId
+    memo
   ) => {
     await post(`/api/receipt/${id}/info`, {
       nickname: nickname,
@@ -76,8 +67,7 @@ const receiptApi = () => {
       product_price: productPrice,
       product_date: productDate,
       used_deal_alert: usedDealAlert,
-      memo: memo,
-      category_id: categoryId
+      memo: memo
     });
   };
 
@@ -133,7 +123,6 @@ const receiptApi = () => {
   };
 
   return {
-    getCategories,
     createReceipt,
     getReceipts,
     getReceiptDetail,

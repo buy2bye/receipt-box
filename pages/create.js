@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react'
 import receiptApi from 'api/receipt';
 import ReceiptDetail from 'components/ReceiptDetail';
 import ReceiptDetailPreview from 'components/ReceiptDetailPreview';
@@ -7,19 +6,7 @@ import { useRouter } from 'next/router';
 
 const ReceiptDetailPage = ({ query }) => {
   const router = useRouter();
-
-  const [categories, setCategories] = useState([]);
-
-  const { getCategories, createReceipt } = receiptApi();
-
-  const fetchReceipt = async () => {
-    const { data: categorieData } = await getCategories();
-    setCategories(categorieData.categoryList)
-  };
-
-  useEffect(() => {
-    fetchReceipt();
-  }, []);
+  const { createReceipt } = receiptApi();
 
   const handleSaveClick = async (
     newReceiptInfo,
@@ -45,7 +32,6 @@ const ReceiptDetailPage = ({ query }) => {
     return <ReceiptDetailPreview isEdit onSaveClick={handleSaveClick} />;
 
   return <ReceiptDetail
-    categories={categories}
     isEdit
     onSaveClick={handleSaveClick}
     onBackClick={() => router.replace('/')}
