@@ -22,21 +22,6 @@ const Tutorial = ({ className }) => {
         <SwiperSlide>
           <img src='/tutorial_0.png' alt='tutorial0' />
         </SwiperSlide>
-        <SwiperSlide>
-          <img src='/tutorial_1.png' alt='tutorial1' />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src='/tutorial_2.png' alt='tutorial2' />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src='/tutorial_3.png' alt='tutorial3' />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src='/tutorial_4.png' alt='tutorial3' />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src='/tutorial_5.png' alt='tutorial3' />
-        </SwiperSlide>
       </Swiper>
     </Container>
   );
