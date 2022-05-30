@@ -157,7 +157,8 @@ const Container = styled(Layout)`
   padding: 0 0 24px 0;
 
   .login__tutorial {
-    width: 80%;
+    display: none;
+    width: 100%;
     flex: 1;
   }
 
