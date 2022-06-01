@@ -76,6 +76,12 @@ const receiptApi = () => {
     return { data };
   };
 
+  // 영수증 가격 합계 가져오기
+  const getReceiptPriceSum = async () => {
+    const { data } = await get('/api/receipt/price-sum', {});
+    return { data };
+  };
+
   //영수증 상세 정보 가져오기
   const getReceiptDetail = async (id) => {
     const { data } = await get(`/api/receipt/${id}/info`);
@@ -165,6 +171,7 @@ const receiptApi = () => {
     changeReceiptCategory,
     createReceipt,
     getReceipts,
+    getReceiptPriceSum,
     getReceiptDetail,
     changeReceiptInfo,
     changeReceiptImages,

@@ -1,11 +1,9 @@
 import styled from '@emotion/styled';
 import Title from 'components/page/Title';
-import Subtitle from 'components/page/Subtitle';
 import Layout from 'components/layout/Layout';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import receiptApi from 'api/receipt';
-import TextModal from './modal/TextModal';
 import FileInputLabel from './common/FileInputLabel';
 import userApi from 'api/user';
 import BottomTextInputPopup from './popup/BottomTextInputPopup';
@@ -25,7 +23,7 @@ const ReceiptListPage = ({ userInfo }) => {
   const router = useRouter();
   const [receiptList, setReceiptList] = useState();
   const [totalCount, setTotalCount] = useState(0);
-  const [totalPrice, setTotalPrice] = useState(0);
+  const [priceSumList, setPriceSumList] = useState([]);
   const [isTotalPriceModalShown, setIsTotalPriceModalShown] = useState(false);
   const [selectedListType, setSelectedListType] = useState('grid');
   const [summaryItem, setSummaryItem] = useState();
@@ -49,6 +47,7 @@ const ReceiptListPage = ({ userInfo }) => {
   const {
     getReceipts,
     getCategories,
+    getReceiptPriceSum,
     createCategories,
     deleteCategories,
     changeCategoryName
@@ -114,6 +113,10 @@ const ReceiptListPage = ({ userInfo }) => {
   useEffect(() => {
     getReceipts(1, 0).then((data) => {
       setTotalCount(data.data.totalCount);
+    });
+
+    getReceiptPriceSum().then((data) => {
+      setPriceSumList(data.data.priceList);
     });
   }, []);
 
@@ -348,7 +351,15 @@ const ReceiptListPage = ({ userInfo }) => {
         onCloseClick={() => setIsTotalPriceModalShown(false)}
         title='구매가 합계'
       >
-        {totalPrice.toLocaleString()}원
+        <div style={{ display: 'flex', flexDirection: 'column', textAlign: 'center'}}>
+          <b>컬렉션 전체 {priceSumList.reduce((acc, cur) => acc + cur.priceSum, 0).toLocaleString()}원</b>
+          <br />
+          {priceSumList.concat(priceSumList).map((item) => {
+            return (
+              <>{item.name} {item.priceSum}원<br/></>
+            )
+          })}
+        </div>
       </HeaderTextModal>
       <BadgeModal
         isOpen={isBadgeModalShown}
