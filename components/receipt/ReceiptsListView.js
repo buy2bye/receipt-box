@@ -1,7 +1,13 @@
 import styled from '@emotion/styled';
 import ReceiptRow from './ReceiptRow';
 
-const ReceiptsListView = ({ receiptList, onItemClick }) => {
+const ReceiptsListView = ({
+  receiptList,
+  onItemClick,
+  isEditMode,
+  selectedItemsOnEditMode,
+  setSelectedItemsOnEditMode,
+}) => {
   const isEmpty = receiptList.length < 1;
 
   const handleItemClick = (item, containerRef) => {
@@ -22,7 +28,14 @@ const ReceiptsListView = ({ receiptList, onItemClick }) => {
         </UploadGuide>
       )}
       {receiptList.map((item, index) => (
-        <ReceiptRow item={item} key={index} onClick={handleItemClick} />
+        <ReceiptRow
+          item={item}
+          key={index}
+          onClick={handleItemClick}
+          isEditMode={isEditMode}
+          selectedItemsOnEditMode={selectedItemsOnEditMode}
+          setSelectedItemsOnEditMode={setSelectedItemsOnEditMode}
+        />
       ))}
     </Container>
   );

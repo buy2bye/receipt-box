@@ -20,6 +20,7 @@ import CollectionList from './receipt/collection/CollectionList';
 import Modal from './modal/Modal';
 import Button from 'components/button/Button';
 import EditModeButtons from './receipt/collection/EditModeButtons';
+import DeleteReasons from 'components/receipt/DeleteReasons';
 
 const ReceiptListPage = ({ userInfo }) => {
   const router = useRouter();
@@ -43,11 +44,18 @@ const ReceiptListPage = ({ userInfo }) => {
     useState(false);
   const [collectionEditSelectorOption, setCollectionEditSelectorOption] =
     useState();
+  const [isDeletePopupShown, setIsDeletePopupShown] = useState(false);
   const [orderType, setOrderType] = useState('구매일자순');
   const [collectionEditMode, setCollectionEditMode] = useState(false);
+  const [selectedItemsOnEditMode, setSelectedItemsOnEditMode] = useState([]);
 
-  const { getReceipts, getCategories, createCategories, changeCategoryName } =
-    receiptApi();
+  const {
+    getReceipts,
+    getCategories,
+    createCategories,
+    deleteCategories,
+    changeCategoryName,
+  } = receiptApi();
 
   const badgeImage =
     totalCount > 200
@@ -104,6 +112,12 @@ const ReceiptListPage = ({ userInfo }) => {
   };
 
   useEffect(() => {
+    getReceipts(1, 0).then((data) => {
+      setTotalCount(data.data.totalCount);
+    });
+  }, []);
+
+  useEffect(() => {
     const orderParams = orderMap[orderType];
     getReceipts(
       1,
@@ -113,7 +127,6 @@ const ReceiptListPage = ({ userInfo }) => {
       orderParams.orderDesc
     ).then((data) => {
       setReceiptList(data.data.receiptList);
-      setTotalCount(data.data.totalCount);
       // setTotalPrice(data.data.productPriceSum);
     });
   }, [selectedCollectionId, orderType]);
@@ -186,6 +199,22 @@ const ReceiptListPage = ({ userInfo }) => {
     changeCategoryName(selectedCollectionId, collectionName)
       .then(() => {
         alert('컬렉션 이름이 변경되었습니다.');
+        window.location.reload();
+      })
+      .catch(({ response }) => {
+        alert(response);
+      });
+  };
+
+  const handleDeleteCollectionClick = () => {
+    setIsCollectionEditSelectorOpen(false);
+    setIsDeletePopupShown(true);
+  };
+
+  const handleDeleteCollectionSubmit = () => {
+    deleteCategories(selectedCollectionId)
+      .then(() => {
+        alert('컬렉션이 삭제되었습니다.');
         window.location.reload();
       })
       .catch(({ response }) => {
@@ -277,11 +306,17 @@ const ReceiptListPage = ({ userInfo }) => {
           <ReceiptsGridView
             receiptList={receiptList}
             onItemClick={handleItemClick}
+            isEditMode={collectionEditMode}
+            selectedItemsOnEditMode={selectedItemsOnEditMode}
+            setSelectedItemsOnEditMode={setSelectedItemsOnEditMode}
           />
         ) : (
           <ReceiptsListView
             receiptList={receiptList}
             onItemClick={handleItemClick}
+            isEditMode={collectionEditMode}
+            selectedItemsOnEditMode={selectedItemsOnEditMode}
+            setSelectedItemsOnEditMode={setSelectedItemsOnEditMode}
           />
         )}
         {summaryItem && (
@@ -340,10 +375,26 @@ const ReceiptListPage = ({ userInfo }) => {
         <CollectionEditButton onClick={handleChangeCollectionNameClick}>
           이름 변경
         </CollectionEditButton>
-        <CollectionEditButton>삭제</CollectionEditButton>
+        {collections.length > 1 && (
+          <CollectionEditButton onClick={handleDeleteCollectionClick}>
+            삭제
+          </CollectionEditButton>
+        )}
       </CollectionEditButtons>
 
-      {/* <EditModeButtons /> */}
+      <EditModeButtons
+        isShown={collectionEditMode}
+        onClose={() => setCollectionEditMode(false)}
+        disabled={selectedItemsOnEditMode.length === 0}
+      />
+
+      <DeleteReasons
+        visible={isDeletePopupShown}
+        setVisible={setIsDeletePopupShown}
+        onDelete={handleDeleteCollectionSubmit}
+        title='폴더에 있는 모든 애장품이 삭제됩니다.'
+        hideReason
+      />
     </Layout>
   );
 };

@@ -1,12 +1,15 @@
+import { css } from '@emotion/react';
 import Button from 'components/button/Button';
 
 const { default: styled } = require('@emotion/styled');
 
-const EditModeButtons = () => {
+const EditModeButtons = ({ isShown, onClose, disabled }) => {
   return (
-    <Container>
-      <EditButton>닫기</EditButton>
-      <EditButton>이동</EditButton>
+    <Container isShown={isShown}>
+      <EditButton onClick={onClose}>닫기</EditButton>
+      <EditButton primary={!disabled} disabled={disabled}>
+        이동
+      </EditButton>
     </Container>
   );
 };
@@ -29,10 +32,16 @@ const Container = styled.div`
   padding: 40px 20px 20px 20px;
   gap: 8px;
   z-index: 1000;
+
+  ${({ isShown }) =>
+    !isShown &&
+    css`
+      display: none;
+    `}
 `;
 
 const EditButton = styled(Button)`
   flex: 1;
   border-radius: 8px;
-  height: auto; ;
+  height: auto;
 `;

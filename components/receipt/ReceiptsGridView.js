@@ -1,8 +1,16 @@
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
+import { useState } from 'react';
 import ReceiptGrid from './ReceiptGrid';
 
-const ReceiptsGridView = ({ receiptList, onItemClick, isPreview }) => {
+const ReceiptsGridView = ({
+  receiptList,
+  onItemClick,
+  isPreview,
+  isEditMode,
+  selectedItemsOnEditMode,
+  setSelectedItemsOnEditMode,
+}) => {
   const isEmpty = receiptList.length < 1;
 
   const handleItemClick = (item, containerRef) => {
@@ -37,6 +45,9 @@ const ReceiptsGridView = ({ receiptList, onItemClick, isPreview }) => {
           key={index}
           onClick={handleItemClick}
           autoClick={isPreview && 0 === index}
+          isEditMode={isEditMode}
+          selectedItemsOnEditMode={selectedItemsOnEditMode}
+          setSelectedItemsOnEditMode={setSelectedItemsOnEditMode}
         />
       ))}
     </Container>

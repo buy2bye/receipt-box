@@ -1,9 +1,22 @@
 import styled from '@emotion/styled';
+import { css } from '@emotion/react';
 import { CircularProgress } from '@mui/material';
 
-const Button = ({ className, primary, onClick, children, isLoading }) => {
+const Button = ({
+  className,
+  primary,
+  onClick,
+  children,
+  isLoading,
+  disabled,
+}) => {
   return (
-    <Container className={className} primary={primary} onClick={onClick}>
+    <Container
+      className={className}
+      primary={primary}
+      onClick={onClick}
+      disabled={disabled}
+    >
       {isLoading ? <CircularProgress color='primary' size={26} /> : children}
     </Container>
   );
@@ -22,4 +35,11 @@ const Container = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
+  transition: all 0.4s;
+
+  ${({ disabled }) =>
+    disabled &&
+    css`
+      color: var(--grey400);
+    `}
 `;
