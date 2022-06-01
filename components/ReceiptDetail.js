@@ -7,7 +7,7 @@ import Layout from 'components/layout/Layout';
 import TextModal from 'components/modal/TextModal';
 import BottomPopup from 'components/popup/BottomPopup';
 import BottomTextInputPopup from 'components/popup/BottomTextInputPopup';
-import BottomDropdown from 'components/popup/BottomDropdown'
+import BottomDropdown from 'components/popup/BottomDropdown';
 import DeleteReasons from 'components/receipt/DeleteReasons';
 import UploadPreview from 'components/receipt/UploadPreview';
 import WrapAuthPage from 'helpers/AuthWrapper';
@@ -50,10 +50,10 @@ const PopupInfo = {
     type: 'date',
   },
   memo: {
-   title: '메모를 입력해주세요.',
-   placeholder: '추가로 기록하고 싶은 사항을 작성하세요.',
-   confirmText: '변경하기',
-   type: 'text'
+    title: '메모를 입력해주세요.',
+    placeholder: '추가로 기록하고 싶은 사항을 작성하세요.',
+    confirmText: '변경하기',
+    type: 'text',
   },
 };
 
@@ -126,12 +126,14 @@ const ReceiptDetail = ({
   };
 
   const handleSelectCateogry = (name) => {
-    const newCategory = categories.filter((category) => category.name === name)[0];
+    const newCategory = categories.filter(
+      (category) => category.name === name
+    )[0];
     setNewReceiptInfo({
       ...newReceiptInfo,
       category: newCategory,
-    })
-  }
+    });
+  };
 
   const handleProductImageChange = (e) => {
     const reader = new FileReader();
@@ -374,7 +376,8 @@ const ReceiptDetail = ({
             )}
           </span>
           <span>
-            {newReceiptInfo.productName || (isEdit ? '터치하여 입력하세요' : '정보없음')}
+            {newReceiptInfo.productName ||
+              (isEdit ? '터치하여 입력하세요' : '정보없음')}
             {isEdit && <img src='/icons/edit.png' alt='edit-icon' />}
           </span>
         </li>
@@ -386,7 +389,8 @@ const ReceiptDetail = ({
             )}
           </span>
           <span>
-            {newReceiptInfo.productPlace || (isEdit ? '터치하여 입력하세요' : '정보없음')}
+            {newReceiptInfo.productPlace ||
+              (isEdit ? '터치하여 입력하세요' : '정보없음')}
             {isEdit && <img src='/icons/edit.png' alt='edit-icon' />}
           </span>
         </li>
@@ -400,7 +404,9 @@ const ReceiptDetail = ({
           <span>
             {newReceiptInfo.productPrice
               ? `${parseInt(newReceiptInfo.productPrice).toLocaleString()}원`
-              :  (isEdit ? '터치하여 입력하세요' : '정보없음')}
+              : isEdit
+              ? '터치하여 입력하세요'
+              : '정보없음'}
             {isEdit && <img src='/icons/edit.png' alt='edit-icon' />}
           </span>
         </li>
@@ -412,7 +418,8 @@ const ReceiptDetail = ({
             )}
           </span>
           <span>
-            {newReceiptInfo.productDate || (isEdit ? '터치하여 입력하세요' : '정보없음')}
+            {newReceiptInfo.productDate ||
+              (isEdit ? '터치하여 입력하세요' : '정보없음')}
             {isEdit && <img src='/icons/edit.png' alt='edit-icon' />}
           </span>
         </li>
@@ -424,7 +431,8 @@ const ReceiptDetail = ({
             )}
           </span>
           <span>
-            {newReceiptInfo.memo || (isEdit ? '터치하여 입력하세요' : '정보없음')}
+            {newReceiptInfo.memo ||
+              (isEdit ? '터치하여 입력하세요' : '정보없음')}
             {isEdit && <img src='/icons/edit.png' alt='edit-icon' />}
           </span>
         </li>
@@ -559,7 +567,7 @@ const ReceiptDetail = ({
       <BottomDropdown
         visible={categoryDropdownOpen}
         setVisible={setCategoryDropdownOpen}
-        title="카테고리를 선택해주세요."
+        title='카테고리를 선택해주세요.'
         items={categories.map((item) => item.name)}
         defaultValue={newReceiptInfo.category.name}
         onSelect={handleSelectCateogry}

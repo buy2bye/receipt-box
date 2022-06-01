@@ -1,15 +1,63 @@
 import { css } from '@emotion/react';
+import receiptApi from 'api/receipt';
 import Button from 'components/button/Button';
+import Modal from 'components/modal/Modal';
+import BottomDropdown from 'components/popup/BottomDropdown';
+import { useState } from 'react';
 
 const { default: styled } = require('@emotion/styled');
 
-const EditModeButtons = ({ isShown, onClose, disabled }) => {
+const EditModeButtons = ({
+  isShown,
+  onClose,
+  disabled,
+  selectedItemsOnEditMode,
+  collections,
+}) => {
+  const [isCollectionSelectPopupShown, setIsCollectionSelectPopupShown] =
+    useState(false);
+  const { changeReceiptCategory } = receiptApi();
+
+  const handleCollectionChangeClick = () => {
+    setIsCollectionSelectPopupShown(true);
+  };
+
+  const handleCollectionChangeSubmit = (selectedCollection) => {
+    console.log(selectedCollection);
+
+    const newCollection = collections.filter(
+      (collection) => collection.name === selectedCollection
+    )[0];
+
+    changeReceiptCategory(selectedItemsOnEditMode, newCollection.id)
+      .then(() => {
+        alert('컬렉션 변경이 완료되었습니다.');
+        window.location.reload();
+      })
+      .catch(({ response }) => {
+        alert(response);
+      });
+  };
+
   return (
     <Container isShown={isShown}>
       <EditButton onClick={onClose}>닫기</EditButton>
-      <EditButton primary={!disabled} disabled={disabled}>
+      <EditButton
+        primary={!disabled}
+        disabled={disabled}
+        onClick={handleCollectionChangeClick}
+      >
         이동
       </EditButton>
+
+      <CollectionSelectPopup
+        visible={isCollectionSelectPopupShown}
+        setVisible={setIsCollectionSelectPopupShown}
+        title='이동할 컬렉션을 선택해주세요.'
+        items={collections.map((item) => item.name)}
+        defaultValue={collections[0].name}
+        onSelect={handleCollectionChangeSubmit}
+      />
     </Container>
   );
 };
@@ -45,3 +93,5 @@ const EditButton = styled(Button)`
   border-radius: 8px;
   height: auto;
 `;
+
+const CollectionSelectPopup = styled(BottomDropdown)``;

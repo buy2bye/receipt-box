@@ -4,16 +4,6 @@ import SelectBox from 'components/common/SelectBox';
 import BottomPopup from 'components/popup/BottomPopup';
 import { useEffect, useState } from 'react';
 
-const reasons = [
-  '재등록을 위해서',
-  '다른 상품으로 교환해서',
-  '환불해서',
-  '판매해서',
-  '분실해서',
-  '도난당해서',
-  '직접 입력',
-];
-
 const BottomDropdown = ({
   title,
   visible,
@@ -33,7 +23,7 @@ const BottomDropdown = ({
     setVisible(false);
   };
 
-  const handleDelete = async () => {
+  const handleSubmit = async () => {
     setIsFetching(true);
     await onSelect(selectedItem);
     setIsFetching(false);
@@ -54,7 +44,7 @@ const BottomDropdown = ({
       />
       <ButtonsWrapper>
         <Button onClick={handleCancel}>취소</Button>
-        <Button primary onClick={handleDelete} isLoading={isFetching}>
+        <Button primary onClick={handleSubmit} isLoading={isFetching}>
           선택하기
         </Button>
       </ButtonsWrapper>

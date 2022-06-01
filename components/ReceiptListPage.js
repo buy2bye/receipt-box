@@ -80,11 +80,14 @@ const ReceiptListPage = ({ userInfo }) => {
       : '/icons/badge/badge-0.png';
 
   useEffect(() => {
-    const savedId = Number(window.localStorage.getItem('selectedCollectionId'))
+    const savedId = Number(window.localStorage.getItem('selectedCollectionId'));
     getCategories().then((data) => {
       setCollections(data.data.categoryList);
-      const hasSaved = data.data.categoryList.filter(item => item.id === savedId).length > 0
-      setSelectedCollectionId(hasSaved ? savedId : data.data.categoryList[0].id);
+      const hasSaved =
+        data.data.categoryList.filter((item) => item.id === savedId).length > 0;
+      setSelectedCollectionId(
+        hasSaved ? savedId : data.data.categoryList[0].id
+      );
     });
     setOrderType(window.localStorage.getItem('orderType') || '구매일자순');
   }, []);
@@ -360,13 +363,27 @@ const ReceiptListPage = ({ userInfo }) => {
         onCloseClick={() => setIsTotalPriceModalShown(false)}
         title='구매가 합계'
       >
-        <div style={{ display: 'flex', flexDirection: 'column', textAlign: 'center'}}>
-          <b>컬렉션 전체 {priceSumList.reduce((acc, cur) => acc + cur.priceSum, 0).toLocaleString()}원</b>
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            textAlign: 'center',
+          }}
+        >
+          <b>
+            컬렉션 전체{' '}
+            {priceSumList
+              .reduce((acc, cur) => acc + cur.priceSum, 0)
+              .toLocaleString()}
+            원
+          </b>
           <br />
           {priceSumList.map((item) => {
             return (
-              <>{item.name} {item.priceSum}원<br/></>
-            )
+              <>
+                {item.name} {item.priceSum}원<br />
+              </>
+            );
           })}
         </div>
       </HeaderTextModal>
@@ -400,6 +417,8 @@ const ReceiptListPage = ({ userInfo }) => {
         isShown={collectionEditMode}
         onClose={() => setCollectionEditMode(false)}
         disabled={selectedItemsOnEditMode.length === 0}
+        selectedItemsOnEditMode={selectedItemsOnEditMode}
+        collections={collections}
       />
 
       <DeleteReasons
