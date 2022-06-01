@@ -56,7 +56,7 @@ const ReceiptListPage = ({ userInfo }) => {
     getReceipts().then((data) => {
       setReceiptList(data.data.receiptList);
       setTotalCount(data.data.totalCount);
-      setTotalPrice(data.data.productPriceSum);
+      // setTotalPrice(data.data.productPriceSum);
     });
   }, []);
 
