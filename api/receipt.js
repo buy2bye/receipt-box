@@ -64,11 +64,13 @@ const receiptApi = () => {
   };
 
   //영수증 리스트 가져오기
-  const getReceipts = async (page = 1, length = 0, categoryId) => {
+  const getReceipts = async (page = 1, length = 0, categoryId, orderCol, orderDesc) => {
     const { data } = await get('/api/receipt/list', {
       page: page,
       length: length,
       category_id: categoryId,
+      order_col: orderCol,
+      order_desc: orderDesc
     });
 
     return { data };

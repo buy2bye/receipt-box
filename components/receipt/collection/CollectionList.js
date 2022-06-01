@@ -8,6 +8,8 @@ const CollectionList = ({
   selectedCollectionId,
   handleCreateCollectionButtonClick,
   handleSelectedCollectionChange,
+  handleOrderChange,
+  orderValue
 }) => {
   const handleSelectorClick = (collectionId) => {
     handleSelectedCollectionChange(collectionId);
@@ -15,32 +17,37 @@ const CollectionList = ({
 
   return (
     <Container isOpen={isOpen}>
-      {collections.map((collection, index) => (
-        <CollectionSelector
-          key={`category_${index}`}
-          isSelected={selectedCollectionId === collection.id}
+      <ListContainer>
+        {collections.map((collection, index) => (
+          <CollectionSelector
+            key={`category_${index}`}
+            isSelected={selectedCollectionId === collection.id}
+            isCollectionListOpen={isOpen}
+            onClick={handleSelectorClick}
+            collection={collection}
+          />
+        ))}
+        <CreateCollectionButton
           isCollectionListOpen={isOpen}
-          onClick={handleSelectorClick}
-          collection={collection}
-        />
-      ))}
-      <CreateCollectionButton
-        isCollectionListOpen={isOpen}
-        onClick={handleCreateCollectionButtonClick}
-      >
-        +
-      </CreateCollectionButton>
-      <div
-        style={{
-          flex: 1,
-        }}
-      ></div>
+          onClick={handleCreateCollectionButtonClick}
+        >
+          +
+        </CreateCollectionButton>
+      </ListContainer>
       <OrderSelect>
-        <select>
-          <option value='구매일자순'>구매일자순</option>
-          <option value='상품명순'>상품명순</option>
-          <option value='구매가순'>구매가순</option>
-          <option value='등록순'>등록순</option>
+        <select
+          value={orderValue}
+          onChange={handleOrderChange}
+        >
+          {[
+            '구매일자순',
+            '상품명순',
+            '구매가순',
+            '등록순',
+            '별명순'
+          ].map((order, idx) => {
+            return <option key={`order__${idx}`} value={order} defaultValue={orderValue === order}>{order}</option>  
+          })}
         </select>
       </OrderSelect>
     </Container>
@@ -52,9 +59,9 @@ export default CollectionList;
 const Container = styled.div`
   width: 100%;
   display: flex;
-  gap: 8px;
-  overflow-x: scroll;
+  overflow-y: clip;
   transition: 0.4s all;
+  gap: 8px;
 
   ${(props) =>
     props.isOpen
@@ -66,6 +73,15 @@ const Container = styled.div`
           height: 0;
         `}
 `;
+
+const ListContainer = styled.div`
+  display: flex;
+  flex: 1;
+  gap: 8px;
+  overflow-x: scroll;
+
+  height: 48px;
+`
 
 const CreateCollectionButton = styled.button`
   white-space: nowrap;
