@@ -187,8 +187,9 @@ const ReceiptListPage = ({ userInfo }) => {
 
       {/* collection 리스트 */}
       <CollectionList isOpen={isCollectionListOpen}>
-        {categories.map((collection) => (
+        {categories.map((collection, idx) => (
           <CollectionSelector
+            key={`category__${idx}`}
             isSelected={selectedCollectionId === collection.id}
             isOpen={isCollectionListOpen}
             onClick={() => setSelectedCollectionId(collection.id)}
