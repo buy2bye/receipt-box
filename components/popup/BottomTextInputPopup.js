@@ -47,13 +47,22 @@ const BottomTextInputPopup = ({
       setVisible={setVisible}
       title={title}
     >
-      <TextInput
-        type={type}
-        placeholder={placeholder}
-        onChange={handleChange}
-        onKeyDown={handleKeyDown}
-        value={innerValue}
-      />
+      {type === 'textarea' ? (
+        <TextArea
+          placeholder={placeholder}
+          onChange={handleChange}
+          // onKeyDown={handleKeyDown}
+          value={innerValue}
+        />
+      ) : (
+        <TextInput
+          type={type}
+          placeholder={placeholder}
+          onChange={handleChange}
+          onKeyDown={handleKeyDown}
+          value={innerValue}
+        />
+      )}
       <Button
         className={buttonClass}
         primary
@@ -78,6 +87,19 @@ const TextInput = styled.input`
   border-radius: 8px;
   font-size: 18px;
   padding: 0 16px;
+  font-weight: 300;
+  color: var(--grey800);
+`;
+
+const TextArea = styled.textarea`
+  width: 100%;
+  height: 160px;
+  resize: none;
+  border: 1px solid var(--grey300);
+  background: var(--grey100);
+  border-radius: 8px;
+  font-size: 18px;
+  padding: 16px;
   font-weight: 300;
   color: var(--grey800);
 `;
