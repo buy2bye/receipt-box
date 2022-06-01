@@ -121,6 +121,16 @@ const ReceiptListPage = ({ userInfo }) => {
       });
   };
 
+  const handleSelectedCollectionChange = (collectionId) => {
+    if (selectedCollectionId === collectionId) {
+      alert('같은거 클릭함');
+      return;
+    }
+
+    setSummaryItem(null);
+    setSelectedCollectionId(collectionId);
+  };
+
   if (!receiptList || !categories)
     return (
       <Layout hideTop showLogo>
@@ -192,9 +202,12 @@ const ReceiptListPage = ({ userInfo }) => {
             key={`category__${idx}`}
             isSelected={selectedCollectionId === collection.id}
             isOpen={isCollectionListOpen}
-            onClick={() => setSelectedCollectionId(collection.id)}
+            onClick={() => handleSelectedCollectionChange(collection.id)}
           >
             {collection.name}
+            {selectedCollectionId === collection.id && (
+              <img src='/icons/edit.png' alt='edit' />
+            )}
           </CollectionSelector>
         ))}
         <AddNewCollectionButton
@@ -323,6 +336,13 @@ const CollectionSelector = styled.button`
   border-radius: 12px;
   opacity: ${(props) => (props.isOpen ? 1 : 0)};
   transition: 0.4s all;
+  display: flex;
+  align-items: center;
+
+  img {
+    width: 16px;
+    padding-left: 4px;
+  }
 
   ${(props) =>
     props.isSelected &&
