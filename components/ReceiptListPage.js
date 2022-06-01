@@ -79,9 +79,11 @@ const ReceiptListPage = ({ userInfo }) => {
       : '/icons/badge/badge-0.png';
 
   useEffect(() => {
+    const savedId = Number(window.localStorage.getItem('selectedCollectionId'))
     getCategories().then((data) => {
       setCollections(data.data.categoryList);
-      setSelectedCollectionId(data.data.categoryList[0].id);
+      const hasSaved = data.data.categoryList.filter(item => item.id === savedId).length > 0
+      setSelectedCollectionId(hasSaved ? savedId : data.data.categoryList[0].id);
     });
     setOrderType(window.localStorage.getItem('orderType') || '구매일자순');
   }, []);
@@ -185,6 +187,7 @@ const ReceiptListPage = ({ userInfo }) => {
 
     setSummaryItem(null);
     setSelectedCollectionId(collectionId);
+    window.localStorage.setItem('selectedCollectionId', collectionId);
   };
 
   const handleChangeCollectionNameClick = () => {
