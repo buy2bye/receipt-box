@@ -19,6 +19,7 @@ import SelectBox from './common/SelectBox';
 import CollectionList from './receipt/collection/CollectionList';
 import Modal from './modal/Modal';
 import Button from 'components/button/Button';
+import DeleteReasons from 'components/receipt/DeleteReasons';
 
 const ReceiptListPage = ({ userInfo }) => {
   const router = useRouter();
@@ -42,9 +43,16 @@ const ReceiptListPage = ({ userInfo }) => {
     useState(false);
   const [collectionEditSelectorOption, setCollectionEditSelectorOption] =
     useState();
+  const [isDeletePopupShown, setIsDeletePopupShown] = useState(false);
   const [orderType, setOrderType] = useState('구매일자순');
 
-  const { getReceipts, getCategories, createCategories, changeCategoryName } =
+  const {
+    getReceipts,
+    getCategories,
+    createCategories,
+    deleteCategories,
+    changeCategoryName
+  } =
     receiptApi();
 
   const badgeImage =
@@ -189,6 +197,22 @@ const ReceiptListPage = ({ userInfo }) => {
         alert(response);
       });
   };
+
+  const handleDeleteCollectionClick = () => {
+    setIsCollectionEditSelectorOpen(false);
+    setIsDeletePopupShown(true);
+  };
+
+  const handleDeleteCollectionSubmit = () => {
+    deleteCategories(selectedCollectionId)
+      .then(() => {
+        alert('컬렉션이 삭제되었습니다.');
+        window.location.reload();
+      })
+      .catch(({ response }) => {
+        alert(response);
+      });
+  }
 
   const handleOrderChange = (e) => {
     window.localStorage.setItem('orderType', e.target.value);
@@ -337,9 +361,22 @@ const ReceiptListPage = ({ userInfo }) => {
         <CollectionEditButton onClick={handleChangeCollectionNameClick}>
           이름 변경
         </CollectionEditButton>
-        <CollectionEditButton>삭제</CollectionEditButton>
+        {collections.length > 1 && (
+          <CollectionEditButton
+            onClick={handleDeleteCollectionClick}
+          >
+            삭제
+          </CollectionEditButton>
+        )}
       </CollectionEditButtons>
       {/* )} */}
+      <DeleteReasons
+        visible={isDeletePopupShown}
+        setVisible={setIsDeletePopupShown}
+        onDelete={handleDeleteCollectionSubmit}
+        title='폴더에 있는 모든 애장품이 삭제됩니다.'
+        hideReason
+      />
     </Layout>
   );
 };
