@@ -19,6 +19,12 @@ const receiptApi = () => {
     await post(`/api/receipt/category/${categoryId}/delete`);
   };
 
+  const changeCategoryName = async (categoryId, categoryName) => {
+    await post(`/api/receipt/category/${categoryId}`, {
+      name: categoryName,
+    });
+  };
+
   const changeReceiptCategory = async (receipts, newCategoryId) => {
     await post('api/receipt/change-category', {
       category_id: newCategoryId,
@@ -153,6 +159,7 @@ const receiptApi = () => {
     getCategories,
     createCategories,
     deleteCategories,
+    changeCategoryName,
     changeReceiptCategory,
     createReceipt,
     getReceipts,

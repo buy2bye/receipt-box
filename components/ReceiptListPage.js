@@ -38,10 +38,11 @@ const ReceiptListPage = ({ userInfo }) => {
     useState(false);
   const [isCollectionEditSelectorOpen, setIsCollectionEditSelectorOpen] =
     useState(false);
-  const [collectionEditSelectorOption, setCollectionEditSelectorOption] =
-    useState();
+  const [isChangeCollectionNamePopupOpen, setIsChangeCollectionNamePopupOpen] =
+    useState(false);
 
-  const { getReceipts, getCategories, createCategories } = receiptApi();
+  const { getReceipts, getCategories, createCategories, changeCategoryName } =
+    receiptApi();
 
   const badgeImage =
     totalCount > 200
@@ -137,6 +138,22 @@ const ReceiptListPage = ({ userInfo }) => {
 
     setSummaryItem(null);
     setSelectedCollectionId(collectionId);
+  };
+
+  const handleChangeCollectionNameClick = () => {
+    setIsCollectionEditSelectorOpen(false);
+    setIsChangeCollectionNamePopupOpen(true);
+  };
+
+  const handleChangeCollectionNameSubmit = (collectionName) => {
+    changeCategoryName(selectedCollectionId, collectionName)
+      .then(() => {
+        alert('컬렉션 이름이 변경되었습니다.');
+        window.location.reload();
+      })
+      .catch(({ response }) => {
+        alert(response);
+      });
   };
 
   if (!receiptList || !collections)
@@ -243,6 +260,16 @@ const ReceiptListPage = ({ userInfo }) => {
         confirmText='컬렉션 만들기'
         value=''
       />
+
+      <ChangeCollectionNamePopup
+        visible={isChangeCollectionNamePopupOpen}
+        setVisible={setIsChangeCollectionNamePopupOpen}
+        title='변경할 컬렉션의 이름을 입력해주세요'
+        onSubmit={handleChangeCollectionNameSubmit}
+        confirmText='이름 변경하기'
+        value=''
+      />
+
       <HeaderTextModal
         isOpen={isTotalPriceModalShown}
         onCloseClick={() => setIsTotalPriceModalShown(false)}
@@ -266,7 +293,9 @@ const ReceiptListPage = ({ userInfo }) => {
         isPortal
         onCloseClick={() => setIsCollectionEditSelectorOpen(false)}
       >
-        <CollectionEditButton>이름 변경</CollectionEditButton>
+        <CollectionEditButton onClick={handleChangeCollectionNameClick}>
+          이름 변경
+        </CollectionEditButton>
         <CollectionEditButton>삭제</CollectionEditButton>
       </CollectionEditButtons>
       {/* )} */}
@@ -423,6 +452,8 @@ const NicknameWrapper = styled.div`
 `;
 
 const CreateCollectionPopup = styled(BottomTextInputPopup)``;
+
+const ChangeCollectionNamePopup = styled(BottomTextInputPopup)``;
 
 const CollectionEditButtons = styled(Modal)`
   display: flex;
