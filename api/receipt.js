@@ -7,8 +7,26 @@ const receiptApi = () => {
   const getCategories = async () => {
     const { data } = await get('/api/receipt/category/list');
     return { data };
-  }
-  
+  };
+
+  const createCategories = async (name) => {
+    const formData = new FormData();
+    formData.append('name', name);
+
+    await post('/api/receipt/category/create', formData);
+  };
+
+  const deleteCategories = async (categoryId) => {
+    await post(`/api/receipt/category/${categoryId}/delete`);
+  };
+
+  const changeReceiptCategory = async (receipts, newCategoryId) => {
+    await post('api/receipt/change-category', {
+      category_id: newCategoryId,
+      receipt_list: receipts,
+    });
+  };
+
   //영수증 등록
   const createReceipt = async (newReceiptInfo) => {
     const formData = new FormData();
@@ -26,9 +44,8 @@ const receiptApi = () => {
       formData.append('product_date', newReceiptInfo.productDate);
     newReceiptInfo.usedDealAlert &&
       formData.append('used_deal_alert', newReceiptInfo.usedDealAlert);
-      newReceiptInfo.memo &&
-      formData.append('memo', newReceiptInfo.memo);
-      newReceiptInfo.category &&
+    newReceiptInfo.memo && formData.append('memo', newReceiptInfo.memo);
+    newReceiptInfo.category &&
       formData.append('category_id', newReceiptInfo.category.id);
     newReceiptInfo.productImage &&
       formData.append('product_image', newReceiptInfo.productImage);
@@ -77,7 +94,7 @@ const receiptApi = () => {
       product_date: productDate,
       used_deal_alert: usedDealAlert,
       memo: memo,
-      category_id: categoryId
+      category_id: categoryId,
     });
   };
 
@@ -99,18 +116,18 @@ const receiptApi = () => {
       hasForm = true;
     }
     imageList.forEach((image) => {
-      formData.append('image_list', image)
+      formData.append('image_list', image);
       hasForm = true;
     });
     removeImageIndexList.forEach((idx) => {
-      formData.append('remove_image_index_list', idx)
+      formData.append('remove_image_index_list', idx);
       hasForm = true;
     });
 
     if (hasForm) {
       await post(`/api/receipt/${id}/images`, formData);
     }
-  }
+  };
 
   const changeReceiptNickname = async (id, nickname) => {
     const { data } = await post(`/api/receipt/${id}/set-nickname`, {
@@ -134,6 +151,9 @@ const receiptApi = () => {
 
   return {
     getCategories,
+    createCategories,
+    deleteCategories,
+    changeReceiptCategory,
     createReceipt,
     getReceipts,
     getReceiptDetail,
