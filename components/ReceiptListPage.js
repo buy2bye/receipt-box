@@ -27,8 +27,8 @@ const ReceiptListPage = ({ userInfo }) => {
   const [summaryPosition, setSummaryPosition] = useState({});
   const [isBadgeModalShown, setIsBadgeModalShown] = useState(false);
   const [isCollectionListOpen, setIsCollectionListOpen] = useState(false);
-  const [selectedCollection, setSelectedCollection] = useState();
-  const { updateProfileImage, updateNickname } = userApi();
+  const [selectedCollectionId, setSelectedCollectionId] = useState();
+  const { updateProfileImage } = userApi();
   const [categories, setCategories] = useState();
   const [isCreateCollectionPopupOpen, setIsCreateCollectionPopupOpen] =
     useState(false);
@@ -59,18 +59,19 @@ const ReceiptListPage = ({ userInfo }) => {
       : '/icons/badge/badge-0.png';
 
   useEffect(() => {
-    let firstCategoryId;
     getCategories().then((data) => {
       setCategories(data.data.categoryList);
-      firstCategoryId = data.data.categoryList[0].id;
-
-      getReceipts(1, 0, firstCategoryId).then((data) => {
-        setReceiptList(data.data.receiptList);
-        setTotalCount(data.data.totalCount);
-        // setTotalPrice(data.data.productPriceSum);
-      });
+      setSelectedCollectionId(data.data.categoryList[0].id);
     });
   }, []);
+
+  useEffect(() => {
+    getReceipts(1, 0, selectedCollectionId).then((data) => {
+      setReceiptList(data.data.receiptList);
+      setTotalCount(data.data.totalCount);
+      // setTotalPrice(data.data.productPriceSum);
+    });
+  }, [selectedCollectionId]);
 
   const handleProfileImageUpload = (e) => {
     const reader = new FileReader();
@@ -186,13 +187,13 @@ const ReceiptListPage = ({ userInfo }) => {
 
       {/* collection 리스트 */}
       <CollectionList isOpen={isCollectionListOpen}>
-        {categories.map((category) => (
+        {categories.map((collection) => (
           <CollectionSelector
-            isSelected={selectedCollection === category.name}
+            isSelected={selectedCollectionId === collection.id}
             isOpen={isCollectionListOpen}
-            onClick={() => setSelectedCollection(category.name)}
+            onClick={() => setSelectedCollectionId(collection.id)}
           >
-            {category.name}
+            {collection.name}
           </CollectionSelector>
         ))}
         <AddNewCollectionButton
@@ -314,6 +315,7 @@ const CollectionList = styled.div`
 `;
 
 const CollectionSelector = styled.button`
+  white-space: nowrap;
   padding: 4px 16px;
   height: 32px;
   border: 1px solid var(--grey400);
