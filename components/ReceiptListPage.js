@@ -16,6 +16,8 @@ import HeaderTextModal from './modal/HeaderTextModal';
 import BadgeModal from './modal/BadgeModal';
 import { css } from '@emotion/react';
 
+const collections = ['null', 'col1', 'col2', 'col3', 'col4', 'col5', 'col6'];
+
 const ReceiptListPage = ({ userInfo }) => {
   const router = useRouter();
   const [receiptList, setReceiptList] = useState();
@@ -28,9 +30,8 @@ const ReceiptListPage = ({ userInfo }) => {
   const [summaryPosition, setSummaryPosition] = useState({});
   const [isBadgeModalShown, setIsBadgeModalShown] = useState(false);
   const [isCollectionListOpen, setIsCollectionListOpen] = useState(false);
+  const [selectedCollection, setSelectedCollection] = useState();
   const { updateProfileImage, updateNickname } = userApi();
-
-  const collections = ['col1', 'col2', 'col3', 'col4', 'col5', 'col6'];
 
   const badgeImage =
     totalCount > 200
@@ -102,6 +103,10 @@ const ReceiptListPage = ({ userInfo }) => {
     setIsBadgeModalShown(true);
   };
 
+  const handleEditCollectionClick = () => {
+    setIsCollectionListOpen(true);
+  };
+
   if (!receiptList)
     return (
       <Layout hideTop showLogo>
@@ -147,7 +152,7 @@ const ReceiptListPage = ({ userInfo }) => {
         <TotalPriceButton onClick={handleTotalPriceButtonClick}>
           ₩
         </TotalPriceButton>
-        <EditButton onClick={handleTotalPriceButtonClick}>
+        <EditButton onClick={handleEditCollectionClick}>
           <img src='/icons/edit.png' alt='edit' />
         </EditButton>
         <ListTypes>
@@ -169,12 +174,13 @@ const ReceiptListPage = ({ userInfo }) => {
       {/* collection 리스트 */}
       <CollectionList isOpen={isCollectionListOpen}>
         {collections.map((collection) => (
-          <CollectionSelectButton
-            isSelected={true}
+          <CollectionSelector
+            isSelected={selectedCollection === collection}
             isOpen={isCollectionListOpen}
+            onClick={() => setSelectedCollection(collection)}
           >
             {collection}
-          </CollectionSelectButton>
+          </CollectionSelector>
         ))}
       </CollectionList>
 
@@ -274,25 +280,32 @@ const CollectionList = styled.div`
   width: 100%;
   display: flex;
   gap: 8px;
-  flex-wrap: wrap;
+  overflow-x: scroll;
   transition: 0.4s all;
 
   ${(props) =>
     props.isOpen
       ? css`
-          height: 100px;
+          height: 48px;
         `
       : css`
           height: 0;
         `}
 `;
 
-const CollectionSelectButton = styled.button`
+const CollectionSelector = styled.button`
   padding: 4px 16px;
+  height: 32px;
   border: 1px solid var(--grey400);
   border-radius: 12px;
   opacity: ${(props) => (props.isOpen ? 1 : 0)};
   transition: 0.4s all;
+
+  ${(props) =>
+    props.isSelected &&
+    css`
+      background: var(--grey200);
+    `}
 `;
 
 const Profile = styled.div`
