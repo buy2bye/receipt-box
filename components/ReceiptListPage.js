@@ -354,7 +354,7 @@ const ReceiptListPage = ({ userInfo }) => {
         <div style={{ display: 'flex', flexDirection: 'column', textAlign: 'center'}}>
           <b>컬렉션 전체 {priceSumList.reduce((acc, cur) => acc + cur.priceSum, 0).toLocaleString()}원</b>
           <br />
-          {priceSumList.concat(priceSumList).map((item) => {
+          {priceSumList.map((item) => {
             return (
               <>{item.name} {item.priceSum}원<br/></>
             )
