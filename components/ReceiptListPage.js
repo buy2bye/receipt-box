@@ -14,12 +14,13 @@ import ReceiptsGridView from './receipt/ReceiptsGridView';
 import SummaryPopup from './receipt/SummaryPopup';
 import HeaderTextModal from './modal/HeaderTextModal';
 import BadgeModal from './modal/BadgeModal';
+import { flexbox } from '@mui/system';
 
 const ReceiptListPage = ({ userInfo }) => {
   const router = useRouter();
   const [receiptList, setReceiptList] = useState();
   const [totalCount, setTotalCount] = useState(0);
-  const [totalPrice, setTotalPrice] = useState(0);
+  const [priceSumList, setPriceSumList] = useState([]);
   const [isTotalPriceModalShown, setIsTotalPriceModalShown] = useState(false);
   const [showNicknameChangePopup, setShowNicknameChangePopup] = useState(false);
   const [selectedListType, setSelectedListType] = useState('grid');
@@ -52,11 +53,14 @@ const ReceiptListPage = ({ userInfo }) => {
       : '/icons/badge/badge-0.png';
 
   useEffect(() => {
-    const { getReceipts } = receiptApi();
+    const { getReceipts, getReceiptPriceSum } = receiptApi();
     getReceipts().then((data) => {
       setReceiptList(data.data.receiptList);
       setTotalCount(data.data.totalCount);
-      // setTotalPrice(data.data.productPriceSum);
+    });
+
+    getReceiptPriceSum().then((data) => {
+      setPriceSumList(data.data.priceList);
     });
   }, []);
 
@@ -184,7 +188,19 @@ const ReceiptListPage = ({ userInfo }) => {
         onCloseClick={() => setIsTotalPriceModalShown(false)}
         title='구매가 합계'
       >
-        {totalPrice.toLocaleString()}원
+        <div style={{ display: 'flex', flexDirection: 'column', textAlign: 'center'}}>
+          <b>컬렉션 전체 {priceSumList.reduce((acc, cur) => acc + cur.priceSum, 0).toLocaleString()}원</b>
+          <br />
+          {priceSumList.map((item) => {
+          return [
+            item.name,
+            ' ',
+            item.priceSum,
+            '원',
+            <br />
+          ]
+        })}
+        </div>
       </HeaderTextModal>
       <BadgeModal
         isOpen={isBadgeModalShown}
