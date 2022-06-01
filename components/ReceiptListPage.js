@@ -16,8 +16,6 @@ import HeaderTextModal from './modal/HeaderTextModal';
 import BadgeModal from './modal/BadgeModal';
 import { css } from '@emotion/react';
 
-const collections = ['null', 'col1', 'col2', 'col3', 'col4', 'col5', 'col6'];
-
 const ReceiptListPage = ({ userInfo }) => {
   const router = useRouter();
   const [receiptList, setReceiptList] = useState();
@@ -32,6 +30,7 @@ const ReceiptListPage = ({ userInfo }) => {
   const [isCollectionListOpen, setIsCollectionListOpen] = useState(false);
   const [selectedCollection, setSelectedCollection] = useState();
   const { updateProfileImage, updateNickname } = userApi();
+  const [categories, setCategories] = useState();
 
   const badgeImage =
     totalCount > 200
@@ -57,11 +56,17 @@ const ReceiptListPage = ({ userInfo }) => {
       : '/icons/badge/badge-0.png';
 
   useEffect(() => {
-    const { getReceipts } = receiptApi();
-    getReceipts().then((data) => {
-      setReceiptList(data.data.receiptList);
-      setTotalCount(data.data.totalCount);
-      setTotalPrice(data.data.productPriceSum);
+    const { getReceipts, getCategories } = receiptApi();
+    let firstCategoryId;
+    getCategories().then((data) => {
+      setCategories(data.data.categoryList);
+      firstCategoryId = data.data.categoryList[0].id;
+
+      getReceipts(1, 0, firstCategoryId).then((data) => {
+        setReceiptList(data.data.receiptList);
+        setTotalCount(data.data.totalCount);
+        setTotalPrice(data.data.productPriceSum);
+      });
     });
   }, []);
 
@@ -75,10 +80,6 @@ const ReceiptListPage = ({ userInfo }) => {
     };
 
     if (files[0]) reader.readAsDataURL(files[0]);
-  };
-
-  const handleNicknameEditClick = () => {
-    setShowNicknameChangePopup(true);
   };
 
   const handleNicknameSubmit = async (nickname) => {
@@ -107,7 +108,7 @@ const ReceiptListPage = ({ userInfo }) => {
     setIsCollectionListOpen(true);
   };
 
-  if (!receiptList)
+  if (!receiptList || !categories)
     return (
       <Layout hideTop showLogo>
         loading...
@@ -173,15 +174,16 @@ const ReceiptListPage = ({ userInfo }) => {
 
       {/* collection 리스트 */}
       <CollectionList isOpen={isCollectionListOpen}>
-        {collections.map((collection) => (
+        {categories.map((category) => (
           <CollectionSelector
-            isSelected={selectedCollection === collection}
+            isSelected={selectedCollection === category.name}
             isOpen={isCollectionListOpen}
-            onClick={() => setSelectedCollection(collection)}
+            onClick={() => setSelectedCollection(category.name)}
           >
-            {collection}
+            {category.name}
           </CollectionSelector>
         ))}
+        <AddNewCollectionButton>asd</AddNewCollectionButton>
       </CollectionList>
 
       <div style={{ width: '100%', position: 'relative' }}>
@@ -307,6 +309,8 @@ const CollectionSelector = styled.button`
       background: var(--grey200);
     `}
 `;
+
+const AddNewCollectionButton = styled(CollectionSelector)``;
 
 const Profile = styled.div`
   width: 100%;

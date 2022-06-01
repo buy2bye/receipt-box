@@ -20,11 +20,11 @@ const BottomDropdown = ({
   setVisible,
   items,
   defaultValue,
-  onSelect
+  onSelect,
 }) => {
   useEffect(() => {
     setSelectedItem(defaultValue || items[0]);
-  }, [visible])
+  }, [visible]);
 
   const [selectedItem, setSelectedItem] = useState(defaultValue);
   const [isFetching, setIsFetching] = useState(false);
@@ -35,7 +35,6 @@ const BottomDropdown = ({
 
   const handleDelete = async () => {
     setIsFetching(true);
-    console.log(selectedItem)
     await onSelect(selectedItem);
     setIsFetching(false);
     setVisible(false);
