@@ -216,6 +216,34 @@ const ReceiptListPage = ({ userInfo }) => {
         >
           +
         </AddNewCollectionButton>
+        <div style={{
+          flex: 1
+        }}>
+        </div>
+        <OrderSelect>
+          <select>
+            <option
+              value='구매일자순'
+            >
+              구매일자순
+            </option>
+            <option
+              value='상품명순'
+            >
+              상품명순
+            </option>
+            <option
+              value='구매가순'
+            >
+              구매가순
+            </option>
+            <option
+              value='등록순'
+            >
+              등록순
+            </option>
+          </select>
+        </OrderSelect>
       </CollectionList>
 
       <div style={{ width: '100%', position: 'relative' }}>
@@ -316,6 +344,7 @@ const CollectionList = styled.div`
   display: flex;
   gap: 8px;
   overflow-x: scroll;
+  overflow-y: clip;
   transition: 0.4s all;
 
   ${(props) =>
@@ -457,3 +486,21 @@ const NicknameWrapper = styled.div`
 `;
 
 const CreateCollectionPopup = styled(BottomTextInputPopup)``;
+
+const OrderSelect = styled.div`
+  select {
+    width: 110px;
+    height: 32px;
+    font-size: 14px;
+    padding: 4px 16px;
+    border-radius: 12px;
+    border: 1px solid var(--grey400);
+    appearance: none;
+    background-color: white;
+    background-image: url('/icons/down-arrow.png');
+    background-position: 96% 50%;
+    background-repeat: no-repeat;
+    background-size: 14px;
+    opacity: 0.7;
+  }
+`
