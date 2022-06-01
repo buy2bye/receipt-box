@@ -22,7 +22,6 @@ const ReceiptListPage = ({ userInfo }) => {
   const [totalCount, setTotalCount] = useState(0);
   const [totalPrice, setTotalPrice] = useState(0);
   const [isTotalPriceModalShown, setIsTotalPriceModalShown] = useState(false);
-  const [showNicknameChangePopup, setShowNicknameChangePopup] = useState(false);
   const [selectedListType, setSelectedListType] = useState('grid');
   const [summaryItem, setSummaryItem] = useState();
   const [summaryPosition, setSummaryPosition] = useState({});
@@ -31,6 +30,10 @@ const ReceiptListPage = ({ userInfo }) => {
   const [selectedCollection, setSelectedCollection] = useState();
   const { updateProfileImage, updateNickname } = userApi();
   const [categories, setCategories] = useState();
+  const [isCreateCollectionPopupOpen, setIsCreateCollectionPopupOpen] =
+    useState(false);
+
+  const { getReceipts, getCategories, createCategories } = receiptApi();
 
   const badgeImage =
     totalCount > 200
@@ -56,7 +59,6 @@ const ReceiptListPage = ({ userInfo }) => {
       : '/icons/badge/badge-0.png';
 
   useEffect(() => {
-    const { getReceipts, getCategories } = receiptApi();
     let firstCategoryId;
     getCategories().then((data) => {
       setCategories(data.data.categoryList);
@@ -65,7 +67,7 @@ const ReceiptListPage = ({ userInfo }) => {
       getReceipts(1, 0, firstCategoryId).then((data) => {
         setReceiptList(data.data.receiptList);
         setTotalCount(data.data.totalCount);
-        setTotalPrice(data.data.productPriceSum);
+        // setTotalPrice(data.data.productPriceSum);
       });
     });
   }, []);
@@ -80,11 +82,6 @@ const ReceiptListPage = ({ userInfo }) => {
     };
 
     if (files[0]) reader.readAsDataURL(files[0]);
-  };
-
-  const handleNicknameSubmit = async (nickname) => {
-    await updateNickname(nickname);
-    window.location.reload();
   };
 
   const handleItemClick = (item, x, y, translateX) => {
@@ -106,6 +103,21 @@ const ReceiptListPage = ({ userInfo }) => {
 
   const handleEditCollectionClick = () => {
     setIsCollectionListOpen(true);
+  };
+
+  const openCreateCollectionPopup = () => {
+    setIsCreateCollectionPopupOpen(true);
+  };
+
+  const handleCreateCollectionSubmit = (collectionName) => {
+    createCategories(collectionName)
+      .then(() => {
+        alert('새로운 컬렉션이 생성되었습니다.');
+        window.location.reload();
+      })
+      .catch(({ response }) => {
+        alert(response);
+      });
   };
 
   if (!receiptList || !categories)
@@ -183,7 +195,12 @@ const ReceiptListPage = ({ userInfo }) => {
             {category.name}
           </CollectionSelector>
         ))}
-        <AddNewCollectionButton>asd</AddNewCollectionButton>
+        <AddNewCollectionButton
+          isOpen={isCollectionListOpen}
+          onClick={openCreateCollectionPopup}
+        >
+          +
+        </AddNewCollectionButton>
       </CollectionList>
 
       <div style={{ width: '100%', position: 'relative' }}>
@@ -209,13 +226,14 @@ const ReceiptListPage = ({ userInfo }) => {
           />
         )}
       </div>
-      <BottomTextInputPopup
-        visible={showNicknameChangePopup}
-        setVisible={setShowNicknameChangePopup}
-        title='변경할 닉네임을 입력해주세요'
-        onSubmit={handleNicknameSubmit}
-        confirmText='변경하기'
-        value={userInfo.data.nickname}
+
+      <CreateCollectionPopup
+        visible={isCreateCollectionPopupOpen}
+        setVisible={setIsCreateCollectionPopupOpen}
+        title='새로운 컬렉션의 이름을 지어주세요'
+        onSubmit={handleCreateCollectionSubmit}
+        confirmText='컬렉션 만들기'
+        value=''
       />
       <HeaderTextModal
         isOpen={isTotalPriceModalShown}
@@ -413,3 +431,5 @@ const NicknameWrapper = styled.div`
     margin-right: 4px;
   }
 `;
+
+const CreateCollectionPopup = styled(BottomTextInputPopup)``;

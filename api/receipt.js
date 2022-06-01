@@ -10,10 +10,9 @@ const receiptApi = () => {
   };
 
   const createCategories = async (name) => {
-    const formData = new FormData();
-    formData.append('name', name);
-
-    await post('/api/receipt/category/create', formData);
+    await post('/api/receipt/category/create', {
+      name: name,
+    });
   };
 
   const deleteCategories = async (categoryId) => {

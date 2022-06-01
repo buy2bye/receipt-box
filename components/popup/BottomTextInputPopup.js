@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import styled from '@emotion/styled';
 import Button from 'components/button/Button';
 import BottomPopup from './BottomPopup';
@@ -13,18 +13,23 @@ const BottomTextInputPopup = ({
   placeholder,
   value,
   confirmText = '다음',
-  type = 'text'
+  type = 'text',
 }) => {
   const [isFetching, setIsFetching] = useState(false);
   const [innerValue, setInnerValue] = useState(value);
+  const inputRef = useRef();
+
+  useEffect(() => {
+    inputRef.current && inputRef.current.focus();
+  }, [visible]);
 
   useEffect(() => {
     if (!visible) {
-      setInnerValue('')
+      setInnerValue('');
     } else {
       setInnerValue(value);
     }
-  }, [value, visible])
+  }, [value, visible]);
 
   const handleClick = async () => {
     setIsFetching(true);
@@ -35,10 +40,8 @@ const BottomTextInputPopup = ({
   const handleKeyDown = (e) => {
     if (e.keyCode === 13) handleClick();
   };
-  
-  const handleChange = (e) => [
-    setInnerValue(e.target.value)
-  ]
+
+  const handleChange = (e) => [setInnerValue(e.target.value)];
 
   return (
     <Container
@@ -53,6 +56,7 @@ const BottomTextInputPopup = ({
         onChange={handleChange}
         onKeyDown={handleKeyDown}
         value={innerValue}
+        ref={inputRef}
       />
       <Button
         className={buttonClass}
