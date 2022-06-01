@@ -322,6 +322,7 @@ const CollectionList = styled.div`
     props.isOpen
       ? css`
           height: 48px;
+          padding-bottom: 48px;
         `
       : css`
           height: 0;
