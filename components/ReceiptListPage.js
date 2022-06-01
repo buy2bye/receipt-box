@@ -19,6 +19,7 @@ import SelectBox from './common/SelectBox';
 import CollectionList from './receipt/collection/CollectionList';
 import Modal from './modal/Modal';
 import Button from 'components/button/Button';
+import EditModeButtons from './receipt/collection/EditModeButtons';
 
 const ReceiptListPage = ({ userInfo }) => {
   const router = useRouter();
@@ -43,6 +44,7 @@ const ReceiptListPage = ({ userInfo }) => {
   const [collectionEditSelectorOption, setCollectionEditSelectorOption] =
     useState();
   const [orderType, setOrderType] = useState('구매일자순');
+  const [collectionEditMode, setCollectionEditMode] = useState(false);
 
   const { getReceipts, getCategories, createCategories, changeCategoryName } =
     receiptApi();
@@ -146,7 +148,8 @@ const ReceiptListPage = ({ userInfo }) => {
   };
 
   const handleEditCollectionClick = () => {
-    setIsCollectionListOpen(true);
+    // TODO: 컬렉션 간 이동할 수 있는 편집모드로 변경
+    setCollectionEditMode(true);
   };
 
   const handleCreateCollectionButtonClick = () => {
@@ -203,7 +206,7 @@ const ReceiptListPage = ({ userInfo }) => {
     );
 
   return (
-    <Layout hideTop showLogo>
+    <Layout hideTop showLogo hideUploadButton={collectionEditMode}>
       <Profile>
         <ProfileImageWrapper>
           <FileInputLabel
@@ -322,7 +325,7 @@ const ReceiptListPage = ({ userInfo }) => {
         isOpen={isBadgeModalShown}
         onCloseClick={() => setIsBadgeModalShown(false)}
       />
-      {/* {isCollectionEditSelectorOpen && ( */}
+
       <CollectionEditButtons
         isOpen={isCollectionEditSelectorOpen}
         modalBoxStyle={{
@@ -339,7 +342,8 @@ const ReceiptListPage = ({ userInfo }) => {
         </CollectionEditButton>
         <CollectionEditButton>삭제</CollectionEditButton>
       </CollectionEditButtons>
-      {/* )} */}
+
+      {/* <EditModeButtons /> */}
     </Layout>
   );
 };
