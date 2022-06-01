@@ -11,26 +11,23 @@ const CollectionList = ({
 }) => {
   return (
     <Container isOpen={isOpen}>
-      {collections.map((collection, index) => (
-        <CollectionSelector
-          key={`category_${index}`}
-          isSelected={selectedCollectionId === collection.id}
+      <ListContainer>
+        {collections.map((collection, index) => (
+          <CollectionSelector
+            key={`category_${index}`}
+            isSelected={selectedCollectionId === collection.id}
+            isCollectionListOpen={isOpen}
+            onClick={() => handleSelectedCollectionChange(collection.id)}
+            collection={collection}
+          />
+        ))}
+        <CreateCollectionButton
           isCollectionListOpen={isOpen}
-          onClick={() => handleSelectedCollectionChange(collection.id)}
-          collection={collection}
-        />
-      ))}
-      <CreateCollectionButton
-        isCollectionListOpen={isOpen}
-        onClick={handleCreateCollectionButtonClick}
-      >
-        +
-      </CreateCollectionButton>
-      <div
-        style={{
-          flex: 1,
-        }}
-      ></div>
+          onClick={handleCreateCollectionButtonClick}
+        >
+          +
+        </CreateCollectionButton>
+      </ListContainer>
       <OrderSelect>
         <select>
           <option value='구매일자순'>구매일자순</option>
@@ -48,9 +45,9 @@ export default CollectionList;
 const Container = styled.div`
   width: 100%;
   display: flex;
-  gap: 8px;
-  overflow-x: scroll;
+  overflow-y: clip;
   transition: 0.4s all;
+  gap: 8px;
 
   ${(props) =>
     props.isOpen
@@ -62,6 +59,15 @@ const Container = styled.div`
           height: 0;
         `}
 `;
+
+const ListContainer = styled.div`
+  display: flex;
+  flex: 1;
+  gap: 8px;
+  overflow-x: scroll;
+
+  height: 48px;
+`
 
 const CreateCollectionButton = styled(CollectionSelector)``;
 
