@@ -9,12 +9,11 @@ const CollectionList = ({
   handleCreateCollectionButtonClick,
   handleSelectedCollectionChange,
 }) => {
-  console.log(collections);
-
   return (
     <Container isOpen={isOpen}>
-      {collections.map((collection) => (
+      {collections.map((collection, index) => (
         <CollectionSelector
+          key={`category_${index}`}
           isSelected={selectedCollectionId === collection.id}
           isCollectionListOpen={isOpen}
           onClick={() => handleSelectedCollectionChange(collection.id)}
@@ -44,6 +43,7 @@ const Container = styled.div`
     props.isOpen
       ? css`
           height: 48px;
+          padding-bottom: 48px;
         `
       : css`
           height: 0;
