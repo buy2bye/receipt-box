@@ -17,6 +17,8 @@ import BadgeModal from './modal/BadgeModal';
 import { css } from '@emotion/react';
 import SelectBox from './common/SelectBox';
 import CollectionList from './receipt/collection/CollectionList';
+import Modal from './modal/Modal';
+import Button from 'components/button/Button';
 
 const ReceiptListPage = ({ userInfo }) => {
   const router = useRouter();
@@ -252,12 +254,22 @@ const ReceiptListPage = ({ userInfo }) => {
         isOpen={isBadgeModalShown}
         onCloseClick={() => setIsBadgeModalShown(false)}
       />
-      {isCollectionEditSelectorOpen && (
-        <CollectionEditButtons>
-          <CollectionEditButton>이름 변경</CollectionEditButton>
-          <CollectionEditButton>삭제</CollectionEditButton>
-        </CollectionEditButtons>
-      )}
+      {/* {isCollectionEditSelectorOpen && ( */}
+      <CollectionEditButtons
+        isOpen={isCollectionEditSelectorOpen}
+        modalBoxStyle={{
+          maxWidth: '400px',
+          minWidth: '256px',
+          minHeight: '140px',
+          padding: '16px',
+        }}
+        isPortal
+        onCloseClick={() => setIsCollectionEditSelectorOpen(false)}
+      >
+        <CollectionEditButton>이름 변경</CollectionEditButton>
+        <CollectionEditButton>삭제</CollectionEditButton>
+      </CollectionEditButtons>
+      {/* )} */}
     </Layout>
   );
 };
@@ -412,18 +424,14 @@ const NicknameWrapper = styled.div`
 
 const CreateCollectionPopup = styled(BottomTextInputPopup)``;
 
-const CollectionEditButtons = styled.div`
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  height: 200px;
-
+const CollectionEditButtons = styled(Modal)`
   display: flex;
   flex-direction: column;
   background: white;
   z-index: 1000;
+  gap: 8px;
 `;
 
-const CollectionEditButton = styled.button`
-  /* z-index: 1001; */
+const CollectionEditButton = styled(Button)`
+  flex: 1;
 `;

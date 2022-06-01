@@ -1,4 +1,6 @@
+import { css } from '@emotion/react';
 import styled from '@emotion/styled';
+import { useRef } from 'react';
 
 const CollectionSelector = ({
   isSelected,
@@ -7,8 +9,19 @@ const CollectionSelector = ({
   collection,
   children,
 }) => {
+  const selectorRef = useRef();
+
+  const handleClick = () => {
+    onClick(collection.id);
+  };
+
   return (
-    <Container isCollectionListOpen={isCollectionListOpen} onClick={onClick}>
+    <Container
+      isCollectionListOpen={isCollectionListOpen}
+      onClick={handleClick}
+      ref={selectorRef}
+      isSelected={isSelected}
+    >
       {collection?.name}
       {isSelected && <img src='/icons/edit.png' alt='edit' />}
       {children}
@@ -38,6 +51,7 @@ const Container = styled.button`
   ${(props) =>
     props.isSelected &&
     css`
-      background: var(--grey200);
+      background: var(--grey100);
+      font-weight: 500;
     `}
 `;

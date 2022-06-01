@@ -9,6 +9,10 @@ const CollectionList = ({
   handleCreateCollectionButtonClick,
   handleSelectedCollectionChange,
 }) => {
+  const handleSelectorClick = (collectionId) => {
+    handleSelectedCollectionChange(collectionId);
+  };
+
   return (
     <Container isOpen={isOpen}>
       {collections.map((collection, index) => (
@@ -16,7 +20,7 @@ const CollectionList = ({
           key={`category_${index}`}
           isSelected={selectedCollectionId === collection.id}
           isCollectionListOpen={isOpen}
-          onClick={() => handleSelectedCollectionChange(collection.id)}
+          onClick={handleSelectorClick}
           collection={collection}
         />
       ))}
@@ -63,7 +67,23 @@ const Container = styled.div`
         `}
 `;
 
-const CreateCollectionButton = styled(CollectionSelector)``;
+const CreateCollectionButton = styled.button`
+  white-space: nowrap;
+  padding: 4px 16px;
+  height: 32px;
+  border: 1px solid var(--grey400);
+  border-radius: 12px;
+  opacity: ${(props) => (props.isCollectionListOpen ? 1 : 0)};
+  transition: 0.4s all;
+  display: flex;
+  align-items: center;
+  position: relative;
+
+  img {
+    width: 16px;
+    padding-left: 4px;
+  }
+`;
 
 const OrderSelect = styled.div`
   select {
