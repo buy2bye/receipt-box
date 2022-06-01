@@ -1,11 +1,9 @@
 import styled from '@emotion/styled';
 import Title from 'components/page/Title';
-import Subtitle from 'components/page/Subtitle';
 import Layout from 'components/layout/Layout';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import receiptApi from 'api/receipt';
-import TextModal from './modal/TextModal';
 import FileInputLabel from './common/FileInputLabel';
 import userApi from 'api/user';
 import BottomTextInputPopup from './popup/BottomTextInputPopup';
@@ -14,7 +12,6 @@ import ReceiptsGridView from './receipt/ReceiptsGridView';
 import SummaryPopup from './receipt/SummaryPopup';
 import HeaderTextModal from './modal/HeaderTextModal';
 import BadgeModal from './modal/BadgeModal';
-import { flexbox } from '@mui/system';
 
 const ReceiptListPage = ({ userInfo }) => {
   const router = useRouter();
@@ -191,15 +188,11 @@ const ReceiptListPage = ({ userInfo }) => {
         <div style={{ display: 'flex', flexDirection: 'column', textAlign: 'center'}}>
           <b>컬렉션 전체 {priceSumList.reduce((acc, cur) => acc + cur.priceSum, 0).toLocaleString()}원</b>
           <br />
-          {priceSumList.map((item) => {
-          return [
-            item.name,
-            ' ',
-            item.priceSum,
-            '원',
-            <br />
-          ]
-        })}
+          {priceSumList.concat(priceSumList).map((item) => {
+            return (
+              <>{item.name} {item.priceSum}원<br/></>
+            )
+          })}
         </div>
       </HeaderTextModal>
       <BadgeModal
