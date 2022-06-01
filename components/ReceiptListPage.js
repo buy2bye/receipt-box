@@ -15,6 +15,8 @@ import SummaryPopup from './receipt/SummaryPopup';
 import HeaderTextModal from './modal/HeaderTextModal';
 import BadgeModal from './modal/BadgeModal';
 import { css } from '@emotion/react';
+import SelectBox from './common/SelectBox';
+import CollectionList from './receipt/collection/CollectionList';
 
 const ReceiptListPage = ({ userInfo }) => {
   const router = useRouter();
@@ -29,9 +31,13 @@ const ReceiptListPage = ({ userInfo }) => {
   const [isCollectionListOpen, setIsCollectionListOpen] = useState(false);
   const [selectedCollectionId, setSelectedCollectionId] = useState();
   const { updateProfileImage } = userApi();
-  const [categories, setCategories] = useState();
+  const [collections, setCollections] = useState();
   const [isCreateCollectionPopupOpen, setIsCreateCollectionPopupOpen] =
     useState(false);
+  const [isCollectionEditSelectorOpen, setIsCollectionEditSelectorOpen] =
+    useState(false);
+  const [collectionEditSelectorOption, setCollectionEditSelectorOption] =
+    useState();
 
   const { getReceipts, getCategories, createCategories } = receiptApi();
 
@@ -60,7 +66,7 @@ const ReceiptListPage = ({ userInfo }) => {
 
   useEffect(() => {
     getCategories().then((data) => {
-      setCategories(data.data.categoryList);
+      setCollections(data.data.categoryList);
       setSelectedCollectionId(data.data.categoryList[0].id);
     });
   }, []);
@@ -106,7 +112,7 @@ const ReceiptListPage = ({ userInfo }) => {
     setIsCollectionListOpen(true);
   };
 
-  const openCreateCollectionPopup = () => {
+  const handleCreateCollectionButtonClick = () => {
     setIsCreateCollectionPopupOpen(true);
   };
 
@@ -123,7 +129,7 @@ const ReceiptListPage = ({ userInfo }) => {
 
   const handleSelectedCollectionChange = (collectionId) => {
     if (selectedCollectionId === collectionId) {
-      alert('같은거 클릭함');
+      setIsCollectionEditSelectorOpen(true);
       return;
     }
 
@@ -131,7 +137,7 @@ const ReceiptListPage = ({ userInfo }) => {
     setSelectedCollectionId(collectionId);
   };
 
-  if (!receiptList || !categories)
+  if (!receiptList || !collections)
     return (
       <Layout hideTop showLogo>
         loading...
@@ -195,27 +201,13 @@ const ReceiptListPage = ({ userInfo }) => {
         </ListTypes>
       </HeaderContainer>
 
-      {/* collection 리스트 */}
-      <CollectionList isOpen={isCollectionListOpen}>
-        {categories.map((collection) => (
-          <CollectionSelector
-            isSelected={selectedCollectionId === collection.id}
-            isOpen={isCollectionListOpen}
-            onClick={() => handleSelectedCollectionChange(collection.id)}
-          >
-            {collection.name}
-            {selectedCollectionId === collection.id && (
-              <img src='/icons/edit.png' alt='edit' />
-            )}
-          </CollectionSelector>
-        ))}
-        <AddNewCollectionButton
-          isOpen={isCollectionListOpen}
-          onClick={openCreateCollectionPopup}
-        >
-          +
-        </AddNewCollectionButton>
-      </CollectionList>
+      <CollectionList
+        isOpen={isCollectionListOpen}
+        collections={collections}
+        selectedCollectionId={selectedCollectionId}
+        handleCreateCollectionButtonClick={handleCreateCollectionButtonClick}
+        handleSelectedCollectionChange={handleSelectedCollectionChange}
+      />
 
       <div style={{ width: '100%', position: 'relative' }}>
         {selectedListType === 'grid' ? (
@@ -260,6 +252,12 @@ const ReceiptListPage = ({ userInfo }) => {
         isOpen={isBadgeModalShown}
         onCloseClick={() => setIsBadgeModalShown(false)}
       />
+      {isCollectionEditSelectorOpen && (
+        <CollectionEditButtons>
+          <CollectionEditButton>이름 변경</CollectionEditButton>
+          <CollectionEditButton>삭제</CollectionEditButton>
+        </CollectionEditButtons>
+      )}
     </Layout>
   );
 };
@@ -309,48 +307,6 @@ const CollectionListToggle = styled.button`
       transform: rotate(-180deg);
     `}
 `;
-
-const CollectionList = styled.div`
-  width: 100%;
-  display: flex;
-  gap: 8px;
-  overflow-x: scroll;
-  transition: 0.4s all;
-
-  ${(props) =>
-    props.isOpen
-      ? css`
-          height: 48px;
-        `
-      : css`
-          height: 0;
-        `}
-`;
-
-const CollectionSelector = styled.button`
-  white-space: nowrap;
-  padding: 4px 16px;
-  height: 32px;
-  border: 1px solid var(--grey400);
-  border-radius: 12px;
-  opacity: ${(props) => (props.isOpen ? 1 : 0)};
-  transition: 0.4s all;
-  display: flex;
-  align-items: center;
-
-  img {
-    width: 16px;
-    padding-left: 4px;
-  }
-
-  ${(props) =>
-    props.isSelected &&
-    css`
-      background: var(--grey200);
-    `}
-`;
-
-const AddNewCollectionButton = styled(CollectionSelector)``;
 
 const Profile = styled.div`
   width: 100%;
@@ -455,3 +411,19 @@ const NicknameWrapper = styled.div`
 `;
 
 const CreateCollectionPopup = styled(BottomTextInputPopup)``;
+
+const CollectionEditButtons = styled.div`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  height: 200px;
+
+  display: flex;
+  flex-direction: column;
+  background: white;
+  z-index: 1000;
+`;
+
+const CollectionEditButton = styled.button`
+  /* z-index: 1001; */
+`;
