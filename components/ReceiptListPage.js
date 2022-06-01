@@ -38,6 +38,7 @@ const ReceiptListPage = ({ userInfo }) => {
     useState(false);
   const [collectionEditSelectorOption, setCollectionEditSelectorOption] =
     useState();
+  const [orderType, setOrderType] = useState('구매일자순');
 
   const { getReceipts, getCategories, createCategories } = receiptApi();
 
@@ -69,15 +70,40 @@ const ReceiptListPage = ({ userInfo }) => {
       setCollections(data.data.categoryList);
       setSelectedCollectionId(data.data.categoryList[0].id);
     });
+    setOrderType(window.localStorage.getItem('orderType') || '구매일자순');
   }, []);
 
+  const orderMap = {
+    구매일자순: {
+      orderCol: 'product_date',
+      orderDesc: true
+    },
+    상품명순: {
+      orderCol: 'product_name',
+      orderDesc: false
+    },
+    구매가순: {
+      orderCol: 'product_price',
+      orderDesc: true
+    },
+    등록순: {
+      orderCol: 'created_time',
+      orderDesc: true
+    },
+    별명순: {
+      orderCol: 'nickname',
+      orderDesc: false
+    }
+  }
+
   useEffect(() => {
-    getReceipts(1, 0, selectedCollectionId).then((data) => {
+    const orderParams = orderMap[orderType]
+    getReceipts(1, 0, selectedCollectionId, orderParams.orderCol, orderParams.orderDesc).then((data) => {
       setReceiptList(data.data.receiptList);
       setTotalCount(data.data.totalCount);
       // setTotalPrice(data.data.productPriceSum);
     });
-  }, [selectedCollectionId]);
+  }, [selectedCollectionId, orderType]);
 
   const handleProfileImageUpload = (e) => {
     const reader = new FileReader();
@@ -135,6 +161,11 @@ const ReceiptListPage = ({ userInfo }) => {
 
     setSummaryItem(null);
     setSelectedCollectionId(collectionId);
+  };
+
+  const handleOrderChange = (e) => {
+    window.localStorage.setItem('orderType', e.target.value);
+    setOrderType(e.target.value)
   };
 
   if (!receiptList || !collections)
@@ -207,6 +238,8 @@ const ReceiptListPage = ({ userInfo }) => {
         selectedCollectionId={selectedCollectionId}
         handleCreateCollectionButtonClick={handleCreateCollectionButtonClick}
         handleSelectedCollectionChange={handleSelectedCollectionChange}
+        handleOrderChange={handleOrderChange}
+        orderValue={orderType}
       />
 
       <div style={{ width: '100%', position: 'relative' }}>

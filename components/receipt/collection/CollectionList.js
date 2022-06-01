@@ -8,6 +8,8 @@ const CollectionList = ({
   selectedCollectionId,
   handleCreateCollectionButtonClick,
   handleSelectedCollectionChange,
+  handleOrderChange,
+  orderValue
 }) => {
   return (
     <Container isOpen={isOpen}>
@@ -29,11 +31,19 @@ const CollectionList = ({
         </CreateCollectionButton>
       </ListContainer>
       <OrderSelect>
-        <select>
-          <option value='구매일자순'>구매일자순</option>
-          <option value='상품명순'>상품명순</option>
-          <option value='구매가순'>구매가순</option>
-          <option value='등록순'>등록순</option>
+        <select
+          value={orderValue}
+          onChange={handleOrderChange}
+        >
+          {[
+            '구매일자순',
+            '상품명순',
+            '구매가순',
+            '등록순',
+            '별명순'
+          ].map((order, idx) => {
+            return <option key={`order__${idx}`} value={order} defaultValue={orderValue === order}>{order}</option>  
+          })}
         </select>
       </OrderSelect>
     </Container>
