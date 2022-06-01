@@ -110,6 +110,12 @@ const ReceiptListPage = ({ userInfo }) => {
   };
 
   useEffect(() => {
+    getReceipts(1, 0).then((data) => {
+      setTotalCount(data.data.totalCount);
+    });
+  }, []);
+
+  useEffect(() => {
     const orderParams = orderMap[orderType];
     getReceipts(
       1,
@@ -119,7 +125,6 @@ const ReceiptListPage = ({ userInfo }) => {
       orderParams.orderDesc
     ).then((data) => {
       setReceiptList(data.data.receiptList);
-      setTotalCount(data.data.totalCount);
       // setTotalPrice(data.data.productPriceSum);
     });
   }, [selectedCollectionId, orderType]);
