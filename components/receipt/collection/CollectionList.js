@@ -9,7 +9,7 @@ const CollectionList = ({
   handleCreateCollectionButtonClick,
   handleSelectedCollectionChange,
   handleOrderChange,
-  orderValue
+  orderValue,
 }) => {
   const handleSelectorClick = (collectionId) => {
     handleSelectedCollectionChange(collectionId);
@@ -35,19 +35,20 @@ const CollectionList = ({
         </CreateCollectionButton>
       </ListContainer>
       <OrderSelect>
-        <select
-          value={orderValue}
-          onChange={handleOrderChange}
-        >
-          {[
-            '구매일자순',
-            '상품명순',
-            '구매가순',
-            '등록순',
-            '별명순'
-          ].map((order, idx) => {
-            return <option key={`order__${idx}`} value={order} defaultValue={orderValue === order}>{order}</option>  
-          })}
+        <select value={orderValue} onChange={handleOrderChange}>
+          {['구매일자순', '상품명순', '구매가순', '등록순', '별명순'].map(
+            (order, idx) => {
+              return (
+                <option
+                  key={`order__${idx}`}
+                  value={order}
+                  defaultValue={orderValue === order}
+                >
+                  {order}
+                </option>
+              );
+            }
+          )}
         </select>
       </OrderSelect>
     </Container>
@@ -81,7 +82,7 @@ const ListContainer = styled.div`
   overflow-x: scroll;
 
   height: 48px;
-`
+`;
 
 const CreateCollectionButton = styled.button`
   white-space: nowrap;
@@ -103,14 +104,14 @@ const CreateCollectionButton = styled.button`
 
 const OrderSelect = styled.div`
   select {
-    width: 110px;
+    width: 96px;
     height: 32px;
     font-size: 14px;
-    padding: 4px 16px;
+    padding: 2px 0 2px 8px;
     border-radius: 12px;
-    border: 1px solid var(--grey400);
+    border: none;
+    color: var(--grey900);
     appearance: none;
-    background-color: white;
     background-image: url('/icons/down-arrow.png');
     background-position: 96% 50%;
     background-repeat: no-repeat;

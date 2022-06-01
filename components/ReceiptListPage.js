@@ -381,7 +381,7 @@ const ReceiptListPage = ({ userInfo }) => {
           {priceSumList.map((item) => {
             return (
               <>
-                {item.name} {item.priceSum}원<br />
+                {item.name} {item.priceSum.toLocaleString()}원<br />
               </>
             );
           })}
