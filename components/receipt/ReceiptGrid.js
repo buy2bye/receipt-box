@@ -31,7 +31,9 @@ const ReceiptGrid = ({
   useEffect(() => {
     if (isSelectedOnEditMode) {
       setSelectedItemsOnEditMode([...selectedItemsOnEditMode, item.id]);
-    } else {
+      return;
+    }
+    if (isEditMode) {
       setSelectedItemsOnEditMode(
         selectedItemsOnEditMode.filter((itemId) => itemId !== item.id)
       );
