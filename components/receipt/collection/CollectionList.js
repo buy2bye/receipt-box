@@ -34,7 +34,9 @@ const CollectionList = ({
           +
         </CreateCollectionButton>
       </ListContainer>
-      <OrderSelect>
+      <OrderSelect
+        isCollectionListOpen={isOpen}
+      >
         <select value={orderValue} onChange={handleOrderChange}>
           {['구매일자순', '상품명순', '구매가순', '등록순', '별명순'].map(
             (order, idx) => {
@@ -103,6 +105,9 @@ const CreateCollectionButton = styled.button`
 `;
 
 const OrderSelect = styled.div`
+  opacity: ${(props) => (props.isCollectionListOpen ? 1 : 0)};
+  transition: 0.4s all;
+
   select {
     width: 96px;
     height: 32px;
