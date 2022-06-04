@@ -90,7 +90,9 @@ const ReceiptListPage = ({ userInfo }) => {
       );
     });
     setOrderType(window.localStorage.getItem('orderType') || '구매일자순');
-    setIsCollectionListOpen(window.localStorage.getItem('isCollectionListOpen') === 'true');
+    setIsCollectionListOpen(
+      window.localStorage.getItem('isCollectionListOpen') === 'true'
+    );
   }, []);
 
   const orderMap = {
@@ -123,14 +125,11 @@ const ReceiptListPage = ({ userInfo }) => {
 
     getReceiptPriceSum().then((data) => {
       setPriceSumDict(
-        data.data.priceList.reduce(
-          (acc, cur) => {
-            acc[cur.id] = cur
-            return acc
-          },
-          {}
-        )
-      )
+        data.data.priceList.reduce((acc, cur) => {
+          acc[cur.id] = cur;
+          return acc;
+        }, {})
+      );
     });
   }, []);
 
@@ -148,9 +147,9 @@ const ReceiptListPage = ({ userInfo }) => {
   }, [selectedCollectionId, orderType]);
 
   const handleCollectionListOpen = (isOpen) => {
-    setIsCollectionListOpen(isOpen)
+    setIsCollectionListOpen(isOpen);
     window.localStorage.setItem('isCollectionListOpen', isOpen);
-  }
+  };
 
   const handleProfileImageUpload = (e) => {
     const reader = new FileReader();
@@ -378,19 +377,17 @@ const ReceiptListPage = ({ userInfo }) => {
       <PricePopup
         isOpen={isTotalPriceModalShown}
         onCloseClick={() => setIsTotalPriceModalShown(false)}
-        totalPrice={
-          Object.values(priceSumDict)
-            .reduce((acc, cur) => acc + cur.priceSum, 0)
-        }
-        categoryPriceList={
-          collections.map((collection) => {
-            const price = priceSumDict[collection.id]?.priceSum || 0
-            return {
-              name: collection.name,
-              price
-            }
-          })
-        }
+        totalPrice={Object.values(priceSumDict).reduce(
+          (acc, cur) => acc + cur.priceSum,
+          0
+        )}
+        categoryPriceList={collections.map((collection) => {
+          const price = priceSumDict[collection.id]?.priceSum || 0;
+          return {
+            name: collection.name,
+            price,
+          };
+        })}
       />
       <BadgeModal
         isOpen={isBadgeModalShown}
@@ -558,8 +555,14 @@ const HeaderButton = styled.button`
 const TotalPriceButton = styled(HeaderButton)`
   border: 1px solid black;
   border-radius: 50%;
+  width: 18px;
+  height: 18px;
+  font-size: 12px;
 `;
 const EditButton = styled(HeaderButton)`
+  width: 18px;
+  height: 18px;
+
   img {
     width: 100%;
     height: 100%;

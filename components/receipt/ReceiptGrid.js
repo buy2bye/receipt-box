@@ -94,6 +94,19 @@ const Thumbnail = styled.button`
     css`
       border: ${isSelectedOnEditMode
         ? '3px solid var(--primary)'
-        : '3px solid var(--grey100)'};
+        : '3px solid var(--grey200)'};
+
+      :before {
+        content: '';
+        width: 10px;
+        height: 10px;
+        background: ${isSelectedOnEditMode ? 'var(--primary)' : 'white'};
+        border: 2px solid
+          ${isSelectedOnEditMode ? 'var(--primary)' : 'var(--grey200)'};
+        position: absolute;
+        top: 8%;
+        left: 8%;
+        border-radius: 50%;
+      }
     `}
 `;

@@ -88,6 +88,7 @@ const Container = styled.button`
     align-items: center;
     border-radius: 8px;
     border: 1px solid var(--grey100);
+    position: relative;
 
     img {
       width: 100%;
@@ -135,6 +136,19 @@ const Container = styled.button`
         border: ${isSelectedOnEditMode
           ? '3px solid var(--primary)'
           : '3px solid var(--grey100)'};
+
+        :before {
+          content: '';
+          width: 10px;
+          height: 10px;
+          background: ${isSelectedOnEditMode ? 'var(--primary)' : 'white'};
+          border: 2px solid
+            ${isSelectedOnEditMode ? 'var(--primary)' : 'var(--grey200)'};
+          position: absolute;
+          top: 8%;
+          left: 8%;
+          border-radius: 50%;
+        }
       }
     `}
 `;
