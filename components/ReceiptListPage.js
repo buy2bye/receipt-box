@@ -90,6 +90,7 @@ const ReceiptListPage = ({ userInfo }) => {
       );
     });
     setOrderType(window.localStorage.getItem('orderType') || '구매일자순');
+    setIsCollectionListOpen(window.localStorage.getItem('isCollectionListOpen') === 'true');
   }, []);
 
   const orderMap = {
@@ -138,6 +139,11 @@ const ReceiptListPage = ({ userInfo }) => {
       // setTotalPrice(data.data.productPriceSum);
     });
   }, [selectedCollectionId, orderType]);
+
+  const handleCollectionListOpen = (isOpen) => {
+    setIsCollectionListOpen(isOpen)
+    window.localStorage.setItem('isCollectionListOpen', isOpen);
+  }
 
   const handleProfileImageUpload = (e) => {
     const reader = new FileReader();
@@ -270,7 +276,7 @@ const ReceiptListPage = ({ userInfo }) => {
         <CollectionListToggleWrapper>
           <CollectionListToggle
             isOpen={isCollectionListOpen}
-            onClick={() => setIsCollectionListOpen(!isCollectionListOpen)}
+            onClick={() => handleCollectionListOpen(!isCollectionListOpen)}
           >
             <img
               src='/icons/down-arrow.png'
