@@ -462,6 +462,7 @@ const HeaderContainer = styled.div`
 `;
 
 const CollectionListToggleWrapper = styled.div`
+  height: 100%;
   flex: 1;
 `;
 
