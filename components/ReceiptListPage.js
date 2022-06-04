@@ -195,11 +195,11 @@ const ReceiptListPage = ({ userInfo }) => {
   };
 
   const handleSelectedCollectionChange = (collectionId) => {
-    if (!collectionEditMode) {
-      // Edit Mode일때만 됨.
-      return;
-    }
     if (selectedCollectionId === collectionId) {
+      if (!collectionEditMode) {
+        // Edit Mode일때만 됨.
+        return;
+      }
       setIsCollectionEditSelectorOpen(true);
       return;
     }
