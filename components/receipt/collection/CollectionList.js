@@ -36,9 +36,7 @@ const CollectionList = ({
           +
         </CreateCollectionButton>
       </ListContainer>
-      <OrderSelect
-        isCollectionListOpen={isOpen}
-      >
+      <OrderSelect isCollectionListOpen={isOpen}>
         <select value={orderValue} onChange={handleOrderChange}>
           {['구매일자순', '상품명순', '구매가순', '등록순', '별명순'].map(
             (order, idx) => {
@@ -82,9 +80,8 @@ const Container = styled.div`
 const ListContainer = styled.div`
   display: flex;
   flex: 1;
-  gap: 8px;
+  gap: 6px;
   overflow-x: scroll;
-
   height: 48px;
 `;
 
@@ -122,7 +119,7 @@ const OrderSelect = styled.div`
     background-image: url('/icons/down-arrow.png');
     background-position: 96% 50%;
     background-repeat: no-repeat;
-    background-size: 14px;
+    background-size: 12px;
     opacity: 0.7;
   }
 `;
