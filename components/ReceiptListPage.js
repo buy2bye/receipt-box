@@ -195,6 +195,10 @@ const ReceiptListPage = ({ userInfo }) => {
   };
 
   const handleSelectedCollectionChange = (collectionId) => {
+    if (!collectionEditMode) {
+      // Edit Mode일때만 됨.
+      return;
+    }
     if (selectedCollectionId === collectionId) {
       setIsCollectionEditSelectorOpen(true);
       return;
@@ -308,6 +312,7 @@ const ReceiptListPage = ({ userInfo }) => {
 
       <CollectionList
         isOpen={isCollectionListOpen}
+        collectionEditMode={collectionEditMode}
         collections={collections}
         selectedCollectionId={selectedCollectionId}
         handleCreateCollectionButtonClick={handleCreateCollectionButtonClick}

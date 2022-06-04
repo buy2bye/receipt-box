@@ -4,6 +4,7 @@ import CollectionSelector from './CollectionSelector';
 
 const CollectionList = ({
   isOpen,
+  collectionEditMode,
   collections,
   selectedCollectionId,
   handleCreateCollectionButtonClick,
@@ -23,6 +24,7 @@ const CollectionList = ({
             key={`category_${index}`}
             isSelected={selectedCollectionId === collection.id}
             isCollectionListOpen={isOpen}
+            collectionEditMode={collectionEditMode}
             onClick={handleSelectorClick}
             collection={collection}
           />

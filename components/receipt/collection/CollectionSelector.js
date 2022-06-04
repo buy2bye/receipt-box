@@ -5,6 +5,7 @@ import { useRef } from 'react';
 const CollectionSelector = ({
   isSelected,
   isCollectionListOpen,
+  collectionEditMode,
   onClick,
   collection,
   children,
@@ -23,7 +24,7 @@ const CollectionSelector = ({
       isSelected={isSelected}
     >
       {collection?.name}
-      {isSelected && <img src='/icons/edit.png' alt='edit' />}
+      {collectionEditMode && isSelected && <img src='/icons/edit.png' alt='edit' />}
       {children}
     </Container>
   );
