@@ -431,11 +431,11 @@ const ReceiptDetail = ({
             )}
           </span>
           <span>
-            <pre>
+            <pre style={{margin: 0}}>
               {newReceiptInfo.memo ||
                 (isEdit ? '터치하여 입력하세요' : '정보없음')}
+                {isEdit && <img src='/icons/edit.png' alt='edit-icon' />}
             </pre>
-            {isEdit && <img src='/icons/edit.png' alt='edit-icon' />}
           </span>
         </li>
         <AddReceiptList>
@@ -752,7 +752,7 @@ const Details = styled.ul`
       border: 1px solid var(--grey300);
     }
 
-    span > img {
+    span > img, span > pre > img {
       width: 14px;
       height: 14px;
       border: none;
