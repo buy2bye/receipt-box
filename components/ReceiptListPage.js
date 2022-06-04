@@ -10,7 +10,7 @@ import BottomTextInputPopup from './popup/BottomTextInputPopup';
 import ReceiptsListView from './receipt/ReceiptsListView';
 import ReceiptsGridView from './receipt/ReceiptsGridView';
 import SummaryPopup from './receipt/SummaryPopup';
-import HeaderTextModal from './modal/HeaderTextModal';
+import PricePopup from './receipt/PricePopup';
 import BadgeModal from './modal/BadgeModal';
 import { css } from '@emotion/react';
 import SelectBox from './common/SelectBox';
@@ -24,7 +24,7 @@ const ReceiptListPage = ({ userInfo }) => {
   const router = useRouter();
   const [receiptList, setReceiptList] = useState();
   const [totalCount, setTotalCount] = useState(0);
-  const [priceSumList, setPriceSumList] = useState([]);
+  const [priceSumDict, setPriceSumDict] = useState([]);
   const [isTotalPriceModalShown, setIsTotalPriceModalShown] = useState(false);
   const [selectedListType, setSelectedListType] = useState('grid');
   const [summaryItem, setSummaryItem] = useState();
@@ -122,7 +122,15 @@ const ReceiptListPage = ({ userInfo }) => {
     });
 
     getReceiptPriceSum().then((data) => {
-      setPriceSumList(data.data.priceList);
+      setPriceSumDict(
+        data.data.priceList.reduce(
+          (acc, cur) => {
+            acc[cur.id] = cur
+            return acc
+          },
+          {}
+        )
+      )
     });
   }, []);
 
@@ -136,7 +144,6 @@ const ReceiptListPage = ({ userInfo }) => {
       orderParams.orderDesc
     ).then((data) => {
       setReceiptList(data.data.receiptList);
-      // setTotalPrice(data.data.productPriceSum);
     });
   }, [selectedCollectionId, orderType]);
 
@@ -368,36 +375,23 @@ const ReceiptListPage = ({ userInfo }) => {
         confirmText='이름 변경하기'
         value=''
       />
-
-      <HeaderTextModal
+      <PricePopup
         isOpen={isTotalPriceModalShown}
         onCloseClick={() => setIsTotalPriceModalShown(false)}
-        title='구매가 합계'
-      >
-        <div
-          style={{
-            display: 'flex',
-            flexDirection: 'column',
-            textAlign: 'center',
-          }}
-        >
-          <b>
-            컬렉션 전체{' '}
-            {priceSumList
-              .reduce((acc, cur) => acc + cur.priceSum, 0)
-              .toLocaleString()}
-            원
-          </b>
-          <br />
-          {priceSumList.map((item) => {
-            return (
-              <>
-                {item.name} {item.priceSum.toLocaleString()}원<br />
-              </>
-            );
-          })}
-        </div>
-      </HeaderTextModal>
+        totalPrice={
+          Object.values(priceSumDict)
+            .reduce((acc, cur) => acc + cur.priceSum, 0)
+        }
+        categoryPriceList={
+          collections.map((collection) => {
+            const price = priceSumDict[collection.id]?.priceSum || 0
+            return {
+              name: collection.name,
+              price
+            }
+          })
+        }
+      />
       <BadgeModal
         isOpen={isBadgeModalShown}
         onCloseClick={() => setIsBadgeModalShown(false)}
