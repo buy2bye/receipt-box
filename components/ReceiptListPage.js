@@ -182,6 +182,7 @@ const ReceiptListPage = ({ userInfo }) => {
 
   const handleEditCollectionClick = () => {
     // TODO: 컬렉션 간 이동할 수 있는 편집모드로 변경
+    handleCollectionListOpen(true);
     setCollectionEditMode(true);
   };
 
