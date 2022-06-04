@@ -79,7 +79,6 @@ const Container = styled.div`
   display: flex;
   padding: 40px 20px 20px 20px;
   gap: 8px;
-  z-index: 1000;
 
   ${({ isShown }) =>
     !isShown &&
