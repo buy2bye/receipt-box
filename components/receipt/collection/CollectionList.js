@@ -19,6 +19,14 @@ const CollectionList = ({
   return (
     <Container isOpen={isOpen}>
       <ListContainer>
+        <CollectionSelector
+          key={`category_all`}
+          isSelected={selectedCollectionId === null}
+          isCollectionListOpen={isOpen}
+          collectionEditMode={collectionEditMode}
+          onClick={handleSelectorClick}
+          collection={null}
+        />
         {collections.map((collection, index) => (
           <CollectionSelector
             key={`category_${index}`}

@@ -80,11 +80,18 @@ const ReceiptListPage = ({ userInfo }) => {
       : '/icons/badge/badge-0.png';
 
   useEffect(() => {
-    const savedId = Number(window.localStorage.getItem('selectedCollectionId'));
+    let savedId = window.localStorage.getItem('selectedCollectionId');
+    if (savedId === 'null') {
+      savedId = null;
+    } else {
+      savedId = Number(savedId)
+    }
     getCategories().then((data) => {
       setCollections(data.data.categoryList);
       const hasSaved =
+        savedId === null ||
         data.data.categoryList.filter((item) => item.id === savedId).length > 0;
+
       setSelectedCollectionId(
         hasSaved ? savedId : data.data.categoryList[0].id
       );

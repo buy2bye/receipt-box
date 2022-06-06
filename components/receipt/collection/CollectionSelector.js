@@ -13,7 +13,7 @@ const CollectionSelector = ({
   const selectorRef = useRef();
 
   const handleClick = () => {
-    onClick(collection.id);
+    onClick(collection?.id || null);
   };
 
   return (
@@ -23,8 +23,8 @@ const CollectionSelector = ({
       ref={selectorRef}
       isSelected={isSelected}
     >
-      {collection?.name}
-      {collectionEditMode && isSelected && <img src='/icons/edit.png' alt='edit' />}
+      {collection?.name || 'ALL'}
+      {collection && collectionEditMode && isSelected && <img src='/icons/edit.png' alt='edit' />}
       {children}
     </Container>
   );
