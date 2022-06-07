@@ -128,6 +128,7 @@ const OrderSelect = styled.div`
     background-position: 96% 50%;
     background-repeat: no-repeat;
     background-size: 12px;
+    background-color: #FFFFFF00;
     opacity: 0.7;
   }
 `;
