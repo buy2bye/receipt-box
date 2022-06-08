@@ -116,10 +116,10 @@ const OrderSelect = styled.div`
   transition: 0.4s all;
 
   select {
-    width: 96px;
+    width: 84px;
     height: 32px;
     font-size: 14px;
-    padding: 2px 0 2px 8px;
+    padding: 2px 0 2px 2px;
     border-radius: 12px;
     border: none;
     color: var(--grey900);

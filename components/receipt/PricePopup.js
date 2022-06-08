@@ -50,9 +50,13 @@ const Container = styled.div`
 
 const Row = styled.div`
   display: flex;
+  line-height: 150%;
+  font-size: 14px;
 
   ${props => props.isTitle && `
     font-weight: bold;
+    line-height: 200%;
+    font-size: 16px;
   `}
 `
 

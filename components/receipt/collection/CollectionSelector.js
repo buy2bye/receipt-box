@@ -52,7 +52,7 @@ const Container = styled.button`
   ${(props) =>
     props.isSelected &&
     css`
-      background: var(--grey100);
+      background: var(--primary);
       font-weight: 500;
     `}
 `;

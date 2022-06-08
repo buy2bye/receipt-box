@@ -303,7 +303,7 @@ const ReceiptListPage = ({ userInfo }) => {
           </CollectionListToggle>
         </CollectionListToggleWrapper>
         <TotalPriceButton onClick={handleTotalPriceButtonClick}>
-          ₩
+          <img src='/icons/won.png' alt='won' />
         </TotalPriceButton>
         <EditButton onClick={handleEditCollectionClick}>
           <img src='/icons/edit.png' alt='edit' />
@@ -561,11 +561,13 @@ const HeaderButton = styled.button`
 `;
 
 const TotalPriceButton = styled(HeaderButton)`
-  border: 1px solid black;
-  border-radius: 50%;
   width: 18px;
   height: 18px;
-  font-size: 12px;
+
+  img {
+    width: 100%;
+    height: 100%;
+  }
 `;
 const EditButton = styled(HeaderButton)`
   width: 18px;
