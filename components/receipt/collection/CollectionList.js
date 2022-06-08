@@ -10,6 +10,7 @@ const CollectionList = ({
   handleCreateCollectionButtonClick,
   handleSelectedCollectionChange,
   handleOrderChange,
+  orderList,
   orderValue,
 }) => {
   const handleSelectorClick = (collectionId) => {
@@ -46,7 +47,7 @@ const CollectionList = ({
       </ListContainer>
       <OrderSelect isCollectionListOpen={isOpen}>
         <select value={orderValue} onChange={handleOrderChange}>
-          {['구매일자순', '상품명순', '구매가순', '등록순', '별명순'].map(
+          {orderList.map(
             (order, idx) => {
               return (
                 <option

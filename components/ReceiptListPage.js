@@ -20,6 +20,29 @@ import Button from 'components/button/Button';
 import EditModeButtons from './receipt/collection/EditModeButtons';
 import DeleteReasons from 'components/receipt/DeleteReasons';
 
+const ORDER_MAP = {
+  구매일순: {
+    orderCol: 'product_date',
+    orderDesc: true,
+  },
+  상품명순: {
+    orderCol: 'product_name',
+    orderDesc: false,
+  },
+  구매가순: {
+    orderCol: 'product_price',
+    orderDesc: true,
+  },
+  등록순: {
+    orderCol: 'created_time',
+    orderDesc: true,
+  },
+  별명순: {
+    orderCol: 'nickname',
+    orderDesc: false,
+  },
+};
+
 const ReceiptListPage = ({ userInfo }) => {
   const router = useRouter();
   const [receiptList, setReceiptList] = useState();
@@ -43,7 +66,7 @@ const ReceiptListPage = ({ userInfo }) => {
   const [collectionEditSelectorOption, setCollectionEditSelectorOption] =
     useState();
   const [isDeletePopupShown, setIsDeletePopupShown] = useState(false);
-  const [orderType, setOrderType] = useState('구매일자순');
+  const [orderType, setOrderType] = useState(Object.keys(ORDER_MAP)[0]);
   const [collectionEditMode, setCollectionEditMode] = useState(false);
   const [selectedItemsOnEditMode, setSelectedItemsOnEditMode] = useState([]);
 
@@ -96,34 +119,12 @@ const ReceiptListPage = ({ userInfo }) => {
         hasSaved ? savedId : data.data.categoryList[0].id
       );
     });
-    setOrderType(window.localStorage.getItem('orderType') || '구매일자순');
+    const savedOrderType = window.localStorage.getItem('orderType')
+    setOrderType(ORDER_MAP[savedOrderType] ? savedOrderType : Object.keys(ORDER_MAP)[0]);
     setIsCollectionListOpen(
       window.localStorage.getItem('isCollectionListOpen') === 'true'
     );
   }, []);
-
-  const orderMap = {
-    구매일자순: {
-      orderCol: 'product_date',
-      orderDesc: true,
-    },
-    상품명순: {
-      orderCol: 'product_name',
-      orderDesc: false,
-    },
-    구매가순: {
-      orderCol: 'product_price',
-      orderDesc: true,
-    },
-    등록순: {
-      orderCol: 'created_time',
-      orderDesc: true,
-    },
-    별명순: {
-      orderCol: 'nickname',
-      orderDesc: false,
-    },
-  };
 
   useEffect(() => {
     getReceipts(1, 0).then((data) => {
@@ -141,7 +142,7 @@ const ReceiptListPage = ({ userInfo }) => {
   }, []);
 
   useEffect(() => {
-    const orderParams = orderMap[orderType];
+    const orderParams = ORDER_MAP[orderType];
     getReceipts(
       1,
       0,
@@ -332,6 +333,7 @@ const ReceiptListPage = ({ userInfo }) => {
         handleCreateCollectionButtonClick={handleCreateCollectionButtonClick}
         handleSelectedCollectionChange={handleSelectedCollectionChange}
         handleOrderChange={handleOrderChange}
+        orderList={Object.keys(ORDER_MAP)}
         orderValue={orderType}
       />
 
