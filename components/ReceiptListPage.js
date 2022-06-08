@@ -13,7 +13,6 @@ import SummaryPopup from './receipt/SummaryPopup';
 import PricePopup from './receipt/PricePopup';
 import BadgeModal from './modal/BadgeModal';
 import { css } from '@emotion/react';
-import SelectBox from './common/SelectBox';
 import CollectionList from './receipt/collection/CollectionList';
 import Modal from './modal/Modal';
 import Button from 'components/button/Button';
