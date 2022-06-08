@@ -88,7 +88,7 @@ const Container = styled.div`
 const ListContainer = styled.div`
   display: flex;
   flex: 1;
-  gap: 6px;
+  gap: 3px;
   overflow-x: scroll;
   height: 48px;
 `;
