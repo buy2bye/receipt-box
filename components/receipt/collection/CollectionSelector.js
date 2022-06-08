@@ -36,7 +36,7 @@ const Container = styled.button`
   white-space: nowrap;
   padding: 4px 16px;
   height: 32px;
-  border: 1px solid var(--grey100);
+  border: 1px solid var(--grey400);
   border-radius: 12px;
   opacity: ${(props) => (props.isCollectionListOpen ? 1 : 0)};
   transition: 0.4s all;
