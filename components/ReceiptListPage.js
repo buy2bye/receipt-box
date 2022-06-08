@@ -435,7 +435,7 @@ const ReceiptListPage = ({ userInfo }) => {
         visible={isDeletePopupShown}
         setVisible={setIsDeletePopupShown}
         onDelete={handleDeleteCollectionSubmit}
-        title='폴더에 있는 모든 애장품이 삭제됩니다.'
+        title='컬렉션에 있는 모든 애장품이 삭제됩니다.'
         hideReason
       />
     </Layout>
