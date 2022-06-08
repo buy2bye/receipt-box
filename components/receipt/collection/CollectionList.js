@@ -121,7 +121,7 @@ const OrderSelect = styled.div`
     width: 84px;
     height: 32px;
     font-size: 14px;
-    text-align: right;
+    text-align: inherit;
     padding: 2px 18px 2px 0px;
     border-radius: 12px;
     border: none;
