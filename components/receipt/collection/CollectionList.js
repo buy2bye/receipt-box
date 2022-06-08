@@ -114,6 +114,7 @@ const CreateCollectionButton = styled.button`
 const OrderSelect = styled.div`
   opacity: ${(props) => (props.isCollectionListOpen ? 1 : 0)};
   transition: 0.4s all;
+  text-align: right;
 
   select {
     display: block;
