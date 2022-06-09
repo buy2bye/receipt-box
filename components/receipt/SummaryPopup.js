@@ -22,7 +22,7 @@ const SummaryPopup = ({
       <CloseButton onClick={onCloseClick}>
         <img src='/icons/close-button-white.png' alt='close-button' />
       </CloseButton>
-      <SummaryHeader>{item.nickname || '정보없음'}</SummaryHeader>
+      <SummaryHeader>{item.nickname || '별명없음'}</SummaryHeader>
       <SummaryContent>
         <SummaryContentRow label='상품명' content={item.productName || '정보없음'} />
         <SummaryContentRow label='구매처' content={item.productPlace || '정보없음'} />
