@@ -117,11 +117,11 @@ const OrderSelect = styled.div`
   transition: 0.4s all;
 
   select {
-    display: block;
     width: 70px;
     height: 32px;
     font-size: 14px;
-    padding: 2px 0px 2px 4px;
+    text-align: right;
+    padding: 2px 18px 2px 0px;
     border-radius: 12px;
     border: none;
     color: var(--grey900);
