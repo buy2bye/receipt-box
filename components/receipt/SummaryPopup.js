@@ -65,7 +65,7 @@ const SummaryHeader = styled.div`
   display: flex;
   align-items: center;
   font-size: 14px;
-  font-weight: 300;
+  font-weight: bold;
   width: 100%;
   height: 40px;
   min-height: 40px;
@@ -111,8 +111,8 @@ const CloseButton = styled.button`
   position: absolute;
   top: 12px;
   right: 12px;
-  width: 16px;
-  height: 16px;
+  width: 14px;
+  height: 14px;
   padding: 0;
 
   img {

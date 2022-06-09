@@ -115,15 +115,13 @@ const CreateCollectionButton = styled.button`
 const OrderSelect = styled.div`
   opacity: ${(props) => (props.isCollectionListOpen ? 1 : 0)};
   transition: 0.4s all;
-  text-align: right;
 
   select {
     display: block;
-    width: 84px;
+    width: 70px;
     height: 32px;
     font-size: 14px;
-    text-align: inherit;
-    padding: 2px 18px 2px 0px;
+    padding: 2px 0px 2px 4px;
     border-radius: 12px;
     border: none;
     color: var(--grey900);
