@@ -100,6 +100,7 @@ const Setting = styled.button`
 `;
 
 const Market = styled.button`
+  display: none;
   position: absolute;
   top: 0;
   right: 40px;
