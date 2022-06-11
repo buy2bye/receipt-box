@@ -19,7 +19,7 @@ const ReceiptsListView = ({
   };
 
   return (
-    <Container isEmpty={isEmpty}>
+    <Container isEmpty={isEmpty} isEditMode={isEditMode}>
       {isEmpty && (
         <UploadGuide>
           <h3>등록된 애장품이 없어요.</h3>
@@ -51,6 +51,11 @@ const Container = styled.div`
   flex-direction: column;
   gap: 8px;
   position: relative;
+
+  ${({ isEditMode }) => 
+    isEditMode &&`
+    margin-bottom: 100px
+    `}
 `;
 
 const UploadGuide = styled.div`
