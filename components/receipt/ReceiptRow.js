@@ -12,7 +12,7 @@ const ReceiptRow = ({
 }) => {
   const containerRef = useRef();
   const dateDiff = calculateDateDiff(item.productDate);
-  const [isSelectedOnEditMode, setIsSelectedOnEditMode] = useState(false);
+  const isSelectedOnEditMode = selectedItemsOnEditMode.includes(item.id);
 
   const imageSkeleton = (
     <div className='thumb'>
@@ -27,22 +27,16 @@ const ReceiptRow = ({
 
   const handleClick = () => {
     if (isEditMode) {
-      setIsSelectedOnEditMode(!isSelectedOnEditMode);
+      if (isSelectedOnEditMode) {
+        setSelectedItemsOnEditMode(selectedItemsOnEditMode.splice(selectedItemsOnEditMode.indexOf(item.id), 1));
+      } else {
+        setSelectedItemsOnEditMode([...selectedItemsOnEditMode, item.id]);
+      }
       return;
     }
 
     onClick(item, containerRef);
   };
-
-  useEffect(() => {
-    if (isSelectedOnEditMode) {
-      setSelectedItemsOnEditMode([...selectedItemsOnEditMode, item.id]);
-    } else {
-      setSelectedItemsOnEditMode(
-        selectedItemsOnEditMode.filter((itemId) => itemId !== item.id)
-      );
-    }
-  }, [isSelectedOnEditMode]);
 
   return (
     <Container
