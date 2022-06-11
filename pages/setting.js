@@ -143,7 +143,7 @@ const SettingPage = ({ userInfo }) => {
         <Divider />
         {renderLink('카카오 문의하기', 'https://pf.kakao.com/_IxmxdJb/chat')}
         {renderLink(
-          '공지사항 🆕',
+          '공지사항',
           'https://deeply-bench-f2d.notion.site/35bc1ccf4e1245c4bdcec0d5a2e5084c'
         )}
         {renderLink(
@@ -151,7 +151,7 @@ const SettingPage = ({ userInfo }) => {
           'https://instagram.com/buy_2_bye'
         )}
         {renderLink(
-          '이벤트 🆕',
+          '이벤트',
           'https://deeply-bench-f2d.notion.site/363aa79533664f48919d38623f436a47'
         )}
         {renderLink('이용약관', '/agreements/terms-and-conditions')}
