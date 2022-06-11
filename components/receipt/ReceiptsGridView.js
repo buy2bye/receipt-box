@@ -31,7 +31,7 @@ const ReceiptsGridView = ({
   };
 
   return (
-    <Container isEmpty={isEmpty}>
+    <Container isEmpty={isEmpty} isEditMode={isEditMode}>
       {isEmpty && (
         <UploadGuide>
           <h3>등록된 애장품이 없어요.</h3>
@@ -68,6 +68,11 @@ const Container = styled.div`
       grid-template-columns: repeat(3, 1fr);
       grid-row-gap: 8px;
       grid-column-gap: 8px;
+    `}
+
+  ${({ isEditMode }) => 
+    isEditMode &&`
+    margin-bottom: 100px
     `}
 `;
 

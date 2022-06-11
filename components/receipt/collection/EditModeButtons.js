@@ -40,29 +40,38 @@ const EditModeButtons = ({
   };
 
   return (
-    <Container isShown={isShown}>
-      <EditButton onClick={onClose}>닫기</EditButton>
-      <EditButton
-        primary={!disabled}
-        disabled={disabled}
-        onClick={handleCollectionChangeClick}
-      >
-        이동
-      </EditButton>
+    <>
+      <Container isShown={isShown}>
+        <EditButton onClick={onClose}>닫기</EditButton>
+        <EditButton
+          primary={!disabled}
+          disabled={disabled}
+          onClick={handleCollectionChangeClick}
+        >
+          이동
+        </EditButton>
 
-      <CollectionSelectPopup
-        visible={isCollectionSelectPopupShown}
-        setVisible={setIsCollectionSelectPopupShown}
-        title='이동할 컬렉션을 선택해주세요.'
-        items={collections.map((item) => item.name)}
-        defaultValue={collections[0].name}
-        onSelect={handleCollectionChangeSubmit}
-      />
-    </Container>
+        <CollectionSelectPopup
+          visible={isCollectionSelectPopupShown}
+          setVisible={setIsCollectionSelectPopupShown}
+          title='이동할 컬렉션을 선택해주세요.'
+          items={collections.map((item) => item.name)}
+          defaultValue={collections[0].name}
+          onSelect={handleCollectionChangeSubmit}
+        />
+      </Container>
+      {isShown && <DummySpace />}
+    </>
   );
 };
 
 export default EditModeButtons;
+
+const DummySpace = styled.div`
+  width: 100vw;
+  height: 120px;
+  flex: 1;
+`
 
 const Container = styled.div`
   position: fixed;
