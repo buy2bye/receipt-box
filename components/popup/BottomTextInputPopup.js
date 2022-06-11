@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import styled from '@emotion/styled';
 import Button from 'components/button/Button';
 import BottomPopup from './BottomPopup';
@@ -13,18 +13,23 @@ const BottomTextInputPopup = ({
   placeholder,
   value,
   confirmText = '다음',
-  type = 'text'
+  type = 'text',
 }) => {
   const [isFetching, setIsFetching] = useState(false);
   const [innerValue, setInnerValue] = useState(value);
+  const inputRef = useRef();
+
+  useEffect(() => {
+    inputRef.current && inputRef.current.focus();
+  }, [visible]);
 
   useEffect(() => {
     if (!visible) {
-      setInnerValue('')
+      setInnerValue('');
     } else {
       setInnerValue(value);
     }
-  }, [value, visible])
+  }, [value, visible]);
 
   const handleClick = async () => {
     setIsFetching(true);
@@ -35,10 +40,8 @@ const BottomTextInputPopup = ({
   const handleKeyDown = (e) => {
     if (e.keyCode === 13) handleClick();
   };
-  
-  const handleChange = (e) => [
-    setInnerValue(e.target.value)
-  ]
+
+  const handleChange = (e) => [setInnerValue(e.target.value)];
 
   return (
     <Container
@@ -47,13 +50,22 @@ const BottomTextInputPopup = ({
       setVisible={setVisible}
       title={title}
     >
-      <TextInput
-        type={type}
-        placeholder={placeholder}
-        onChange={handleChange}
-        onKeyDown={handleKeyDown}
-        value={innerValue}
-      />
+      {type === 'textarea' ? (
+        <TextArea
+          placeholder={placeholder}
+          onChange={handleChange}
+          // onKeyDown={handleKeyDown}
+          value={innerValue}
+        />
+      ) : (
+        <TextInput
+          type={type}
+          placeholder={placeholder}
+          onChange={handleChange}
+          onKeyDown={handleKeyDown}
+          value={innerValue}
+        />
+      )}
       <Button
         className={buttonClass}
         primary
@@ -78,6 +90,19 @@ const TextInput = styled.input`
   border-radius: 8px;
   font-size: 18px;
   padding: 0 16px;
+  font-weight: 300;
+  color: var(--grey800);
+`;
+
+const TextArea = styled.textarea`
+  width: 100%;
+  height: 160px;
+  resize: none;
+  border: 1px solid var(--grey300);
+  background: var(--grey100);
+  border-radius: 8px;
+  font-size: 18px;
+  padding: 16px;
   font-weight: 300;
   color: var(--grey800);
 `;

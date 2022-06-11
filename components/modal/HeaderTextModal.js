@@ -73,8 +73,8 @@ const CloseButton = styled.button`
   position: absolute;
   top: 16px;
   right: 16px;
-  width: 16px;
-  height: 16px;
+  width: 12px;
+  height: 12px;
   padding: 0;
 
   img {

@@ -1,10 +1,18 @@
+import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import { calculateDateDiff } from 'helpers/utils';
-import { useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
-const ReceiptRow = ({ item, onClick }) => {
+const ReceiptRow = ({
+  item,
+  onClick,
+  isEditMode,
+  selectedItemsOnEditMode,
+  setSelectedItemsOnEditMode,
+}) => {
   const containerRef = useRef();
   const dateDiff = calculateDateDiff(item.productDate);
+  const [isSelectedOnEditMode, setIsSelectedOnEditMode] = useState(false);
 
   const imageSkeleton = (
     <div className='thumb'>
@@ -18,14 +26,31 @@ const ReceiptRow = ({ item, onClick }) => {
   );
 
   const handleClick = () => {
+    if (isEditMode) {
+      setIsSelectedOnEditMode(!isSelectedOnEditMode);
+      return;
+    }
+
     onClick(item, containerRef);
-  }
+  };
+
+  useEffect(() => {
+    if (isSelectedOnEditMode) {
+      setSelectedItemsOnEditMode([...selectedItemsOnEditMode, item.id]);
+    } else {
+      setSelectedItemsOnEditMode(
+        selectedItemsOnEditMode.filter((itemId) => itemId !== item.id)
+      );
+    }
+  }, [isSelectedOnEditMode]);
 
   return (
     <Container
       onClick={handleClick}
       disabled={item.disabled}
       ref={containerRef}
+      isEditMode={isEditMode}
+      isSelectedOnEditMode={isSelectedOnEditMode}
     >
       {item.productImage ? imageWrapper : imageSkeleton}
       <div className='contents'>
@@ -63,6 +88,7 @@ const Container = styled.button`
     align-items: center;
     border-radius: 8px;
     border: 1px solid var(--grey100);
+    position: relative;
 
     img {
       width: 100%;
@@ -102,4 +128,27 @@ const Container = styled.button`
       font-weight: 400;
     }
   }
+
+  ${({ isEditMode, isSelectedOnEditMode }) =>
+    isEditMode &&
+    css`
+      .thumb {
+        border: ${isSelectedOnEditMode
+          ? '3px solid var(--primary)'
+          : '3px solid var(--grey100)'};
+
+        :before {
+          content: '';
+          width: 10px;
+          height: 10px;
+          background: ${isSelectedOnEditMode ? 'var(--primary)' : 'white'};
+          border: 2px solid
+            ${isSelectedOnEditMode ? 'var(--primary)' : 'var(--grey200)'};
+          position: absolute;
+          top: 8%;
+          left: 8%;
+          border-radius: 50%;
+        }
+      }
+    `}
 `;

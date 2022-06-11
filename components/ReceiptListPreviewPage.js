@@ -178,7 +178,7 @@ const ReceiptListPreviewPage = ({ userInfo }) => {
       <HeaderContainer showBorder>
         <Title>내 애장품 컬렉션</Title>
         <TotalPriceButton onClick={handleTotalPriceButtonClick}>
-          ₩
+          <img src='/icons/won.png' alt='won' />
         </TotalPriceButton>
         <ListTypes>
           <ListType
@@ -262,12 +262,13 @@ const HeaderContainer = styled.div`
 const TotalPriceButton = styled.button`
   width: 16px;
   height: 16px;
-  border: 1px solid black;
-  border-radius: 50%;
   margin-left: 6px;
-  text-align: center;
   padding: 0;
-  font-size: 10px;
+
+  img {
+    width: 100%;
+    height: 100%;
+  }
 `;
 
 const HeaderLeftButton = styled.button`

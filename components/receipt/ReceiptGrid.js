@@ -1,12 +1,26 @@
+import { css } from '@emotion/react';
 import styled from '@emotion/styled';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
-const ReceiptGrid = ({ item, onClick, autoClick }) => {
+const ReceiptGrid = ({
+  item,
+  onClick,
+  autoClick,
+  isEditMode,
+  selectedItemsOnEditMode,
+  setSelectedItemsOnEditMode,
+}) => {
   const containerRef = useRef();
+  const [isSelectedOnEditMode, setIsSelectedOnEditMode] = useState(false);
 
   const handleClick = () => {
+    if (isEditMode) {
+      setIsSelectedOnEditMode(!isSelectedOnEditMode);
+      return;
+    }
+
     onClick(item, containerRef);
-  }
+  };
 
   useEffect(() => {
     if (autoClick) {
@@ -14,9 +28,26 @@ const ReceiptGrid = ({ item, onClick, autoClick }) => {
     }
   }, []);
 
+  useEffect(() => {
+    if (isSelectedOnEditMode) {
+      setSelectedItemsOnEditMode([...selectedItemsOnEditMode, item.id]);
+      return;
+    }
+    if (isEditMode) {
+      setSelectedItemsOnEditMode(
+        selectedItemsOnEditMode.filter((itemId) => itemId !== item.id)
+      );
+    }
+  }, [isSelectedOnEditMode]);
+
   return (
     <Container ref={containerRef}>
-      <Thumbnail onClick={handleClick} disabled={item.disabled}>
+      <Thumbnail
+        onClick={handleClick}
+        disabled={item.disabled}
+        isEditMode={isEditMode}
+        isSelectedOnEditMode={isSelectedOnEditMode}
+      >
         {item.productImage ? (
           <img src={item?.productImage} alt={item?.nickname} />
         ) : (
@@ -49,6 +80,7 @@ const Thumbnail = styled.button`
   align-items: center;
   border: 1px solid var(--grey100);
   padding: 0;
+  transition: all 0.4s;
 
   img {
     width: 100%;
@@ -56,4 +88,25 @@ const Thumbnail = styled.button`
     border-radius: 8px;
     object-fit: cover;
   }
+
+  ${({ isEditMode, isSelectedOnEditMode }) =>
+    isEditMode &&
+    css`
+      border: ${isSelectedOnEditMode
+        ? '3px solid var(--primary)'
+        : '3px solid var(--grey200)'};
+
+      :before {
+        content: '';
+        width: 10px;
+        height: 10px;
+        background: ${isSelectedOnEditMode ? 'var(--primary)' : 'white'};
+        border: 2px solid
+          ${isSelectedOnEditMode ? 'var(--primary)' : 'var(--grey200)'};
+        position: absolute;
+        top: 8%;
+        left: 8%;
+        border-radius: 50%;
+      }
+    `}
 `;

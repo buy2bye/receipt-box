@@ -1,19 +1,26 @@
 import styled from '@emotion/styled';
 import ReceiptRow from './ReceiptRow';
 
-const ReceiptsListView = ({ receiptList, onItemClick }) => {
+const ReceiptsListView = ({
+  receiptList,
+  onItemClick,
+  isEditMode,
+  selectedItemsOnEditMode,
+  setSelectedItemsOnEditMode,
+}) => {
+  const isEmpty = receiptList.length < 1;
 
   const handleItemClick = (item, containerRef) => {
     const rect = containerRef.current.getBoundingClientRect();
     const top = containerRef.current.offsetTop + rect.height * 0.8;
     let left = containerRef.current.offsetLeft;
 
-    onItemClick(item, left + rect.width * 0.5, top, - 50);
+    onItemClick(item, left + rect.width * 0.5, top, -50);
   };
 
   return (
-    <Container>
-      {receiptList.length < 1 && (
+    <Container isEmpty={isEmpty}>
+      {isEmpty && (
         <UploadGuide>
           <h3>등록된 애장품이 없어요.</h3>
           <span>오른쪽 아래의 + 버튼을 눌러</span>
@@ -25,6 +32,9 @@ const ReceiptsListView = ({ receiptList, onItemClick }) => {
           item={item}
           key={index}
           onClick={handleItemClick}
+          isEditMode={isEditMode}
+          selectedItemsOnEditMode={selectedItemsOnEditMode}
+          setSelectedItemsOnEditMode={setSelectedItemsOnEditMode}
         />
       ))}
     </Container>
@@ -44,17 +54,14 @@ const Container = styled.div`
 `;
 
 const UploadGuide = styled.div`
-  position: absolute;
-  top: 40%;
-  left: 50%;
-  transform: translate(-50%, -50%);
   width: 100%;
   display: flex;
   flex-direction: column;
+
   align-items: center;
 
   h3 {
-    margin: 0;
+    margin: 40px 0 0 0;
     margin-bottom: 20px;
     font-size: 16px;
     color: var(--grey600);

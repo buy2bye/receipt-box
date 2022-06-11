@@ -10,6 +10,7 @@ const Layout = ({
   className,
   hideTop,
   hideBottom,
+  hideUploadButton,
   showLogo,
   hideSetting,
   topNavColor,
@@ -61,7 +62,12 @@ const Layout = ({
           )}
           {children}
         </Body>
-        {!hideBottom && <BottomNav isPreview={isPreview} />}
+        {!hideBottom && (
+          <BottomNav
+            isPreview={isPreview}
+            hideUploadButton={hideUploadButton}
+          />
+        )}
       </BodyWrapper>
     </Container>
   );

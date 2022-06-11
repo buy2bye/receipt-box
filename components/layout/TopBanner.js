@@ -8,11 +8,7 @@ const TopBanner = () => {
   const [bannerType, setBannerType] = useState();
   const router = useRouter();
 
-  console.log(router.asPath);
-
   useEffect(() => {
-    console.log(navigator.userAgent);
-
     if (/android/i.test(navigator.userAgent)) {
       if (
         typeof window.SwingJavascriptInterface != 'undefined' ||

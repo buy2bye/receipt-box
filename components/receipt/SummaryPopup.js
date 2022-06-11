@@ -22,7 +22,7 @@ const SummaryPopup = ({
       <CloseButton onClick={onCloseClick}>
         <img src='/icons/close-button-white.png' alt='close-button' />
       </CloseButton>
-      <SummaryHeader>{item.nickname || '정보없음'}</SummaryHeader>
+      <SummaryHeader>{item.nickname || '별명없음'}</SummaryHeader>
       <SummaryContent>
         <SummaryContentRow label='상품명' content={item.productName || '정보없음'} />
         <SummaryContentRow label='구매처' content={item.productPlace || '정보없음'} />
@@ -65,7 +65,7 @@ const SummaryHeader = styled.div`
   display: flex;
   align-items: center;
   font-size: 14px;
-  font-weight: 300;
+  font-weight: bold;
   width: 100%;
   height: 40px;
   min-height: 40px;
@@ -111,8 +111,8 @@ const CloseButton = styled.button`
   position: absolute;
   top: 12px;
   right: 12px;
-  width: 16px;
-  height: 16px;
+  width: 14px;
+  height: 14px;
   padding: 0;
 
   img {

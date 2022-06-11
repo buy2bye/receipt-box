@@ -1,7 +1,17 @@
+import { css } from '@emotion/react';
 import styled from '@emotion/styled';
+import { useState } from 'react';
 import ReceiptGrid from './ReceiptGrid';
 
-const ReceiptsGridView = ({ receiptList, onItemClick, isPreview }) => {
+const ReceiptsGridView = ({
+  receiptList,
+  onItemClick,
+  isPreview,
+  isEditMode,
+  selectedItemsOnEditMode,
+  setSelectedItemsOnEditMode,
+}) => {
+  const isEmpty = receiptList.length < 1;
 
   const handleItemClick = (item, containerRef) => {
     const rect = containerRef.current.getBoundingClientRect();
@@ -18,11 +28,11 @@ const ReceiptsGridView = ({ receiptList, onItemClick, isPreview }) => {
       // is center
       onItemClick(item, left + rect.width * 0.5, top, -50);
     }
-  }
+  };
 
   return (
-    <Container>
-      {receiptList.length < 1 && (
+    <Container isEmpty={isEmpty}>
+      {isEmpty && (
         <UploadGuide>
           <h3>등록된 애장품이 없어요.</h3>
           <span>오른쪽 아래의 + 버튼을 눌러</span>
@@ -35,6 +45,9 @@ const ReceiptsGridView = ({ receiptList, onItemClick, isPreview }) => {
           key={index}
           onClick={handleItemClick}
           autoClick={isPreview && 0 === index}
+          isEditMode={isEditMode}
+          selectedItemsOnEditMode={selectedItemsOnEditMode}
+          setSelectedItemsOnEditMode={setSelectedItemsOnEditMode}
         />
       ))}
     </Container>
@@ -47,24 +60,25 @@ const Container = styled.div`
   width: 100%;
   height: fit-content;
   position: relative;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-row-gap: 8px;
-  grid-column-gap: 8px;
+
+  ${({ isEmpty }) =>
+    !isEmpty &&
+    css`
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-row-gap: 8px;
+      grid-column-gap: 8px;
+    `}
 `;
 
 const UploadGuide = styled.div`
-  position: absolute;
-  top: 40%;
-  left: 50%;
-  transform: translate(-50%, -50%);
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
 
   h3 {
-    margin: 35% 0 0 0;
+    margin: 40px 0 0 0;
     margin-bottom: 20px;
     font-size: 16px;
     color: var(--grey600);

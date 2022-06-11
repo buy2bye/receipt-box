@@ -3,12 +3,13 @@ import { useRouter } from 'next/router';
 import styled from '@emotion/styled';
 import PreviewModal from 'components/preview/PreviewModal';
 import Link from 'next/link';
+import { css } from '@emotion/react';
 
-const BottomNav = ({ isPreview }) => {
+const BottomNav = ({ isPreview, hideUploadButton }) => {
   const router = useRouter();
 
   return (
-    <Container>
+    <Container hide={hideUploadButton}>
       <Link href={isPreview ? `/create?preview=yes` : '/create'} passHref>
         <UploadButton htmlFor='upload-photo'>
           <img src='/icons/plus.png' alt='receipt-upload' />
@@ -24,6 +25,12 @@ const Container = styled.div`
   position: fixed;
   bottom: 40px;
   right: 40px;
+
+  ${({ hide }) =>
+    hide &&
+    css`
+      display: none;
+    `}
 `;
 
 const UploadButton = styled.label`
