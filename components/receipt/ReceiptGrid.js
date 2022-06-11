@@ -11,11 +11,15 @@ const ReceiptGrid = ({
   setSelectedItemsOnEditMode,
 }) => {
   const containerRef = useRef();
-  const [isSelectedOnEditMode, setIsSelectedOnEditMode] = useState(false);
+  const isSelectedOnEditMode = selectedItemsOnEditMode.includes(item.id);
 
   const handleClick = () => {
     if (isEditMode) {
-      setIsSelectedOnEditMode(!isSelectedOnEditMode);
+      if (isSelectedOnEditMode) {
+        setSelectedItemsOnEditMode(selectedItemsOnEditMode.splice(selectedItemsOnEditMode.indexOf(item.id), 1));
+      } else {
+        setSelectedItemsOnEditMode([...selectedItemsOnEditMode, item.id]);
+      }
       return;
     }
 
@@ -27,18 +31,6 @@ const ReceiptGrid = ({
       onClick(item, containerRef);
     }
   }, []);
-
-  useEffect(() => {
-    if (isSelectedOnEditMode) {
-      setSelectedItemsOnEditMode([...selectedItemsOnEditMode, item.id]);
-      return;
-    }
-    if (isEditMode) {
-      setSelectedItemsOnEditMode(
-        selectedItemsOnEditMode.filter((itemId) => itemId !== item.id)
-      );
-    }
-  }, [isSelectedOnEditMode]);
 
   return (
     <Container ref={containerRef}>
