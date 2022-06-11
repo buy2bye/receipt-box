@@ -147,7 +147,7 @@ const SettingPage = ({ userInfo }) => {
           'https://deeply-bench-f2d.notion.site/35bc1ccf4e1245c4bdcec0d5a2e5084c'
         )}
         {renderLink(
-          '바이투바이 인스타그램 ⭐',
+          '바이투바이 인스타그램  ⭐',
           'https://instagram.com/buy_2_bye'
         )}
         {renderLink(
