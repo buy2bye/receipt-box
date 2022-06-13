@@ -16,7 +16,8 @@ const ReceiptGrid = ({
   const handleClick = () => {
     if (isEditMode) {
       if (isSelectedOnEditMode) {
-        setSelectedItemsOnEditMode(selectedItemsOnEditMode?.splice(selectedItemsOnEditMode.indexOf(item.id), 1));
+        selectedItemsOnEditMode.splice(selectedItemsOnEditMode.indexOf(item.id), 1)
+        setSelectedItemsOnEditMode([...selectedItemsOnEditMode]);
       } else {
         setSelectedItemsOnEditMode([...selectedItemsOnEditMode, item.id]);
       }
