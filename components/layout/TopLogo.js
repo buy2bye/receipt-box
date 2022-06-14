@@ -26,7 +26,7 @@ const TopLogo = ({ hideSetting, isPreview, onLoginClick }) => {
           </Setting>
           <a
             target='_blank'
-            href='https://smartstore.naver.com/buy2bye/products/6720106860'
+            href='https://cafe.naver.com/buy2bye'
             rel='noreferrer'>
             <Market>
               <img src='/icons/market.png' alt='market' />
@@ -54,7 +54,7 @@ const TopLogo = ({ hideSetting, isPreview, onLoginClick }) => {
       )}
       <a
         target='_blank'
-        href='https://smartstore.naver.com/buy2bye/products/6720106860'
+        href='https://cafe.naver.com/buy2bye'
         rel='noreferrer'>
         <Market>
           <img src='/icons/market.png' alt='market' />
@@ -100,7 +100,6 @@ const Setting = styled.button`
 `;
 
 const Market = styled.button`
-  display: none;
   position: absolute;
   top: 0;
   right: 40px;
