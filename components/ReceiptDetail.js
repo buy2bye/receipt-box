@@ -188,6 +188,10 @@ const ReceiptDetail = ({
   };
 
   const handleSaveClick = () => {
+    if (!newReceiptInfo.category?.id) {
+      alert('카테고리를 입력해주세요');
+      return;
+    }
     if (!newReceiptInfo.productName) {
       alert('상품명을 입력해주세요.');
       return;

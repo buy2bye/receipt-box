@@ -31,7 +31,7 @@ const EditModeButtons = ({
 
     changeReceiptCategory(selectedItemsOnEditMode, newCollection.id)
       .then(() => {
-        alert('컬렉션 변경이 완료되었습니다.');
+        alert('컬렉션 이동이 완료되었습니다.');
         window.location.reload();
       })
       .catch(({ response }) => {
