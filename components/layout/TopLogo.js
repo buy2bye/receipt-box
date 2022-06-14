@@ -26,7 +26,7 @@ const TopLogo = ({ hideSetting, isPreview, onLoginClick }) => {
           </Setting>
           <a
             target='_blank'
-            href='https://cafe.naver.com/buy2bye'
+            href='https://cafe.naver.com/buy2bye/2'
             rel='noreferrer'>
             <Market>
               <img src='/icons/market.png' alt='market' />
@@ -54,7 +54,7 @@ const TopLogo = ({ hideSetting, isPreview, onLoginClick }) => {
       )}
       <a
         target='_blank'
-        href='https://cafe.naver.com/buy2bye'
+        href='https://cafe.naver.com/buy2bye/2'
         rel='noreferrer'>
         <Market>
           <img src='/icons/market.png' alt='market' />
