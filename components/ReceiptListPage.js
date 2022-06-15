@@ -493,7 +493,7 @@ const CollectionListToggle = styled.button`
 
 const Profile = styled.div`
   width: 100%;
-  height: 20%;
+  height: 400px;
   display: flex;
   flex-direction: column;
   align-items: center;
