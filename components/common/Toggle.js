@@ -55,7 +55,7 @@ const Container = styled.label`
       content: '';
       height: 36px;
       width: 36px;
-      left: 3px;
+      left: 11px;
       bottom: 3px;
       background-color: white;
       -webkit-transition: 0.4s;

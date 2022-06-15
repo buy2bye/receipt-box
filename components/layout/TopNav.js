@@ -22,7 +22,7 @@ export default TopNav;
 
 const Container = styled.div`
   width: 100vw;
-  height: 50px;
+  height: 4vh;
   padding: 0 18px;
   display: flex;
   align-items: center;
@@ -40,7 +40,7 @@ const Container = styled.div`
     padding: 0;
 
     color: var(--grey300);
-    font-size: 25px;
+    font-size: 54px;
 
     img {
       width: 20px;

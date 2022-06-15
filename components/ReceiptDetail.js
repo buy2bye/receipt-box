@@ -627,7 +627,7 @@ const TopBackground = styled.img`
   top: 0px;
   left: 0;
   width: 100vw;
-  height: 45vh;
+  height: 39vh;
   z-index: 0;
   filter: brightness(0.7);
 `;
@@ -642,6 +642,7 @@ const DeleteReceipt = styled.button`
   font-size: 13px;
   color: var(--grey300);
   z-index: 2;
+  display: none;
 `;
 
 const ModifyReceipt = styled.button`
@@ -651,7 +652,7 @@ const ModifyReceipt = styled.button`
   height: 32px;
   background: transparent;
   padding: 8px;
-  font-size: 13px;
+  font-size: 40px;
   color: var(--grey300);
   z-index: 2;
 `;
@@ -663,7 +664,7 @@ const NicknameWrapper = styled.div`
   gap: 8px;
   z-index: 1;
   font-weight: bold;
-  font-size: 20px;
+  font-size: 44px;
   text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
 
   img {
@@ -692,7 +693,7 @@ const ThumbnailWrapper = styled.div`
   border-radius: 8px;
   position: relative;
   border: 1px solid var(--grey300);
-  margin-top: 32vh;
+  margin-top: 25vh;
 
   label {
     width: 100%;
@@ -752,8 +753,8 @@ const Details = styled.ul`
     }
 
     img {
-      width: 60px;
-      height: 60px;
+      width: 120px;
+      height: 120px;
       border: 1px solid var(--grey300);
     }
 
@@ -819,9 +820,9 @@ const UsedDeal = styled.li`
 
   .info {
     padding: 0;
-    width: 44px;
-    height: 44px;
-    font-size: 40px;
+    width: 40px;
+    height: 40px;
+    font-size: 32px;
     margin-left: 6px;
     border: 1px solid var(--grey600);
     border-radius: 50%;
@@ -842,6 +843,7 @@ const AddReceiptList = styled.div`
   flex-direction: column;
   justify-content: space-between;
   gap: 8px;
+  margin-bottom: 1vh;
 
   span {
     display: flex;
@@ -851,9 +853,9 @@ const AddReceiptList = styled.div`
 
   .info {
     padding: 0;
-    width: 44px;
-    height: 44px;
-    font-size: 40px;
+    width: 40px;
+    height: 40px;
+    font-size: 32px;
     margin-left: 6px;
     border: 1px solid var(--grey600);
     border-radius: 50%;
@@ -879,8 +881,8 @@ const ReceiptImages = styled.ul`
 `;
 
 const AddReceiptImageLabel = styled.label`
-  width: 120px;
-  height: 120px;
+  width: 60px;
+  height: 60px;
   border: 1px solid var(--grey500);
   border-radius: 4px;
   display: flex;
