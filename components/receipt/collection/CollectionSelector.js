@@ -44,6 +44,7 @@ const Container = styled.button`
   align-items: center;
   position: relative;
   font-size: 40px;
+  margin-right: 1vw;
 
   img {
     width: 16px;

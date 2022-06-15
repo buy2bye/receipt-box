@@ -549,6 +549,7 @@ const ListType = styled.img`
   :first-of-type {
     width: 36px;
     height: 36px;
+    margin-right: 1vw;
   }
   :last-of-type {
     width: 40px;
@@ -568,6 +569,7 @@ const HeaderButton = styled.button`
 const TotalPriceButton = styled(HeaderButton)`
   width: 40px;
   height: 40px;
+  margin-right: 1vw;
 
   img {
     width: 100%;
@@ -577,6 +579,7 @@ const TotalPriceButton = styled(HeaderButton)`
 const EditButton = styled(HeaderButton)`
   width: 40px;
   height: 40px;
+  margin-right: 1vw;
 
   img {
     width: 100%;
