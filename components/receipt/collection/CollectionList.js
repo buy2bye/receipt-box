@@ -78,7 +78,7 @@ const Container = styled.div`
   ${(props) =>
     props.isOpen
       ? css`
-          height: 48px;
+          height: 80px;
           padding-bottom: 48px;
         `
       : css`
@@ -89,15 +89,15 @@ const Container = styled.div`
 const ListContainer = styled.div`
   display: flex;
   flex: 1;
-  gap: 3px;
+  gap: 14px;
   overflow-x: scroll;
-  height: 48px;
+  height: 80px;
 `;
 
 const CreateCollectionButton = styled.button`
   white-space: nowrap;
   padding: 4px 16px;
-  height: 32px;
+  height: 60px;
   border: 1px solid var(--grey400);
   border-radius: 12px;
   opacity: ${(props) => (props.isCollectionListOpen ? 1 : 0)};
@@ -105,6 +105,7 @@ const CreateCollectionButton = styled.button`
   display: flex;
   align-items: center;
   position: relative;
+  font-size: 40px;
 
   img {
     width: 16px;
@@ -117,11 +118,11 @@ const OrderSelect = styled.div`
   transition: 0.4s all;
 
   select {
-    width: 70px;
-    height: 32px;
-    font-size: 14px;
+    width: 200px;
+    height: 60px;
+    font-size: 40px;
     text-align: right;
-    padding: 2px 18px 2px 0px;
+    padding: 2px 60px 2px 0px;
     border-radius: 12px;
     border: none;
     color: var(--grey900);
@@ -129,7 +130,7 @@ const OrderSelect = styled.div`
     background-image: url('/icons/down-arrow.png');
     background-position: 96% 50%;
     background-repeat: no-repeat;
-    background-size: 12px;
+    background-size: 36px;
     background-color: #FFFFFF00;
     opacity: 0.7;
   }

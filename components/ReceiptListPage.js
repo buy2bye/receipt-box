@@ -451,7 +451,7 @@ const HeaderContainer = styled.div`
   display: flex;
   align-items: center;
   margin: 12px 0;
-  gap: 12px;
+  gap: 32px;
   border-bottom: ${(props) =>
     props.showBorder ? '1px solid var(--grey200)' : 'none'};
   padding-bottom: 12px;
@@ -482,8 +482,8 @@ const CollectionListToggle = styled.button`
   transition: 0.4s all;
 
   img {
-    width: 44px;
-    height: 44px;
+    width: 20px;
+    height: 20px;
   }
 
   ${(props) =>
@@ -536,7 +536,7 @@ const ListTypes = styled.div`
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  gap: 12px;
+  gap: 32px;
 
   img {
   }

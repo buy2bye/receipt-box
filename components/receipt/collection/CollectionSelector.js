@@ -35,7 +35,7 @@ export default CollectionSelector;
 const Container = styled.button`
   white-space: nowrap;
   padding: 4px 16px;
-  height: 32px;
+  height: 60px;
   border: 1px solid var(--grey400);
   border-radius: 12px;
   opacity: ${(props) => (props.isCollectionListOpen ? 1 : 0)};
@@ -43,6 +43,7 @@ const Container = styled.button`
   display: flex;
   align-items: center;
   position: relative;
+  font-size: 40px;
 
   img {
     width: 16px;
