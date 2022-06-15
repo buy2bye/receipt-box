@@ -459,6 +459,7 @@ const HeaderContainer = styled.div`
   h2 {
     padding-bottom: 0;
     width: auto;
+    font-size: 40px
   }
 
   span {
@@ -470,6 +471,7 @@ const HeaderContainer = styled.div`
 const CollectionListToggleWrapper = styled.div`
   height: 100%;
   flex: 1;
+  padding-left: 20px;
 `;
 
 const CollectionListToggle = styled.button`
@@ -480,8 +482,8 @@ const CollectionListToggle = styled.button`
   transition: 0.4s all;
 
   img {
-    width: 12px;
-    height: 12px;
+    width: 44px;
+    height: 44px;
   }
 
   ${(props) =>
@@ -521,7 +523,6 @@ const Nickname = styled.div`
   position: relative;
   display: flex;
   align-items: center;
-  padding-left: 60px;
 
   img {
     margin-left: 8px;
@@ -546,12 +547,12 @@ const ListType = styled.img`
   cursor: pointer;
 
   :first-of-type {
-    width: 16px;
-    height: 16px;
+    width: 36px;
+    height: 36px;
   }
   :last-of-type {
-    width: 18px;
-    height: 18px;
+    width: 40px;
+    height: 40px;
   }
 `;
 
@@ -565,8 +566,8 @@ const HeaderButton = styled.button`
 `;
 
 const TotalPriceButton = styled(HeaderButton)`
-  width: 18px;
-  height: 18px;
+  width: 40px;
+  height: 40px;
 
   img {
     width: 100%;
@@ -574,8 +575,8 @@ const TotalPriceButton = styled(HeaderButton)`
   }
 `;
 const EditButton = styled(HeaderButton)`
-  width: 18px;
-  height: 18px;
+  width: 40px;
+  height: 40px;
 
   img {
     width: 100%;
@@ -595,6 +596,7 @@ const UploadGuideText = styled.div`
 const NicknameWrapper = styled.div`
   display: flex;
   align-items: center;
+  padding-left: 60px;
 
   > img {
     width: 40px;
