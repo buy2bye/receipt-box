@@ -627,7 +627,7 @@ const TopBackground = styled.img`
   top: 0px;
   left: 0;
   width: 100vw;
-  height: 310px;
+  height: 45vh;
   z-index: 0;
   filter: brightness(0.7);
 `;
@@ -679,9 +679,9 @@ const NicknameWrapper = styled.div`
 `;
 
 const ThumbnailWrapper = styled.div`
-  width: 140px;
+  width: 33vw;
   min-height: 140px;
-  height: 140px;
+  height: 33vw;
   background: white;
   text-align: center;
   display: flex;
@@ -692,7 +692,7 @@ const ThumbnailWrapper = styled.div`
   border-radius: 8px;
   position: relative;
   border: 1px solid var(--grey300);
-  margin-top: 190px;
+  margin-top: 32vh;
 
   label {
     width: 100%;
@@ -729,8 +729,8 @@ const Details = styled.ul`
   flex-direction: column;
   gap: 20px;
   padding: 16px 0;
-  margin-top: 24px;
-  font-size: 14px;
+  margin-top: 1vh;
+  font-size: 40px;
   font-weight: 300;
   width: 71%;
 

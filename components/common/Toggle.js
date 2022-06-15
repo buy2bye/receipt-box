@@ -17,8 +17,8 @@ const Toggle = ({ onToggle, toggleState, id }) => {
 export default Toggle;
 
 const Container = styled.label`
-  width: 48px;
-  height: 24px;
+  width: 80px;
+  height: 40px;
   position: relative;
   display: inline-block;
 
@@ -53,8 +53,8 @@ const Container = styled.label`
     :before {
       position: absolute;
       content: '';
-      height: 18px;
-      width: 18px;
+      height: 36px;
+      width: 36px;
       left: 3px;
       bottom: 3px;
       background-color: white;
