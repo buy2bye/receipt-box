@@ -648,11 +648,11 @@ const DeleteReceipt = styled.button`
 const ModifyReceipt = styled.button`
   position: absolute;
   top: 10px;
-  right: 54px;
+  right: 3vw;
   height: 32px;
   background: transparent;
   padding: 8px;
-  font-size: 40px;
+  font-size: 36px;
   color: var(--grey300);
   z-index: 2;
 `;
@@ -877,6 +877,7 @@ const ReceiptImages = styled.ul`
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-right: 1vw;
   }
 `;
 

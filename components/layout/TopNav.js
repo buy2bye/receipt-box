@@ -29,6 +29,7 @@ const Container = styled.div`
   position: sticky;
   z-index: 1;
   background: ${(props) => props.background};
+  margin-left: 3vw;
 
   button {
     position: relative;
