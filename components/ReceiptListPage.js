@@ -521,6 +521,7 @@ const Nickname = styled.div`
   position: relative;
   display: flex;
   align-items: center;
+  padding-left: 60px;
 
   img {
     margin-left: 8px;
