@@ -497,13 +497,13 @@ const Profile = styled.div`
   display: block;
   flex-direction: column;
   align-items: center;
-  padding: 800px 0 32px 0;
+  padding: 100px 0 400px 400px;
 `;
 
 const ProfileImageWrapper = styled.div`
   position: relative;
-  width: 100px;
-  height: 100px;
+  width: 300px;
+  height: 300px;
   display: flex;
   justify-content: center;
   align-items: center;
