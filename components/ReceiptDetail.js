@@ -744,6 +744,7 @@ const Details = styled.ul`
       min-width: 92px;
       font-weight: 500;
       flex: 1;
+      margin-bottom: 1vh;
     }
 
     > span:last-of-type {
@@ -818,9 +819,9 @@ const UsedDeal = styled.li`
 
   .info {
     padding: 0;
-    width: 14px;
-    height: 14px;
-    font-size: 10px;
+    width: 44px;
+    height: 44px;
+    font-size: 40px;
     margin-left: 6px;
     border: 1px solid var(--grey600);
     border-radius: 50%;
@@ -850,9 +851,9 @@ const AddReceiptList = styled.div`
 
   .info {
     padding: 0;
-    width: 14px;
-    height: 14px;
-    font-size: 10px;
+    width: 44px;
+    height: 44px;
+    font-size: 40px;
     margin-left: 6px;
     border: 1px solid var(--grey600);
     border-radius: 50%;
@@ -867,8 +868,8 @@ const ReceiptImages = styled.ul`
   flex-wrap: wrap;
 
   li {
-    width: 60px;
-    height: 60px;
+    width: 120px;
+    height: 120px;
     border: 1px solid var(--grey500);
     border-radius: 4px;
     display: flex;
@@ -878,8 +879,8 @@ const ReceiptImages = styled.ul`
 `;
 
 const AddReceiptImageLabel = styled.label`
-  width: 60px;
-  height: 60px;
+  width: 120px;
+  height: 120px;
   border: 1px solid var(--grey500);
   border-radius: 4px;
   display: flex;
