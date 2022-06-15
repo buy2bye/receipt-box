@@ -497,7 +497,7 @@ const Profile = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 20px 0 32px 0;
+  padding: 200px 0 32px 0;
 `;
 
 const ProfileImageWrapper = styled.div`
