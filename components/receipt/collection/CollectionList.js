@@ -81,10 +81,12 @@ const Container = styled.div`
           height: 80px;
           padding-bottom: 48px;
           margin-bottom: 40px;
+          margin-top: 1vh;
         `
       : css`
           height: 0;
           margin-bottom: 40px;
+          margin-top: 1vh;
         `}
 `;
 
