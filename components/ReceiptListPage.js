@@ -451,7 +451,7 @@ const HeaderContainer = styled.div`
   display: flex;
   align-items: center;
   margin: 12px 0;
-  gap: 32px;
+  gap: 2vw;
   border-bottom: ${(props) =>
     props.showBorder ? '1px solid var(--grey200)' : 'none'};
   padding-bottom: 12px;
@@ -536,7 +536,7 @@ const ListTypes = styled.div`
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  gap: 32px;
+  gap: 2vw;
 
   img {
   }

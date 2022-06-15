@@ -80,9 +80,11 @@ const Container = styled.div`
       ? css`
           height: 80px;
           padding-bottom: 48px;
+          margin-bottom: 40px;
         `
       : css`
           height: 0;
+          margin-bottom: 40px;
         `}
 `;
 
