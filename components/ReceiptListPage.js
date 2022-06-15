@@ -493,7 +493,7 @@ const CollectionListToggle = styled.button`
 
 const Profile = styled.div`
   width: 100%;
-  height: 400px;
+  height: 30%;
   display: block;
   flex-direction: column;
   align-items: center;
@@ -515,7 +515,7 @@ const ProfileImageWrapper = styled.div`
 `;
 
 const Nickname = styled.div`
-  font-size: 14px;
+  font-size: 40px;
   font-weight: 400;
   color: var(--grey600);
   position: relative;
@@ -596,8 +596,8 @@ const NicknameWrapper = styled.div`
   align-items: center;
 
   > img {
-    width: 20px;
-    height: 20px;
+    width: 40px;
+    height: 40px;
     margin-right: 4px;
   }
 `;
