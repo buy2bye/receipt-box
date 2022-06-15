@@ -454,7 +454,7 @@ const HeaderContainer = styled.div`
   gap: 2vw;
   border-bottom: ${(props) =>
     props.showBorder ? '1px solid var(--grey200)' : 'none'};
-  padding-bottom: 12px;
+  padding-bottom: 1vh;
 
   h2 {
     padding-bottom: 0;
