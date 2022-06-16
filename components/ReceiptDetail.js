@@ -731,7 +731,7 @@ const Details = styled.ul`
   gap: 20px;
   padding: 16px 0;
   margin-top: 1vh;
-  font-size: 40px;
+  font-size: 3.5vw;
   font-weight: 300;
   width: 71%;
 

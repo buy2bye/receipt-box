@@ -459,7 +459,7 @@ const HeaderContainer = styled.div`
   h2 {
     padding-bottom: 0;
     width: auto;
-    font-size: 40px
+    font-size: 3.5vw;
   }
 
   span {
@@ -496,16 +496,16 @@ const CollectionListToggle = styled.button`
 const Profile = styled.div`
   width: 100%;
   height: 30%;
-  display: block;
+  display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 100px 0 400px 400px;
+  padding: 4vh 0 6vh 0;
 `;
 
 const ProfileImageWrapper = styled.div`
   position: relative;
-  width: 300px;
-  height: 300px;
+  width: 27vw;
+  height: 27vw;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -517,7 +517,7 @@ const ProfileImageWrapper = styled.div`
 `;
 
 const Nickname = styled.div`
-  font-size: 40px;
+  font-size: 3.5vw;
   font-weight: 400;
   color: var(--grey600);
   position: relative;
@@ -599,11 +599,10 @@ const UploadGuideText = styled.div`
 const NicknameWrapper = styled.div`
   display: flex;
   align-items: center;
-  padding-left: 60px;
 
   > img {
-    width: 40px;
-    height: 40px;
+    width: 4vw;
+    height: 4vw;
     margin-right: 4px;
   }
 `;

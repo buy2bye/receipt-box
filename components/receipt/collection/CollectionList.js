@@ -107,7 +107,7 @@ const CreateCollectionButton = styled.button`
   display: flex;
   align-items: center;
   position: relative;
-  font-size: 40px;
+  font-size: 3.5vw;
 
   img {
     width: 16px;
@@ -122,7 +122,7 @@ const OrderSelect = styled.div`
   select {
     width: 200px;
     height: 60px;
-    font-size: 40px;
+    font-size: 3.5vw;
     text-align: right;
     padding: 2px 60px 2px 0px;
     border-radius: 12px;

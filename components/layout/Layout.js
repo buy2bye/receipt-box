@@ -93,7 +93,7 @@ const Body = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 12px 24px 24px 24px;
+  padding: 3vw 6vw 6vw 6vw;
   width: 100vw;
   height: 100vh;
   position: relative;
