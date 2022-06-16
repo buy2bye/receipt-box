@@ -122,7 +122,7 @@ const OrderSelect = styled.div`
   select {
     width: 200px;
     height: 60px;
-    font-size: 3.5vw;
+    font-size: 3.0vw;
     text-align: right;
     padding: 2px 60px 2px 0px;
     border-radius: 12px;

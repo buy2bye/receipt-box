@@ -43,7 +43,7 @@ const Container = styled.button`
   display: flex;
   align-items: center;
   position: relative;
-  font-size: 3.5vw;
+  font-size: 3.0vw;
   margin-right: 1vw;
 
   img {
