@@ -66,8 +66,8 @@ const Container = styled.div`
     css`
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      grid-row-gap: 8px;
-      grid-column-gap: 8px;
+      grid-row-gap: 2.5vw;
+      grid-column-gap: 2.5vw;
     `}
 
   ${({ isEditMode }) => 

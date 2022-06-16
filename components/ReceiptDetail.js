@@ -634,11 +634,11 @@ const TopBackground = styled.img`
 
 const DeleteReceipt = styled.button`
   position: absolute;
-  top: 10px;
-  right: 10px;
-  height: 32px;
+  top: 1vw;
+  right: 1vw;
+  height: 3.2vw;
   background: transparent;
-  padding: 8px;
+  padding: 0.8vw;
   font-size: 3.0vw;
   color: var(--grey300);
   z-index: 2;
@@ -646,11 +646,11 @@ const DeleteReceipt = styled.button`
 
 const ModifyReceipt = styled.button`
   position: absolute;
-  top: 10px;
-  right: 8vw;
-  height: 32px;
+  top: 1vw;
+  right: 7.8vw;
+  height: 3.2vw;
   background: transparent;
-  padding: 8px;
+  padding: 0.8vw;
   font-size: 3.0vw;
   color: var(--grey300);
   z-index: 2;
@@ -663,7 +663,7 @@ const NicknameWrapper = styled.div`
   gap: 8px;
   z-index: 1;
   font-weight: bold;
-  font-size: 44px;
+  font-size: 4.4vw;
   text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
 
   img {
@@ -680,7 +680,7 @@ const NicknameWrapper = styled.div`
 
 const ThumbnailWrapper = styled.div`
   width: 33vw;
-  min-height: 140px;
+  min-height: 33vw;
   height: 33vw;
   background: white;
   text-align: center;
@@ -689,7 +689,7 @@ const ThumbnailWrapper = styled.div`
   justify-content: center;
   justify-content: space-between;
   align-items: center;
-  border-radius: 8px;
+  border-radius: 2vw;
   position: relative;
   border: 1px solid var(--grey300);
   margin-top: 25vh;
@@ -706,7 +706,7 @@ const ThumbnailWrapper = styled.div`
     width: 100%;
     height: 100%;
     object-fit: cover;
-    border-radius: 8px;
+    border-radius: 2vw;
   }
 
   span {
@@ -727,7 +727,6 @@ const ThumbnailWrapper = styled.div`
 const Details = styled.ul`
   display: flex;
   flex-direction: column;
-  gap: 20px;
   padding: 16px 0;
   margin-top: 1vh;
   font-size: 3.5vw;
@@ -739,12 +738,12 @@ const Details = styled.ul`
     align-items: normal;
     width: 100%;
     overflow: hidden;
+    margin-bottom: 2vh;
 
     > span:first-of-type {
       min-width: 92px;
       font-weight: 500;
       flex: 1;
-      margin-bottom: 1vh;
     }
 
     > span:last-of-type {
@@ -819,9 +818,9 @@ const UsedDeal = styled.li`
 
   .info {
     padding: 0;
-    width: 40px;
-    height: 40px;
-    font-size: 32px;
+    width: 4vw;
+    height: 4vw;
+    font-size: 3.2vw;
     margin-left: 6px;
     border: 1px solid var(--grey600);
     border-radius: 50%;
@@ -852,9 +851,9 @@ const AddReceiptList = styled.div`
 
   .info {
     padding: 0;
-    width: 40px;
-    height: 40px;
-    font-size: 32px;
+    width: 4vw;
+    height: 4vw;
+    font-size: 3.2vw;
     margin-left: 6px;
     border: 1px solid var(--grey600);
     border-radius: 50%;

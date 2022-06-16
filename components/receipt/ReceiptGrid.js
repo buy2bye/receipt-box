@@ -56,8 +56,8 @@ export default ReceiptGrid;
 const Container = styled.div`
   position: relative;
 
-  width: calc((100vw - 48px - 16px) / 3);
-  height: calc((100vw - 48px - 16px) / 3);
+  width: calc((100vw - 12vw - 5vw) / 3);
+  height: calc((100vw - 12vw - 5vw) / 3);
 `;
 
 const Thumbnail = styled.button`
@@ -65,7 +65,7 @@ const Thumbnail = styled.button`
   width: 100%;
   height: 100%;
   aspect-ratio: 1/1;
-  border-radius: 8px;
+  border-radius: 2vw;
   background: white;
   text-align: center;
   display: flex;
@@ -78,7 +78,7 @@ const Thumbnail = styled.button`
   img {
     width: 100%;
     height: 100%;
-    border-radius: 8px;
+    border-radius: 2vw;
     object-fit: cover;
   }
 

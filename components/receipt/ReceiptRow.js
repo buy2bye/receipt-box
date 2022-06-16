@@ -72,7 +72,7 @@ const Container = styled.button`
   display: flex;
   align-items: center;
   gap: 16px;
-  margin: 1.5vw 0 1.5vw 0;
+  margin: 1vw 0 1vw 0;
 
   .thumb {
     height: 27vw;
@@ -82,7 +82,7 @@ const Container = styled.button`
     display: flex;
     justify-content: center;
     align-items: center;
-    border-radius: 8px;
+    border-radius: 2vw;
     border: 1px solid var(--grey100);
     position: relative;
 
@@ -90,7 +90,7 @@ const Container = styled.button`
       width: 100%;
       height: 100%;
       object-fit: cover;
-      border-radius: 8px;
+      border-radius: 2vw;
     }
 
     span {

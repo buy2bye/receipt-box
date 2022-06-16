@@ -23,7 +23,7 @@ export default TopNav;
 const Container = styled.div`
   width: 100vw;
   height: 4vh;
-  padding: 0 18px;
+  padding: 0 1.8vw;
   display: flex;
   align-items: center;
   position: sticky;
@@ -33,15 +33,15 @@ const Container = styled.div`
 
   button {
     position: relative;
-    width: 50px;
-    height: 50px;
+    width: 100%;
+    height: 100%;
     display: flex;
     align-items: center;
     background: transparent;
     padding: 0;
 
     color: var(--grey300);
-    font-size: 54px;
+    font-size: 5.4vw;
 
     img {
       width: 20px;

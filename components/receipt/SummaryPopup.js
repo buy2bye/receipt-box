@@ -45,13 +45,13 @@ export default SummaryPopup;
 
 const Container = styled.div`
   position: absolute;
-  width: 60vw;
-  height: 60vw;
+  width: 55vw;
+  height: 55vw;
   top: ${(props) => props.posY-70}px;
   left: ${(props) => props.posX}px;
   transform: translate(${props => props.translateX}%, 0%);
   background: white;
-  border-radius: 8px;
+  border-radius: 2vw;
   z-index: 1;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
   display: flex;

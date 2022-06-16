@@ -79,7 +79,7 @@ const Container = styled.div`
     props.isOpen
       ? css`
           height: 8vw;
-          padding-bottom: 4.8vw;
+          padding-bottom: 7vw;
           margin-bottom: 4.0vw;
         `
       : css`
@@ -91,7 +91,6 @@ const Container = styled.div`
 const ListContainer = styled.div`
   display: flex;
   flex: 1;
-  gap: 1.4vw;
   overflow-x: scroll;
   height: 8vw;
 `;

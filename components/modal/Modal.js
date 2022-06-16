@@ -54,7 +54,7 @@ const Container = styled.div`
 const ModalBox = styled.div`
   position: relative;
   border: none;
-  border-radius: 12px;
+  border-radius: 2vw;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   background-color: white;
 `;

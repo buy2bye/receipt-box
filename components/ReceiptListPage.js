@@ -472,7 +472,6 @@ const HeaderContainer = styled.div`
 const CollectionListToggleWrapper = styled.div`
   height: 100%;
   flex: 1;
-  padding-left: 20px;
 `;
 
 const CollectionListToggle = styled.button`
@@ -600,7 +599,7 @@ const UploadGuideText = styled.div`
 const NicknameWrapper = styled.div`
   display: flex;
   align-items: center;
-  padding: 0 0 0 34px;
+  padding: 0 0 0 4.5vw;
 
   > img {
     width: 4vw;
