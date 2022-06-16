@@ -73,6 +73,7 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   position: sticky;
+  margin: 1vh 0 0 0;
 `;
 
 const Logo = styled.div`
