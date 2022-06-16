@@ -72,6 +72,7 @@ const Container = styled.button`
   display: flex;
   align-items: center;
   gap: 16px;
+  margin: 2vw 0 2vw 0;
 
   .thumb {
     height: 27vw;
@@ -105,6 +106,7 @@ const Container = styled.button`
     flex-direction: column;
     justify-content: center;
     text-align: left;
+    margin-left: 2vw;
   }
 
   .name {
