@@ -72,7 +72,7 @@ const Container = styled.button`
   display: flex;
   align-items: center;
   gap: 16px;
-  margin: 2vw 0 2vw 0;
+  margin: 1.5vw 0 1.5vw 0;
 
   .thumb {
     height: 27vw;

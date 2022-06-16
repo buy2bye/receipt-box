@@ -67,7 +67,7 @@ const TopLogo = ({ hideSetting, isPreview, onLoginClick }) => {
 export default TopLogo;
 
 const Container = styled.div`
-  height: 60px;
+  height: 7vw;
   width: 100%;
   display: flex;
   justify-content: center;
@@ -76,10 +76,10 @@ const Container = styled.div`
 `;
 
 const Logo = styled.div`
-  width: 100px;
+  height: 100%;
   img {
-    width: 100%;
-    height: auto;
+    width: auto;
+    height: 100%;
   }
 `;
 
@@ -87,13 +87,13 @@ const Setting = styled.button`
   position: absolute;
   top: 0;
   right: 0;
-  width: 40px;
-  height: 60px;
+  width: auto;
+  height: 100%;
   padding: 0 9px 0 3px;
   background: none;
 
   img {
-    height: 45%;
+    height: 90%;
     width: auto;
     opacity: 0.3;
   }
@@ -102,14 +102,14 @@ const Setting = styled.button`
 const Market = styled.button`
   position: absolute;
   top: 0;
-  right: 40px;
-  width: 40px;
-  height: 60px;
+  right: 7.5vw;
+  width: auto;
+  height: 100%;
   padding: 0 6px 0 6px;
   background: none;
 
   img {
-    height: 45%;
+    height: 90%;
     width: auto;
     opacity: 0.3;
   }
