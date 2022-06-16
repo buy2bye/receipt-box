@@ -500,7 +500,7 @@ const Profile = styled.div`
   display: block;
   flex-direction: column;
   align-items: center;
-  padding: 4vh 0 6vh calc((100vw - 27vw - 48px)/2);
+  padding: 4vh 0 6vh calc((100vw - 27vw - 12vw)/2);
 `;
 
 const ProfileImageWrapper = styled.div`

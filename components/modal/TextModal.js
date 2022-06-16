@@ -8,10 +8,10 @@ const TextModal = ({ isOpen, isPortal, onCloseClick, children }) => {
     <Modal
       isOpen={isOpen}
       modalBoxStyle={{
-        maxWidth: '400px',
-        minWidth: '256px',
-        minHeight: '140px',
-        padding: '16px',
+        maxWidth: '80vw',
+        minWidth: '60vw',
+        minHeight: '10vh',
+        padding: '4vw',
       }}
       isPortal={isPortal}
     >
@@ -34,17 +34,17 @@ export default TextModal;
 const DescriptionText = styled.div`
   padding: 8px 0;
   width: 90%;
-  font-size: 14px;
+  font-size: 3.5vw;
   line-height: 1.4;
   word-break: keep-all;
 `;
 
 const CloseButton = styled.button`
   position: absolute;
-  top: 16px;
-  right: 16px;
-  width: 16px;
-  height: 16px;
+  top: 3vw;
+  right: 3vw;
+  width: 3vw;
+  height: 3vw;
   padding: 0;
 
   img {

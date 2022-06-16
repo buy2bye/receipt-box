@@ -767,8 +767,8 @@ const Details = styled.ul`
 
 const ZoomReceipt = styled(BottomPopup)`
   img {
-    width: calc(100vw - 48px);
-    height: calc(100vw - 48px);
+    width: calc(100vw - 12vw);
+    height: calc(100vw - 12vw);
     object-fit: contain;
   }
 
@@ -841,7 +841,7 @@ const AddReceiptList = styled.div`
   flex-direction: column;
   justify-content: space-between;
   gap: 8px;
-  margin-bottom: 1vh;
+  margin-bottom: 2vh;
 
   span {
     display: flex;
