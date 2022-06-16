@@ -485,6 +485,7 @@ const CollectionListToggle = styled.button`
   img {
     width: auto;
     height: 100%;
+    opacity: 0;
   }
 
   ${(props) =>

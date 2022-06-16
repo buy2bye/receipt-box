@@ -23,8 +23,8 @@ export default BottomNav;
 
 const Container = styled.div`
   position: fixed;
-  bottom: 40px;
-  right: 40px;
+  bottom: 2vh;
+  right: 3vw;
 
   ${({ hide }) =>
     hide &&
@@ -55,8 +55,8 @@ const UploadButton = styled.label`
 
 const UploadButtonPreview = styled.button`
   background-color: var(--primary);
-  width: 55px;
-  height: 55px;
+  width: 12vw;
+  height: 12vw;
   border-radius: 50%;
   display: flex;
   justify-content: center;

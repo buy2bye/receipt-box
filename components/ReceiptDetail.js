@@ -278,12 +278,12 @@ const ReceiptDetail = ({
 
           <DeleteReceipt onClick={handleSaveClick}>저장</DeleteReceipt>
           <EditIcon
-            top={280}
-            right={10}
+            top={35}
+            right={2.5}
             src='/icons/edit.png'
             alt='edit-icon'
-            width={18}
-            height={18}
+            width={4}
+            height={4}
           />
         </>
       ) : (
@@ -667,8 +667,8 @@ const NicknameWrapper = styled.div`
   text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
 
   img {
-    width: 14px;
-    height: 14px;
+    width: 3vw;
+    height: 3vw;
     opacity: 0.8;
   }
 
@@ -716,7 +716,7 @@ const ThumbnailWrapper = styled.div`
     padding: 20px;
     word-break: keep-all;
     color: var(--grey500);
-    font-size: 13px;
+    font-size: 3vw;
     flex: 1;
     display: flex;
     align-items: center;
@@ -757,8 +757,8 @@ const Details = styled.ul`
     }
 
     span > img, span > pre > img {
-      width: 14px;
-      height: 14px;
+      width: 3vw;
+      height: 3vw;
       border: none;
       margin-left: 8px;
     }
@@ -891,12 +891,12 @@ const AddReceiptImageLabel = styled.label`
 
 const EditIcon = styled.img`
   position: absolute;
-  top: ${({ top }) => `${top}px` || 0} !important;
+  top: ${({ top }) => `${top}vh` || 0} !important;
   bottom: ${({ bottom }) => `${bottom}px` || 0} !important;
   left: ${({ left }) => `${left}px` || 0} !important;
-  right: ${({ right }) => `${right}px` || 0} !important;
-  width: ${({ width }) => `${width}px`} !important;
-  height: ${({ height }) => `${height}px`} !important;
+  right: ${({ right }) => `${right}vw` || 0} !important;
+  width: ${({ width }) => `${width}vw`} !important;
+  height: ${({ height }) => `${height}vw`} !important;
   z-index: 99;
   border-radius: 2px !important;
   background: rgba(255, 255, 255, 0);
