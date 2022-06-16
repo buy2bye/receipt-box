@@ -448,6 +448,7 @@ export default ReceiptListPage;
 
 const HeaderContainer = styled.div`
   width: 100%;
+  height: 7vw;
   display: flex;
   align-items: center;
   margin: 12px 0;
@@ -482,8 +483,8 @@ const CollectionListToggle = styled.button`
   transition: 0.4s all;
 
   img {
-    width: 20px;
-    height: 20px;
+    width: auto;
+    height: 100%;
   }
 
   ${(props) =>
@@ -547,13 +548,13 @@ const ListType = styled.img`
   cursor: pointer;
 
   :first-of-type {
-    width: 36px;
-    height: 36px;
+    width: 3.6vw;
+    height: 3.6vw;
     margin-right: 1vw;
   }
   :last-of-type {
-    width: 40px;
-    height: 40px;
+    width: 4vw;
+    height: 4vw;
   }
 `;
 
@@ -567,8 +568,8 @@ const HeaderButton = styled.button`
 `;
 
 const TotalPriceButton = styled(HeaderButton)`
-  width: 40px;
-  height: 40px;
+  width: 4vw;
+  height: 4vw;
   margin-right: 1vw;
 
   img {
@@ -577,8 +578,8 @@ const TotalPriceButton = styled(HeaderButton)`
   }
 `;
 const EditButton = styled(HeaderButton)`
-  width: 40px;
-  height: 40px;
+  width: 4vw;
+  height: 4vw;
   margin-right: 1vw;
 
   img {

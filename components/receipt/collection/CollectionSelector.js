@@ -35,7 +35,7 @@ export default CollectionSelector;
 const Container = styled.button`
   white-space: nowrap;
   padding: 4px 16px;
-  height: 60px;
+  height: 6vw;
   border: 1px solid var(--grey400);
   border-radius: 12px;
   opacity: ${(props) => (props.isCollectionListOpen ? 1 : 0)};

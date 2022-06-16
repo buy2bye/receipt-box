@@ -78,28 +78,28 @@ const Container = styled.div`
   ${(props) =>
     props.isOpen
       ? css`
-          height: 80px;
-          padding-bottom: 48px;
-          margin-bottom: 40px;
+          height: 8vw;
+          padding-bottom: 4.8vw;
+          margin-bottom: 4.0vw;
         `
       : css`
           height: 0;
-          margin-bottom: 40px;
+          margin-bottom: 4.0vw;
         `}
 `;
 
 const ListContainer = styled.div`
   display: flex;
   flex: 1;
-  gap: 14px;
+  gap: 1.4vw;
   overflow-x: scroll;
-  height: 80px;
+  height: 8vw;
 `;
 
 const CreateCollectionButton = styled.button`
   white-space: nowrap;
   padding: 4px 16px;
-  height: 60px;
+  height: 6vw;
   border: 1px solid var(--grey400);
   border-radius: 12px;
   opacity: ${(props) => (props.isCollectionListOpen ? 1 : 0)};
@@ -120,11 +120,11 @@ const OrderSelect = styled.div`
   transition: 0.4s all;
 
   select {
-    width: 200px;
-    height: 60px;
+    width: 20vw;
+    height: 6vw;
     font-size: 3.0vw;
     text-align: right;
-    padding: 2px 60px 2px 0px;
+    padding: 0.2vw 6vw 0.2vw 0px;
     border-radius: 12px;
     border: none;
     color: var(--grey900);
@@ -132,7 +132,7 @@ const OrderSelect = styled.div`
     background-image: url('/icons/down-arrow.png');
     background-position: 96% 50%;
     background-repeat: no-repeat;
-    background-size: 36px;
+    background-size: 3.6vw;
     background-color: #FFFFFF00;
     opacity: 0.7;
   }
