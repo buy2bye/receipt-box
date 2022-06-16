@@ -647,7 +647,7 @@ const DeleteReceipt = styled.button`
 const ModifyReceipt = styled.button`
   position: absolute;
   top: 10px;
-  right: 3vw;
+  right: 8vw;
   height: 32px;
   background: transparent;
   padding: 8px;
