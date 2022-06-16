@@ -506,7 +506,7 @@ const ProfileImageWrapper = styled.div`
   position: relative;
   width: 27vw;
   height: 27vw;
-  display: flex;
+  display: block;
   justify-content: center;
   align-items: center;
   margin-bottom: 10px;
