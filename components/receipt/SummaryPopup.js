@@ -45,8 +45,8 @@ export default SummaryPopup;
 
 const Container = styled.div`
   position: absolute;
-  width: 240px;
-  height: 240px;
+  width: 65vw;
+  height: 65vw;
   top: ${(props) => props.posY-70}px;
   left: ${(props) => props.posX}px;
   transform: translate(${props => props.translateX}%, 0%);
