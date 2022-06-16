@@ -89,12 +89,13 @@ const Setting = styled.button`
   top: 0;
   right: 0;
   width: auto;
-  height: 100%;
+  height: 90%;
   padding: 0 9px 0 3px;
   background: none;
+  display: none;
 
   img {
-    height: 90%;
+    height: 100%;
     width: auto;
     opacity: 0.3;
   }
@@ -105,12 +106,12 @@ const Market = styled.button`
   top: 0;
   right: 7.5vw;
   width: auto;
-  height: 100%;
+  height: 90%;
   padding: 0 6px 0 6px;
   background: none;
 
   img {
-    height: 90%;
+    height: 100%;
     width: auto;
     opacity: 0.3;
   }
