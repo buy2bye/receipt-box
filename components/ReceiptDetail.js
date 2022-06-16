@@ -669,7 +669,7 @@ const NicknameWrapper = styled.div`
     width: 3vw;
     height: 3vw;
     opacity: 0.8;
-    margin: 0 0 0 2vw;
+    margin: 0 0 0 1vw;
   }
 
   button {
