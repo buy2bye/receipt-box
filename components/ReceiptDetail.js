@@ -660,7 +660,6 @@ const NicknameWrapper = styled.div`
   margin: 20px 0 20px 0;
   display: flex;
   align-items: center;
-  gap: 8px;
   z-index: 1;
   font-weight: bold;
   font-size: 4.4vw;
@@ -670,6 +669,7 @@ const NicknameWrapper = styled.div`
     width: 3vw;
     height: 3vw;
     opacity: 0.8;
+    margin: 0 0 0 2vw;
   }
 
   button {
