@@ -368,7 +368,7 @@ const ReceiptDetail = ({
             )}
           </span>
           <span>
-            {newReceiptInfo.category.name || '선택해주세요.'}
+            {newReceiptInfo.category.name || '선택해주세요'}
             {isEdit && <img src='/icons/edit.png' alt='edit-icon' />}
           </span>
         </li>
@@ -573,7 +573,7 @@ const ReceiptDetail = ({
       <BottomDropdown
         visible={categoryDropdownOpen}
         setVisible={setCategoryDropdownOpen}
-        title='카테고리를 선택해주세요.'
+        title='카테고리를 선택해주세요'
         items={categories.map((item) => item.name)}
         defaultValue={newReceiptInfo.category.name}
         onSelect={handleSelectCateogry}
@@ -634,24 +634,24 @@ const TopBackground = styled.img`
 
 const DeleteReceipt = styled.button`
   position: absolute;
-  top: 1vw;
+  top: 1vh;
   right: 1vw;
   height: 3.2vw;
   background: transparent;
   padding: 0.8vw;
-  font-size: 3.0vw;
+  font-size: 3.2vw;
   color: var(--grey300);
   z-index: 2;
 `;
 
 const ModifyReceipt = styled.button`
   position: absolute;
-  top: 1vw;
+  top: 1vh;
   right: 7.8vw;
   height: 3.2vw;
   background: transparent;
   padding: 0.8vw;
-  font-size: 3.0vw;
+  font-size: 3.2vw;
   color: var(--grey300);
   z-index: 2;
 `;

@@ -23,7 +23,7 @@ export default TopNav;
 const Container = styled.div`
   width: 100vw;
   height: 4vh;
-  padding: 0 1.8vw;
+  padding: 1vh 1.8vw 0 1.8vw;
   display: flex;
   align-items: center;
   position: sticky;

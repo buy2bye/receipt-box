@@ -23,8 +23,8 @@ export default BottomNav;
 
 const Container = styled.div`
   position: fixed;
-  bottom: 2vh;
-  right: 3vw;
+  bottom: 3vh;
+  right: 5vw;
 
   ${({ hide }) =>
     hide &&
