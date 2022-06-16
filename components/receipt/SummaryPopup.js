@@ -64,23 +64,23 @@ const SummaryHeader = styled.div`
   color: white;
   display: flex;
   align-items: center;
-  font-size: 14px;
+  font-size: 3vw;
   font-weight: bold;
   width: 100%;
-  height: 40px;
+  height: 10vw;
   min-height: 40px;
   border-radius: 8px 8px 0 0;
   padding: 0 12px;
 `;
 
 const SummaryContent = styled.div`
-  padding: 20px;
+  padding: 5vw;
   width: 100%;
   height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  font-size: 14px;
+  font-size: 3vw;
   font-weight: 300;
   box-sizing: border-box;
 `;
@@ -99,20 +99,20 @@ const SummaryContentWrapper = styled.div`
 `;
 
 const ShowDetailButton = styled.button`
-  width: 100px;
-  font-size: 14px;
-  padding: 8px;
+  width: 42%;
+  font-size: 3vw;
+  padding: 2vw;
   border-radius: 4px;
   background: var(--primary);
-  margin-bottom: 20px;
+  margin-bottom: 5.5vw;
 `;
 
 const CloseButton = styled.button`
   position: absolute;
-  top: 12px;
-  right: 12px;
-  width: 14px;
-  height: 14px;
+  top: 1.5vw;
+  right: 2.0vw;
+  width: 3.5vw;
+  height: 3.5vw;
   padding: 0;
 
   img {
