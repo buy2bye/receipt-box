@@ -472,6 +472,7 @@ const HeaderContainer = styled.div`
 const CollectionListToggleWrapper = styled.div`
   height: 100%;
   flex: 1;
+  padding: 0 0 0 3vw;
 `;
 
 const CollectionListToggle = styled.button`
