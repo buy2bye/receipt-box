@@ -496,17 +496,17 @@ const CollectionListToggle = styled.button`
 const Profile = styled.div`
   width: 100%;
   height: 30%;
-  display: flex;
+  display: block;
   flex-direction: column;
   align-items: center;
-  margin: 4vh 0 6vh 0;
+  padding: 4vh 0 6vh calc((100vw - 27vw - 48px)/2);
 `;
 
 const ProfileImageWrapper = styled.div`
   position: relative;
   width: 27vw;
   height: 27vw;
-  display: block;
+  display: flex;
   justify-content: center;
   align-items: center;
   margin-bottom: 10px;
@@ -599,6 +599,7 @@ const UploadGuideText = styled.div`
 const NicknameWrapper = styled.div`
   display: flex;
   align-items: center;
+  padding: 0 0 0 34px;
 
   > img {
     width: 4vw;
