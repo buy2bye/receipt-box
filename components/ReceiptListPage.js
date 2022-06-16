@@ -499,7 +499,7 @@ const Profile = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 4vh 0 6vh 0;
+  margin: 4vh 0 6vh 0;
 `;
 
 const ProfileImageWrapper = styled.div`
