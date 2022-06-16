@@ -45,8 +45,8 @@ export default SummaryPopup;
 
 const Container = styled.div`
   position: absolute;
-  width: 65vw;
-  height: 65vw;
+  width: 60vw;
+  height: 60vw;
   top: ${(props) => props.posY-70}px;
   left: ${(props) => props.posX}px;
   transform: translate(${props => props.translateX}%, 0%);
@@ -67,7 +67,7 @@ const SummaryHeader = styled.div`
   font-size: 3vw;
   font-weight: bold;
   width: 100%;
-  height: 10vw;
+  height: 15vw;
   min-height: 40px;
   border-radius: 8px 8px 0 0;
   padding: 0 12px;
@@ -109,10 +109,10 @@ const ShowDetailButton = styled.button`
 
 const CloseButton = styled.button`
   position: absolute;
-  top: 1.5vw;
+  top: 2.5vw;
   right: 2.0vw;
-  width: 3.5vw;
-  height: 3.5vw;
+  width: 3vw;
+  height: 3vw;
   padding: 0;
 
   img {
