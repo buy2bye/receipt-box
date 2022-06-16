@@ -68,14 +68,14 @@ export default ReceiptRow;
 const Container = styled.button`
   cursor: pointer;
   width: 100%;
-  height: 90px;
+  height: 27vw;
   display: flex;
   align-items: center;
   gap: 16px;
 
   .thumb {
-    height: 90px;
-    width: 90px;
+    height: 27vw;
+    width: 27vw;
     background: var(white);
     text-align: center;
     display: flex;
@@ -109,13 +109,13 @@ const Container = styled.button`
 
   .name {
     margin: 0;
-    font-size: 14px;
+    font-size: 3.0vw;
     font-weight: 400;
   }
 
   .date {
     margin-top: 8px;
-    font-size: 14px;
+    font-size: 3.0vw;
     font-weight: 300;
     color: var(--grey600);
 
