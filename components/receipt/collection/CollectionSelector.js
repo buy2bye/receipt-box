@@ -47,7 +47,7 @@ const Container = styled.button`
   margin-right: 1vw;
 
   img {
-    width: 16px;
+    width: 3vw;
     padding-left: 4px;
   }
 
