@@ -601,7 +601,7 @@ const UploadGuideText = styled.div`
 const NicknameWrapper = styled.div`
   display: flex;
   align-items: center;
-  padding: 0 0 0 4.5vw;
+  padding: 0 0 0 1.3vw;
 
   > img {
     width: 4vw;
