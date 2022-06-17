@@ -29,9 +29,9 @@ const Container = styled.button`
     props.primary ? 'var(--primary)' : 'var(--grey100)'};
   color: ${(props) => (props.primary ? 'var(--grey900)' : 'var(--grey700)')};
   width: 100%;
-  height: 60px;
-  font-size: 15px;
-  border-radius: 16px;
+  height: 14vw;
+  font-size: 3.5vw;
+  border-radius: 4vw;
   display: flex;
   justify-content: center;
   align-items: center;

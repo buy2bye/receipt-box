@@ -33,7 +33,7 @@ const BottomDropdown = ({
   return (
     <Container
       visible={visible}
-      height='280px'
+      height='36vh'
       setVisible={() => setVisible(false)}
       title={title}
     >

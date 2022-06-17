@@ -84,12 +84,12 @@ const Container = styled(BottomPopup)``;
 
 const TextInput = styled.input`
   width: 100%;
-  height: 60px;
+  height: 16vw;
   border: 1px solid var(--grey300);
   background: var(--grey100);
-  border-radius: 8px;
-  font-size: 18px;
-  padding: 0 16px;
+  border-radius: 2vw;
+  font-size: 4.5vw;
+  padding: 0 4vw;
   font-weight: 300;
   color: var(--grey800);
 `;

@@ -78,7 +78,7 @@ const Container = styled.div`
   bottom: 0;
   left: 0;
   width: 100vw;
-  height: 120px;
+  height: 10vh;
   background: linear-gradient(
     180deg,
     rgba(255, 255, 255, 0) 0%,
@@ -98,7 +98,7 @@ const Container = styled.div`
 
 const EditButton = styled(Button)`
   flex: 1;
-  border-radius: 8px;
+  border-radius: 2vw;
   height: auto;
 `;
 

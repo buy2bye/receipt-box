@@ -51,5 +51,5 @@ const PopupWrapper = styled.div`
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
   opacity: ${(props) => (props.visible ? 1 : 0)};
   transition: 0.4s ease-out;
-  padding: 24px;
+  padding: 6vw;
 `;

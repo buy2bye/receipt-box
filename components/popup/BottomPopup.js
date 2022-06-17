@@ -40,7 +40,7 @@ const Container = styled(Popup)`
 const Title = styled.span`
   display: inline-block;
   width: 100%;
-  font-size: 18px;
+  font-size: 4vw;
   text-align: center;
-  margin-bottom: 24px;
+  margin: 2vw 0 5vw 0;
 `;

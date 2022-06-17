@@ -35,8 +35,8 @@ const Container = styled.div`
 
 const UploadButton = styled.label`
   background-color: var(--primary);
-  width: 55px;
-  height: 55px;
+  width: 12vw;
+  height: 12vw;
   border-radius: 50%;
   display: flex;
   justify-content: center;

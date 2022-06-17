@@ -91,8 +91,8 @@ const Thumbnail = styled.button`
 
       :before {
         content: '';
-        width: 10px;
-        height: 10px;
+        width: 2.5vw;
+        height: 2.5vw;
         background: ${isSelectedOnEditMode ? 'var(--primary)' : 'white'};
         border: 2px solid
           ${isSelectedOnEditMode ? 'var(--primary)' : 'var(--grey200)'};

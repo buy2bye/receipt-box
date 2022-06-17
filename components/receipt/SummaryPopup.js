@@ -101,7 +101,7 @@ const SummaryContentWrapper = styled.div`
 const ShowDetailButton = styled.button`
   width: 42%;
   font-size: 3vw;
-  padding: 2vw;
+  padding: 2vw 2vw 2.2vw 2vw;
   border-radius: 4px;
   background: var(--primary);
   margin-bottom: 5.5vw;

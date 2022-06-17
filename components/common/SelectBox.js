@@ -55,16 +55,16 @@ const Container = styled.div`
   gap: 4px;
 
   select {
-    font-size: 14px;
-    padding: 16px 12px;
-    border-radius: 10px;
+    font-size: 3.5vw;
+    padding: 4vw 3vw;
+    border-radius: 2.5vw;
     border: 1px solid var(--grey400);
     appearance: none;
     background-color: white;
     background-image: url('/icons/down-arrow.png');
     background-position: 96% 50%;
     background-repeat: no-repeat;
-    background-size: 14px;
+    background-size: 3.5vw;
     opacity: 0.7;
   }
 
