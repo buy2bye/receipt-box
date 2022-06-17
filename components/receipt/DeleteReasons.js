@@ -38,7 +38,7 @@ const DeleteReasons = ({
   return (
     <Container
       visible={visible}
-      height={hideReason ? '180px' : '280px'}
+      height={hideReason ? '23vh' : '280px'}
       setVisible={() => setVisible(false)}
       title={title}
     >
